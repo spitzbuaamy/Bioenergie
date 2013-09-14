@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>customer</title>
+</head>
+<body>
+
+{% for customer in customers %}
+
+    <ul>
+        <li><a href="{% url 'customer_detail' pk=customer.pk %}">{{ customer.first_name }}</a></li>
+        <li>{{ customer.last_name }}</li>
+        <li>{{ customer.salutation }}</li>
+        <li>{{ customer.street }}</li>
+    </ul>
+
+    <!-- Todo: styling und so -->
+
+{% endfor %}
+
+<a href="{% url 'customer_create' %}">Create new customer</a>
+
+
+</body>
+</html>

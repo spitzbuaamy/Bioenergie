@@ -45,7 +45,6 @@ class Building(models.Model):
     discount_fixed = models.IntegerField()
     contract_date = models.DateField()
 
-
-
-
-
+class Index (models.Model):
+    year = models.IntegerField(max_length=4)
+    index = models.IntegerField(max_length=4)

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angeschlossenen Objekte</title>
+</head>
+<body>
+    {% for building in buildings %}
+        <ul>
+            <li>{{ building.place }}</li>
+            <li>{{ building.street }}</li>
+            <li>{{ building.discount }}</li>
+            <li>{{ building.discount_fixed }}</li>
+            <li>{{ building.contract_date }}</li>
+        </ul>
+    {% endfor %}
+
+</body>
+</html>

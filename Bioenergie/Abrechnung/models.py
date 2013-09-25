@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 class Customer(models.Model):
     salutation = models.CharField(max_length=10) # Anrede
@@ -13,7 +12,7 @@ class Customer(models.Model):
     place = models.CharField(max_length=32)
 
     def __unicode__(self):
-        return self.first_name # Todo: Vorname & Nachname
+        pass # TODO: Unicode so ändern, damit wir ein Building anlegen können
 
     def get_absolute_url(self):
         return "/customers/detail/%i" % self.id

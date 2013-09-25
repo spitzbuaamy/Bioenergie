@@ -11,8 +11,10 @@ class Customer(models.Model):
     zip = models.IntegerField() # PLZ
     place = models.CharField(max_length=32)
 
+    '''
     def __unicode__(self):
-        pass # TODO: Unicode so ändern, damit wir ein Building anlegen können
+        pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
+    '''
 
     def get_absolute_url(self):
         return "/customers/detail/%i" % self.id

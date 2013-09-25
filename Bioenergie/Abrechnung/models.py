@@ -51,3 +51,13 @@ class Building(models.Model):
 class Index (models.Model):
     year = models.IntegerField(max_length=4)
     index = models.IntegerField(max_length=4)
+
+
+class Bioenergy (models.Model):
+    name = models.CharField(max_length=32)
+    standard_discount = models.IntegerField()
+    bill_number = models.IntegerField()
+    zip = models.IntegerField()
+    place = models.CharField(max_length=32)
+    house_number = models.IntegerField()
+    street = models.CharField(max_length=32)

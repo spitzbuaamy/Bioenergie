@@ -16,7 +16,7 @@ class Customer(models.Model):
         return self.first_name # Todo: Vorname & Nachname
 
     def get_absolute_url(self):
-        return "/abrechnung/detail/%i" % self.id
+        return "/customers/detail/%i" % self.id
 
 
 class Price(models.Model):
@@ -46,6 +46,13 @@ class Building(models.Model):
     discount = models.IntegerField()
     discount_fixed = models.IntegerField()
     contract_date = models.DateField()
+
+    def __unicode__(self):
+        return self.customer # Todo: Vorname & Nachname des Customer
+
+    def get_absolute_url(self):
+        return "/buildings/detail/%i" % self.id
+
 
 class Index (models.Model):
     year = models.IntegerField(max_length=4)

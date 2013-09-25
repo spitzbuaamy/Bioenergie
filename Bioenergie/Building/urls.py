@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from Buildings.views import BuildingListView
+from Building.views import BuildingListView
 
 urlpatterns = patterns('',
     url(r'^$', BuildingListView.as_view(), name='buildings_list'),

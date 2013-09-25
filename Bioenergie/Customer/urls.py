@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from Abrechnung.views import CustomerListView, CustomerDetailView, CustomerCreateView, CustomerUpdateView,CustomerDeleteView
+from Customer.views import CustomerListView, CustomerDetailView, CustomerCreateView, CustomerUpdateView,CustomerDeleteView
 
 urlpatterns = patterns('',
     url(r'^$', CustomerListView.as_view(), name='customer_list'),

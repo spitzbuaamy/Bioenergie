@@ -4,18 +4,20 @@ from django.db import models
 # Create your models here.
 class Customer(models.Model):
     salutation = models.CharField(max_length=10) # Anrede
+    title = models.CharField(max_length=32, blank = True)
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
-    zip = models.CharField(max_length=4) # PLZ
+    zip = models.IntegerField() # PLZ
     place = models.CharField(max_length=32)
     street = models.CharField(max_length=32)
-    house_number = models.CharField(max_length=32)
-    title = models.CharField(max_length=32)
+    house_number = models.IntegerField()
+
 
     def __unicode__(self):
         return self.first_name # Todo: Vorname & Nachname
 
-    # Todo: define a get_absolute_url method on the Model
+    def get_absolute_url(self):
+        return "/abrechnung/detail/%i" % self.id
 
 
 class Price(models.Model):
@@ -25,14 +27,15 @@ class Price(models.Model):
     # Todo: Typ als "Enum"
 
 
+class Counter(models.Model):
+    number = models.CharField(max_length=128)
+
+
 class Measurement(models.Model):
+    counter = models.ForeignKey(Counter)
     measured_date = models.DateField()
     value = models.IntegerField()
 
-
-class Counter(models.Model):
-    measurement = models.ForeignKey(Measurement)
-    number = models.CharField(max_length=128)
 
 
 class Building(models.Model):

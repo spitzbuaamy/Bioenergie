@@ -19,14 +19,14 @@ class CustomerCreateView(CreateView):
     model = Customer
     context_object_name = 'customer'
     form_class = CustomerForm
-    success_url = reverse_lazy('customer_list')
+    #success_url = reverse_lazy('customer_list')
 
 
 class CustomerUpdateView(UpdateView):
     model = Customer
     context_object_name = 'customer'
     form_class = CustomerForm
-    success_url = reverse_lazy('customer_list')
+    # success_url = reverse_lazy('customer_list')
 
 
 class CustomerDeleteView(DeleteView):

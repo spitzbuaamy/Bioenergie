@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ customer.first_name}}</title>
+    <title>{{ building.place}}</title>
 </head>
 <body>
 
-<h1>customer</h1>
+<h1>Building</h1>
 
     <ul>
-        <li>{{ customer.salutation }}</li>
-        <li>{{ customer.title }}</li>
-        <li>{{ customer.first_name }}</li>
-        <li>{{ customer.last_name }}</li>
-        <li>{{ customer.street }}</li>
-        <li>{{ customer.house_number }}</li>
-        <li>{{ customer.zip }}</li>
-        <li>{{ customer.place }}</li>
+            <li>{{ building.place }}</li>
+            <li>{{ building.street }}</li>
+            <li>{{ building.discount }}</li>
+            <li>{{ building.discount_fixed }}</li>
+            <li>{{ building.contract_date }}</li>
     </ul>
 
 <a href="{% url 'customer_update' pk=customer.pk %}">Edit this customer</a>

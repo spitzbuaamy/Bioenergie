@@ -17,7 +17,7 @@ class Customer(models.Model):
         return self.first_name # Todo: Vorname & Nachname
 
     def get_absolute_url(self):
-        return "/abrechnung/detail/%i" % self.id
+        return "/customers/detail/%i" % self.id
 
 
 class Price(models.Model):

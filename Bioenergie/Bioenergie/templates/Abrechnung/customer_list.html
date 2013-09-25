@@ -9,9 +9,14 @@
 
     <ul>
         <li><a href="{% url 'customer_detail' pk=customer.pk %}">{{ customer.first_name }}</a></li>
-        <li>{{ customer.last_name }}</li>
         <li>{{ customer.salutation }}</li>
+        <li>{{ customer.title }}</li>
+        <li>{{ customer.first_name }}</li>
+        <li>{{ customer.last_name }}</li>
         <li>{{ customer.street }}</li>
+        <li>{{ customer.house_number }}</li>
+        <li>{{ customer.zip }}</li>
+        <li>{{ customer.place }}</li>
     </ul>
 
     <!-- Todo: styling und so -->

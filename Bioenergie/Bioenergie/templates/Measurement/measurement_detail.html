@@ -13,8 +13,8 @@
             <li>{{ Measurement.value }}</li>
     </ul>
 
-<a href="{% url 'measurement_create' pk=customer.pk %}">Edit this measurement</a>
-<a href="{% url 'measurement_delete' pk=customer.pk %}">Delete this measurement</a>
+<a href="{% url 'measurement_update' pk=measurement.pk %}">Edit this measurement</a>
+<a href="{% url 'measurement_delete' pk=measurement.pk %}">Delete this measurement</a>
 
 
 </body>

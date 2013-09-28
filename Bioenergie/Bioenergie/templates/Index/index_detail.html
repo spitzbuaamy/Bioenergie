@@ -11,8 +11,9 @@
             <li>{{ Index.index }}</li>
     </ul>
 
-<a href="{% url 'index_create' pk=customer.pk %}">Edit this index</a>
-<a href="{% url 'index_delete' pk=customer.pk %}">Delete this index</a>
+
+<a href="{% url 'index_update' pk=index.pk %}">Edit this index</a>
+<a href="{% url 'index_delete' pk=index.pk %}">Delete this index</a>
 
 
 </body>

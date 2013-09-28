@@ -15,8 +15,9 @@
             <li>{{ building.contract_date }}</li>
     </ul>
 
-<a href="{% url 'building_create' pk=customer.pk %}">Edit this building</a>
-<a href="{% url 'building_delete' pk=customer.pk %}">Delete this building</a>
+
+<a href="{% url 'building_update' pk=building.pk %}">Edit this building</a>
+<a href="{% url 'building_delete' pk=building.pk %}">Delete this building</a>
 
 
 </body>

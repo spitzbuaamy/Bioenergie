@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ Index.year}}</title>
+</head>
+<body>
+
+<h1>Index</h1>
+
+    <ul>
+            <li>{{ Index.index }}</li>
+    </ul>
+
+<a href="{% url 'index_create' pk=customer.pk %}">Edit this index</a>
+<a href="{% url 'index_delete' pk=customer.pk %}">Delete this index</a>
+
+
+</body>
+</html>

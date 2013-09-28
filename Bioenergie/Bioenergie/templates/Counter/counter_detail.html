@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ Counter.number}}</title>
+</head>
+<body>
+
+<h1>Counter</h1>
+
+    <ul>
+            <li>{{ Counter.number }}</li>
+
+    </ul>
+
+<a href="{% url 'counter_create' pk=customer.pk %}">Edit this counter</a>
+<a href="{% url 'counter_delete' pk=customer.pk %}">Delete this counter</a>
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ Index.year}}</title>
+</head>
+<body>
+
+<h1>Index</h1>
+
+    <ul>
+            <li>{{ Measurement.counter }}</li>
+            <li>{{ Measurement.measured_date }}</li>
+            <li>{{ Measurement.value }}</li>
+    </ul>
+
+<a href="{% url 'measurement_create' pk=customer.pk %}">Edit this measurement</a>
+<a href="{% url 'measurement_delete' pk=customer.pk %}">Delete this measurement</a>
+
+
+</body>
+</html>

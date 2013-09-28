@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm</title>
+</head>
+<body>
+
+<p>
+    Do you really want to delete:
+    {{ Price.amount }}
+</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit"/>
+</form>
+
+</body>
+</html>

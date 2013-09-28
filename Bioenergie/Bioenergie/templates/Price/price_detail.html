@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ Price.amount}}</title>
+</head>
+<body>
+
+<h1>Price</h1>
+
+    <ul>
+            <li>{{ Price.amount }}</li>
+            <li>{{ Price.max }}</li>
+            <li>{{ Price.min }}</li>
+
+    </ul>
+
+<a href="{% url 'price_create' pk=customer.pk %}">Edit this price</a>
+<a href="{% url 'price_delete' pk=customer.pk %}">Delete this price</a>
+
+
+</body>
+</html>

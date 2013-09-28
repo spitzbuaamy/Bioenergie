@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angeschlossenen Objekte</title>
+</head>
+<body>
+    {% for price in prices %}
+        <ul>
+            <li>{{ Price.amount }}</li>
+            <li>{{ Price.max }}</li>
+            <li>{{ Price.min }}</li>
+        </ul>
+    {% endfor %}
+
+<a href="{% url 'price_create' %}">Create new price</a>
+
+</body>
+</html>

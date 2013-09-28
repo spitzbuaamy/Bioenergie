@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angeschlossenen Objekte</title>
+</head>
+<body>
+    {% for counter in counters %}
+        <ul>
+            <li>{{ Counter.number }}</li>
+
+        </ul>
+    {% endfor %}
+
+<a href="{% url 'Counter_create' %}">Create new counter</a>
+
+</body>
+</html>

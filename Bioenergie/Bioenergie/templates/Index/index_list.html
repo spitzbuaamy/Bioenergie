@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angeschlossenen Objekte</title>
+</head>
+<body>
+    {% for index in indexes %}
+        <ul>
+            <li>{{ Index.year }}</li>
+            <li>{{ Index.index }}</li>
+        </ul>
+    {% endfor %}
+
+<a href="{% url 'index_create' %}">Create new index</a>
+
+</body>
+</html>

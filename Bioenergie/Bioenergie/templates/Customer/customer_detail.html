@@ -9,13 +9,9 @@
 
     <ul>
         <li>{{ customer.salutation }}</li>
-        <li>{{ customer.title }}</li>
-        <li>{{ customer.first_name }}</li>
-        <li>{{ customer.last_name }}</li>
-        <li>{{ customer.street }}</li>
-        <li>{{ customer.house_number }}</li>
-        <li>{{ customer.zip }}</li>
-        <li>{{ customer.place }}</li>
+        <li>{{ customer.title}} {{ customer.first_name}} {{customer.last_name}}</li>
+        <li>{{ customer.street }} {{ customer.house_number }}</li>
+        <li>{{ customer.zip }} {{ customer.place }}</li>
     </ul>
 
 <a href="{% url 'customer_update' pk=customer.pk %}">Edit this customer</a>

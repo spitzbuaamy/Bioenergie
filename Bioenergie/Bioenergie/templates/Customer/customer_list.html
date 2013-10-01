@@ -8,11 +8,7 @@
 {% for customer in customers %}
 
     <ul>
-        <li><a href="{% url 'customer_detail' pk=customer.pk %}">{{ customer.first_name }}</a></li>
-        <li>{{ customer.salutation }}</li>
-        <li>{{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} </li>
-        <li>{{ customer.street }} {{ customer.house_number }}</li>
-        <li>{{ customer.zip }} {{ customer.place }} </li>
+        <li><a href="{% url 'customer_detail' pk=customer.pk %}">{{ customer.first_name }} {{ customer.last_name }}</a></li>
     </ul>
 
     <!-- Todo: styling und so -->

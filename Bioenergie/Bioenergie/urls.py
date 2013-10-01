@@ -17,7 +17,6 @@ urlpatterns = patterns('',
     url(r'^indexes/', include('Index.urls')),
     url(r'^measurements/', include('Measurement.urls')),
     url(r'^prices/', include('Price.urls')),
-
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    #url(r'^$/', )
 )

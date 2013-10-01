@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Indeces</title>
+    <title>Indexes</title>
 </head>
 <body>
-    {% for index in indeces %}
-        <ul>
-            <li>{{ Index.year }}</li>
-            <li>{{ Index.index }}</li>
-        </ul>
+    <table>
+       <tr> <th>Index</th> <th>Jahr</th></tr>
+    {% for index in indexes %}
+        <tr><td>{{index.index}}</td> <td>{{index.year}}</td></tr>
     {% endfor %}
+        </table>
 
 <a href="{% url 'index_create' %}">Create new index</a>
 

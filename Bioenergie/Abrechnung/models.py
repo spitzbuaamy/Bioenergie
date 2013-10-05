@@ -11,13 +11,11 @@ class Customer(models.Model):
     zip = models.IntegerField() # PLZ
     place = models.CharField(max_length=32)
 
-    '''
-    def __unicode__(self):
-        pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
-    '''
-
     def get_absolute_url(self):
         return "/customers/detail/%i" % self.id
+
+    def __unicode__(self):
+        return self.first_name + ' ' + self.last_name
 
 
 class Price(models.Model):
@@ -26,10 +24,8 @@ class Price(models.Model):
     amount = models.IntegerField() # Preis
     # Todo: Typ als "Enum"
 
-    '''
     def __unicode__(self):
-        pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
-    '''
+        return str(self.min) + ' / ' + str(self.max)
 
     def get_absolute_url(self):
         return "/prices/detail/%i" % self.id
@@ -38,10 +34,8 @@ class Price(models.Model):
 class Counter(models.Model):
     number = models.CharField(max_length=128)
 
-    '''
     def __unicode__(self):
-        pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
-    '''
+        return self.number
 
     def get_absolute_url(self):
         return "/counters/detail/%i" % self.id
@@ -52,10 +46,8 @@ class Measurement(models.Model):
     measured_date = models.DateField()
     value = models.IntegerField()
 
-    '''
     def __unicode__(self):
-        pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
-    '''
+        return self.measured_date
 
     def get_absolute_url(self):
         return "/measurements/detail/%i" % self.id

@@ -1,17 +1,9 @@
-{% load staticfiles %}
+{% extends "site_base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-    <title>customer</title>
-</head>
-<body>
-
-
+{% block body %}
 {% for customer in customers %}
 
-    <ul>
+    <ul class="list">
         <li>{{ customer.first_name }} {{ customer.last_name }} <a href="{% url 'customer_detail' pk=customer.pk %}">Details</a> <a href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
     </ul>
 
@@ -19,7 +11,4 @@
 
 <a class="linkButton" href="{% url 'customer_create' %}"><button class="myButton">Create new customer</button></a>
 
-
-</body>
-</html>
-
+{% endblock %}

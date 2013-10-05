@@ -1,29 +1,51 @@
- a{
+input, select {
+    display: block;
+    margin: 10px;
+}
+
+.menu ul {
+    list-style: none;
+    height: 2em;
+}
+
+.right {
+}
+
+.menu ul li {
+    display: block;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 0px 5px;
+}
+
+
+a{
             color: black;
             text-decoration: none;
             margin-right: 10pt;
             float: right;
         }
-        ul {
+         ul.list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
 
-        .linkButton {
+         .linkButton {
             float: left;
         }
 
-        li {
+        ul.list li {
             background-color: #008041;
             margin-bottom: 5px;
             padding: 3px;
         }
-        li > a {
+        ul.list li > a {
             color: yellow;
 
         }
-        li:hover{
+        ul.list li:hover{
             background-color: greenyellow;
 
         }
@@ -75,5 +97,4 @@
     }
     .myButton:active {
         position:relative;
-        top:1px;
     }

@@ -1,0 +1,42 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Todo: Jquery ueber Django Static Files einbinden -->
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <title>customer</title>
+    {% block extra_head %}
+     <!-- zusaetzliche head tags -->
+    {% endblock %}
+</head>
+<body>
+
+<div class="menu">
+    <ul>
+        <div class="right">
+        <li>Abrechnung</li>
+        <li><a href="/customers/">Customer</a></li>
+        <li><a href="/buildings/">Building</a></li>
+        <li>Counter</li>
+        <li>Index</li>
+        <li>Measurement</li>
+        </div>
+    </ul>
+
+</div>
+
+{% block body %}
+
+    <!-- hier kommt Inhalt -->
+
+{% endblock %}
+
+</body>
+</html>

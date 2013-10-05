@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>New Building</title>
-    <style type="text/css">
-        input {
-            display: block;
-        }
+{% extends "site_base.html" %}
 
-        .errorlist {
-            color: red;
-        }
+    {% block extra_head %}
+        <script>
 
-    </style>
-</head>
-<body>
+       $(function() {
+            $( "#id_contract_date" ).datepicker();
+         });
+      </script>
+
+    {% endblock %}
+
+{% block body %}
 
 <form method="post">
     {% csrf_token %}
@@ -21,5 +18,4 @@
     <input type="submit"/>
 </form>
 
-</body>
-</html>
+{%  endblock %}

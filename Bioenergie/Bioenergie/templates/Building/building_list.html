@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Angeschlossenen Objekte</title>
-</head>
-<body>
+{% extends "site_base.html" %}
+
+{% block body %}
+
     {% for building in buildings %}
         <ul>
             <li>{{ building.place }}</li>
@@ -17,5 +15,4 @@
 
 <a href="{% url 'building_create' %}">Create new building</a>
 
-</body>
-</html>
+{% endblock %}

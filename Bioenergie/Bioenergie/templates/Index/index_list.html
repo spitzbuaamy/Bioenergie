@@ -1,3 +1,19 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for index in indexes %}
+
+    <ul class="list">
+        <li>{{ index.year }} {{ index.index }} <a href="{% url 'index_detail' pk=index.pk %}">Details</a> <a href="{% url 'index_delete' pk=index.pk %}">Löschen</a><a href="{% url 'index_update' pk=index.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'index_create' %}"><button class="myButton">Create new index</button></a>
+
+{% endblock %}
+
+
 <!DOCTYPE html>
 <html>
 <head>

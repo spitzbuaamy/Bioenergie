@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ Index.year}}</title>
-</head>
-<body>
+{% extends "site_base.html" %}
 
-<h1>Index</h1>
+{% block body %}
 
-    <ul>
-            <li>{{ Index.index }}</li>
+    <ul class="list">
+        <li>{{ index.year }}</li>
+        <li>{{ index.index}}</li>
     </ul>
 
 
-<a href="{% url 'index_update' pk=index.pk %}">Edit this index</a>
-<a href="{% url 'index_delete' pk=index.pk %}">Delete this index</a>
+<a class="linkButton" href="{% url 'index_update' pk=index.pk %}"><button class="myButton">Edit this index</button></a>
+<a class="linkButton" href="{% url 'index_delete' pk=index.pk %}"><button class="myButton">Delete this index</button></a>
 
-
-</body>
-</html>
+{% endblock %}

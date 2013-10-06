@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Angeschlossenen Objekte</title>
-</head>
-<body>
-    {% for measurement in measurement %}
-        <ul>
-            <li>{{ Index.year }}</li>
-            <li>{{ Index.index }}</li>
-        </ul>
-    {% endfor %}
+{% extends "site_base.html" %}
 
-<a href="{% url 'measurement_create' %}">Create new index</a>
+{% block body %}
+{% for measurement in measurements %}
 
-</body>
-</html>
+    <ul class="list">
+        <li>{{ measurement.counter }} {{ measurement.measured_date }} <a href="{% url 'measurement_detail' pk=measurement.pk %}">Details</a> <a href="{% url 'measurement_delete' pk=measurement.pk %}">Löschen</a><a href="{% url 'measurement_update' pk=measurement.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'measurement_create' %}"><button class="myButton">Create new measurement</button></a>
+
+{% endblock %}

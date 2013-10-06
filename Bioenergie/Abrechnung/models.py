@@ -47,7 +47,7 @@ class Measurement(models.Model):
     value = models.IntegerField()
 
     def __unicode__(self):
-        return self.measured_date
+        return str(self.measured_date)
 
     def get_absolute_url(self):
         return "/measurements/detail/%i" % self.id

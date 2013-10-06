@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ Index.year}}</title>
-</head>
-<body>
+{% extends "site_base.html" %}
 
-<h1>Index</h1>
+{% block body %}
 
-    <ul>
-            <li>{{ Measurement.counter }}</li>
-            <li>{{ Measurement.measured_date }}</li>
-            <li>{{ Measurement.value }}</li>
+    <ul class="list">
+            <li>{{ measurement.counter }}</li>
+            <li>{{ measurement.measured_date }}</li>
+            <li>{{ measurement.value }}</li>
     </ul>
 
-<a href="{% url 'measurement_update' pk=measurement.pk %}">Edit this measurement</a>
-<a href="{% url 'measurement_delete' pk=measurement.pk %}">Delete this measurement</a>
 
+<a class="linkButton" href="{% url 'measurement_update' pk=measurement.pk %}"><button class="myButton">Edit this measurement</button></a>
+<a class="linkButton" href="{% url 'measurement_delete' pk=measurement.pk %}"><button class="myButton">Delete this measurement</button></a>
 
-</body>
-</html>
+{% endblock %}

@@ -1,25 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ customer.first_name}}</title>
-    <style type="text/css">
-        li{list-style: none;}
-    </style>
-</head>
-<body>
+{% extends "site_base.html" %}
 
-<h1>customer</h1>
+{% block body %}
 
-    <ul>
+    <ul class="list">
         <li>{{ customer.salutation }}</li>
         <li>{{ customer.title}} {{ customer.first_name}} {{customer.last_name}}</li>
         <li>{{ customer.street }} {{ customer.house_number }}</li>
         <li>{{ customer.zip }} {{ customer.place }}</li>
     </ul>
 
-<a href="{% url 'customer_update' pk=customer.pk %}">Edit this customer</a>
-<a href="{% url 'customer_delete' pk=customer.pk %}">Delete this customer</a>
 
+<a class="linkButton" href="{% url 'customer_update' pk=customer.pk %}"><button class="myButton">Edit this customer</button></a>
+<a class="linkButton" href="{% url 'customer_delete' pk=customer.pk %}"><button class="myButton">Delete this customer</button></a>
 
-</body>
-</html>
+{% endblock %}

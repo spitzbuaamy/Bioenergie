@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>New Customer</title>
-    <style type="text/css">
+{% extends "site_base.html" %}
+
+{% block extra_head %}
+
+     <style type="text/css">
         input {
             display: block;
             margin-bottom: 15pt;
@@ -15,14 +15,17 @@
         }
 
     </style>
-</head>
-<body>
+
+{% endblock %}
+
+
+
+{% block body %}
 
 <form method="post">
     {% csrf_token %}
 {{ form }}
-    <input type="submit"/>
+    <input type="submit" class="myButton"/>
 </form>
 
-</body>
-</html>
+{% endblock %}

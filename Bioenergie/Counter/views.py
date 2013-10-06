@@ -36,5 +36,5 @@ class CounterUpdateView(UpdateView):
 class CounterDeleteView(DeleteView):
     template_name = "Counter/counter_confirm_delete.html"
     model = Counter
-    context_object_name = 'building'
+    context_object_name = 'counter'
     success_url = reverse_lazy('counter_list')

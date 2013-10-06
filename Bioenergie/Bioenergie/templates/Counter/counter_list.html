@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Counter</title>
-</head>
-<body>
-    {% for counter in counters %}
-        <ul>
-            <li>{{ Counter.number }}</li>
+{% extends "site_base.html" %}
 
-        </ul>
-    {% endfor %}
+{% block body %}
+{% for counter in counters %}
 
-<a href="{% url 'counter_create' %}">Create new counter</a>
+    <ul class="list">
+        <li>{{ counter.number }}<a href="{% url 'counter_detail' pk=counter.pk %}">Details</a> <a href="{% url 'counter_delete' pk=counter.pk %}">Löschen</a><a href="{% url 'counter_update' pk=counter.pk %}">Bearbeiten</a></li>
+    </ul>
 
-</body>
-</html>
+{% endfor %}
+
+<a class="linkButton" href="{% url 'counter_create' %}"><button class="myButton">Create new counter</button></a>
+
+{% endblock %}

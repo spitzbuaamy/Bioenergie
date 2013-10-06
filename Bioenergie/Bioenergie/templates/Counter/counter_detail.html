@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ Counter.number}}</title>
-</head>
-<body>
+{% extends "site_base.html" %}
 
-<h1>Counter</h1>
+{% block body %}
 
-    <ul>
-            <li>{{ Counter.number }}</li>
-
+    <ul class="list">
+        <li>{{ counter.number }}</li>
     </ul>
 
-<a href="{% url 'counter_update' pk=counter.pk %}">Edit this counter</a>
-<a href="{% url 'counter_delete' pk=counter.pk %}">Delete this counter</a>
 
+<a class="linkButton" href="{% url 'counter_update' pk=counter.pk %}"><button class="myButton">Edit this counter</button></a>
+<a class="linkButton" href="{% url 'counter_delete' pk=counter.pk %}"><button class="myButton">Delete this counter</button></a>
 
-</body>
-</html>
+{% endblock %}

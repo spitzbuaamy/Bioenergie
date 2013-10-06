@@ -59,6 +59,7 @@ class Building(models.Model):
     counter = models.ManyToManyField(Counter)
     place = models.CharField(max_length=32)
     street = models.CharField(max_length=32)
+    house_number = models.IntegerField()
     discount = models.IntegerField()
     discount_fixed = models.IntegerField()
     contract_date = models.DateField()

@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Angeschlossenen Objekte</title>
-</head>
-<body>
-    {% for price in prices %}
-        <ul>
-            <li>{{ Price.amount }}</li>
-            <li>{{ Price.max }}</li>
-            <li>{{ Price.min }}</li>
-        </ul>
-    {% endfor %}
+{% extends "site_base.html" %}
 
-<a href="{% url 'price_create' %}">Create new price</a>
+{% block body %}
+{% for price in prices %}
 
-</body>
-</html>
+    <ul class="list">
+        <li>{{ price.amount }} <a href="{% url 'price_detail' pk=price.pk %}">Details</a> <a href="{% url 'price_delete' pk=price.pk %}">Löschen</a><a href="{% url 'price_update' pk=price.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'price_create' %}"><button class="myButton">Create new price</button></a>
+
+{% endblock %}

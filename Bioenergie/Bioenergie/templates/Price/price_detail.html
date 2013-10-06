@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ Price.amount}}</title>
-</head>
-<body>
+{% extends "site_base.html" %}
 
-<h1>Price</h1>
+{% block body %}
 
-    <ul>
-            <li>{{ Price.amount }}</li>
-            <li>{{ Price.max }}</li>
-            <li>{{ Price.min }}</li>
-
+    <ul class="list">
+            <li>Amount: {{ price.amount }}</li>
+            <li>Max: {{ price.max }}</li>
+            <li>Min: {{ price.min }}</li>
     </ul>
 
-<a href="{% url 'price_update' pk=price.pk %}">Edit this price</a>
-<a href="{% url 'price_delete' pk=price.pk %}">Delete this price</a>
 
+<a class="linkButton" href="{% url 'price_update' pk=price.pk %}"><button class="myButton">Edit this price</button></a>
+<a class="linkButton" href="{% url 'price_delete' pk=price.pk %}"><button class="myButton">Delete this price</button></a>
 
-</body>
-</html>
+{% endblock %}

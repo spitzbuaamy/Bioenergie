@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Confirm</title>
-</head>
-<body>
+{% extends "site_base.html" %}
+
+{% block body %}
 
 <p>
     Do you really want to delete:
@@ -11,8 +8,7 @@
 </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit"/>
+    <input type="submit" class="myButton"/>
 </form>
 
-</body>
-</html>
+{% endblock %}

@@ -1,3 +1,26 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+            <li>{{ building.customer }}</li>
+            <li>{{ building.place }}</li>
+            <li>{{ building.street }} {{ building.house_number }}</li>
+            <li>{{ building.discount }}</li>
+            <li>{{ building.discount_fixed }}</li>
+            <li>{{ building.contract_date }}</li>
+            <li>{{ building.price }}</li>
+            <li>{{ building.counter }}</li>
+
+    </ul>
+
+
+<a class="linkButton" href="{% url 'building_update' pk=building.pk %}"><button class="myButton">Edit this building</button></a>
+<a class="linkButton" href="{% url 'building_delete' pk=building.pk %}"><button class="myButton">Delete this building</button></a>
+
+{% endblock %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +31,7 @@
 <h1>Building</h1>
 
     <ul>
-            <li>{{ building.place }}</li>
-            <li>{{ building.street }}</li>
-            <li>{{ building.discount }}</li>
-            <li>{{ building.discount_fixed }}</li>
-            <li>{{ building.contract_date }}</li>
+
     </ul>
 
 

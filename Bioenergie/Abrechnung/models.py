@@ -80,10 +80,7 @@ class Index (models.Model):
         pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
     '''
     def __unicode__(self):
-        return u'%s : %s' (self.year, self.index)
-
-    def __str__(self):
-        return '%s : %s' (self.year, self.index)
+        return str(self.year) + ' ' + str(self.index)
 
     def get_absolute_url(self):
         return "/indexes/detail/%i" % self.id

@@ -10,7 +10,7 @@
             <li>{{ building.discount_fixed }}</li>
             <li>{{ building.contract_date }}</li>
             <li>{{ building.price }}</li>
-            <li>{{ building.counter }}</li>
+            <li>{% for counter in building.counter.all %}{{ counter }}<br/>{% endfor %}</li>
 
     </ul>
 

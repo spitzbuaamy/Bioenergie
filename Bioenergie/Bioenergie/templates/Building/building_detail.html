@@ -19,25 +19,3 @@
 <a class="linkButton" href="{% url 'building_delete' pk=building.pk %}"><button class="myButton">Delete this building</button></a>
 
 {% endblock %}
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ building.place}}</title>
-</head>
-<body>
-
-<h1>Building</h1>
-
-    <ul>
-
-    </ul>
-
-
-<a href="{% url 'building_update' pk=building.pk %}">Edit this building</a>
-<a href="{% url 'building_delete' pk=building.pk %}">Delete this building</a>
-
-
-</body>
-</html>

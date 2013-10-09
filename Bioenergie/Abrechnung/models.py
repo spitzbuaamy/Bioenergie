@@ -75,10 +75,6 @@ class Index (models.Model):
     year = models.IntegerField(max_length=4)
     index = models.IntegerField(max_length=4)
 
-    '''
-    def __unicode__(self):
-        pass # TODO: Unicode so andern, damit wir ein Building anlegen konnen
-    '''
     def __unicode__(self):
         return str(self.year) + ' ' + str(self.index)
 

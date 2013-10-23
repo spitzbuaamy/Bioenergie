@@ -1,9 +1,15 @@
 {% extends "site_base.html" %}
 
 {% block body %}
+
+    <form action="search/" method="get" style="float: right; margin-top: -50px;">
+        <input type="text" name="q" style="display: inline;">
+        <input type="submit" value="Search" style="display: inline;">
+    </form>
+
 {% for customer in customers %}
 
-    <ul class="list">
+    <ul class="list" xmlns="http://www.w3.org/1999/html">
         <li>{{ customer.first_name }} {{ customer.last_name }} <a href="{% url 'customer_detail' pk=customer.pk %}">Details</a> <a href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
     </ul>
 

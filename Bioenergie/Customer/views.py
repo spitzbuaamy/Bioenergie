@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from Abrechnung.models import Customer
 from Customer.forms import CustomerForm
@@ -38,3 +39,17 @@ class CustomerDeleteView(DeleteView):
     model = Customer
     context_object_name = 'customer'
     success_url = reverse_lazy('customer_list')
+
+
+def search_form(request):
+    return render(request, 'customer/search_form.html')
+
+
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        customer = Customer.objects.filter(last_name__icontains=q)
+        return render(request, 'customer/search_results.html',
+            {'Customers': customer, 'query': q})
+    else:
+        return HttpResponse('Bitte einen Namen eingeben!')

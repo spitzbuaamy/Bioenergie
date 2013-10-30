@@ -1,0 +1,17 @@
+{% extends "site_base.html" %}
+{% block body %}
+    <p>Sie suchten nach: <strong>{{ query }}</strong></p>
+
+    {% if Customers %}
+        <ul class = "list">
+            {% for customer in Customers %}
+            <li>{{ customer.first_name }} {{ customer.last_name }} <a href="{% url 'customer_detail' pk=customer.pk %}">Details</a> <a href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Leider kein Kunde gefunden.</p>
+    {% endif %}
+{% endblock %}
+
+
+

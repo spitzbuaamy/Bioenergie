@@ -48,7 +48,7 @@ def search_form(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        customer = Customer.objects.filter(last_name__icontains=q)
+        customer = Customer.objects.filter(last_name__icontains = q)
         return render(request, 'customer/search_results.html',
             {'Customers': customer, 'query': q})
     else:

@@ -13,10 +13,10 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^customers/', include('Customer.urls')),
     url(r'^buildings/', include('Building.urls')),
-    url(r'^counters/', include('Counter.urls')),
+    url(r'^counters/', include('CounterChange.urls')),
     url(r'^indexes/', include('Index.urls')),
     url(r'^measurements/', include('Measurement.urls')),
-    url(r'^prices/', include('Price.urls')),
+    url(r'^prices/', include('WorkingPrice.urls')),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$/', )
 )

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from Abrechnung.models import Counter
-from Counter.forms import CounterForm
+from CounterChange.forms import CounterForm
 from django.core.urlresolvers import reverse_lazy
 
 

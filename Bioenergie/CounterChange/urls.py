@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from Counter.views import CounterListView, CounterDetailView, CounterCreateView, CounterUpdateView, CounterDeleteView
+from CounterChange.views import CounterListView, CounterDetailView, CounterCreateView, CounterUpdateView, CounterDeleteView
 
 urlpatterns = patterns('',
     url(r'^$', CounterListView.as_view(), name='counter_list'),

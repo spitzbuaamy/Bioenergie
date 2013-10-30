@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from Abrechnung.models import Price
-from Price.forms import PriceForm
+from WorkingPrice.forms import PriceForm
 from django.core.urlresolvers import reverse_lazy
 
 

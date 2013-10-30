@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from Price.views import PriceListView, PriceDetailView, PriceCreateView, PriceUpdateView,PriceDeleteView
+from WorkingPrice.views import PriceListView, PriceDetailView, PriceCreateView, PriceUpdateView,PriceDeleteView
 
 urlpatterns = patterns('',
     url(r'^$', PriceListView.as_view(), name='price_list'),

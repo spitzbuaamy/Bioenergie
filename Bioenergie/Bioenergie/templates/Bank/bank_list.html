@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    {% for bank in banks %}
+
+        <ul class="list">
+            <li>{{ bank.name }}<a href="{% url 'bank_detail' pk=bank.pk %}">Details</a> <a href="{% url 'bank_delete' pk=bank.pk %}">Löschen</a><a href="{% url 'bank_update' pk=bank.pk %}">Bearbeiten</a></li>
+        </ul>
+
+    {% endfor %}
+
+<a class="linkButton" href="{% url 'bank_create' %}"><button class="myButton">Create new bank</button></a>
+
+{% endblock %}

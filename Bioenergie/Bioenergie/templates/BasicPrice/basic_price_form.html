@@ -1,0 +1,28 @@
+{% extends "site_base.html" %}
+
+    {% block extra_head %}
+             <style type="text/css">
+        input {
+            display: block;
+            margin-bottom: 15pt;
+        }
+
+        .errorlist {
+            color: red;
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+
+    {% endblock %}
+
+{% block body %}
+
+<form method="post">
+    {% csrf_token %}
+{{ form }}
+    <input type="submit" class="myButton"/>
+</form>
+
+{%  endblock %}

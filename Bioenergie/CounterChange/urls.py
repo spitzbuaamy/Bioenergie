@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, url
-from CounterChange.views import CounterListView, CounterDetailView, CounterCreateView, CounterUpdateView, CounterDeleteView
+from CounterChange.views import CounterChangeListView, CounterChangeDetailView, CounterChangeCreateView, CounterChangeUpdateView, CounterChangeDeleteView
 
 urlpatterns = patterns('',
-    url(r'^$', CounterListView.as_view(), name='counter_list'),
-    url(r'^detail/(?P<pk>\d+)$', CounterDetailView.as_view(), name='counter_detail'),
-    url(r'^create/$', CounterCreateView.as_view(), name='counter_create'),
-    url(r'^update/(?P<pk>\d+)$', CounterUpdateView.as_view(), name='counter_update'),
-    url(r'^delete/(?P<pk>\d+)$', CounterDeleteView.as_view(), name='counter_delete'),
+    url(r'^$', CounterChangeListView.as_view(), name='counter_change_list'),
+    url(r'^detail/(?P<pk>\d+)$', CounterChangeDetailView.as_view(), name='counter_change_detail'),
+    url(r'^create/$', CounterChangeCreateView.as_view(), name='counter_change_create'),
+    url(r'^update/(?P<pk>\d+)$', CounterChangeUpdateView.as_view(), name='counter_change_update'),
+    url(r'^delete/(?P<pk>\d+)$', CounterChangeDeleteView.as_view(), name='counter_change_delete'),
+
 )

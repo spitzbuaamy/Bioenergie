@@ -1,40 +1,39 @@
-from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Abrechnung.models import Counter
-from CounterChange.forms import CounterForm
+from Abrechnung.models import CounterChange
+from CounterChange.forms import CounterChangeForm
 from django.core.urlresolvers import reverse_lazy
 
 
-class CounterListView(ListView):
-    template_name = "Counter/counter_list.html"
-    model = Counter
-    context_object_name = 'counters'
+class CounterChangeListView(ListView):
+    template_name = "CounterChange/counter_change_list.html"
+    model = CounterChange
+    context_object_name = 'counter_change'
 
 
-class CounterDetailView(DetailView):
-    template_name = "Counter/counter_detail.html"
-    model = Counter
-    context_object_name = 'counter'
+class CounterChangeDetailView(DetailView):
+    template_name = "CounterChange/counter_change_detail.html"
+    model = CounterChange
+    context_object_name = 'counter_change'
 
 
-class CounterCreateView(CreateView):
-    template_name = "Counter/counter_form.html"
-    model = Counter
-    context_object_name = 'counter'
-    form_class = CounterForm
-    #success_url = reverse_lazy('counter_list')
+class CounterChangeCreateView(CreateView):
+    template_name = "CounterChange/counter_change_form.html"
+    model = CounterChange
+    context_object_name = 'counter_change'
+    form_class = CounterChangeForm
+    #success_url = reverse_lazy('counter_change_list')
 
 
-class CounterUpdateView(UpdateView):
-    template_name = "Counter/counter_form.html"
-    model = Counter
-    context_object_name = 'counter'
-    form_class = CounterForm
-    # success_url = reverse_lazy('counter_list')
+class CounterChangeUpdateView(UpdateView):
+    template_name = "CounterChange/counter_change_form.html"
+    model = CounterChange
+    context_object_name = 'counter_change'
+    form_class = CounterChangeForm
+    # success_url = reverse_lazy('counter_change_list')
 
 
-class CounterDeleteView(DeleteView):
-    template_name = "Counter/counter_confirm_delete.html"
-    model = Counter
-    context_object_name = 'counter'
-    success_url = reverse_lazy('counter_list')
+class CounterChangeDeleteView(DeleteView):
+    template_name = "CounterChange/counter_change_confirm_delete.html"
+    model = CounterChange
+    context_object_name = 'counter_change'
+    success_url = reverse_lazy('counter_change_list')

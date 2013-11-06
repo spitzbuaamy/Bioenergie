@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for measurement_price in measurement_prices %}
+
+    <ul class="list">
+        <li>Group {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }}) <a href="{% url 'measurement_price_detail' pk=measurement_price.pk %}">Details</a> <a href="{% url 'measurement_price_delete' pk=measurement_price.pk %}">Löschen</a><a href="{% url 'measurement_price_update' pk=measurement_price.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'measurement_price_create' %}"><button class="myButton">Create new measurement-price</button></a>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+<p>
+    Do you really want to delete:
+    Group {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }})
+</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" class="myButton"/>
+</form>
+
+{% endblock %}

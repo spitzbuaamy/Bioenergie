@@ -11,12 +11,20 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^customers/', include('Customer.urls')),
+    url(r'^banks/', include('Bank.urls')),
+    url(r'^basicprices/', include('BasicPrice.urls')),
+    url(r'^bills/', include('Bill.urls')),
     url(r'^buildings/', include('Building.urls')),
-    url(r'^counters/', include('CounterChange.urls')),
+    url(r'^cableprices/', include('CablePrice.urls')),
+    url(r'^connectionflatrates/', include('ConnectionFlatRate.urls')),
+    url(r'^counterbills/', include('CounterBill.urls')),
+    url(r'^counterchanges/', include('CounterChange.urls')),
+    url(r'^customers/', include('Customer.urls')),
     url(r'^indexes/', include('Index.urls')),
     url(r'^measurements/', include('Measurement.urls')),
-    url(r'^prices/', include('WorkingPrice.urls')),
+    url(r'^measurementprices/', include('MeasurementPrice.urls')),
+    url(r'^rates/', include('Rate.urls')),
+    url(r'^workingprices/', include('WorkingPrice.urls')),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$/', )
 )

@@ -1,11 +1,10 @@
 from django.conf.urls import patterns, url
-
-from WorkingPrice.views import PriceListView, PriceDetailView, PriceCreateView, PriceUpdateView,PriceDeleteView
+from WorkingPrice.views import WorkingPriceListView, WorkingPriceDetailView, WorkingPriceCreateView, WorkingPriceUpdateView,WorkingPriceDeleteView
 
 urlpatterns = patterns('',
-    url(r'^$', PriceListView.as_view(), name='price_list'),
-    url(r'^detail/(?P<pk>\d+)$', PriceDetailView.as_view(), name='price_detail'),
-    url(r'^create/$', PriceCreateView.as_view(), name='price_create'),
-    url(r'^update/(?P<pk>\d+)$', PriceUpdateView.as_view(), name='price_update'),
-    url(r'^delete/(?P<pk>\d+)$', PriceDeleteView.as_view(), name='price_delete'),
+    url(r'^$', WorkingPriceListView.as_view(), name='working_price_list'),
+    url(r'^detail/(?P<pk>\d+)$', WorkingPriceDetailView.as_view(), name='working_price_detail'),
+    url(r'^create/$', WorkingPriceCreateView.as_view(), name='working_price_create'),
+    url(r'^update/(?P<pk>\d+)$', WorkingPriceUpdateView.as_view(), name='working_price_update'),
+    url(r'^delete/(?P<pk>\d+)$', WorkingPriceDeleteView.as_view(), name='working_price_delete'),
 )

@@ -1,40 +1,39 @@
-from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Abrechnung.models import Price
-from WorkingPrice.forms import PriceForm
+from Abrechnung.models import WorkingPrice
+from WorkingPrice.forms import WorkingPriceForm
 from django.core.urlresolvers import reverse_lazy
 
 
-class PriceListView(ListView):
-    template_name = "Price/price_list.html"
-    model = Price
-    context_object_name = 'prices'
+class WorkingPriceListView(ListView):
+    template_name = "WorkingPrice/working_price_list.html"
+    model = WorkingPrice
+    context_object_name = 'working_price'
 
 
-class PriceDetailView(DetailView):
-    template_name = "Price/price_detail.html"
-    model = Price
-    context_object_name = 'price'
+class WorkingPriceDetailView(DetailView):
+    template_name = "WorkingPrice/working_price_detail.html"
+    model = WorkingPrice
+    context_object_name = 'working_price'
 
 
-class PriceCreateView(CreateView):
-    template_name = "Price/price_form.html"
-    model = Price
-    context_object_name = 'price'
-    form_class = PriceForm
-    #success_url = reverse_lazy('price_list')
+class WorkingPriceCreateView(CreateView):
+    template_name = "WorkingPrice/working_price_form.html"
+    model = WorkingPrice
+    context_object_name = 'working_price'
+    form_class = WorkingPriceForm
+    #success_url = reverse_lazy('working_price_list')
 
 
-class PriceUpdateView(UpdateView):
-    template_name = "Price/price_form.html"
-    model = Price
-    context_object_name = 'price'
-    form_class = PriceForm
-    # success_url = reverse_lazy('price_list')
+class WorkingPriceUpdateView(UpdateView):
+    template_name = "WorkingPrice/working_price_form.html"
+    model = WorkingPrice
+    context_object_name = 'working_price'
+    form_class = WorkingPriceForm
+    # success_url = reverse_lazy('working_price_list')
 
 
-class PriceDeleteView(DeleteView):
-    template_name = "Price/price_confirm_delete.html"
-    model = Price
-    context_object_name = 'price'
-    success_url = reverse_lazy('price_list')
+class WorkingPriceDeleteView(DeleteView):
+    template_name = "WorkingPrice/working_price_confirm_delete.html"
+    model = WorkingPrice
+    context_object_name = 'working_price'
+    success_url = reverse_lazy('working_price_list')

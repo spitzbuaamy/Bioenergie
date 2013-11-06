@@ -2,6 +2,21 @@ from django.db import models
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Create your models here.
+class Bank(models.Model):
+    name = models.CharField(max_length=64) #Bankname
+    account_number = models.IntegerField() #Kontonummer
+    code_number = models.IntegerField() #Bankleitzahl
+    IBAN = models.CharField(max_length=32)
+    BIC = models.CharField(max_length=32)
+
+    def __unicode__(self):
+        return str(self.name)
+
+    def get_absolute_url(self):
+        return "/banks/detail/%i" % self.id
+
+
+#-----------------------------------------------------------------------------------------------------------------------
 class Customer(models.Model): #Kunde
     salutation = models.CharField(max_length=10) #Anrede
     title = models.CharField(max_length=32, blank = True)
@@ -89,6 +104,32 @@ class CablePrice(models.Model):
 
 
 #-----------------------------------------------------------------------------------------------------------------------
+class Building(models.Model):
+    customer = models.ForeignKey(Customer)
+    working_price = models.ForeignKey(WorkingPrice)
+    basic_price = models.ForeignKey(BasicPrice)
+    measurement_price = models.ForeignKey(MeasurementPrice)
+    connection_flat_rate = models.ForeignKey(ConnectionFlatRate) #Anschlusspauschale
+    cable_price = models.ForeignKey(CablePrice) #Zuleitungspreis
+    cable_length = models.IntegerField() #Kabellaenge
+    street = models.CharField(max_length=32)
+    house_number = models.IntegerField()
+    zip = models.IntegerField()
+    place = models.CharField(max_length=32)
+    discount_fixed = models.IntegerField()
+    contract_date = models.DateField() #Anschlussdatum
+    connection_number = models.IntegerField() #AnschlussID
+    connection_power = models.IntegerField() #Anschlussleistung
+    last_bill = models.DateField() #Letzte Abrechnung
+
+    def __unicode__(self):
+        return self.customer # Todo: Vorname & Nachname des Customer
+
+    def get_absolute_url(self):
+        return "/buildings/detail/%i" % self.id
+
+
+#-----------------------------------------------------------------------------------------------------------------------
 class CounterChange(models.Model):    #Zaehlerwechsel
     date = models.DateField()
     counter_final_result = models.IntegerField()
@@ -117,32 +158,6 @@ class Measurement(models.Model): #Zaehlerstand
 
 
 #-----------------------------------------------------------------------------------------------------------------------
-class Building(models.Model):
-    customer = models.ForeignKey(Customer)
-    working_price = models.ForeignKey(WorkingPrice)
-    basic_price = models.ForeignKey(BasicPrice)
-    measurement_price = models.ForeignKey(MeasurementPrice)
-    connection_flat_rate = models.ForeignKey(ConnectionFlatRate) #Anschlusspauschale
-    cable_price = models.ForeignKey(CablePrice) #Zuleitungspreis
-    cable_length = models.IntegerField() #Kabellaenge
-    street = models.CharField(max_length=32)
-    house_number = models.IntegerField()
-    zip = models.IntegerField()
-    place = models.CharField(max_length=32)
-    discount_fixed = models.IntegerField()
-    contract_date = models.DateField() #Anschlussdatum
-    connection_number = models.IntegerField() #AnschlussID
-    connection_power = models.IntegerField() #Anschlussleistung
-    last_bill = models.DateField() #Letzte Abrechnung
-
-    def __unicode__(self):
-        return self.customer # Todo: Vorname & Nachname des Customer
-
-    def get_absolute_url(self):
-        return "/buildings/detail/%i" % self.id
-
-
-#-----------------------------------------------------------------------------------------------------------------------
 class Rate(models.Model):
     building = models.ForeignKey(Building)
     year = models.IntegerField()
@@ -168,24 +183,9 @@ class Index(models.Model):
 
 
 #-----------------------------------------------------------------------------------------------------------------------
-class Bank(models.Model):
-    name = models.CharField(max_length=64) #Bankname
-    account_number = models.IntegerField() #Kontonummer
-    code_number = models.IntegerField() #Bankleitzahl
-    IBAN = models.CharField(max_length=32)
-    BIC = models.CharField(max_length=32)
-
-    def __unicode__(self):
-        return str(self.name)
-
-    def get_absolute_url(self):
-        return "/banks/detail/%i" % self.id
-
-
-#-----------------------------------------------------------------------------------------------------------------------
 class Bill(models.Model):
     building = models.ForeignKey(Building)
-    bill_number = models.CharField #TODO: Rechnungsnummer-Zusammensetzung fragen
+    bill_number = models.CharField(max_length=32)  #TODO: Rechnungsnummer-Zusammensetzung fragen
     date = models.DateField()
     working_price = models.IntegerField()
     measurement_price = models.IntegerField()

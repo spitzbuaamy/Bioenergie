@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for connection_flat_rate in connection_flat_rates %}
+
+    <ul class="list">
+        <li>Group {{ connection_flat_rate.wage_group }}: ({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }}) <a href="{% url 'connection_flat_rate_detail' pk=connection_flat_rate.pk %}">Details</a> <a href="{% url 'connection_flat_rate_delete' pk=connection_flat_rate.pk %}">Löschen</a><a href="{% url 'connection_flat_rate_update' pk=connection_flat_rate.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'connection_flat_rate_create' %}"><button class="myButton">Create new connection-flat-rate</button></a>
+
+{% endblock %}

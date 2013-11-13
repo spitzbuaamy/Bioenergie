@@ -1,0 +1,17 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+        <li>{{ counter_bill.bill }}</li>
+        <li> {{ counter_bill.old_measurement }}</li>
+        <li> {{ counter_bill.date_old_measurement }}</li>
+        <li> {{ counter_bill.new_measurement }}</li>
+        <li> {{ counter_bill.date_new_measurement }}</li>
+    </ul>
+
+
+<a class="linkButton" href="{% url 'counter_bill_update' pk=counter_bill.pk %}"><button class="myButton">Edit this counter bill</button></a>
+<a class="linkButton" href="{% url 'counter_bill_delete' pk=counter_bill.pk %}"><button class="myButton">Delete this counter bill</button></a>
+
+{% endblock %}

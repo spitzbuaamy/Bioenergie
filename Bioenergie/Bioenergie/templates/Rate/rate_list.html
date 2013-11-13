@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for price in prices %}
+
+    <ul class="list">
+        <li>{{ rate.building }} {{ rate.year }} <a href="{% url 'rate_detail' pk=rate.pk %}">Details</a> <a href="{% url 'rate_delete' pk=rate.pk %}">Löschen</a><a href="{% url 'rate_update' pk=rate.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'rate_create' %}"><button class="myButton">Create new rate</button></a>
+
+{% endblock %}

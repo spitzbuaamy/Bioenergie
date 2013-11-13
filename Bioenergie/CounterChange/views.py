@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 class CounterChangeListView(ListView):
     template_name = "CounterChange/counter_change_list.html"
     model = CounterChange
-    context_object_name = 'counter_change'
+    context_object_name = 'counter_changes'
 
 
 class CounterChangeDetailView(DetailView):

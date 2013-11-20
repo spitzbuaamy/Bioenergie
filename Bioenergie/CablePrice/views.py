@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 class CablePriceListView(ListView):
     template_name = "CablePrice/cable_price_list.html"
     model = CablePrice
-    context_object_name = 'cable_price'
+    context_object_name = 'cable_prices'
 
 
 class CablePriceDetailView(DetailView):

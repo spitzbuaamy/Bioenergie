@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+            <li>Wage-group: {{ connection_flat_rate.wage_group }}</li>
+            <li>Min: {{ connection_flat_rate.max }}</li>
+            <li>Max: {{ connection_flat_rate.min }}</li>
+            <li>Amount: {{ connection_flat_rate.amount }}</li>
+    </ul>
+
+
+<a class="linkButton" href="{% url 'connection_flat_rate_update' pk=connection_flat_rate.pk %}"><button class="myButton">Edit this connection-flat-rate</button></a>
+<a class="linkButton" href="{% url 'connection_flat_rate_delete' pk=connection_flat_rate.pk %}"><button class="myButton">Delete this connection-flat-rate</button></a>
+
+{% endblock %}

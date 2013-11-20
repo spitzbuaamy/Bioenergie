@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for counter_change in counter_changes %}
+
+    <ul class="list">
+        <li>{{ counter_change.building }} {{ counter_change.date }}<a href="{% url 'counter_change_detail' pk=counter_change.pk %}">Details</a> <a href="{% url 'counter_change_delete' pk=counter_change.pk %}">Löschen</a><a href="{% url 'counter_change_update' pk=counter_change.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'counter_change_create' %}"><button class="myButton">Create new counter change</button></a>
+
+{% endblock %}

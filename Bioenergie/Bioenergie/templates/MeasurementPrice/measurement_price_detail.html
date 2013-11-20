@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+            <li>Wage-group: {{ measurement_price.wage_group }}</li>
+            <li>Min: {{ measurement_price.max }}</li>
+            <li>Max: {{ measurement_price.min }}</li>
+            <li>Amount: {{ measurement_price.amount }}</li>
+    </ul>
+
+
+<a class="linkButton" href="{% url 'measurement_price_update' pk=measurement_price.pk %}"><button class="myButton">Edit this measurement-price</button></a>
+<a class="linkButton" href="{% url 'measurement_price_delete' pk=measurement_price.pk %}"><button class="myButton">Delete this measurement-price</button></a>
+
+{% endblock %}

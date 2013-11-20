@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+<p>
+    Do you really want to delete:
+    Group {{ connection_flat_rate.wage_group }}: ({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }})
+</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" class="myButton"/>
+</form>
+
+{% endblock %}

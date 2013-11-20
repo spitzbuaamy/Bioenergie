@@ -4,13 +4,19 @@
 
     <ul class="list">
             <li>{{ building.customer }}</li>
-            <li>{{ building.place }}</li>
+            <li>{{ building.working_price }}</li>
+            <li>{{ building.basic_price }}</li>
+            <li>{{ building.measurement_price }}</li>
+            <li>{{ building.connection_flat_rate }}</li>
+            <li>{{ building.cable_price }}</li>
+            <li>{{ building.cable_length }}</li>
+            <li>{{ building.zip }} {{ building.place }}</li>
             <li>{{ building.street }} {{ building.house_number }}</li>
-            <li>{{ building.discount }}</li>
             <li>{{ building.discount_fixed }}</li>
             <li>{{ building.contract_date }}</li>
-            <li>{{ building.price }}</li>
-            <li>{% for counter in building.counter.all %}{{ counter }}<br/>{% endfor %}</li>
+            <li>{{ building.connection_number }}</li>
+            <li>{{ building.connection_power }}</li>
+            <li>{{ building.last_bill }}</li>
 
     </ul>
 

@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+            <li>{{ cable_price.price_per_meter }} € per meter</li>
+
+    </ul>
+
+
+<a class="linkButton" href="{% url 'cable_price_update' pk=cable_price.pk %}"><button class="myButton">Edit this cable-price</button></a>
+<a class="linkButton" href="{% url 'cable_price_delete' pk=cable_price.pk %}"><button class="myButton">Delete this cable-price</button></a>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+            <li>{{ bill.building }}</li>
+            <li>{{ bill.bill_number }}</li>
+            <li>{{ bill.date }}</li>
+            <li>{{ bill.working_price }}</li>
+            <li>{{ bill.measurement_price }}</li>
+            <li>{{ bill.basic_price }}</li>
+            <li>{{ bill.discount }}</li>
+            <li>{{ bill.payment_net }}</li>
+            <li>{{ bill.additional_payment_net }}</li>
+            <li>{{ bill.new_payment_net }}</li>
+    </ul>
+
+
+<a class="linkButton" href="{% url 'bill_update' pk=bill.pk %}"><button class="myButton">Edit this bill</button></a>
+<a class="linkButton" href="{% url 'bill_delete' pk=bill.pk %}"><button class="myButton">Delete this bill</button></a>
+
+{% endblock %}

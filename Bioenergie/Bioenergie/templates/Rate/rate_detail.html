@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+            <li>{{ rate.building }}</li>
+            <li>{{ rate.year }}</li>
+            <li>{{ rate.monthly_rate }}</li>
+    </ul>
+
+
+<a class="linkButton" href="{% url 'rate_update' pk=rate.pk %}"><button class="myButton">Edit this rate</button></a>
+<a class="linkButton" href="{% url 'rate_delete' pk=rate.pk %}"><button class="myButton">Delete this rate</button></a>
+
+{% endblock %}

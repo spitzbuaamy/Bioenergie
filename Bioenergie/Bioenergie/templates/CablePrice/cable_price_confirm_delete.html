@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+<p>
+    Do you really want to delete:
+    {{ cable_price.price_per_meter }}
+</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" class="myButton"/>
+</form>
+
+{% endblock %}

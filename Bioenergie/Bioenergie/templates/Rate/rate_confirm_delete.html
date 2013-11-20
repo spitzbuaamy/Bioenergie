@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+<p>
+    Do you really want to delete:
+    {{ rate.buildung }} {{ rate.year }}
+</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" class="myButton"/>
+</form>
+
+{% endblock %}

@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 class ConnectionFlatRateListView(ListView):
     template_name = "ConnectionFlatRate/connection_flat_rate_list.html"
     model = ConnectionFlatRate
-    context_object_name = 'connection_flat_rate'
+    context_object_name = 'connection_flat_rates'
 
 
 class ConnectionFlatRateDetailView(DetailView):

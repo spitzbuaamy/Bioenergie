@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for bill in bills %}
+
+    <ul class="list">
+        <li>{{ bill.number }} {{ bill.date }} <a href="{% url 'measurement_detail' pk=bill.pk %}">Details</a> <a href="{% url 'bill_delete' pk=bill.pk %}">Löschen</a><a href="{% url 'bill_update' pk=bill.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'bill_create' %}"><button class="myButton">Create new bill</button></a>
+
+{% endblock %}

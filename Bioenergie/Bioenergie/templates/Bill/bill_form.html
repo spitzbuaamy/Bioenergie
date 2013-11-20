@@ -1,7 +1,8 @@
 {% extends "site_base.html" %}
 
-    {% block extra_head %}
-             <style type="text/css">
+{% block extra_head %}
+
+     <style type="text/css">
         input {
             display: block;
             margin-bottom: 15pt;
@@ -14,16 +15,14 @@
         }
 
     </style>
-
         <script>
 
        $(function() {
-            $( "#id_contract_date" ).datepicker({ dateFormat: 'dd.mm.yy'});
-            $( "#id_last_bill" ).datepicker({ dateFormat: 'dd.mm.yy'});
+            $( "#id_date" ).datepicker({ dateFormat: 'dd.mm.yy'});
          });
       </script>
 
-    {% endblock %}
+{% endblock %}
 
 {% block body %}
 
@@ -33,4 +32,4 @@
     <input type="submit" class="myButton"/>
 </form>
 
-{%  endblock %}
+{% endblock %}

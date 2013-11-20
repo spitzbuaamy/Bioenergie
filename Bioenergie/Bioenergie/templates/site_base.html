@@ -13,33 +13,39 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <title>customer</title>
     {% block extra_head %}
-     <!-- zusaetzliche head tags -->
+        <!-- zusaetzliche head tags -->
     {% endblock %}
 </head>
 <body>
-
-<div class="menu">
-    <ul>
-        <div class="right">
-        <li>Abrechnung</li>
-        <li><a href="/banks/">Bank</a></li>
-        <li><a href="/basicprices/">BasicPrice</a></li>
-        <li><a href="/buildings/">Building</a></li>
-        <li><a href="/cableprices/">CablePrice</a></li>
-        <li><a href="/connectionflatrates/">ConnectionFlatRate</a></li>
-        <li><a href="/counterbills/">CounterBill</a></li>
-        <li><a href="/counterchanges/">CounterChange</a></li>
+<div class="drop">
+    <ul class="drop_menu">
+        <li><a href="/bills/">Bill</a></li>
+        <li><a href='#'>Bill Components</a>
+            <ul>
+                <li><a href="/banks/">Bank</a></li>
+                <li><a href="/cableprices/">Cable Price</a></li>
+                <li><a href="/connectionflatrates/">Connection Flatrate</a></li>
+                <li><a href="/counterbills/">Counter Bill</a></li>
+                <li><a href="/rates/">Rate</a></li>
+            </ul>
+        </li>
         <li><a href="/customers/">Customer</a></li>
+        <li><a href="/buildings/">Building</a></li>
+        <li><a href="/counterchanges/">Counter Change</a></li>
+        <li><a href=>Prices</a>
+            <ul>
+                <li><a href="/basicprices/">Basic Price</a></li>
+                <li><a href="/measurementprices/">Measurement Price</a></li>
+                <li><a href="/workingprices/">Working Price</a></li>
+            </ul>
+        </li>
         <li><a href="/indexes/">Index</a></li>
         <li><a href="/measurements/">Measurement</a></li>
-        <li><a href="/measurementprices/">MeasurementPrice</a></li>
-        <li><a href="/rates/">Rate</a></li>
-        <li><a href="/workingprices/">WorkingPrice</a></li>
-
-        </div>
     </ul>
-
 </div>
+<div class = "clear"> </div>
+
+
 
 {% block body %}
 

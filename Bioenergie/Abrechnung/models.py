@@ -29,11 +29,11 @@ class Customer(models.Model): #Kunde
     customer_number = models.CharField(max_length=32) #TODO: Format festlegen
     bank = models.ForeignKey(Bank)
 
+    def __unicode__(self):
+        return str(self.first_name) + ' ' + str(self.last_name)
+
     def get_absolute_url(self):
         return "/customers/detail/%i" % self.id
-
-    def __unicode__(self):
-        return self.first_name + ' ' + self.last_name
 
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ class CounterChange(models.Model):    #Zaehlerwechsel
     building = models.ForeignKey(Building)
 
     def __unicode__(self):
-        return self.number
+        return str(self.building)
 
     def get_absolute_url(self):
         return "/counterchanges/detail/%i" % self.id
@@ -215,3 +215,6 @@ class CounterBill(models.Model):
 
     def get_absolute_url(self):
         return "/counterbills/detail/%i" % self.id
+
+
+#-----------------------------------------------------------------------------------------------------------------------

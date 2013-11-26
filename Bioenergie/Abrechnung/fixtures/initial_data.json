@@ -1,6 +1,305 @@
 [
     {
         "pk": 1,
+        "model": "Abrechnung.bank",
+        "fields": {
+            "BIC": "412344",
+            "code_number": 13222,
+            "IBAN": "12311121131",
+            "name": "Raiffeisen Donau Ameisberg",
+            "account_number": 111212
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.bank",
+        "fields": {
+            "BIC": "234325",
+            "code_number": 3333,
+            "IBAN": "2345523",
+            "name": "Sparkasse Muehlviertel West",
+            "account_number": 3333
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Jakob",
+            "last_name": "Wundsam",
+            "zip": 4141,
+            "title": "",
+            "house_number": 1,
+            "customer_number": "345434433",
+            "street": "Pfarrkirchen",
+            "place": "Pfarrkirchen",
+            "salutation": "Herr",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Fabian",
+            "last_name": "Schauer",
+            "zip": 4132,
+            "title": "",
+            "house_number": 5,
+            "customer_number": "324432432",
+            "street": "Steining",
+            "place": "Lembach",
+            "salutation": "Herr",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Klaus",
+            "last_name": "Ammerstorfer",
+            "zip": 4132,
+            "title": "",
+            "house_number": 6,
+            "customer_number": "3244334",
+            "street": "Stra\u00dfe",
+            "place": "Lembach",
+            "salutation": "Herr",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.workingprice",
+        "fields": {
+            "max": 20,
+            "amount": 23,
+            "wage_group": 1,
+            "min": 10
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.workingprice",
+        "fields": {
+            "max": 30,
+            "amount": 45,
+            "wage_group": 2,
+            "min": 20
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.workingprice",
+        "fields": {
+            "max": 40,
+            "amount": 78,
+            "wage_group": 3,
+            "min": 30
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 20,
+            "amount": 10,
+            "wage_group": 1,
+            "min": 13
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 30,
+            "amount": 20,
+            "wage_group": 2,
+            "min": 21
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 40,
+            "amount": 30,
+            "wage_group": 3,
+            "min": 31
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.measurementprice",
+        "fields": {
+            "max": 20,
+            "amount": 30,
+            "wage_group": 1,
+            "min": 10
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.measurementprice",
+        "fields": {
+            "max": 30,
+            "amount": 45,
+            "wage_group": 2,
+            "min": 20
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.measurementprice",
+        "fields": {
+            "max": 40,
+            "amount": 67,
+            "wage_group": 3,
+            "min": 30
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.connectionflatrate",
+        "fields": {
+            "max": 20,
+            "amount": 21,
+            "wage_group": 1,
+            "min": 10
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.connectionflatrate",
+        "fields": {
+            "max": 30,
+            "amount": 45,
+            "wage_group": 2,
+            "min": 20
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.connectionflatrate",
+        "fields": {
+            "max": 40,
+            "amount": 67,
+            "wage_group": 3,
+            "min": 30
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 34
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 1,
+            "connection_number": 43,
+            "measurement_price": 3,
+            "street": "Pfarrkirchen",
+            "zip": 4141,
+            "working_price": 1,
+            "house_number": 2,
+            "contract_date": "2013-11-05",
+            "cable_price": 1,
+            "discount_fixed": 23,
+            "connection_power": 23,
+            "connection_flat_rate": 2,
+            "place": "Pfarrkirchen",
+            "last_bill": "2013-11-12",
+            "basic_price": 2,
+            "cable_length": 888
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 2,
+            "connection_number": 2,
+            "measurement_price": 3,
+            "street": "Steining",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 5,
+            "contract_date": "2013-11-05",
+            "cable_price": 1,
+            "discount_fixed": 0,
+            "connection_power": 56,
+            "connection_flat_rate": 2,
+            "place": "Lembach",
+            "last_bill": "2013-11-03",
+            "basic_price": 1,
+            "cable_length": 67
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.counterchange",
+        "fields": {
+            "date": "2013-11-26",
+            "building": 2,
+            "date_new_counter": "2013-11-26",
+            "counter_final_result": 34,
+            "heat_quantity": 12
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.counterchange",
+        "fields": {
+            "date": "2013-11-12",
+            "building": 1,
+            "date_new_counter": "2013-11-13",
+            "counter_final_result": 20,
+            "heat_quantity": 15
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 2,
+            "measured_date": "2013-11-08",
+            "value": 45
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 1,
+            "monthly_rate": 240,
+            "year": 2012
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 1,
+            "monthly_rate": 50,
+            "year": 2010
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 2,
+            "monthly_rate": 345,
+            "year": 2000
+        }
+    },
+    {
+        "pk": 1,
         "model": "Abrechnung.index",
         "fields": {
             "index": 100,
@@ -30,6 +329,32 @@
             "index": 125,
             "year": 2004
         }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.bill",
+        "fields": {
+            "building": 1,
+            "measurement_price": 20,
+            "working_price": 45,
+            "payment_net": 1000,
+            "additional_payment_net": 145,
+            "new_payment_net": 123,
+            "discount": 14,
+            "basic_price": 12,
+            "date": "2013-11-05",
+            "bill_number": "324343"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.counterbill",
+        "fields": {
+            "old_measurement": 56666,
+            "date_new_measurement": "2013-06-14",
+            "bill": 1,
+            "new_measurement": 4666666,
+            "date_old_measurement": "2012-01-12"
+        }
     }
 ]
-

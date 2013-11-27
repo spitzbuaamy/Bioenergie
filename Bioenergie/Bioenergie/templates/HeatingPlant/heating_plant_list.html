@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+{% for heating_plant in heating_plants %}
+
+    <ul class="list">
+        <li>{{ heating_plant.name }} ({{ heating_plant.manager }}) <a href="{% url 'heating_plant_detail' pk=heating_plant.pk %}">Details</a> <a href="{% url 'heating_plant_delete' pk=heating_plant.pk %}">Löschen</a><a href="{% url 'heating_plant_update' pk=heating_plant.pk %}">Bearbeiten</a></li>
+    </ul>
+
+{% endfor %}
+
+<a class="linkButton" href="{% url 'heating_plant_create' %}"><button class="myButton">Create new heating plant</button></a>
+
+{% endblock %}

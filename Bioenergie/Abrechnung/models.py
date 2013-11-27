@@ -10,7 +10,7 @@ class Bank(models.Model):
     BIC = models.CharField(max_length=32)
 
     def __unicode__(self):
-        return str(self.name)
+        return unicode(self.name)
 
     def get_absolute_url(self):
         return "/banks/detail/%i" % self.id
@@ -30,7 +30,7 @@ class Customer(models.Model): #Kunde
     bank = models.ForeignKey(Bank)
 
     def __unicode__(self):
-        return str(self.first_name) + ' ' + str(self.last_name)
+        return unicode(self.first_name) + ' ' + unicode(self.last_name)
 
     def get_absolute_url(self):
         return "/customers/detail/%i" % self.id
@@ -44,7 +44,7 @@ class WorkingPrice(models.Model): #Arbeitspreis
     wage_group = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.wage_group) + ': ' + str(self.min) + ' / ' + str(self.max)
+        return unicode(self.wage_group) + ': ' + unicode(self.min) + ' / ' + unicode(self.max)
 
     def get_absolute_url(self):
         return "/workingprices/detail/%i" % self.id
@@ -58,7 +58,7 @@ class BasicPrice(models.Model): #Grundpreis
     wage_group = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.wage_group) + ': ' + str(self.min) + ' / ' + str(self.max)
+        return unicode(self.wage_group) + ': ' + unicode(self.min) + ' / ' + unicode(self.max)
 
     def get_absolute_url(self):
         return "/basicprices/detail/%i" % self.id
@@ -72,7 +72,7 @@ class MeasurementPrice(models.Model): #Messpreis
     wage_group = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.wage_group) + ': ' + str(self.min) + ' / ' + str(self.max)
+        return unicode(self.wage_group) + ': ' + unicode(self.min) + ' / ' + unicode(self.max)
 
     def get_absolute_url(self):
         return "/measurementprices/detail/%i" % self.id
@@ -86,7 +86,7 @@ class ConnectionFlatRate(models.Model):
     wage_group = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.wage_group) + ': ' + str(self.min) + ' / ' + str(self.max)
+        return unicode(self.wage_group) + ': ' + unicode(self.min) + ' / ' + unicode(self.max)
 
     def get_absolute_url(self):
         return "/connectionflatrates/detail/%i" % self.id
@@ -97,7 +97,7 @@ class CablePrice(models.Model):
     price_per_meter = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.price_per_meter)
+        return unicode(self.price_per_meter)
 
     def get_absolute_url(self):
         return "/cableprices/detail/%i" % self.id
@@ -123,7 +123,7 @@ class Building(models.Model):
     last_bill = models.DateField() #Letzte Abrechnung
 
     def __unicode__(self):
-        return self.customer # Todo: Vorname & Nachname des Customer
+        return unicode(self.customer) + ' ' + unicode(self.street) + ' ' + unicode(self.house_number) # Todo: Vorname & Nachname des Customer
 
     def get_absolute_url(self):
         return "/buildings/detail/%i" % self.id
@@ -138,7 +138,7 @@ class CounterChange(models.Model):    #Zaehlerwechsel
     building = models.ForeignKey(Building)
 
     def __unicode__(self):
-        return str(self.building)
+        return unicode(self.building)
 
     def get_absolute_url(self):
         return "/counterchanges/detail/%i" % self.id
@@ -151,7 +151,7 @@ class Measurement(models.Model): #Zaehlerstand
     value = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.measured_date)
+        return unicode(self.measured_date)
 
     def get_absolute_url(self):
         return "/measurements/detail/%i" % self.id
@@ -164,7 +164,7 @@ class Rate(models.Model):
     monthly_rate = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.monthly_rate)
+        return unicode(self.monthly_rate)
 
     def get_absolute_url(self):
         return "/rates/detail/%i" % self.id
@@ -176,7 +176,7 @@ class Index(models.Model):
     index = models.IntegerField(max_length=4)
 
     def __unicode__(self):
-        return str(self.year) + ' ' + str(self.index)
+        return unicode(self.year) + ' ' + unicode(self.index)
 
     def get_absolute_url(self):
         return "/indexes/detail/%i" % self.id
@@ -196,7 +196,7 @@ class Bill(models.Model):
     new_payment_net = models.IntegerField() #neue Akkontozahlung Netto
 
     def __unicode__(self):
-        return str(self.bill_number)
+        return unicode(self.bill_number)
 
     def get_absolute_url(self):
         return "/bills/detail/%i" % self.id
@@ -211,10 +211,27 @@ class CounterBill(models.Model):
     date_new_measurement = models.DateField()
 
     def __unicode__(self):
-        return str(self.bill) + ' ' + str(self.date_new_measurement)
+        return unicode(self.bill) + ' ' + str(self.date_new_measurement)
 
     def get_absolute_url(self):
         return "/counterbills/detail/%i" % self.id
 
 
 #-----------------------------------------------------------------------------------------------------------------------
+class HeatingPlant(models.Model):
+    name = models.CharField(max_length="32")
+    standard_discount = models.IntegerField()
+    bill_number = models.IntegerField()
+    house_number = models.IntegerField()
+    street = models.CharField(max_length="32")
+    zip = models.IntegerField()
+    place = models.CharField(max_length="32")
+    Ust_ID = models.IntegerField()
+    manager = models.CharField(max_length="32")
+    company_register_number = models.IntegerField()
+
+    def __unicode__(self):
+        return unicode(self.name) + '(' + str(self.manager) + ')'
+
+    def get_absolute_url(self):
+        return "/heatingplants/detail/%i" % self.id

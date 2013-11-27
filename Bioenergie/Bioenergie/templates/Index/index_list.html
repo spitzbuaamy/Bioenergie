@@ -12,22 +12,3 @@
 <a class="linkButton" href="{% url 'index_create' %}"><button class="myButton">Create new index</button></a>
 
 {% endblock %}
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Indexes</title>
-</head>
-<body>
-    <table>
-       <tr> <th>Index</th> <th>Jahr</th></tr>
-    {% for index in indexes %}
-        <tr><td>{{index.index}}</td> <td>{{index.year}}</td></tr>
-    {% endfor %}
-        </table>
-
-<a href="{% url 'index_create' %}">Create new index</a>
-
-</body>
-</html>

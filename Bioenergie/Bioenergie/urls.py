@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^measurementprices/', include('MeasurementPrice.urls')),
     url(r'^rates/', include('Rate.urls')),
     url(r'^workingprices/', include('WorkingPrice.urls')),
+    url(r'^heatingplants/', include('HeatingPlant.urls')),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$/', )
 )

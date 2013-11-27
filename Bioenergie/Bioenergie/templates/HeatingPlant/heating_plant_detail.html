@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <ul class="list">
+        <li>{{ heating_plant.name }}</li>
+        <li>{{ heating_plant.standard_discount}}</li>
+        <li>{{ heating_plant.bill_number }}</li>
+        <li>{{ heating_plant.house_number}}</li>
+        <li>{{ heating_plant.street }}</li>
+        <li>{{ heating_plant.zip}}</li>
+        <li>{{ heating_plant.place }}</li>
+        <li>{{ heating_plant.Ust_ID}}</li>
+        <li>{{ heating_plant.manager }}</li>
+        <li>{{ heating_plant.company_register_number}}</li>
+    </ul>
+
+
+<a class="linkButton" href="{% url 'heating_plant_update' pk=heating_plant.pk %}"><button class="myButton">Edit this heating plant</button></a>
+<a class="linkButton" href="{% url 'heating_plant_delete' pk=heating_plant.pk %}"><button class="myButton">Delete this heating plant</button></a>
+
+{% endblock %}

@@ -17,7 +17,7 @@
             "BIC": "234325",
             "code_number": 3333,
             "IBAN": "2345523",
-            "name": "Sparkasse Muehlviertel West",
+            "name": "Sparkasse M\u00fchlviertel West",
             "account_number": 3333
         }
     },
@@ -67,6 +67,22 @@
             "place": "Lembach",
             "salutation": "Herr",
             "bank": 2
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Daniel",
+            "last_name": "\u00d6ller",
+            "zip": 4157,
+            "title": "",
+            "house_number": 11,
+            "customer_number": "0000000001",
+            "street": "Sonnenweg",
+            "place": "Peilstein",
+            "salutation": "Herr",
+            "bank": 1
         }
     },
     {
@@ -355,6 +371,22 @@
             "bill": 1,
             "new_measurement": 4666666,
             "date_old_measurement": "2012-01-12"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.heatingplant",
+        "fields": {
+            "standard_discount": 14,
+            "name": "Bioenergie Lembach",
+            "zip": 4132,
+            "house_number": 2,
+            "company_register_number": 3463434,
+            "Ust_ID": 42424,
+            "manager": "Franz Ammerstorfer",
+            "street": "Lembacherstra\u00dfe",
+            "place": "Lembach",
+            "bill_number": 324343
         }
     }
 ]

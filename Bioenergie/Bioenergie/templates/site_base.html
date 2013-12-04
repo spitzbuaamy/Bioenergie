@@ -11,56 +11,64 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
-    <meta charset="utf-8">
     <title>customer</title>
     {% block extra_head %}
         <!-- zusaetzliche head tags -->
     {% endblock %}
 </head>
 <body>
-<div class="drop">
-    <ul class="drop_menu">
-        <li><a href='#'>Create Bill</a>
-            <ul>
-                <li><a href="/bills/">Normal Invoice</a></li>
-                <li><a href='#'>Connection Bill</a></li>
-                <li><a href='#'>Blank Invoice</a></li>
-            </ul>
-        </li>
-        <li><a href='#'>Bill Components</a>
-            <ul>
-                <li><a href="/banks/">Bank</a></li>
-                <li><a href="/cableprices/">Cable Price</a></li>
-                <li><a href="/connectionflatrates/">Connection Flatrate</a></li>
-                <li><a href="/counterbills/">Counter Bill</a></li>
-                <li><a href="/rates/">Rate</a></li>
-            </ul>
-        </li>
-        <li><a href="/customers/">Customer</a></li>
-        <li><a href="/buildings/">Building</a></li>
-        <li><a href="/counterchanges/">Counter Change</a></li>
-        <li><a href=>Prices</a>
-            <ul>
-                <li><a href="/basicprices/">Basic Price</a></li>
-                <li><a href="/measurementprices/">Measurement Price</a></li>
-                <li><a href="/workingprices/">Working Price</a></li>
-            </ul>
-        </li>
-        <li><a href="/indexes/">Index</a></li>
-        <li><a href="/measurements/">Measurement</a></li>
-        <li><a href="/heatingplants/">Heating Plant</a></li>
-    </ul>
-</div>
-<div class="clear"></div>
+ {% if user.is_authenticated %}
+    <div class="drop">
+        <ul class="drop_menu">
+            <li><a href='#'>Create Bill</a>
+                <ul>
+                    <li><a href="/bills/">Normal Invoice</a></li>
+                    <li><a href='#'>Connection Bill</a></li>
+                    <li><a href='#'>Blank Invoice</a></li>
+                </ul>
+            </li>
+            <li><a href='#'>Bill Components</a>
+                <ul>
+                    <li><a href="/banks/">Bank</a></li>
+                    <li><a href="/cableprices/">Cable Price</a></li>
+                    <li><a href="/connectionflatrates/">Connection Flatrate</a></li>
+                    <li><a href="/counterbills/">Counter Bill</a></li>
+                    <li><a href="/rates/">Rate</a></li>
+                </ul>
+            </li>
+            <li><a href="/customers/">Customer</a></li>
+            <li><a href="/buildings/">Building</a></li>
+            <li><a href="/counterchanges/">Counter Change</a></li>
+            <li><a href=>Prices</a>
+                <ul>
+                    <li><a href="/basicprices/">Basic Price</a></li>
+                    <li><a href="/measurementprices/">Measurement Price</a></li>
+                    <li><a href="/workingprices/">Working Price</a></li>
+                </ul>
+            </li>
+            <li><a href="/indexes/">Index</a></li>
+            <li><a href="/measurements/">Measurement</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    {% block body %}
 
+        <!-- hier kommt Inhalt, falls der nutzer authenticated ist...-->
 
+    {% endblock %}
 
-{% block body %}
+     <a style="position: absolute; right: 0px; bottom: 10px" href="{% url 'logout' %}"><button class="logoutbutton">Logout</button></a>
 
-    <!-- hier kommt Inhalt -->
-
-{% endblock %}
+{% else %}
+    <form style="margin: 0 auto; position: absolute; top: 30%; right: 40%" id="login_form" method="post" action="/login/">
+        {% csrf_token %}
+        Username: <input type="text" name="username" value="" size="50"/>
+        <br/>
+        Password: <input type="password" name="password" value="" size="50"/>
+        <br/>
+        <a style="position: absolute; right: 35%" class="linkButton" type="submit"><button class="myButton">Login</button></a>
+    </form>
+{% endif %}
 
 </body>
 </html>

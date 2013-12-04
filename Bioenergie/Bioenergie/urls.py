@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from Abrechnung import views
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -28,4 +30,6 @@ urlpatterns = patterns('',
     url(r'^heatingplants/', include('HeatingPlant.urls')),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$/', )
+    url(r'^login/$', views.user_login, name='login'),
+    url(r'^logout/$', views.user_logout, name='logout'),
 )

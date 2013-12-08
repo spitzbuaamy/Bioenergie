@@ -2,15 +2,19 @@
 
 {% block body %}
 
-    <ul class="list">
-            <li>Wage-group: {{ basic_price.wage_group }}</li>
-            <li>Min: {{ basic_price.max }}</li>
-            <li>Max: {{ basic_price.min }}</li>
-            <li>Amount: {{ basic_price.amount }}</li>
+    <ul>
+        Wage-group: {{ basic_price.wage_group }} </br>
+        Min: {{ basic_price.max }} </br>
+        Max: {{ basic_price.min }} </br>
+        Amount: {{ basic_price.amount }}
     </ul>
 
 
-<a class="linkButton" href="{% url 'basic_price_update' pk=basic_price.pk %}"><button class="myButton">Edit this basic-price</button></a>
-<a class="linkButton" href="{% url 'basic_price_delete' pk=basic_price.pk %}"><button class="myButton">Delete this basic-price</button></a>
+    <a class="linkButton" href="{% url 'basic_price_update' pk=basic_price.pk %}">
+        <button class="myButton">Edit this basic-price</button>
+    </a>
+    <a class="linkButton" href="{% url 'basic_price_delete' pk=basic_price.pk %}">
+        <button class="myButton">Delete this basic-price</button>
+    </a>
 
 {% endblock %}

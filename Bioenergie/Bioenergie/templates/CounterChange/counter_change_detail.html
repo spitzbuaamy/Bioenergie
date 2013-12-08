@@ -2,13 +2,30 @@
 
 {% block body %}
 
-    <ul class="list">
-        <li>{{ counter_change.date }}</li>
-        <li> {{ counter_change.counter_final_result }}</li>
-        <li> {{ counter_change.heat_quantity }}</li>
-        <li> {{ counter_change.date_new_counter }}</li>
-        <li> {{ counter_change.building }}</li>
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Datum des Wechsels:</td>
+                <td>{{ counter_change.date }}</td>
+            </tr>
+            <tr>
+                <td> Endstand des Zählers: </td>
+                <td> {{ counter_change.counter_final_result }} </td>
+            </tr>
+            <tr>
+                <td> Zu verrechnende Wärmemenge:</td>
+                <td> {{ counter_change.heat_quantity }}kW </td>
+            </tr>
+            <tr>
+                <td> Einsetzen des neuen Zählers:</td>
+                <td> {{ counter_change.date_new_counter }} </td>
+            </tr>
+            <tr>
+                <td> Gebäude:</td>
+                <td> {{ counter_change.building }} </td>
+            </tr>
+        </ul>
+    </table>
 
 
 <a class="linkButton" href="{% url 'counter_change_update' pk=counter_change.pk %}"><button class="myButton">Edit this counter change</button></a>

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Abrechnung.models import Customer
+from Abrechnung.models import Customer, Building
 from Customer.forms import CustomerForm
 from django.core.urlresolvers import reverse_lazy
 
@@ -16,6 +16,12 @@ class CustomerDetailView(DetailView):
     template_name = "Customer/customer_detail.html"
     model = Customer
     context_object_name = 'customer'
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerDetailView, self).get_context_data(**kwargs)
+        context['buildings'] =  context['customer'].building_set.all()
+
+        return context
 
 
 class CustomerCreateView(CreateView):

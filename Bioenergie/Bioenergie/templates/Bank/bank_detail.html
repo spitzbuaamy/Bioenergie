@@ -2,13 +2,12 @@
 
 {% block body %}
 
-    <ul class="list">
-        <li>{{ bank.name }}</li>
-        <li>Kontonummer: {{ bank.account_number}}</li>
-        <li>Bankleitzahl: {{ bank.code_number }}</li>
-        <li>IBAN: {{ bank.IBAN }}</li>
-        <li>BIC: {{ bank.BIC }}</li>
-
+    <ul>
+        {{ bank.name }} </br>
+        Kontonummer: {{ bank.account_number}} </br>
+        Bankleitzahl: {{ bank.code_number }} </br>
+        IBAN: {{ bank.IBAN }} </br>
+        BIC: {{ bank.BIC }}
     </ul>
 
 

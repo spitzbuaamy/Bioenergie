@@ -16,6 +16,14 @@
 
     </style>
 
+     <script>
+
+       $(function() {
+            $( "#id_date_old_measurement" ).datepicker({ dateFormat: 'dd.mm.yy'});
+            $( "#id_date_new_measurement" ).datepicker({ dateFormat: 'dd.mm.yy'});
+         });
+      </script>
+
 {% endblock %}
 
 {% block body %}

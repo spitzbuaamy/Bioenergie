@@ -27,6 +27,7 @@
         "fields": {
             "first_name": "Jakob",
             "last_name": "Wundsam",
+            "telephone_number": 20,
             "zip": 4141,
             "title": "",
             "house_number": 1,
@@ -43,6 +44,7 @@
         "fields": {
             "first_name": "Fabian",
             "last_name": "Schauer",
+            "telephone_number": 10,
             "zip": 4132,
             "title": "",
             "house_number": 5,
@@ -59,6 +61,7 @@
         "fields": {
             "first_name": "Klaus",
             "last_name": "Ammerstorfer",
+            "telephone_number": 30,
             "zip": 4132,
             "title": "",
             "house_number": 6,
@@ -75,6 +78,7 @@
         "fields": {
             "first_name": "Daniel",
             "last_name": "\u00d6ller",
+            "telephone_number": 90,
             "zip": 4157,
             "title": "",
             "house_number": 11,

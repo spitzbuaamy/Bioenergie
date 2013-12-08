@@ -1,3 +1,4 @@
+from random import choice
 from django.db import models
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -18,10 +19,23 @@ class Bank(models.Model):
 
 #-----------------------------------------------------------------------------------------------------------------------
 class Customer(models.Model): #Kunde
-    salutation = models.CharField(max_length=10) #Anrede
-    title = models.CharField(max_length=32, blank = True)
+    BLANK = ''
+    HERR = 'Herr'
+    FRAU = 'Frau'
+    FAMILIE = 'Familie'
+    FIRMA = 'Firma'
+    SALUTATIONS = (
+        (BLANK, ''),
+        (HERR, 'Herr'),
+        (FRAU, 'Frau'),
+        (FAMILIE, 'Familie'),
+        (FIRMA, 'Firma'),
+    )
+    salutation = models.CharField(max_length=10, choices=SALUTATIONS, default=2, blank=True)
+    title = models.CharField(max_length=32, blank=True)
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
+    telephone_number = models.IntegerField(blank=True)
     street = models.CharField(max_length=32)
     house_number = models.IntegerField()
     zip = models.IntegerField() # PLZ

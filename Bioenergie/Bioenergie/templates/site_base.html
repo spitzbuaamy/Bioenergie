@@ -58,7 +58,7 @@
 
     {% endblock %}
 
-     <a style="position: absolute; right: 0px; top: 12px;" href="{% url 'logout' %}"><button>Logout</button></a>
+      <a style="position: absolute; right: 0px; top: 12px;" href="{% url 'logout' %}"><button style="background-color: red; color:#ffffff; border-color: red">Logout</button></a>
 
 {% else %}
     <form style="margin: 0 auto; position: absolute; top: 30%; right: 40%" id="login_form" method="post" action="/login/">

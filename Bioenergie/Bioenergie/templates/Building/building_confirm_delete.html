@@ -3,12 +3,12 @@
 {% block body %}
 
 <p>
-    Do you really want to delete:
+    Möchten Sie dieses Gebäude wirklich löschen?
      <li>{{ building.street }} {{ building.house_number }} {{ building.customer }}
 </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit" class="myButton"/>
+    <input type="submit" value="Löschen" class="myButton"/>
 </form>
 
 {% endblock %}

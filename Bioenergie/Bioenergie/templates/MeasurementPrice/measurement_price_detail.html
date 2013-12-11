@@ -2,15 +2,29 @@
 
 {% block body %}
 
-    <ul>
-            Wage-group: {{ measurement_price.wage_group }} </br>
-            Min: {{ measurement_price.max }} </br>
-            Max: {{ measurement_price.min }} </br>
-            Amount: {{ measurement_price.amount }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Preisgruppe:</td>
+                <td>{{ measurement_price.wage_group }}</td>
+            </tr>
+            <tr>
+                <td> Minimum:</td>
+                <td> {{ measurement_price.min }}kW </td>
+            </tr>
+            <tr>
+                <td> Maximum:</td>
+                <td> {{ measurement_price.max }}kW </td>
+            </tr>
+            <tr>
+                <td> Betrag:</td>
+                <td> {{ measurement_price.amount }}kW </td>
+            </tr>
+        </ul>
+    </table>
 
 
-<a class="linkButton" href="{% url 'measurement_price_update' pk=measurement_price.pk %}"><button class="myButton">Edit this measurement-price</button></a>
-<a class="linkButton" href="{% url 'measurement_price_delete' pk=measurement_price.pk %}"><button class="myButton">Delete this measurement-price</button></a>
+<a class="linkButton" href="{% url 'measurement_price_update' pk=measurement_price.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'measurement_price_delete' pk=measurement_price.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

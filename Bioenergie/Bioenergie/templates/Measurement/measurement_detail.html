@@ -2,14 +2,25 @@
 
 {% block body %}
 
-    <ul>
-            Gebäude: {{ measurement.building }} </br>
-            Datum: {{ measurement.measured_date }} </br>
-            Wert: {{ measurement.value }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Gebäude:</td>
+                <td>{{ measurement.building }}</td>
+            </tr>
+            <tr>
+                <td> Datum:</td>
+                <td> {{ measurement.measured_date }} </td>
+            </tr>
+            <tr>
+                <td> Wert:</td>
+                <td> {{ measurement.value }}kW </td>
+            </tr>
+        </ul>
+    </table>
 
 
-<a class="linkButton" href="{% url 'measurement_update' pk=measurement.pk %}"><button class="myButton">Edit this measurement</button></a>
-<a class="linkButton" href="{% url 'measurement_delete' pk=measurement.pk %}"><button class="myButton">Delete this measurement</button></a>
+<a class="linkButton" href="{% url 'measurement_update' pk=measurement.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'measurement_delete' pk=measurement.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

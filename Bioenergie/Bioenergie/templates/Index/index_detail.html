@@ -2,13 +2,20 @@
 
 {% block body %}
 
-    <ul>
-       Jahr: {{ index.year }} </br>
-       Index: {{ index.index}}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Jahr:</td>
+                <td>{{ index.year }}</td>
+            </tr>
+            <tr>
+                <td> Index:</td>
+                <td> {{ index.index }} </td>
+            </tr>
+        </ul>
+    </table>
 
-
-<a class="linkButton" href="{% url 'index_update' pk=index.pk %}"><button class="myButton">Edit this index</button></a>
-<a class="linkButton" href="{% url 'index_delete' pk=index.pk %}"><button class="myButton">Delete this index</button></a>
+<a class="linkButton" href="{% url 'index_update' pk=index.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'index_delete' pk=index.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

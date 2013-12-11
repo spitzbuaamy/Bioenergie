@@ -2,15 +2,30 @@
 
 {% block body %}
 
-    <ul>
-            Wage-group: {{ connection_flat_rate.wage_group }} </br>
-            Min: {{ connection_flat_rate.max }} </br>
-            Max: {{ connection_flat_rate.min }} </br>
-            Amount: {{ connection_flat_rate.amount }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Preisgruppe:</td>
+                <td>{{ connection_flat_rate.wage_group }}</td>
+            </tr>
+            <tr>
+                <td> Minimum:</td>
+                <td> {{ connection_flat_rate.min }} </td>
+            </tr>
+            <tr>
+                <td> Maximum:</td>
+                <td> {{ connection_flat_rate.max }} </td>
+            </tr>
+            <tr>
+                <td> Betrag:</td>
+                <td> {{ connection_flat_rate.amount }} </td>
+            </tr>
+        </ul>
+    </table>
 
 
-<a class="linkButton" href="{% url 'connection_flat_rate_update' pk=connection_flat_rate.pk %}"><button class="myButton">Edit this connection-flat-rate</button></a>
-<a class="linkButton" href="{% url 'connection_flat_rate_delete' pk=connection_flat_rate.pk %}"><button class="myButton">Delete this connection-flat-rate</button></a>
+
+<a class="linkButton" href="{% url 'connection_flat_rate_update' pk=connection_flat_rate.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'connection_flat_rate_delete' pk=connection_flat_rate.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

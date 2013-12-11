@@ -2,14 +2,25 @@
 
 {% block body %}
 
-    <ul>
-            Gebäude: {{ rate.building }} </br>
-            Jahr: {{ rate.year }} </br>
-            Monatsrate: {{ rate.monthly_rate }} €/Monat
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Gebäude:</td>
+                <td>{{ rate.building }}</td>
+            </tr>
+            <tr>
+                <td> Jahr:</td>
+                <td> {{ rate.year }} </td>
+            </tr>
+            <tr>
+                <td> Monatsrate:</td>
+                <td> {{ rate.monthly_rate }}€ </td>
+            </tr>
+        </ul>
+    </table>
 
 
-<a class="linkButton" href="{% url 'rate_update' pk=rate.pk %}"><button class="myButton">Edit this rate</button></a>
-<a class="linkButton" href="{% url 'rate_delete' pk=rate.pk %}"><button class="myButton">Delete this rate</button></a>
+<a class="linkButton" href="{% url 'rate_update' pk=rate.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'rate_delete' pk=rate.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

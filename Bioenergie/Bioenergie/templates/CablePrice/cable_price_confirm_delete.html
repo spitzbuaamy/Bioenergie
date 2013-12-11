@@ -3,12 +3,12 @@
 {% block body %}
 
 <p>
-    Do you really want to delete:
+    Möchten Sie diesen Kabelpreis wirklich löschen?
     {{ cable_price.price_per_meter }}
 </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit" class="myButton"/>
+    <input type="submit" value="Löschen" class="myButton"/>
 </form>
 
 {% endblock %}

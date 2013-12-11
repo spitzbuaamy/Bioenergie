@@ -2,25 +2,57 @@
 
 {% block body %}
 
-    <ul>
-        {{ bill.building }} </br>
-        {{ bill.bill_number }} </br>
-        {{ bill.date }} </br>
-        {{ bill.working_price }} </br>
-        {{ bill.measurement_price }} </br>
-        {{ bill.basic_price }} </br>
-        {{ bill.discount }} </br>
-        {{ bill.payment_net }} </br>
-        {{ bill.additional_payment_net }} </br>
-        {{ bill.new_payment_net }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Gebäude:</td>
+                <td>{{ bill.building }}</td>
+            </tr>
+            <tr>
+                <td> Rechnungsnummer:</td>
+                <td> {{ bill.bill_number }} </td>
+            </tr>
+            <tr>
+                <td> Datum:</td>
+                <td> {{ bill.date }} </td>
+            </tr>
+            <tr>
+                <td> Arbeitspreis:</td>
+                <td> {{ bill.working_price }} </td>
+            </tr>
+            <tr>
+                <td> Messpreis:</td>
+                <td> {{ bill.measurement_price }} </td>
+            </tr>
+            <tr>
+                <td> Grundpreis:</td>
+                <td> {{ bill.basic_price }} </td>
+            </tr>
+            <tr>
+                <td> Rabatt:</td>
+                <td> {{ bill.discount }} </td>
+            </tr>
+            <tr>
+                <td> Nettozahlung:</td>
+                <td> {{ bill.payment_net }} </td>
+            </tr>
+            <tr>
+                <td> Zusätzliche Zahlungen Netto:</td>
+                <td> {{ bill.additional_payment_net }} </td>
+            </tr>
+            <tr>
+                <td> Neue Rate Netto:</td> #Nicht sicher, ob des stimmt
+                <td> {{ bill.new_payment_net }} </td>
+            </tr>
+        </ul>
+    </table>
 
 
     <a class="linkButton" href="{% url 'bill_update' pk=bill.pk %}">
-        <button class="myButton">Edit this bill</button>
+        <button class="myButton">Bearbeiten</button>
     </a>
     <a class="linkButton" href="{% url 'bill_delete' pk=bill.pk %}">
-        <button class="myButton">Delete this bill</button>
+        <button class="myButton">Löschen</button>
     </a>
 
 {% endblock %}

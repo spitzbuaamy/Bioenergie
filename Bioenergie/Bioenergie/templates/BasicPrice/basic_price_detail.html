@@ -2,19 +2,33 @@
 
 {% block body %}
 
-    <ul>
-        Wage-group: {{ basic_price.wage_group }} </br>
-        Min: {{ basic_price.max }} </br>
-        Max: {{ basic_price.min }} </br>
-        Amount: {{ basic_price.amount }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Preisgruppe:</td>
+                <td>{{ basic_price.wage_group }}</td>
+            </tr>
+            <tr>
+                <td> Minimum:</td>
+                <td> {{ basic_price.min }}kW </td>
+            </tr>
+            <tr>
+                <td> Maximum:</td>
+                <td> {{ basic_price.max }}kW </td>
+            </tr>
+            <tr>
+                <td> Betrag:</td>
+                <td> {{ basic_price.amount }}kW </td>
+            </tr>
+        </ul>
+    </table>
 
 
     <a class="linkButton" href="{% url 'basic_price_update' pk=basic_price.pk %}">
-        <button class="myButton">Edit this basic-price</button>
+        <button class="myButton">Bearbeiten</button>
     </a>
     <a class="linkButton" href="{% url 'basic_price_delete' pk=basic_price.pk %}">
-        <button class="myButton">Delete this basic-price</button>
+        <button class="myButton">Löschen</button>
     </a>
 
 {% endblock %}

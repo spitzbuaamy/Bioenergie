@@ -3,12 +3,12 @@
 {% block body %}
 
 <p>
-    Do you really want to delete:
+    Möchten Sie diesen Messpreis wirklich löschen?
     Group {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }})
 </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit" class="myButton"/>
+    <input type="submit" value="Löschen" class="myButton"/>
 </form>
 
 {% endblock %}

@@ -20,34 +20,35 @@
  {% if user.is_authenticated %}
     <div class="drop">
         <ul class="drop_menu">
-            <li><a href='#'>Create Bill</a>
+            <li><a href='#'>Abrechnung</a>
                 <ul>
-                    <li><a href="/bills/">Normal Invoice</a></li>
-                    <li><a href='#'>Connection Bill</a></li>
-                    <li><a href='#'>Blank Invoice</a></li>
+                    <li><a href="/bills/">Energieabrechnung</a></li>
+                    <li><a href='#'>Anschlussrechnung</a></li>
+                    <li><a href='#'>Zwischenabrechnung</a></li>
+                    <li><a href='#'>Leere Rechnung</a></li>
                 </ul>
             </li>
-            <li><a href='#'>Bill Components</a>
+            <li><a href='#'>Rechnungskomponenten</a>
                 <ul>
                     <li><a href="/banks/">Bank</a></li>
-                    <li><a href="/cableprices/">Cable Price</a></li>
-                    <li><a href="/connectionflatrates/">Connection Flatrate</a></li>
-                    <li><a href="/counterbills/">Counter Bill</a></li>
+                    <li><a href="/cableprices/">Kabelpreis</a></li>
+                    <li><a href="/connectionflatrates/">Anschlusspauschale</a></li>
+                    <li><a href="/counterbills/">Zählerrechnung</a></li>
                     <li><a href="/rates/">Rate</a></li>
                 </ul>
             </li>
-            <li><a href="/customers/">Customer</a></li>
-            <li><a href="/buildings/">Building</a></li>
-            <li><a href="/counterchanges/">Counter Change</a></li>
-            <li><a href=>Prices</a>
+            <li><a href="/customers/">Kunde</a></li>
+            <li><a href="/buildings/">Gebäude</a></li>
+            <li><a href="/counterchanges/">Zählerwechsel</a></li>
+            <li><a href=>Preisgruppen</a>
                 <ul>
-                    <li><a href="/basicprices/">Basic Price</a></li>
-                    <li><a href="/measurementprices/">Measurement Price</a></li>
-                    <li><a href="/workingprices/">Working Price</a></li>
+                    <li><a href="/basicprices/">Grundpreis</a></li>
+                    <li><a href="/measurementprices/">Messpreis</a></li>
+                    <li><a href="/workingprices/">Arbeitspreis</a></li>
                 </ul>
             </li>
             <li><a href="/indexes/">Index</a></li>
-            <li><a href="/measurements/">Measurement</a></li>
+            <li><a href="/measurements/">Messung</a></li>
         </ul>
     </div>
     <div class="clear"></div>

@@ -2,16 +2,33 @@
 
 {% block body %}
 
-    <ul>
-        {{ bank.name }} </br>
-        Kontonummer: {{ bank.account_number}} </br>
-        Bankleitzahl: {{ bank.code_number }} </br>
-        IBAN: {{ bank.IBAN }} </br>
-        BIC: {{ bank.BIC }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Bankname:</td>
+                <td>{{ bank.name }}</td>
+            </tr>
+            <tr>
+                <td> Kontonummer:</td>
+                <td> {{ bank.account_number }} </td>
+            </tr>
+            <tr>
+                <td> Bankleitzahl:</td>
+                <td> {{ bank.code_number }} </td>
+            </tr>
+            <tr>
+                <td> IBAN:</td>
+                <td> {{ bank.IBAN }} </td>
+            </tr>
+            <tr>
+                <td> BIC:</td>
+                <td> {{ bank.BIC }} </td>
+            </tr>
+        </ul>
+    </table>
 
 
-<a class="linkButton" href="{% url 'bank_update' pk=bank.pk %}"><button class="myButton">Edit this bank</button></a>
-<a class="linkButton" href="{% url 'bank_delete' pk=bank.pk %}"><button class="myButton">Delete this bank</button></a>
+<a class="linkButton" href="{% url 'bank_update' pk=bank.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'bank_delete' pk=bank.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

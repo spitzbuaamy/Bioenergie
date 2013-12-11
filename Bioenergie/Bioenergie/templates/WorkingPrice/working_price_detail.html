@@ -2,15 +2,30 @@
 
 {% block body %}
 
-    <ul>
-            Wage-group: {{ working_price.wage_group }} </br>
-            Min: {{ working_price.max }} </br>
-            Max: {{ working_price.min }} </br>
-            Amount: {{ working_price.amount }}
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Preisgruppe:</td>
+                <td>{{ working_price.wage_group }}</td>
+            </tr>
+            <tr>
+                <td> Minimum:</td>
+                <td> {{ working_price.min }}kW </td>
+            </tr>
+            <tr>
+                <td> Maximum:</td>
+                <td> {{ working_price.max }}kW </td>
+            </tr>
+            <tr>
+                <td> Betrag:</td>
+                <td> {{ working_price.amount }}kW </td>
+            </tr>
+        </ul>
+    </table>
 
 
-<a class="linkButton" href="{% url 'working_price_update' pk=working_price.pk %}"><button class="myButton">Edit this working-price</button></a>
-<a class="linkButton" href="{% url 'working_price_delete' pk=working_price.pk %}"><button class="myButton">Delete this working-price</button></a>
+
+<a class="linkButton" href="{% url 'working_price_update' pk=working_price.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'working_price_delete' pk=working_price.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

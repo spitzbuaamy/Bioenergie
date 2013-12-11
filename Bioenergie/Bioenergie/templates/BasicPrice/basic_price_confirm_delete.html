@@ -3,12 +3,12 @@
 {% block body %}
 
 <p>
-    Do you really want to delete:
+    Möchten Sie diesen Grundpreis wirklich löschen?
     Group {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }})
 </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit" class="myButton"/>
+    <input type="submit" value="Löschen" class="myButton"/>
 </form>
 
 {% endblock %}

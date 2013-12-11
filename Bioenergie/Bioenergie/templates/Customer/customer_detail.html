@@ -2,18 +2,34 @@
 
 {% block body %}
 
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td  valign="top"> Kunde:</td>
+                <td>{{ customer.salutation }} <br/>
+                {{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} <br/>
+                {{ customer.telephone_number }} <br/>
+                {{ customer.street }} {{ customer.house_number }} <br/>
+                {{ customer.zip }} {{ customer.place }} </td>
+            </tr>
+            <tr>
+                <td> Kundennummer: </td>
+                <td>  {{ customer.customer_number }} </td>
+            </tr>
+            <tr>
+                <td> Bank:</td>
+                <td> {{ customer.bank }} </td>
+            </tr>
+          </ul>
+    </table>
     <ul>
-        {{ customer.salutation }} </br>
-        {{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} </br>
-        {{ customer.street }} {{ customer.house_number }} </br>
-        {{ customer.zip }} {{ customer.place }}
-    </ul>
+
 
     <a class="linkButton" href="{% url 'customer_update' pk=customer.pk %}">
-        <button class="myButton">Edit this customer</button>
+        <button class="myButton">Bearbeiten</button>
     </a>
     <a class="linkButton" href="{% url 'customer_delete' pk=customer.pk %}">
-        <button class="myButton">Delete this customer</button>
+        <button class="myButton">Löschen</button>
     </a> <br/>
 
 
@@ -23,7 +39,7 @@
             <ul>
                 <tr><br/>
                     <h2 style="margin-left: 40px">Gebäude {{ forloop.counter }}</h2> <a style="position: relative; margin-top: 300px; margin-left: 0px" class="linkButton" href="{% url 'building_update' pk=building.pk %}">
-            <button class="myButton">Edit this building</button>
+            <button class="myButton">Bearbeiten</button>
         </a>
                     <td> Arbeitspreis:</td>
                     <td> {{ building.working_price }} </td>

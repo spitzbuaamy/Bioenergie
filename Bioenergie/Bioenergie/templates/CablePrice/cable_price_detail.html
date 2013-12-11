@@ -2,13 +2,17 @@
 
 {% block body %}
 
-    <ul>
-        {{ cable_price.price_per_meter }} € per meter
-    </ul>
+    <table style="margin-left: 30px; margin-bottom: 20px" >
+        <ul>
+            <tr>
+                <td> Preis:</td>
+                <td>{{ cable_price.price_per_meter }} € pro Meter</td>
+            </tr>
+        </ul>
+    </table>
 
 
-
-<a class="linkButton" href="{% url 'cable_price_update' pk=cable_price.pk %}"><button class="myButton">Edit this cable-price</button></a>
-<a class="linkButton" href="{% url 'cable_price_delete' pk=cable_price.pk %}"><button class="myButton">Delete this cable-price</button></a>
+<a class="linkButton" href="{% url 'cable_price_update' pk=cable_price.pk %}"><button class="myButton">Bearbeiten</button></a>
+<a class="linkButton" href="{% url 'cable_price_delete' pk=cable_price.pk %}"><button class="myButton">Löschen</button></a>
 
 {% endblock %}

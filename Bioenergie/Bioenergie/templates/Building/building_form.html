@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 
     {% block extra_head %}
-             <style type="text/css">
+        <style type="text/css" xmlns="http://www.w3.org/1999/html">
         input {
             display: block;
             margin-bottom: 15pt;
@@ -30,7 +30,7 @@
 <form method="post">
     {% csrf_token %}
 {{ form }}
-    <input type="submit" class="myButton"/>
+    <input type="submit" value="Änderungen speichern" class="myButton">
 </form>
 
 {%  endblock %}

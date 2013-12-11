@@ -8,9 +8,12 @@
                 <td  valign="top"> Kunde:</td>
                 <td>{{ customer.salutation }} <br/>
                 {{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} <br/>
-                {{ customer.telephone_number }} <br/>
                 {{ customer.street }} {{ customer.house_number }} <br/>
                 {{ customer.zip }} {{ customer.place }} </td>
+            </tr>
+            <tr>
+                <td> Telefonnummer: </td>
+                <td>  {{ customer.telephone_number }} </td>
             </tr>
             <tr>
                 <td> Kundennummer: </td>
@@ -22,7 +25,7 @@
             </tr>
           </ul>
     </table>
-    <ul>
+
 
 
     <a class="linkButton" href="{% url 'customer_update' pk=customer.pk %}">

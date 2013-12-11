@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from Abrechnung.models import Customer, Building
 from Customer.forms import CustomerForm
 from django.core.urlresolvers import reverse_lazy
-
+from itertools import chain
 
 class CustomerListView(ListView):
     template_name = "Customer/customer_list.html"
@@ -54,7 +54,10 @@ def search_form(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        customer = Customer.objects.filter(last_name__icontains = q)
+        splitedsearch = q.split( )
+        customer = []
+        for searchterm in splitedsearch:
+            customer = list(set(chain(customer, Customer.objects.filter(last_name__icontains = searchterm) | Customer.objects.filter(first_name__icontains = searchterm) | Customer.objects.filter(street__icontains = searchterm))))
         return render(request, 'customer/search_results.html',
             {'Customers': customer, 'query': q})
     else:

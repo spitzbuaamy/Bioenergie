@@ -1,5 +1,11 @@
 {% extends "site_base.html" %}
 {% block body %}
+
+    <form action="" method="get" style="margin-top: -43px; position: absolute; right: 148px">
+        <input type="text" name="q" style="display: inline;">
+        <input type="submit" value="Suchen" style="display: inline; background-color: gray; border-color: gray;">
+    </form>
+
     <p>Sie suchten nach: <strong>{{ query }}</strong></p>
 
     {% if Customers %}

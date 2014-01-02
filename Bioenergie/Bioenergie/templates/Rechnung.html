@@ -1,20 +1,8 @@
+{% load mathfilters %}
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-    <TITLE></TITLE>
-    <META NAME="GENERATOR" CONTENT="LibreOffice 4.0.5.2 (Linux)">
-    <META NAME="AUTHOR" CONTENT="Jakob Wundsam">
-    <META NAME="CREATED" CONTENT="20131218;13130000">
-    <META NAME="CHANGEDBY" CONTENT="Jakob Wundsam">
-    <META NAME="CHANGED" CONTENT="20131218;13390000">
-    <META NAME="AppVersion" CONTENT="14.0000">
-    <META NAME="Company" CONTENT="HP">
-    <META NAME="DocSecurity" CONTENT="0">
-    <META NAME="HyperlinksChanged" CONTENT="false">
-    <META NAME="LinksUpToDate" CONTENT="false">
-    <META NAME="ScaleCrop" CONTENT="false">
-    <META NAME="ShareDoc" CONTENT="false">
     <STYLE TYPE="text/css">
         <!--
         @page {
@@ -38,31 +26,37 @@
 <P STYLE="margin-bottom: 0.14in; line-height: 100%"><FONT SIZE=2 STYLE="font-size: 9pt"><U>Bioenergie
     Lembach Ammerstorfer KG, Oberndorf 4, 4132 Lembach, TelNr: 00000/xxxx</U></FONT></P>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">(Kundenname)</P>
+<P STYLE="margin-bottom: 0in; line-height: 100%"> {{ customer.salutation }} {{ customer.first_name }} {{ customer.last_name }}</P>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">(Straße Hausnummer)</P>
+<P STYLE="margin-bottom: 0in; line-height: 100%">{{ customer.street }} {{ customer.house_number }}</P>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">(PLZ) (Ort)</P>
+<P STYLE="margin-bottom: 0in; line-height: 100%">{{ customer.zip }} {{ customer.place }}</P>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">Kundennummer
-    (Kundennummer)</P>
+<P STYLE="margin-bottom: 0in; line-height: 100%">Kundennummer: {{ customer.customer_number }}</P>
 
 <P ALIGN=RIGHT STYLE="margin-bottom: 0.14in; line-height: 100%"><FONT SIZE=4><U>RECHNUNG</U></FONT></P>
 
+{% comment %}
+{% for customer in Customers %} <-- Funktioniert nu ned so gonz wies soid..
 <P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Kundenrechnung:
-    (Rechnungsnummer) (HK (Jahr)-(fortlaufend,nummeriert)</P>
+    {{ bill.bill_number }} HK {% now "Y" %}-{{ forloop.counter }}</P>
+{% endfor %}
+{% endcomment %}
 
 <P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Datum:
-    (Datum)</P>
+    {% now "j. F Y" %}</P>
 
 <P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Ust-IDNr:
-    (USt-ID)</P>
+    {{ heatingplant.Ust_ID }}</P>
 
 <P STYLE="margin-bottom: 0in; line-height: 150%"><FONT SIZE=2>Betreff:
-    Heizkosten (Kundenname) (StraßeGebäude) (HausnummerGebäude)</FONT></P>
+    Heizkosten {{ building.customer }} {{ building.street }} {{ building.house_number }}</FONT></P>
 
 <P STYLE="margin-bottom: 0in; border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; line-height: 150%">
-    <B>Rechnung für Wärmelieferung von (Anfangsdatum) bis (Enddatum)</B></P>
+    <B>Rechnung für Wärmelieferung von 01.07.{% now "Y" %} bis 30.06.{% now "Y" %} </B></P>
+    {% comment %}
+    soin ma des so mocha mit jetzigem Jahr und Jetzigem Jahr -1?
+    {% endcomment %}
 
 <P STYLE="margin-bottom: 0in; line-height: 150%"><BR>
 </P>
@@ -73,24 +67,24 @@
 <TBODY>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Alter Zählerstand von (Datum)</P>
+        <P>Alter Zählerstand von {{ counterbill.date_old_measurement }}</P> {% comment %} Bin ma ned sicher, ob des fo Counterbill kimt {% endcomment %}
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>kWh</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Messwert1)</P>
+        <P ALIGN=RIGHT>{{ counterbill.old_measurement }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Neuer Zählerstand von (Datum) </P>
+        <P>Neuer Zählerstand von {{ counterbill.date_new_measurement }} </P>
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>kWh</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Messwert2)</P>
+        <P ALIGN=RIGHT>{{ counterbill.new_measurement }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -101,13 +95,13 @@
         <P>kWh</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Messwert1- 2)</P>
+        <P ALIGN=RIGHT> {{ Counterbill.new_measurement }} {{Counterbill.old_measurement }}</P> {% comment %} do hob i a Frage in Stackoverflow gstellt wie des funktioniert {% endcomment %}
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Arbeitspreis lt. Wärmevertrag (EUR (Arbeitspreis) *
+        <P>Arbeitspreis lt. Wärmevertrag (EUR {{ workingprice.amount }}
             (Differzenz))</P>
     </TD>
     <TD WIDTH=32
@@ -116,7 +110,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>(AP*Messwert)</P>
+        <P ALIGN=RIGHT>{{ workingprice.amount }} {{ measurementprice.amount }}</P>
     </TD>
 </TR>
 </TBODY>
@@ -124,7 +118,7 @@
 <TR VALIGN=TOP>
     <TD WIDTH=409
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Messpreis für Wärmezähler (Messpreis) ((Monate)/12)</P>
+        <P>Messpreis für Wärmezähler {{ measurementprice.amount }} ((Monate)/12)</P> {% comment %} Woicha Anzahl vo Monat?? {% endcomment %}
     </TD>
     <TD WIDTH=32
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
@@ -132,19 +126,19 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>(Messpreis)</P>
+        <P ALIGN=RIGHT>{{ measurementprice.amount }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Grundpreis (EUR (Grundpreis) pro kW<FONT SIZE=2 STYLE="font-size: 9pt">
-        </FONT>(Anschlleist.) ((Monate)/12)</P>
+        <P>Grundpreis (EUR {{ basicprice.amount }} pro kW<FONT SIZE=2 STYLE="font-size: 9pt">
+        </FONT>(Anschlleist.) ((Monate)/12)</P> {% comment %} wos is des?? {% endcomment %}
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Grundpreis)</P>
+        <P ALIGN=RIGHT>{{ basicprice.amount }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -158,7 +152,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>(Mess+Grund)</P>
+        <P ALIGN=RIGHT>{{ measurementprice.amount }} {{ basicprice.amount }}</P>
     </TD>
 </TR>
 </TBODY>
@@ -387,13 +381,21 @@
     <COL WIDTH=191>
     <TR VALIGN=TOP>
         <TD WIDTH=191 STYLE="border: none; padding: 0in">
-            <P>FirmenbuchNr(FirmenbuchNR)</P>
+            <P>FirmenbuchNr {{ heatingplant.company_register_number }}</P>
         </TD>
+
+        {% comment %} Keat des scho 2x eina?
         <TD WIDTH=191 STYLE="border: none; padding: 0in">
             <P>FirmenbuchNr(FirmenbuchNR)</P>
         </TD>
+        {% endcomment %}
+
         <TD WIDTH=191 STYLE="border: none; padding: 0in">
-            <P ALIGN=RIGHT>(Bankdaten)</P>
+            <P ALIGN=RIGHT>Bankname: {{ bank.name }}
+                           Kontonummer: {{ bank.acount_number }}
+                           Kennziffer: {{ bank.code_number }}
+                           BIC: {{ bank.BIC }}
+                           IBAN: {{ bank.IBAN }}</P>
         </TD>
     </TR>
 </TABLE>
@@ -423,5 +425,11 @@
 
 <P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
 </P>
+
+
+
+<b>{{ mesurement_diff }}</b>
+
+
 </BODY>
 </HTML>

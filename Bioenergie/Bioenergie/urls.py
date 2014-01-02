@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^abrechnungen/', include('Abrechnung.urls')),
     url(r'^banks/', include('Bank.urls')),
     url(r'^basicprices/', include('BasicPrice.urls')),
     url(r'^bills/', include('Bill.urls')),

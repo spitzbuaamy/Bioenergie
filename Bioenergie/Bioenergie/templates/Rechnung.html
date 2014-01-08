@@ -1,5 +1,3 @@
-{% load mathfilters %}
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
@@ -356,20 +354,19 @@
             FirmenbuchNr: {{ company_register_number }}
         </td>
         <td>
-            Bankname: {{ bankname }} <table>
-    <tr>
-        <td>Kontonummer: {{ account_number }}</td>
-        <td>IBAN: {{ IBAN }}</td>
+            Bankname: {{ bankname }}
+            <table>
+                <tr>
+                    <td>Kontonummer: {{ account_number }}</td>
+                    <td>IBAN: {{ IBAN }}</td>
+                </tr>
+                <tr>
+                    <td>BLZ: {{ code_number }}</td>
+                    <td>BIC: {{ BIC }}</td>
+                </tr>
+            </table>
+        </td>
     </tr>
-
-    <tr>
-        <td>BLZ: {{ code_number }}</td>
-        <td>BIC: {{ BIC }}</td>
-    </tr> </table>
-
-    </td>
-    </tr>
-
 </table>
 </BODY>
 </HTML>

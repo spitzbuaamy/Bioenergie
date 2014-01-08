@@ -63,14 +63,15 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('/login/')
 
+
 # toPDF Funktion
 def write_pdf(template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
-    html  = template.render(context)
+    html = template.render(context)
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(
-        html.encode("UTF-8")), result)
+        html.encode("UTF-8")), result, encoding='UTF-8')
 
     # Speichern
     file = open('Rechnungen/' + str(context_dict['customer']) + '.pdf', 'w')
@@ -89,7 +90,6 @@ def pdfRechnung(request, id):
     building = get_object_or_404(Building, pk=id)
     heatingplant = get_object_or_404(HeatingPlant, pk=1)
     customer = building.customer
-    bank = building.customer.bank
     Ust_ID = heatingplant.Ust_ID
     workingprice = building.working_price
     measurementprice = building.measurement_price

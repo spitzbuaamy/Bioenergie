@@ -87,7 +87,7 @@ def pdfRechnung(request, id):
 #-----------------------------------------------------------------------------------------------------------------------
     months = 12
     building = get_object_or_404(Building, pk=id)
-    heatingplant = get_object_or_404(HeatingPlant, pk=id)
+    heatingplant = get_object_or_404(HeatingPlant, pk=1)
     customer = building.customer
     bank = building.customer.bank
     Ust_ID = heatingplant.Ust_ID
@@ -151,7 +151,7 @@ def pdfRechnung(request, id):
     restult_measurementprice_basicprice = round(measurementpricemulti, 2) + round(basicpricemulti, 2)
 
     #Nettosumme von Arbeitspreis + Summe aus Messpreis und Grundpreis
-    net_workingprice_measrumentprice_basicprice = workingpricemulti + restult_measurementprice_basicprice
+    net_workingprice_measurementprice_basicprice = workingpricemulti + restult_measurementprice_basicprice
 
     #Rabatt
     discount_fixed = building.discount_fixed
@@ -160,13 +160,13 @@ def pdfRechnung(request, id):
         discount = discount_fixed
     else:
         discount = standard_discount
-    result_discount = net_workingprice_measrumentprice_basicprice * (float(discount)/100)
+    result_discount = net_workingprice_measurementprice_basicprice * (float(discount)/100)
 
     #MWST nach Rabatt
-    vat_after_discount = (net_workingprice_measrumentprice_basicprice - round(result_discount, 2)) * 0.2
+    vat_after_discount = (net_workingprice_measurementprice_basicprice - round(result_discount, 2)) * 0.2
 
     #Summe Netto - Rabatt + MwSt
-    sum = net_workingprice_measrumentprice_basicprice - result_discount + vat_after_discount
+    sum = net_workingprice_measurementprice_basicprice - result_discount + vat_after_discount
 
     #Akontozahlung Brutto, Netto und MWSt
     advanced_payment_on_account_net = rate.monthly_rate * months #Netto
@@ -223,7 +223,7 @@ def pdfRechnung(request, id):
         'connection_power': connection_power,
         'basicpricemulti': basicpricemulti,
         'restult_measurementprice_basicprice': restult_measurementprice_basicprice,
-        'net_workingprice_measrumentprice_basicprice': net_workingprice_measrumentprice_basicprice,
+        'net_workingprice_measurementprice_basicprice': net_workingprice_measurementprice_basicprice,
         'discount': discount,
         'result_discount': result_discount,
         'vat_after_discount': vat_after_discount,

@@ -1,5 +1,3 @@
-{% load mathfilters %}
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
@@ -60,7 +58,7 @@
 <TBODY>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Alter Zählerstand von {{ date_old_measurement }}</P>
+        <P>Alter Zählerstand von {{ date_old_measurement|date:"d.M.Y" }}</P>
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>kWh</P>

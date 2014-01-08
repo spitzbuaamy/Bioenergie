@@ -1,14 +1,7 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-{% for bill in bills %}
-
-    <ul class="list">
-        <li>{{ bill.number }} {{ bill.date }} <a href="{% url 'measurement_detail' pk=bill.pk %}">Details</a> <a href="{% url 'bill_delete' pk=bill.pk %}">Löschen</a><a href="{% url 'bill_update' pk=bill.pk %}">Bearbeiten</a></li>
-    </ul>
-
-{% endfor %}
-
-<a class="linkButton" href="{% url 'bill_create' %}"><button class="myButton">Neue Rechnung anlegen</button></a>
+    <a class="linkButton" href=" "><button style="margin-top: 50px; margin-left: 50px" class="myButton">Alle Kunden abrechnen</button></a> </br>
+    <a class="linkButton" href="{% url 'customer_list' %}"><button style=" margin-top: 30px; margin-left: 30px" class="myButton">Einen Kunden abrechnen</button></a> </br>
 
 {% endblock %}

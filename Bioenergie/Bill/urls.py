@@ -7,5 +7,4 @@ urlpatterns = patterns('',
     url(r'^create/$', BillCreateView.as_view(), name='bill_create'),
     url(r'^update/(?P<pk>\d+)$', BillUpdateView.as_view(), name='bill_update'),
     url(r'^delete/(?P<pk>\d+)$', BillDeleteView.as_view(), name='bill_delete'),
-
 )

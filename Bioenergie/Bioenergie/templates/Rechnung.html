@@ -36,27 +36,20 @@
 
 <P ALIGN=RIGHT STYLE="margin-bottom: 0.14in; line-height: 100%"><FONT SIZE=4><U>RECHNUNG</U></FONT></P>
 
-{% comment %}
-{% for customer in Customers %} <-- Funktioniert nu ned so gonz wies soid..
 <P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Kundenrechnung:
-    {{ bill.bill_number }} HK {% now "Y" %}-{{ forloop.counter }}</P>
-{% endfor %}
-{% endcomment %}
+    {{ bill.bill_number }} HK {% now "Y" %}-{{ customer.pk }}</P>
 
 <P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Datum:
     {% now "j. F Y" %}</P>
 
 <P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Ust-IDNr:
-    {{ heatingplant.Ust_ID }}</P>
+    {{ Ust_ID }}</P>
 
 <P STYLE="margin-bottom: 0in; line-height: 150%"><FONT SIZE=2>Betreff:
     Heizkosten {{ building.customer }} {{ building.street }} {{ building.house_number }}</FONT></P>
 
 <P STYLE="margin-bottom: 0in; border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; line-height: 150%">
-    <B>Rechnung für Wärmelieferung von 01.07.{% now "Y" %} bis 30.06.{% now "Y" %} </B></P>
-    {% comment %}
-    soin ma des so mocha mit jetzigem Jahr und Jetzigem Jahr -1?
-    {% endcomment %}
+    <B>Rechnung für Wärmelieferung von {{ begin_acounting }} bis {{ end_acounting }} </B></P>
 
 <P STYLE="margin-bottom: 0in; line-height: 150%"><BR>
 </P>
@@ -67,24 +60,24 @@
 <TBODY>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Alter Zählerstand von {{ counterbill.date_old_measurement }}</P> {% comment %} Bin ma ned sicher, ob des fo Counterbill kimt {% endcomment %}
+        <P>Alter Zählerstand von {{ date_old_measurement }}</P>
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>kWh</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ counterbill.old_measurement }}</P>
+        <P ALIGN=RIGHT>{{ old_reading }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Neuer Zählerstand von {{ counterbill.date_new_measurement }} </P>
+        <P>Neuer Zählerstand von {{ date_new_measurement }} </P>
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>kWh</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ counterbill.new_measurement }}</P>
+        <P ALIGN=RIGHT>{{ new_reading }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -95,14 +88,13 @@
         <P>kWh</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT> {{ Counterbill.new_measurement }} {{Counterbill.old_measurement }}</P> {% comment %} do hob i a Frage in Stackoverflow gstellt wie des funktioniert {% endcomment %}
+        <P ALIGN=RIGHT> {{ measurement_diff }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Arbeitspreis lt. Wärmevertrag (EUR {{ workingprice.amount }}
-            (Differzenz))</P>
+        <P>Arbeitspreis lt. Wärmevertrag (EUR {{ workingpriceamount }} x {{ measurement_diff }} kWh)</P>
     </TD>
     <TD WIDTH=32
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
@@ -110,7 +102,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ workingprice.amount }} {{ measurementprice.amount }}</P>
+        <P ALIGN=RIGHT>{{ workingpricemulti|floatformat:2 }}</P>
     </TD>
 </TR>
 </TBODY>
@@ -118,7 +110,8 @@
 <TR VALIGN=TOP>
     <TD WIDTH=409
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Messpreis für Wärmezähler {{ measurementprice.amount }} ((Monate)/12)</P> {% comment %} Woicha Anzahl vo Monat?? {% endcomment %}
+        <P>Messpreis für Wärmezähler {{ measurementpriceamount }} x
+            ({{ months }}/12)</P> {% comment %} Woicha Anzahl vo Monat?? {% endcomment %}
     </TD>
     <TD WIDTH=32
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
@@ -126,19 +119,19 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ measurementprice.amount }}</P>
+        <P ALIGN=RIGHT>{{ measurementpricemulti|floatformat:2 }}</P> {% comment %} floatformat dient zum Runden auf 2 Dezimalen {% endcomment %}
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Grundpreis (EUR {{ basicprice.amount }} pro kW<FONT SIZE=2 STYLE="font-size: 9pt">
-        </FONT>(Anschlleist.) ((Monate)/12)</P> {% comment %} wos is des?? {% endcomment %}
+        <P>Grundpreis (EUR {{ basicpriceamount }} pro kW) <FONT SIZE=2 STYLE="font-size: 9pt">
+        </FONT>{{ connection_power }} x ({{ months }}/12)</P> {% comment %} wos is des?? {% endcomment %}
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ basicprice.amount }}</P>
+        <P ALIGN=RIGHT>{{ basicpricemulti|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -152,7 +145,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ measurementprice.amount }} {{ basicprice.amount }}</P>
+        <P ALIGN=RIGHT>{{ restult_measurementprice_basicprice|floatformat:2 }}</P>
     </TD>
 </TR>
 </TBODY>
@@ -168,18 +161,18 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT><SPAN LANG="en-GB">SUMME(Diff+Total)</SPAN></P>
+        <P ALIGN=RIGHT><SPAN LANG="en-GB">{{ net_workingprice_measrumentprice_basicprice|floatformat:2 }}</SPAN></P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>(Rabatt)</P>
+        <P>Rabatt {{ discount }} %</P>
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>-(Summe*(Rabatt))</P>
+        <P ALIGN=RIGHT>-{{ result_discount|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -190,21 +183,21 @@
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Summe*(Rabatt)*0,2)</P>
+        <P ALIGN=RIGHT>{{ vat_after_discount|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Summe</P>
+        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in;">
+        <b><P>Summe</P></b>
     </TD>
     <TD WIDTH=32
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
+        <b><P>EUR</P></b>
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>Netto/Rabatt*1,2</P>
+        <b><P ALIGN=RIGHT> {{ sum|floatformat:2 }}</P></b>
     </TD>
 </TR>
 </TBODY>
@@ -220,7 +213,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>(Rate*Monate)</P>
+        <P ALIGN=RIGHT>{{ advanced_payment_on_account_net|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -231,7 +224,7 @@
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>Rate*Monate*1,2</P>
+        <P ALIGN=RIGHT>{{ advanced_payment_on_account_vat|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -245,7 +238,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>Rate*Monate*1,2</P>
+        <P ALIGN=RIGHT>{{ advanced_payment_on_account_gross|floatformat:2 }}</P>
     </TD>
 </TR>
 </TBODY>
@@ -253,7 +246,7 @@
 <TR VALIGN=TOP>
     <TD WIDTH=409
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Nachzahlung Netto</P>
+        <P>{{ credit_additionalpayment }} Netto</P>
     </TD>
     <TD WIDTH=32
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
@@ -261,7 +254,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>(SummeNet-gelNet)</P>
+        <P ALIGN=RIGHT>{{ credit_additionalpayment_net|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -272,24 +265,23 @@
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Summe-gel)*0,2</P>
+        <P ALIGN=RIGHT>{{ credit_additionalpayment_vat|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
     <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Nachzahlung Brutto</P>
+        <b><P>{{ credit_additionalpayment }} Brutto</P></b>
     </TD>
     <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
+        <b><P>EUR</P></b>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>(Summe-gel)*1,2</P>
+        <b><P ALIGN=RIGHT>{{ credit_additionalpayment_gross|floatformat:2 }}</P></b>
     </TD>
 </TR>
 <TR>
     <TD COLSPAN=3 WIDTH=605 VALIGN=TOP STYLE="border: none; padding: 0in">
-        <P>Der Betrag wird innerhalb von 14 Tagen von ihrem Konto
-            abgebucht.</P>
+        <P>Der Betrag wird innerhalb von 14 Tagen {{ debit_transfer }}</P> </br>
     </TD>
 </TR>
 <TR>
@@ -311,7 +303,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>Formel Nachzahlung</P>
+        <P ALIGN=RIGHT>{{ new_rate_net|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -322,7 +314,7 @@
         <P>EUR</P>
     </TD>
     <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>Formel*0,2</P>
+        <P ALIGN=RIGHT>{{ new_rate_vat|floatformat:2 }}</P>
     </TD>
 </TR>
 <TR VALIGN=TOP>
@@ -336,7 +328,7 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>Formel*1,2</P>
+        <P ALIGN=RIGHT>{{ new_rate_gross|floatformat:2 }}</P>
     </TD>
 </TR>
 </TBODY>
@@ -352,84 +344,32 @@
     </TD>
     <TD WIDTH=136
         STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>Formel*1,2</P>
+        <P ALIGN=RIGHT>{{ new_rate_gross|floatformat:2 }}</P>
     </TD>
+
 </TR>
 </TBODY>
 </TABLE>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><A NAME="_GoBack"></A>
-    <BR>
-</P>
+<table>
+    <tr>
+        <td>
+            FirmenbuchNr: {{ company_register_number }}
+        </td>
+        <td>
+            Bankname: {{ bankname }} <table>
+    <tr>
+        <td>Kontonummer: {{ account_number }}</td>
+        <td>IBAN: {{ IBAN }}</td>
+    </tr>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
+    <tr>
+        <td>BLZ: {{ code_number }}</td>
+        <td>BIC: {{ BIC }}</td>
+    </tr> </table>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
+    </td>
+    </tr>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-<TABLE WIDTH=614 CELLPADDING=7 CELLSPACING=0>
-    <COL WIDTH=191>
-    <COL WIDTH=191>
-    <COL WIDTH=191>
-    <TR VALIGN=TOP>
-        <TD WIDTH=191 STYLE="border: none; padding: 0in">
-            <P>FirmenbuchNr {{ heatingplant.company_register_number }}</P>
-        </TD>
-
-        {% comment %} Keat des scho 2x eina?
-        <TD WIDTH=191 STYLE="border: none; padding: 0in">
-            <P>FirmenbuchNr(FirmenbuchNR)</P>
-        </TD>
-        {% endcomment %}
-
-        <TD WIDTH=191 STYLE="border: none; padding: 0in">
-            <P ALIGN=RIGHT>Bankname: {{ bank.name }}
-                           Kontonummer: {{ bank.acount_number }}
-                           Kennziffer: {{ bank.code_number }}
-                           BIC: {{ bank.BIC }}
-                           IBAN: {{ bank.IBAN }}</P>
-        </TD>
-    </TR>
-</TABLE>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
-</P>
-
-
-
-<b>{{ mesurement_diff }}</b>
-
-
+</table>
 </BODY>
 </HTML>

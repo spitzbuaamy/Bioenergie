@@ -4,7 +4,7 @@
 {% for measurement in measurements %}
 
     <ul class="list">
-        <li>{{ measurement.counter }} {{ measurement.measured_date }} <a href="{% url 'measurement_detail' pk=measurement.pk %}">Details</a> <a href="{% url 'measurement_delete' pk=measurement.pk %}">Löschen</a><a href="{% url 'measurement_update' pk=measurement.pk %}">Bearbeiten</a></li>
+        <li>{{ measurement.measured_date }} {{ measurement.building }}<a href="{% url 'measurement_detail' pk=measurement.pk %}">Details</a> <a href="{% url 'measurement_delete' pk=measurement.pk %}">Löschen</a><a href="{% url 'measurement_update' pk=measurement.pk %}">Bearbeiten</a></li>
     </ul>
 
 {% endfor %}

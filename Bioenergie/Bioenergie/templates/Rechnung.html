@@ -1,360 +1,377 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-    <STYLE TYPE="text/css">
-        <!--
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <style type="text/css">
         @page {
             margin-left: 0.98in;
             margin-right: 0.98in;
             margin-top: 0.98in;
             margin-bottom: 0.79in
         }
+    </style>
+</head>
 
-        P {
-            margin-bottom: 0.08in;
-            direction: ltr;
-            widows: 2;
-            orphans: 2
-        }
 
-        -->
-    </STYLE>
-</HEAD>
-<BODY LANG="de-AT" DIR="LTR" style="width: 620px; margin: 0px auto; margin-top: 50px">
-<P STYLE="margin-bottom: 0.14in; line-height: 100%"><FONT SIZE=2 STYLE="font-size: 9pt"><U>Bioenergie
-    Lembach Ammerstorfer KG, Oberndorf 4, 4132 Lembach, TelNr: 00000/xxxx</U></FONT></P>
+<body style="width: 620px; margin-top: 50px">
+<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>Bioenergie
+    Lembach Ammerstorfer KG, Oberndorf 4, 4132 Lembach, TelNr: 07286/8242</u></p>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%"> {{ customer.salutation }} {{ customer.first_name }} {{ customer.last_name }}</P>
+<p style="margin-top: 60px; line-height: 100%; font-size: 12px"> {{ customer.salutation }} {{ customer.first_name }} {{ customer.last_name }}</p>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">{{ customer.street }} {{ customer.house_number }}</P>
+<p STYLE="margin-bottom: 0in; line-height: 100%; font-size: 12px">{{ customer.street }} {{ customer.house_number }}</p>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">{{ customer.zip }} {{ customer.place }}</P>
+<p style="margin-bottom: 0in; line-height: 100%; font-size: 12px">{{ customer.zip }} {{ customer.place }}</p>
 
-<P STYLE="margin-bottom: 0in; line-height: 100%">Kundennummer: {{ customer.customer_number }}</P>
+<p style="margin-bottom: 0in; line-height: 100%; font-size: 12px">Kundennummer: {{ customer.customer_number }}</p>
 
-<P ALIGN=RIGHT STYLE="margin-bottom: 0.14in; line-height: 100%"><FONT SIZE=4><U>RECHNUNG</U></FONT></P>
+<div align="right" style="padding-top: -170px; margin-bottom: 20px; float: left;"><img
+        src="C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg" width="150" height="100"
+        alt="Logo"></div>
 
-<P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Kundenrechnung:
-    {{ bill.bill_number }} HK {% now "Y" %}-{{ customer.pk }}</P>
+<p align="right" style="margin-top: 0px; line-height: 100%; font-size: 4"><u>RECHNUNG</u></p>
 
-<P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Datum:
-    {% now "j. F Y" %}</P>
+<p align="right" style="margin-bottom: 0in; line-height: 100%; font-size: 12px">Kundenrechnung:
+    {{ bill.bill_number }} HK {% now "Y" %}-{{ customer.pk }}</p>
 
-<P ALIGN=RIGHT STYLE="margin-bottom: 0in; line-height: 100%">Ust-IDNr:
-    {{ Ust_ID }}</P>
+<p align="right" style="margin-bottom: 0in; line-height: 100%; font-size: 12px">Datum:
+    {% now "j. F Y" %}</p>
 
-<P STYLE="margin-bottom: 0in; line-height: 150%"><FONT SIZE=2>Betreff:
-    Heizkosten {{ building.customer }} {{ building.street }} {{ building.house_number }}</FONT></P>
+<p align="right" style="margin-bottom: 0in; line-height: 100% ; font-size: 12px">Ust-IDNr:
+    {{ Ust_ID }}</p>
 
-<P STYLE="margin-bottom: 0in; border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; line-height: 150%">
-    <B>Rechnung für Wärmelieferung von {{ begin_acounting }} bis {{ end_acounting }} </B></P>
+<p style="margin-bottom: 0in; line-height: 150%; font-size: 3">Betreff:
+    Heizkosten {{ building.customer }} {{ building.street }} {{ building.house_number }}</p>
 
-<P STYLE="margin-bottom: 0in; line-height: 150%"><BR>
-</P>
-<TABLE WIDTH=619 CELLPADDING=7 CELLSPACING=0>
-<COL WIDTH=409>
-<COL WIDTH=32>
-<COL WIDTH=136>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Alter Zählerstand von {{ date_old_measurement }}</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>kWh</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ old_reading }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Neuer Zählerstand von {{ date_new_measurement }} </P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>kWh</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ new_reading }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Verbrauch Differenz</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>kWh</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT> {{ measurement_diff }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Arbeitspreis lt. Wärmevertrag (EUR {{ workingpriceamount }} x {{ measurement_diff }} kWh)</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ workingpricemulti|floatformat:2 }}</P>
-    </TD>
-</TR>
-</TBODY>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Messpreis für Wärmezähler {{ measurementpriceamount }} x
-            ({{ months }}/12)</P> {% comment %} Woicha Anzahl vo Monat?? {% endcomment %}
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ measurementpricemulti|floatformat:2 }}</P> {% comment %} floatformat dient zum Runden auf 2 Dezimalen {% endcomment %}
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Grundpreis (EUR {{ basicpriceamount }} pro kW) <FONT SIZE=2 STYLE="font-size: 9pt">
-        </FONT>{{ connection_power }} x ({{ months }}/12)</P> {% comment %} wos is des?? {% endcomment %}
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ basicpricemulti|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Totaler Mess- und Grundpreis für obige Zeitspanne</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ restult_measurementprice_basicprice|floatformat:2 }}</P>
-    </TD>
-</TR>
-</TBODY>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Netto</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT><SPAN LANG="en-GB">{{ net_workingprice_measurementprice_basicprice|floatformat:2 }}</SPAN></P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>Rabatt {{ discount }} %</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>-{{ result_discount|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>20% MwSt</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ vat_after_discount|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in;">
-        <b><P>Summe</P></b>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <b><P>EUR</P></b>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <b><P ALIGN=RIGHT> {{ sum|floatformat:2 }}</P></b>
-    </TD>
-</TR>
-</TBODY>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Geleistete Akontozahlung Netto</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ advanced_payment_on_account_net|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>20% MwSt</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ advanced_payment_on_account_vat|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Geleistete Akontozahlung Brutto</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ advanced_payment_on_account_gross|floatformat:2 }}</P>
-    </TD>
-</TR>
-</TBODY>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>{{ credit_additionalpayment }} Netto</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ credit_additionalpayment_net|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>20% MwSt</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ credit_additionalpayment_vat|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <b><P>{{ credit_additionalpayment }} Brutto</P></b>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <b><P>EUR</P></b>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <b><P ALIGN=RIGHT>{{ credit_additionalpayment_gross|floatformat:2 }}</P></b>
-    </TD>
-</TR>
-<TR>
-    <TD COLSPAN=3 WIDTH=605 VALIGN=TOP STYLE="border: none; padding: 0in">
-        <P>Der Betrag wird innerhalb von 14 Tagen {{ debit_transfer }}</P> </br>
-    </TD>
-</TR>
-<TR>
-    <TD COLSPAN=3 WIDTH=605 VALIGN=TOP
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Der neu errechnete monatliche Akontozahlungsbetrag lautet:</P>
-    </TD>
-</TR>
-</TBODY>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Netto</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ new_rate_net|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409 STYLE="border: none; padding: 0in">
-        <P>20% MwSt</P>
-    </TD>
-    <TD WIDTH=32 STYLE="border: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136 STYLE="border: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ new_rate_vat|floatformat:2 }}</P>
-    </TD>
-</TR>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>Brutto</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ new_rate_gross|floatformat:2 }}</P>
-    </TD>
-</TR>
-</TBODY>
-<TBODY>
-<TR VALIGN=TOP>
-    <TD WIDTH=409
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>Die monatliche Vorauszahlung betr&auml;gt</P>
-    </TD>
-    <TD WIDTH=32
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P>EUR</P>
-    </TD>
-    <TD WIDTH=136
-        STYLE="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <P ALIGN=RIGHT>{{ new_rate_gross|floatformat:2 }}</P>
-    </TD>
+<p style="font-size: 12px; margin-bottom: 0in; border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; line-height: 150%">
+    <b>Rechnung für Wärmelieferung von {{ begin_acounting }} bis {{ end_acounting }} </b></p>
 
-</TR>
-</TBODY>
-</TABLE>
+<p style="font-size: 12px; margin-bottom: 0in; line-height: 100%">
+<table width="619" cellpadding="4" cellspacing="0">
+
+<tbody>
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>Alter Zählerstand von {{ date_old_measurement }}</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>kWh</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">{{ old_reading }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>Neuer Zählerstand von {{ date_new_measurement }} </p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>kWh</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">{{ new_reading }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>Verbrauch Differenz</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>kWh</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right"> {{ measurement_diff }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>Arbeitspreis lt. Wärmevertrag (EUR {{ workingpriceamount }} x {{ measurement_diff }} kWh)</p>
+    </td>
+    <td width="32"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ workingpricemulti|floatformat:2 }}</p>
+    </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr valign="top">
+    <td width="409"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>Messpreis für Wärmezähler {{ measurementpriceamount }} x ({{ months }}/12)</p>
+    </td>
+    <td width="32"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ measurementpricemulti|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p style="font-size: 9pt">Grundpreis (EUR {{ basicpriceamount }} pro kW) {{ connection_power }} x ({{ months }}/12)
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">{{ basicpricemulti|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>Totaler Mess- und Grundpreis für obige Zeitspanne</p>
+    </td>
+    <td width="32"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ restult_measurementprice_basicprice|floatformat:2 }}</p>
+    </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr valign="top">
+    <td width="409"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>Netto</p>
+    </td>
+    <td width="32"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ net_workingprice_measurementprice_basicprice|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>Rabatt {{ discount }} %</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">-{{ result_discount|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>20% MwSt</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="236" style="border: none; padding: 0in">
+        <p align="right">{{ vat_after_discount|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in;">
+        <p><b>Summe</b></p>
+    </td>
+    <td width="32"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p><b>EUR</b></p>
+    </td>
+    <td width="136"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p align="right"><b> {{ sum|floatformat:2 }}</b></p>
+    </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr valign="top">
+    <td width="409"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>Geleistete Akontozahlung Netto</p>
+    </td>
+    <td width="32"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ advanced_payment_on_account_net|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>20% MwSt</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">{{ advanced_payment_on_account_vat|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>Geleistete Akontozahlung Brutto</p>
+    </td>
+    <td width="32"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ advanced_payment_on_account_gross|floatformat:2 }}</p>
+    </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr valign="top">
+    <td width="409"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>{{ credit_additionalpayment }} Netto</p>
+    </td>
+    <td width="32"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ credit_additionalpayment_net|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>20% MwSt</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">{{ credit_additionalpayment_vat|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p><b>{{ credit_additionalpayment }} Brutto</b></p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p><b>EUR</b></p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <P align="right"><b>{{ credit_additionalpayment_gross|floatformat:2 }}</b></p>
+    </td>
+</tr>
+
+<tr>
+    <td colspan="3" width="605" valign="top" style="border: none; padding: 0in">
+        <p>Der Betrag wird innerhalb von 14 Tagen {{ debit_transfer }}</p>
+    </td>
+</tr>
+
+<tr>
+    <td colspan="3" width="605" valign="top"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>Der neu errechnete monatliche Akontozahlungsbetrag lautet:
+
+        <p>
+    </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr valign="top">
+    <td width="409"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>Netto</p>
+    </td>
+    <td width="32"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ new_rate_net|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409" style="border: none; padding: 0in">
+        <p>20% MwSt</p>
+    </td>
+    <td width="32" style="border: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136" style="border: none; padding: 0in">
+        <p align="right">{{ new_rate_vat|floatformat:2 }}</p>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td width="409"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>Brutto</p>
+    </td>
+    <td width="32"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ new_rate_gross|floatformat:2 }} </p>
+    </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr valign="top">
+    <td width="409"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>Die monatliche Vorauszahlung betr&auml;gt</p>
+    </td>
+    <td width="32"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p>EUR</p>
+    </td>
+    <td width="136"
+        style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
+        <p align="right">{{ new_rate_gross|floatformat:2 }}</p>
+    </td>
+</tr>
+</tbody>
+</table>
+</br>
+
 <table>
     <tr>
-        <td>
+        <td style="font-size: 9px;">
             FirmenbuchNr: {{ company_register_number }}
         </td>
-        <td><table>
-            <td colspan="2">Bankname: {{ bankname }}</td>
+        <td>
+            <table style="font-size: 8px">
+                <td colspan="2"> Bankname: {{ bankname }}</td>
 
                 <tr>
                     <td>Kontonummer: {{ account_number }}</td>
@@ -369,7 +386,6 @@
 
         </td>
     </tr>
-
 </table>
-</BODY>
-</HTML>
+</body>
+</html>

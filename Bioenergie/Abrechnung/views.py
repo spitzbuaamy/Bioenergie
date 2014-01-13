@@ -95,7 +95,7 @@ def pdfRechnung(request, id):
     measurementprice = building.measurement_price
     basicprice = building.basic_price
     connection_power = building.connection_power #Anschlussleistung
-    rate = get_object_or_404(Rate, pk=id)
+    rate = get_object_or_404(Rate, pk = id)
     company_register_number = heatingplant.company_register_number
     bank = building.customer.bank
     bankname = bank.name
@@ -113,6 +113,7 @@ def pdfRechnung(request, id):
     # Rechnen...
     thisyear = date.today().year
 
+
     # todo: letztes Abrechnungsdatum heranziehen:
     #Zum Filern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
     abr_date1 = str(int(thisyear-1))+"-06-30"
@@ -123,8 +124,8 @@ def pdfRechnung(request, id):
         measurement_diff = measurements.latest('measured_date').value - measurements[0].value
     else:
         measurement_diff = 'Keine Zaehlerstaende vorhanden'
-    date_old_measurement = abr_date1
-    date_new_measurement = abr_date2
+    date_old_measurement = "30.06. " + str(int(thisyear-1))
+    date_new_measurement = "01.07. " + str(int(thisyear))
     old_reading = measurements[0].value
     new_reading = measurements.latest('measured_date').value
 
@@ -192,7 +193,7 @@ def pdfRechnung(request, id):
     index_this_year = str(int(thisyear))
 
     #indices = index_set.filter(date__range=[index_last_year, index_this_year])
-    indexdif =  float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
+    indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
     new_rate_gross = (sum / months) * indexdif #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST

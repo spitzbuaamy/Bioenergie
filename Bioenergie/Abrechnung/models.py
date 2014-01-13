@@ -1,8 +1,11 @@
 from random import choice
 from django.db import models
+import csv
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Create your models here.
+
+
 class Bank(models.Model):
     name = models.CharField(max_length=64) #Bankname
     account_number = models.IntegerField() #Kontonummer
@@ -137,7 +140,7 @@ class Building(models.Model):
     last_bill = models.DateField() #Letzte Abrechnung
 
     def __unicode__(self):
-        return unicode(self.customer) + ' ' + unicode(self.street) + ' ' + unicode(self.house_number) # Todo: Vorname & Nachname des Customer
+        return unicode(self.customer) + ' ' + unicode(self.street) + ' ' + unicode(self.house_number)
 
     def get_absolute_url(self):
         return "/buildings/detail/%i" % self.id
@@ -242,7 +245,7 @@ class HeatingPlant(models.Model):
     place = models.CharField(max_length="32")
     Ust_ID = models.IntegerField()
     manager = models.CharField(max_length="32")
-    company_register_number = models.IntegerField()
+    company_register_number = models.CharField(max_length="32")
 
     def __unicode__(self):
         return unicode(self.name) + '(' + str(self.manager) + ')'

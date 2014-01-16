@@ -120,7 +120,7 @@ def pdfRechnung(request, id):
     abr_date2 = str(int(thisyear))+"-07-01"
 
     #Zaehlerwechsel
-    measurement_end_date = "01.07. " + str(int(thisyear))
+    measurement_end_date = "30.Juni " + str(int(thisyear))
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
 
 
@@ -130,7 +130,7 @@ def pdfRechnung(request, id):
         summe = measurements.latest('measured_date').value - measurements[0].value
     else:
         summe = 'Keine Zaehlerstaende vorhanden'
-    date_old_measurement = "30.06. " + str(int(thisyear-1))
+    date_old_measurement = "1.Juli " + str(int(thisyear-1))
     old_reading = measurements[0].value
     new_reading = measurements.latest('measured_date').value
 
@@ -141,8 +141,8 @@ def pdfRechnung(request, id):
     measurement_diff = summe
 
     # Fuer die Abrechnungsperiode bei der Rechnung
-    begin_acounting = "01.07."+str(int(thisyear-1)) #Beginn der Abrechnung (Datum)
-    end_acounting = "30.06."+str(int(thisyear)) #Ende der Abrechnung (Datum)
+    begin_acounting = "1.Juli "+str(int(thisyear-1)) #Beginn der Abrechnung (Datum)
+    end_acounting = "30.Juni "+str(int(thisyear)) #Ende der Abrechnung (Datum)
 
     #Alter Zaehlerstand - neuer Zaehlerstand
     #old_reading = new_reading - heat_quantity #Alter Zaehlerstand

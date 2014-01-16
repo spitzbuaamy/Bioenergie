@@ -104,6 +104,7 @@ def pdfRechnung(request, id):
     IBAN = bank.IBAN
     BIC = bank.BIC
 
+
     #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
     #date_new_measurement = counterchange.date_new_counter #Datum neuer Zaehlerstand
     #heat_quantity = counterchange.heat_quantity #Zu verrechnende Waermemenge
@@ -114,20 +115,30 @@ def pdfRechnung(request, id):
     thisyear = date.today().year
 
 
-    # todo: letztes Abrechnungsdatum heranziehen:
     #Zum Filern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
-    abr_date1 = str(int(thisyear-1))+"-06-30"
+    abr_date1 = building.last_bill
     abr_date2 = str(int(thisyear))+"-07-01"
+
+    #Zaehlerwechsel
+    measurement_end_date = "01.07. " + str(int(thisyear))
+    counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
+
+
     measurements = building.measurement_set.filter(measured_date__range=[abr_date1, abr_date2])
     #Fehlermeldung ausgeben, falls keine Messwerte vorhanden sind
     if len(measurements) > 1:
-        measurement_diff = measurements.latest('measured_date').value - measurements[0].value
+        summe = measurements.latest('measured_date').value - measurements[0].value
     else:
-        measurement_diff = 'Keine Zaehlerstaende vorhanden'
+        summe = 'Keine Zaehlerstaende vorhanden'
     date_old_measurement = "30.06. " + str(int(thisyear-1))
-    date_new_measurement = "01.07. " + str(int(thisyear))
     old_reading = measurements[0].value
     new_reading = measurements.latest('measured_date').value
+
+    for counter_change in counter_changes:
+        summe = summe - counter_change.heat_quantity
+        summe = summe + counter_change.counter_final_result
+
+    measurement_diff = summe
 
     # Fuer die Abrechnungsperiode bei der Rechnung
     begin_acounting = "01.07."+str(int(thisyear-1)) #Beginn der Abrechnung (Datum)
@@ -199,9 +210,11 @@ def pdfRechnung(request, id):
     new_rate_vat = new_rate_gross - new_rate_net #MWST
 
 
+
 #-----------------------------------------------------------------------------------------------------------------------
 
     return write_pdf('Rechnung.html', {
+        'counterchanges': counter_changes,
         'pagesize': 'A4',
         'building': building,
         'customer': customer,
@@ -211,10 +224,8 @@ def pdfRechnung(request, id):
         'end_acounting': end_acounting,
         'Ust_ID': Ust_ID,
         'date_old_measurement': date_old_measurement,
-        'date_new_measurement': date_new_measurement,
         'old_reading': old_reading,
         'new_reading': new_reading,
-        #'heat_quantity': heat_quantity,
         'workingpriceamount': workingpriceamount,
         'workingpricemulti': workingpricemulti,
         'measurementpriceamount': measurementpriceamount,
@@ -246,5 +257,6 @@ def pdfRechnung(request, id):
         'code_number': code_number,
         'IBAN': IBAN,
         'BIC': BIC,
+        'measurement_end_date': measurement_end_date,
 
     })

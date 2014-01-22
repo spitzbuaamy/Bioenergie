@@ -1,6 +1,8 @@
+from itertools import chain
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Abrechnung.models import Building
+from Abrechnung.models import Building, Customer
 from Building.forms import BuildingForm
 from django.core.urlresolvers import reverse_lazy
 
@@ -38,3 +40,32 @@ class BuildingDeleteView(DeleteView):
     model = Building
     context_object_name = 'building'
     success_url = reverse_lazy('building_list')
+
+class BuildingListViewInvoice(ListView):
+    template_name = "Building/building_invoice.html"
+    model = Building
+    context_object_name = 'buildings'
+
+def search_form(request):
+    return render(request, 'building/search_form.html')
+
+
+def searchinvoice(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        splitedsearch = q.split( )
+        building = []
+        customers = []
+
+        for searchterm in splitedsearch:
+            customers = list(set(chain(customers, Customer.objects.filter(last_name__icontains = searchterm) | Customer.objects.filter(first_name__icontains = searchterm))))
+        for customer in customers:
+            building += Building.objects.filter(customer=customer)
+
+        building += Building.objects.filter(street__icontains=q)
+        return render(request, 'building/search_results.html',
+            {'Buildings': building, 'query': q})
+    else:
+        return HttpResponse('Bitte einen Namen eingeben!')
+
+

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from Building.views import BuildingListView, BuildingDetailView, BuildingCreateView, BuildingUpdateView,BuildingDeleteView
+from Building.views import BuildingListView, BuildingDetailView, BuildingCreateView, BuildingUpdateView,BuildingDeleteView, BuildingListViewInvoice, searchinvoice
 
 urlpatterns = patterns('',
     url(r'^$', BuildingListView.as_view(), name='building_list'),
@@ -8,4 +8,7 @@ urlpatterns = patterns('',
     url(r'^create/$', BuildingCreateView.as_view(), name='building_create'),
     url(r'^update/(?P<pk>\d+)$', BuildingUpdateView.as_view(), name='building_update'),
     url(r'^delete/(?P<pk>\d+)$', BuildingDeleteView.as_view(), name='building_delete'),
+    url(r'^invoice/$', BuildingListViewInvoice.as_view(), name='building_invoice'),
+    url(r'^invoice/search/$', searchinvoice),
+
 )

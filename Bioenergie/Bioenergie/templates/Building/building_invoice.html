@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <form action="search/" method="get" style="margin-top: -43px; position: absolute; right: 148px;">
+        <input type="text" name="q" style="display: inline;">
+        <input type="submit" value="Suchen" style="display: inline; background-color: gray; border-color: gray;">
+    </form>
+
+
+    {% for building in buildings %}
+
+        <ul class="list">
+            <li>{{ building.customer }} {{ building.street }} {{ building.house_number }}  <a href="{% url 'building_detail' pk=building.pk %}">Dieses Gebäude Abrechnen</a></li>
+        </ul>
+
+    {% endfor %}
+
+{% endblock %}

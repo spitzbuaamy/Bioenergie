@@ -11,7 +11,7 @@
     {% for building in buildings %}
 
         <ul class="list">
-            <li>{{ building.customer }} {{ building.street }} {{ building.house_number }}  <a href="{% url 'building_detail' pk=building.pk %}">Dieses Gebäude Abrechnen</a></li>
+            <li>{{ building.customer }} {{ building.street }} {{ building.house_number }}  <a href="{% url 'pdf_Rechnung' building.pk %}">Dieses Gebäude Abrechnen</a></li>
         </ul>
 
     {% endfor %}

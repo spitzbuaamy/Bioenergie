@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from xhtml2pdf import pisa
 from Abrechnung.pdfmixin import PDFTemplateResponseMixin
 from django.contrib.auth import authenticate, login, logout
@@ -86,7 +86,15 @@ def write_pdf(template_src, context_dict):
 # View
 def pdfRechnung(request, id):
 #-----------------------------------------------------------------------------------------------------------------------
-    months = 12
+    #Anzahl vergangener Monate ausrechnen
+    today = datetime.now()
+    month = today.month
+
+    if month < 7:
+        months = month + 6
+    else:
+        months = month - 6
+#-----------------------------------------------------------------------------------------------------------------------
     building = get_object_or_404(Building, pk=id)
     heatingplant = get_object_or_404(HeatingPlant, pk=1)
     customer = building.customer
@@ -95,7 +103,7 @@ def pdfRechnung(request, id):
     measurementprice = building.measurement_price
     basicprice = building.basic_price
     connection_power = building.connection_power #Anschlussleistung
-    rate = get_object_or_404(Rate, pk = id)
+    rate = get_object_or_404(Rate, pk = id) #TODO: Stimmt noch nicht: Rate auf Gebaeude beziehen
     company_register_number = heatingplant.company_register_number
     bank = building.customer.bank
     bankname = bank.name
@@ -258,5 +266,4 @@ def pdfRechnung(request, id):
         'IBAN': IBAN,
         'BIC': BIC,
         'measurement_end_date': measurement_end_date,
-
     })

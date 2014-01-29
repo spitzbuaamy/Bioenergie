@@ -202,7 +202,7 @@ class Index(models.Model):
 #-----------------------------------------------------------------------------------------------------------------------
 class Bill(models.Model):
     building = models.ForeignKey(Building)
-    bill_number = models.CharField(max_length=32)  #TODO: Rechnungsnummer-Zusammensetzung fragen
+    bill_number = models.CharField(max_length=32)
     date = models.DateField()
     working_price = models.IntegerField()
     measurement_price = models.IntegerField()

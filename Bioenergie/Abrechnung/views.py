@@ -94,6 +94,7 @@ def pdfRechnung(request, id):
         months = month + 6
     else:
         months = month - 6
+
 #-----------------------------------------------------------------------------------------------------------------------
     building = get_object_or_404(Building, pk=id)
     heatingplant = get_object_or_404(HeatingPlant, pk=1)
@@ -176,10 +177,10 @@ def pdfRechnung(request, id):
     #Rabatt
     discount_fixed = building.discount_fixed
     standard_discount = heatingplant.standard_discount
-    if discount_fixed > 0:
-        discount = discount_fixed
-    else:
+    if discount_fixed is None:
         discount = standard_discount
+    else:
+        discount = discount_fixed
     result_discount = net_workingprice_measurementprice_basicprice * (float(discount)/100)
 
     #MWST nach Rabatt
@@ -217,7 +218,13 @@ def pdfRechnung(request, id):
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
 
-
+    #Wenn kein ganzes Jahr abgerechnet wird, soll in der Rechnung aufscheinen: Anteilig x Monate
+    if months < 12:
+        partial1 = "Anteilig"
+        partial2 = "Monate"
+    else:
+        partial1 = ""
+        partial2 = ""
 
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -266,4 +273,6 @@ def pdfRechnung(request, id):
         'IBAN': IBAN,
         'BIC': BIC,
         'measurement_end_date': measurement_end_date,
+        "partial1": partial1,
+        "partial2": partial2,
     })

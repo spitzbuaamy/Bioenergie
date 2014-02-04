@@ -129,7 +129,7 @@
 <tr valign="top">
     <td width="409"
         style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <p>Messpreis für Wärmezähler {{ measurementpriceamount }} x ({{ months }}/12)</p>
+        <p>Messpreis für Wärmezähler {{ measurementpriceamount }} x {{ partial1 }} {{ months }} {{ partial2 }}</p>
     </td>
     <td width="32"
         style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
@@ -143,7 +143,7 @@
 
 <tr valign="top">
     <td width="409" style="border: none; padding: 0in">
-        <p style="font-size: 9pt">Grundpreis (EUR {{ basicpriceamount }} pro kW) {{ connection_power }} x ({{ months }}/12)
+        <p style="font-size: 9pt">Grundpreis (EUR {{ basicpriceamount }} pro kW) {{ connection_power }} x {{ partial1 }} {{ months }} {{ partial2 }}
     </td>
     <td width="32" style="border: none; padding: 0in">
         <p>EUR</p>
@@ -337,7 +337,7 @@
     </td>
     <td width="136"
         style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <p align="right">{{ new_rate_net|floatformat:2 }}</p>
+        <p align="right">{{ new_rate_net|floatformat:0 }}</p>
     </td>
 </tr>
 
@@ -349,7 +349,7 @@
         <p>EUR</p>
     </td>
     <td width="136" style="border: none; padding: 0in">
-        <p align="right">{{ new_rate_vat|floatformat:2 }}</p>
+        <p align="right">{{ new_rate_vat|floatformat:0 }}</p>
     </td>
 </tr>
 
@@ -364,7 +364,7 @@
     </td>
     <td width="136"
         style="border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding: 0in">
-        <p align="right">{{ new_rate_gross|floatformat:2 }} </p>
+        <p align="right">{{ new_rate_gross|floatformat:0 }} </p>
     </td>
 </tr>
 </tbody>
@@ -381,7 +381,7 @@
     </td>
     <td width="136"
         style="border-top: 1px solid #00000a; border-bottom: none; border-left: none; border-right: none; padding: 0in">
-        <p align="right">{{ new_rate_gross|floatformat:2 }}</p>
+        <p align="right">{{ new_rate_gross|floatformat:0 }}</p>
     </td>
 </tr>
 

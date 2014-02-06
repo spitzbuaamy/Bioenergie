@@ -112,6 +112,8 @@ def pdfRechnung(request, id):
     code_number = bank.code_number
     IBAN = bank.IBAN
     BIC = bank.BIC
+    correction_factor = heatingplant.correction_factor
+    debiting = building.customer.debitor
 
 
     #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
@@ -124,12 +126,12 @@ def pdfRechnung(request, id):
     thisyear = date.today().year
 
 
-    #Zum Filern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
+    #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
     abr_date1 = building.last_bill
     abr_date2 = str(int(thisyear))+"-07-01"
 
     #Zaehlerwechsel
-    measurement_end_date = "30.Juni " + str(int(thisyear))
+
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
 
 
@@ -139,19 +141,21 @@ def pdfRechnung(request, id):
         summe = measurements.latest('measured_date').value - measurements[0].value
     else:
         summe = 'Keine Zaehlerstaende vorhanden'
-    date_old_measurement = "1.Juli " + str(int(thisyear-1))
+
+    measurement_end_date = measurements.latest('measured_date').measured_date
+    date_old_measurement = measurements[0].measured_date
     old_reading = measurements[0].value
     new_reading = measurements.latest('measured_date').value
 
     for counter_change in counter_changes:
-        summe = summe - counter_change.heat_quantity
+        summe = summe - counter_change.new_counter_reading
         summe = summe + counter_change.counter_final_result
 
     measurement_diff = summe
 
     # Fuer die Abrechnungsperiode bei der Rechnung
-    begin_acounting = "1.Juli "+str(int(thisyear-1)) #Beginn der Abrechnung (Datum)
-    end_acounting = "30.Juni "+str(int(thisyear)) #Ende der Abrechnung (Datum)
+    begin_acounting = abr_date1 #Beginn der Abrechnung (Datum)
+    end_acounting = date.today() #Ende der Abrechnung (Datum)
 
     #Alter Zaehlerstand - neuer Zaehlerstand
     #old_reading = new_reading - heat_quantity #Alter Zaehlerstand
@@ -195,12 +199,20 @@ def pdfRechnung(request, id):
     advanced_payment_on_account_gross = advanced_payment_on_account_net * float(1.2) #Brutto
 
     #Unterscheidung ob Guthaben oder Nachzahlung; Ergebnis wird in die String-Variable credit_additionalpayment gespeichert
-    if (advanced_payment_on_account_gross - sum) > 0:
-        credit_additionalpayment = "Guthaben"
-        debit_transfer = "auf Ihr Konto ueberwiesen."
+    if debiting is False:
+        if (advanced_payment_on_account_gross - sum) > 0:
+            credit_additionalpayment = "Guthaben"
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto ueberwiesen"
+        else:
+            credit_additionalpayment = "Nachzahlung"
+            debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto ueberweisen"
     else:
-        credit_additionalpayment = "Nachzahlung"
-        debit_transfer = "von Ihrem Konto abgebucht."
+        if (advanced_payment_on_account_gross - sum) > 0:
+            credit_additionalpayment = "Guthaben"
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto ueberwiesen."
+        else:
+            credit_additionalpayment = "Nachzahlung"
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen von Ihrem Konto abgebucht."
 
     #Guthaben Brutto, Netto und MWSt
     credit_additionalpayment_gross = advanced_payment_on_account_gross - sum #Brutto
@@ -214,7 +226,7 @@ def pdfRechnung(request, id):
 
     #indices = index_set.filter(date__range=[index_last_year, index_this_year])
     indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
-    new_rate_gross = (sum / months) * indexdif #Brutto
+    new_rate_gross = ((sum / months) * indexdif) * correction_factor #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
 
@@ -225,6 +237,16 @@ def pdfRechnung(request, id):
     else:
         partial1 = ""
         partial2 = ""
+
+    #Adresse des Heiwerkes
+    heatingplant_data = heatingplant.name + " " + heatingplant.street + " "+ str(heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
+
+
+    #Erneutes auslesen des Index, um diesen auf der Rechnung anzuzeigen.
+    year_ago = str(int(thisyear-2))
+    index_for_the_last_year = Index.objects.get(year = year_ago).index
+    index_for_this_year = Index.objects.get(year = index_last_year).index
+    index_for_the_next_year = Index.objects.get(year = index_this_year).index
 
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -275,4 +297,8 @@ def pdfRechnung(request, id):
         'measurement_end_date': measurement_end_date,
         "partial1": partial1,
         "partial2": partial2,
+        "heatingplant_data": heatingplant_data,
+        "index_for_the_last_year": index_for_the_last_year,
+        "index_for_this_year": index_for_this_year,
+        "index_for_the_next_year": index_for_the_next_year,
     })

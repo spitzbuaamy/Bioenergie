@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from random import choice
 from django.db import models
 import csv
@@ -36,24 +37,20 @@ class Customer(models.Model): #Kunde
     )
     salutation = models.CharField("Anrede", max_length=10, choices=SALUTATIONS, default=2, blank=True)
     title = models.CharField("Titel", max_length=32, blank=True)
-
-    if salutation == FIRMA: #TODO: Geht noch nicht
-        first_name = models.CharField("Vorname", max_length=32, blank=True)
-    else:
-        first_name = models.CharField("Vorname", max_length=32)
-
+    first_name = models.CharField("Vorname", max_length=32)
     last_name = models.CharField("Nachname", max_length=32)
     telephone_number = models.IntegerField("Telefonnummer", blank=True)
-    street = models.CharField("Strasse", max_length=32)
+    street = models.CharField("Straße", max_length=32)
     house_number = models.IntegerField("Hausnummer")
     zip = models.IntegerField("Postleitzahl") # PLZ
     place = models.CharField("Ort", max_length=32)
     customer_number = models.CharField("Kundennummer", max_length=32) #TODO: Format festlegen
     bank = models.ForeignKey(Bank, verbose_name= "Bank")
-    #customer_account_number = models.IntegerField("Kontonummer") #Kontonummer des Kunden #TODO: Fehlermeldung, wenn auskommentiert
-    #customer_code_number = models.IntegerField("Bankleitzahl") #Bankleitzahl
-    #customer_BIC = models.CharField("BIC", max_length=32)
-    #customer_IBAN = models.CharField("IBAN", max_length=32)
+    account_number = models.IntegerField("Kontonummer") #Kontonummer des Kunden
+    code_number = models.IntegerField("Bankleitzahl") #Bankleitzahl
+    BIC = models.CharField("BIC", max_length=32)
+    IBAN = models.CharField("IBAN", max_length=32)
+    debitor = models.BooleanField("Abbucher")
 
 
     def __unicode__(self):
@@ -138,8 +135,8 @@ class Building(models.Model):
     measurement_price = models.ForeignKey(MeasurementPrice, verbose_name="Messpreis")
     connection_flat_rate = models.ForeignKey(ConnectionFlatRate, verbose_name="Anschlusspauschale") #Anschlusspauschale
     cable_price = models.ForeignKey(CablePrice, verbose_name="Zuleitungspreis") #Zuleitungspreis
-    cable_length = models.IntegerField("Kabelweite") #Kabellaenge
-    street = models.CharField("Strasse", max_length=32)
+    cable_length = models.IntegerField("Kabellänge") #Kabellaenge
+    street = models.CharField("Straße", max_length=32)
     house_number = models.IntegerField("Hausnummer")
     zip = models.IntegerField("Postleitzahl")
     place = models.CharField("Ort", max_length=32)
@@ -148,7 +145,7 @@ class Building(models.Model):
     connection_number = models.IntegerField("AnschlussID") #AnschlussID
     connection_power = models.IntegerField("Anschlussleistung") #Anschlussleistung
     last_bill = models.DateField("Letzte Abrechnung") #Letzte Abrechnung
-    #billing_begin = models.DateField("Abrechnungsbeginn") #TODO: Fehlermeldung, wenn auskommentiert
+    billing_begin = models.DateField("Abrechnungsbeginn")
 
     def __unicode__(self):
         return unicode(self.customer) + ' ' + unicode(self.street) + ' ' + unicode(self.house_number)
@@ -161,8 +158,8 @@ class Building(models.Model):
 class CounterChange(models.Model):    #Zaehlerwechsel
     date = models.DateField("Datum")
     counter_final_result = models.IntegerField("Endstand")
-    heat_quantity = models.IntegerField("Zu verrechnende Menge") #Zu verrechnende Waermemenge
-    date_new_counter = models.DateField("Beginn des neuen Zahelers") #Beginn neuer Zaehler
+    new_counter_reading = models.IntegerField("Neuer Zählerstand") #Neuer Zaehlerstand
+    date_new_counter = models.DateField("Beginn des neuen Zählers") #Beginn neuer Zaehler
     building = models.ForeignKey(Building, verbose_name="Objekt")
 
     def __unicode__(self):
@@ -247,15 +244,17 @@ class CounterBill(models.Model):
 
 #-----------------------------------------------------------------------------------------------------------------------
 class HeatingPlant(models.Model):
-    name = models.CharField("Name", max_length="32")
+    name = models.CharField("Name", max_length="64")
     standard_discount = models.IntegerField("Standardrabatt")
     bill_number = models.IntegerField("Rechnungsnummer")
     house_number = models.IntegerField("Hausnummer")
-    street = models.CharField("Strasse", max_length="32")
+    street = models.CharField("Straße", max_length="32")
     zip = models.IntegerField("Postleitzahl")
     place = models.CharField("Ort", max_length="32")
+    phone_number = models.CharField("Telefonnummer", max_length="32", blank=True)
+    correction_factor = models.DecimalField("Korrekturfaktor", max_digits=3, decimal_places=2)
     Ust_ID = models.IntegerField("Ust ID")
-    manager = models.CharField("Betriebsleiter", max_length="32")
+    manager = models.CharField("Geschäftsführer", max_length="32")
     company_register_number = models.CharField("Firmenbuchnummer", max_length="32")
 
     def __unicode__(self):

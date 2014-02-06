@@ -11,10 +11,8 @@
     </style>
 </head>
 
-
 <body style="width: 620px; margin-top: 50px">
-<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>Bioenergie
-    Lembach Ammerstorfer KG, Oberndorf 4, 4132 Lembach, TelNr: 07286/8242</u></p>
+<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>{{ heatingplant_data }} TelNr: 07286/8242</u></p>
 
 <p style="margin-top: 60px; line-height: 100%; font-size: 12px"> {{ customer.salutation }} {{ customer.first_name }} {{ customer.last_name }}</p>
 
@@ -80,7 +78,7 @@
             <p>kWh</p>
         </td>
         <td width="136" style="border: none; padding: 0in">
-            <p align="right">{{ change.heat_quantity }}</p>
+            <p align="right">{{ change.new_counter_reading }}</p>
         </td>
     </tr>
 {% endfor %}
@@ -311,7 +309,7 @@
 
 <tr>
     <td colspan="3" width="605" valign="top" style="border: none; padding: 0in">
-        <p>Der Betrag wird innerhalb von 14 Tagen {{ debit_transfer }}</p>
+        <p> {{ debit_transfer }}</p>
     </td>
 </tr>
 
@@ -413,6 +411,25 @@
         </td>
     </tr>
 </table>
+
+<table style="margin-left: 30px; margin-bottom: 20px">
+    <ul>
+        <h3>Die Indexänderungen im Überblick:</h3>
+        <tr>
+            <td>Index des Vergangenes Jahres:</td>
+            <td> {{ index_for_the_last_year }}</td>
+        </tr>
+        <tr>
+            <td>Index dieses Jahr:</td>
+            <td> {{ index_for_this_year }}</td>
+        </tr>
+        <tr>
+            <td>Index des kommenden Jahres:</td>
+            <td> {{ index_for_the_next_year }}</td>
+        </tr>
+    </ul>
+</table>
+
+
 </body>
-<p style="page-break-before:always; color: white">Aha</p>
 </html>

@@ -21,8 +21,21 @@
 
 <form method="post">
     {% csrf_token %}
-{{ form }}
+<label for="id_name">Name:</label><input type="text" value="Bioenergie Lembach Ammerstorfer KG" name="name" maxlength="64" id="id_name">
+<label for="id_standard_discount">Standardrabatt:</label><input type="text" value="14" name="standard_discount" id="id_standard_discount">
+<label for="id_bill_number">Rechnungsnummer:</label><input type="text" value="324343" name="bill_number" id="id_bill_number">
+<label for="id_house_number">Hausnummer:</label><input type="text" value="4" name="house_number" id="id_house_number">
+<label for="id_street">Straße:</label><input type="text" value="Obernort" name="street" maxlength="32" id="id_street">
+<label for="id_zip">Postleitzahl:</label><input type="text" value="4132" name="zip" id="id_zip">
+<label for="id_place">Ort:</label><input type="text" value="Lembach" name="place" maxlength="32" id="id_place">
+<label for="id_phone_number">Telefonnummer:</label><input type="text" name="phone_number" maxlength="32" id="id_phone_number">
+<label for="id_correction_factor">Korrekturfaktor:</label><input type="text" value="1" name="correction_factor" id="id_correction_factor" rel="tipsy" title="Größer 1 = leichter Winter Kleiner 1 = strenger Winter Kommazahlen mit Punkt">
+<label for="id_Ust_ID">Ust ID:</label><input type="text" value="42424" name="Ust_ID" id="id_Ust_ID">
+<label for="id_manager">Geschäftsführer:</label><input type="text" value="Franz Ammerstorfer" name="manager" maxlength="32" id="id_manager">
+<label for="id_company_register_number">Firmenbuchnummer:</label><input type="text" value="3463434" name="company_register_number" maxlength="32" id="id_company_register_number">
+
     <input type="submit" value="Änderungen speichern" class="myButton"/>
 </form>
+
 
 {% endblock %}

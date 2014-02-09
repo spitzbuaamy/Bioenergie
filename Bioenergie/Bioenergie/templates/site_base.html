@@ -11,6 +11,17 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script type='text/javascript' src='{% static "js/jquery.tipsy.js" %}'></script>
+<link rel="stylesheet" href="{% static "css/tipsy.css" %}" type="text/css" />
+
+
+    <script type='text/javascript'>
+     $(function() {
+       $('input[rel=tipsy]').tipsy({trigger: 'focus', gravity: 'w'});
+     });
+    </script>
+
     <title>customer</title>
     {% block extra_head %}
         <!-- zusaetzliche head tags -->
@@ -71,6 +82,10 @@
         <a style="position: absolute; right: 35%" class="linkButton" type="submit"><button class="myButton">Login</button></a>
     </form>
 {% endif %}
+
+{% block extra_script %}
+    <script></script>
+{% endblock %}
 
 </body>
 </html>

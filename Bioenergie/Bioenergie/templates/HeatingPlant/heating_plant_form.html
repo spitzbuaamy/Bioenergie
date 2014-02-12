@@ -19,7 +19,7 @@
 
 {% block body %}
 
-<form method="post">
+<form method="post" style="padding-left: 10px">
     {% csrf_token %}
 <label for="id_name">Name:</label><input type="text" value="Bioenergie Lembach Ammerstorfer KG" name="name" maxlength="64" id="id_name">
 <label for="id_standard_discount">Standardrabatt:</label><input type="text" value="14" name="standard_discount" id="id_standard_discount">

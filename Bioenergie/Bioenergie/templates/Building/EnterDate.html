@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+<html>
+<body>
+<a style="font-size: 20px"> Möchten Sie für die Zwischenabrechnung einen Zeitraum eingeben?</br>
+    Wenn nicht, wird das aktuelle Datum verwendet.</a> </p>
+<form action="{% url "pdf_Zwischenabrechnung" building.pk %}" method="get">
+    <table border="0" cellpadding="0" cellspacing="4">
+        <tr>
+            <td align="right" style="font-size: 16px">Anfangsdatum:</td>
+            <td><input name="anfangsdatum" type="date"></td>
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 16px">Enddatum:</td>
+            <td><input name="enddatum" type="date"></td>
+        </tr>
+    </table> </p>
+
+    <a class="linkButton" type="submit" href=""><button style="background-color: #008041; border-color: #008041; width: 400px;">Die Rechnung mit angegebenem Datum erzeugen</button></a> </p>
+    <a class="linkButton" href="{% url 'pdf_Zwischenabrechnung' building.pk %}">Die Rechnung ohne Datumsangaben erzeugen</a>
+
+
+</form>
+</body>
+</html>

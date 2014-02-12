@@ -304,6 +304,8 @@ def pdfRechnung(request, id):
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def pdfZwischenabrechnung(request, id):
 #-----------------------------------------------------------------------------------------------------------------------
+    datum1 = request.GET['anfangsdatum']
+
     #Anzahl vergangener Monate ausrechnen
     today = datetime.now()
     month = today.month

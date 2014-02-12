@@ -11,7 +11,6 @@ from Abrechnung.models import Building, HeatingPlant, CounterChange, Rate, Index
 from django import http
 from django.template.loader import get_template
 from django.template import Context
-
 import cStringIO as StringIO
 import cgi
 
@@ -304,18 +303,6 @@ def pdfRechnung(request, id):
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def pdfZwischenabrechnung(request, id):
 #-----------------------------------------------------------------------------------------------------------------------
-    datum1 = request.GET['anfangsdatum']
-
-    #Anzahl vergangener Monate ausrechnen
-    today = datetime.now()
-    month = today.month
-
-    if month < 7:
-        months = month + 6
-    else:
-        months = month - 6
-
-#-----------------------------------------------------------------------------------------------------------------------
     building = get_object_or_404(Building, pk=id)
     heatingplant = get_object_or_404(HeatingPlant, pk=1)
     customer = building.customer
@@ -345,13 +332,44 @@ def pdfZwischenabrechnung(request, id):
     # Rechnen...
     thisyear = date.today().year
 
+    datum1 = request.GET['anfangsdatum']
+    datum2 = request.GET['enddatum']
 
-    #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
-    abr_date1 = building.last_bill
-    abr_date2 = str(int(thisyear))+"-07-01"
+
+    if datum1 and datum2 is None:
+        #Anzahl vergangener Monate ausrechnen
+        today = datetime.now()
+        month = today.month
+
+        if month < 7:
+            months = month + 6
+        else:
+            months = month - 6
+
+        #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
+        abr_date1 = building.last_bill
+        abr_date2 = str(int(thisyear))+"-07-01"
+
+        # Fuer die Abrechnungsperiode bei der Rechnung
+        begin_acounting = abr_date1 #Beginn der Abrechnung (Datum)
+        end_acounting = date.today() #Ende der Abrechnung (Datum)
+    else:
+        #Anzahl vergangener Monate ausrechnen
+        variabel1 = datum1.split("-")
+        firstmonth = variabel1[1]
+        variabel2 = datum2.split("-")
+        secondmonth = variabel2[1]
+
+        months = (12 - (int(secondmonth) - int(firstmonth)) *(-1))
+        #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
+        abr_date1 = str(datum1)
+        abr_date2 = str(datum2)
+
+        # Fuer die Abrechnungsperiode bei der Rechnung
+        begin_acounting = abr_date1 #Beginn der Abrechnung (Datum)
+        end_acounting = datum2 #Ende der Abrechnung (Datum)
 
     #Zaehlerwechsel
-
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
 
 
@@ -373,9 +391,6 @@ def pdfZwischenabrechnung(request, id):
 
     measurement_diff = summe
 
-    # Fuer die Abrechnungsperiode bei der Rechnung
-    begin_acounting = abr_date1 #Beginn der Abrechnung (Datum)
-    end_acounting = date.today() #Ende der Abrechnung (Datum)
 
     #Alter Zaehlerstand - neuer Zaehlerstand
     #old_reading = new_reading - heat_quantity #Alter Zaehlerstand

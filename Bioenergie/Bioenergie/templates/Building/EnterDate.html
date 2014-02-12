@@ -1,23 +1,45 @@
 {% extends "site_base.html" %}
+{% block extra_head %}
+<script>
+        $(function () {
+            $('#anfangsdatum').datepicker({
+                dateFormat: 'yy-mm-dd',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesMin: ['So', 'Mo', 'Die', 'Mi', 'Do', 'Fr', 'Sa']
+            });
 
+
+            $('#enddatum').datepicker({
+                dateFormat: 'yy-mm-dd',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesMin: ['So', 'Mo', 'Die', 'Mi', 'Do', 'Fr', 'Sa']
+            });
+
+        });
+
+
+    </script>
+{% endblock %}
 {% block body %}
     <h4 style="padding-left: 10px">Möchten Sie für die Zwischenabrechnung einen Zeitraum eingeben?</br>
         Wenn nicht, wird das aktuelle Datum verwendet.</h4>
     <form action="{% url "pdf_Zwischenabrechnung" building.pk %}" method="get">
         <table border="0" cellpadding="0" cellspacing="4">
             <tr>
-                <td align="right" style="padding-left: 20px; font-size: 16px">Anfangsdatum:</td>
-                <td><input name="anfangsdatum" type="date"></td>
+                <td align="left" style="padding-left: 20px; font-size: 16px">Anfangsdatum:</td>
+                <td><input id="anfangsdatum" name="anfangsdatum" type="date" style="margin-left: 10px"></td>
             </tr>
             <tr>
-                <td align="right" style="margin-left: 20px; font-size: 16px">Enddatum:</td>
-                <td><input name="enddatum" type="date"></td>
+                <td align="left" style="padding-left: 20px; font-size: 16px">Enddatum:</td>
+                <td><input id="enddatum" name="enddatum" type="date" style="margin-left: 10px"></td>
             </tr>
         </table>
         </p>
 
-        <input class="btn btn-primary" style="margin-left: 20px; padding: 6px" type="submit" value="Die Rechnung mit angegebenem Datum erzeugen"> </p>
-        <a class="btn btn-primary" style="margin-left: 20px; float: left; width: 300px" href="{% url 'pdf_Zwischenabrechnung' building.pk %}">Die Rechnung ohne Datumsangaben
+        <input class="btn btn-primary" style="margin-left: 20px; padding: 6px; width: 340px" type="submit" value="Die Rechnung mit angegebenem Datum erzeugen"> </p>
+        <a class="btn btn-primary" style="margin-left: 20px; float: left; width: 314px" href="{% url 'pdf_Zwischenabrechnung' building.pk %}">Die Rechnung ohne Datumsangaben
             erzeugen</a>
     </form>
 

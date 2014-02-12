@@ -27,22 +27,20 @@
         "fields": {
             "first_name": "Jakob",
             "last_name": "Wundsam",
+            "debitor": true,
             "zip": 4141,
             "title": "",
             "house_number": 1,
+            "BIC": "234325",
             "telephone_number": 20,
+            "code_number": 3333,
             "customer_number": "345434433",
             "street": "Pfarrkirchen",
             "place": "Pfarrkirchen",
-            "salutation": "Herr",
-            "bank": 1,
-            "BIC": "234325",
-            "code_number": 3333,
-            "IBAN": "2345523",
             "account_number": 3333,
-            "debitor": false
-
-
+            "salutation": "Herr",
+            "IBAN": "2345523",
+            "bank": 1
         }
     },
     {
@@ -51,20 +49,20 @@
         "fields": {
             "first_name": "Fabian",
             "last_name": "Schauer",
+            "debitor": false,
             "zip": 4132,
             "title": "",
             "house_number": 5,
+            "BIC": "234325",
             "telephone_number": 10,
+            "code_number": 3333,
             "customer_number": "324432432",
             "street": "Steining",
             "place": "Lembach",
-            "salutation": "Herr",
-            "bank": 2,
-            "BIC": "234325",
-            "code_number": 3333,
-            "IBAN": "2345523",
             "account_number": 3333,
-            "debitor": false
+            "salutation": "Herr",
+            "IBAN": "2345523",
+            "bank": 2
         }
     },
     {
@@ -73,20 +71,20 @@
         "fields": {
             "first_name": "Klaus",
             "last_name": "Ammerstorfer",
+            "debitor": false,
             "zip": 4132,
             "title": "",
             "house_number": 6,
+            "BIC": "234325",
             "telephone_number": 30,
+            "code_number": 3333,
             "customer_number": "3244334",
             "street": "Stra\u00dfe",
             "place": "Lembach",
-            "salutation": "Herr",
-            "bank": 2,
-            "BIC": "234325",
-            "code_number": 3333,
-            "IBAN": "2345523",
             "account_number": 3333,
-            "debitor": false
+            "salutation": "Herr",
+            "IBAN": "2345523",
+            "bank": 2
         }
     },
     {
@@ -95,20 +93,20 @@
         "fields": {
             "first_name": "Daniel",
             "last_name": "\u00d6ller",
+            "debitor": false,
             "zip": 4157,
             "title": "",
             "house_number": 11,
+            "BIC": "234325",
             "telephone_number": 90,
+            "code_number": 3333,
             "customer_number": "0000000001",
             "street": "Sonnenweg",
             "place": "Peilstein",
-            "salutation": "Herr",
-            "bank": 1,
-            "BIC": "234325",
-            "code_number": 3333,
-            "IBAN": "2345523",
             "account_number": 3333,
-            "debitor": false
+            "salutation": "Herr",
+            "IBAN": "2345523",
+            "bank": 1
         }
     },
     {
@@ -257,8 +255,8 @@
             "place": "Pfarrkirchen",
             "last_bill": "2013-11-12",
             "basic_price": 2,
-            "cable_length": 888,
-            "billing_begin": "2013-06-01"
+            "billing_begin": "2013-06-01",
+            "cable_length": 888
         }
     },
     {
@@ -280,8 +278,8 @@
             "place": "Lembach",
             "last_bill": "2013-11-03",
             "basic_price": 1,
-            "cable_length": 67,
-            "billing_begin": "2013-06-01"
+            "billing_begin": "2013-06-01",
+            "cable_length": 67
         }
     },
     {
@@ -303,8 +301,8 @@
             "place": "Lembach",
             "last_bill": "2013-12-17",
             "basic_price": 2,
-            "cable_length": 124,
-            "billing_begin": "2013-06-01"
+            "billing_begin": "2013-06-01",
+            "cable_length": 124
         }
     },
     {
@@ -326,8 +324,8 @@
             "place": "fhdscdscd",
             "last_bill": "2013-12-22",
             "basic_price": 1,
-            "cable_length": 15,
-            "billing_begin": "2013-06-01"
+            "billing_begin": "2013-06-01",
+            "cable_length": 15
         }
     },
     {
@@ -407,35 +405,11 @@
         }
     },
     {
-        "pk": 1,
-        "model": "Abrechnung.index",
-        "fields": {
-            "index": 100,
-            "year": 2001
-        }
-    },
-    {
-        "pk": 2,
-        "model": "Abrechnung.index",
-        "fields": {
-            "index": 113,
-            "year": 2002
-        }
-    },
-    {
-        "pk": 3,
-        "model": "Abrechnung.index",
-        "fields": {
-            "index": 125,
-            "year": 2003
-        }
-    },
-    {
         "pk": 4,
         "model": "Abrechnung.index",
         "fields": {
             "index": 125,
-            "year": 2004
+            "year": 2012
         }
     },
     {
@@ -496,17 +470,18 @@
         "pk": 1,
         "model": "Abrechnung.heatingplant",
         "fields": {
+            "phone_number": "",
             "standard_discount": 14,
             "name": "Bioenergie Lembach Ammerstorfer KG",
             "zip": 4132,
             "house_number": 4,
-            "company_register_number": 3463434,
+            "company_register_number": "3463434",
             "Ust_ID": 42424,
-            "correction_factor": 1,
             "manager": "Franz Ammerstorfer",
             "street": "Obernort",
             "place": "Lembach",
-            "bill_number": 324343
+            "bill_number": 324343,
+            "correction_factor": 1.5
         }
     }
 ]

@@ -46,6 +46,11 @@ class BuildingListViewInvoice(ListView):
     model = Building
     context_object_name = 'buildings'
 
+class EnterDate(DetailView):
+    template_name = "Building/EnterDate.html"
+    model = Building
+    context_object_name = 'building'
+
 def search_form(request):
     return render(request, 'building/search_form.html')
 

@@ -365,9 +365,67 @@ def pdfZwischenabrechnung(request, id):
         abr_date1 = str(datum1)
         abr_date2 = str(datum2)
 
+
         # Fuer die Abrechnungsperiode bei der Rechnung
-        begin_acounting = abr_date1 #Beginn der Abrechnung (Datum)
-        end_acounting = datum2 #Ende der Abrechnung (Datum)
+        day1 = variabel1[2]
+        month1 = variabel1[1]
+        year1 = variabel1[0]
+        day2 = variabel2[2]
+        month2 = variabel2[1]
+        year2 = variabel2[0]
+
+        if month1 == "01":
+            chosenmonth1 = "Jaenner"
+        elif month1 == "02":
+            chosenmonth1 = "Februar"
+        elif month1 == "03":
+            chosenmonth1 = "Maerz"
+        elif month1 == "04":
+            chosenmonth1 = "April"
+        elif month1 == "05":
+            chosenmonth1 = "Mai"
+        elif month1 == "06":
+            chosenmonth1 = "Juni"
+        elif month1 == "07":
+            chosenmonth1 = "Juli"
+        elif month1 == "08":
+            chosenmonth1 = "August"
+        elif month1 == "09":
+            chosenmonth1 = "September"
+        elif month1 == "10":
+            chosenmonth1 = "Oktober"
+        elif month1 == "11":
+            chosenmonth1 = "November"
+        elif month1 == "12":
+            chosenmonth1 = "Dezember"
+
+        if month2 == "01":
+            chosenmonth2 = "Jaenner"
+        elif month2 == "02":
+            chosenmonth2 = "Februar"
+        elif month2 == "03":
+            chosenmonth2 = "Maerz"
+        elif month2 == "04":
+            chosenmonth2 = "April"
+        elif month2 == "05":
+            chosenmonth2 = "Mai"
+        elif month2 == "06":
+            chosenmonth2 = "Juni"
+        elif month2 == "07":
+            chosenmonth2 = "Juli"
+        elif month2 == "08":
+            chosenmonth2 = "August"
+        elif month2 == "09":
+            chosenmonth2 = "September"
+        elif month2 == "10":
+            chosenmonth2 = "Oktober"
+        elif month2 == "11":
+            chosenmonth2 = "November"
+        elif month2 == "12":
+            chosenmonth2 = "Dezember"
+
+        begin_acounting = str(day1 + ". " + chosenmonth1 + " " + year1)  #Beginn der Abrechnung (Datum)
+        end_acounting = str(day2 + ". " + chosenmonth2 + " " + year2) #Ende der Abrechnung (Datum)
 
     #Zaehlerwechsel
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])

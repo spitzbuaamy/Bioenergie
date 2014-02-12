@@ -29,10 +29,10 @@
 
 
     <a class="linkButton" href="{% url 'customer_update' pk=customer.pk %}">
-        <button class="myButton">Bearbeiten</button>
+        <button class="btn btn-primary">Bearbeiten</button>
     </a>
     <a class="linkButton" href="{% url 'customer_delete' pk=customer.pk %}">
-        <button class="myButton">Löschen</button>
+        <button class="btn btn-primary">Löschen</button>
     </a> <br/>
 
 
@@ -42,7 +42,7 @@
             <ul>
                 <tr><br/>
                     <h2 style="margin-left: 40px">Gebäude {{ forloop.counter }}</h2> <a style="position: relative; margin-top: 300px; margin-left: 0px" class="linkButton" href="{% url 'building_update' pk=building.pk %}">
-            <button class="myButton">Bearbeiten</button>
+            <button class="btn btn-primary">Bearbeiten</button>
         </a>
                     <td> Arbeitspreis:</td>
                     <td> {{ building.working_price }} </td>

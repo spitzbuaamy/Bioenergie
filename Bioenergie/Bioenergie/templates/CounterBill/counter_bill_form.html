@@ -19,8 +19,18 @@
      <script>
 
        $(function() {
-            $( "#id_date_old_measurement" ).datepicker({ dateFormat: 'dd.mm.yy'});
-            $( "#id_date_new_measurement" ).datepicker({ dateFormat: 'dd.mm.yy'});
+            $( "#id_date_old_measurement" ).datepicker({
+                dateFormat: 'dd.mm.yy',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesMin: ['So', 'Mo', 'Die', 'Mi', 'Do', 'Fr', 'Sa']
+            });
+            $( "#id_date_new_measurement" ).datepicker({
+                dateFormat: 'dd.mm.yy',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesMin: ['So', 'Mo', 'Die', 'Mi', 'Do', 'Fr', 'Sa']
+            });
          });
       </script>
 
@@ -28,10 +38,10 @@
 
 {% block body %}
 
-<form method="post">
+<form method="post" style="padding-left: 10px">
     {% csrf_token %}
 {{ form }}
-    <input type="submit" value="Änderungen speichern" class="myButton"/>
+    <input type="submit" value="Änderungen speichern" class="btn btn-primary"/>
 </form>
 
 {% endblock %}

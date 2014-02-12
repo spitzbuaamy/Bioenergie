@@ -19,7 +19,7 @@
 
 {% block body %}
 
-<form method="post">
+<form method="post" style="padding-left: 10px">
     {% csrf_token %}
 <label for="id_name">Name:</label><input type="text" value="Bioenergie Lembach Ammerstorfer KG" name="name" maxlength="64" id="id_name">
 <label for="id_standard_discount">Standardrabatt:</label><input type="text" value="14" name="standard_discount" id="id_standard_discount">
@@ -34,7 +34,7 @@
 <label for="id_manager">Geschäftsführer:</label><input type="text" value="Franz Ammerstorfer" name="manager" maxlength="32" id="id_manager">
 <label for="id_company_register_number">Firmenbuchnummer:</label><input type="text" value="3463434" name="company_register_number" maxlength="32" id="id_company_register_number">
 
-    <input type="submit" value="Änderungen speichern" class="myButton"/>
+    <input type="submit" value="Änderungen speichern" class="btn btn-primary"/>
 </form>
 
 

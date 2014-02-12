@@ -7,17 +7,20 @@
     <!-- Todo: Jquery ueber Django Static Files einbinden -->
 
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui-1.10.4.custom.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-ui-1.10.4.custom.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <title>customer</title>
     {% block extra_head %}
         <!-- zusaetzliche head tags -->
     {% endblock %}
 </head>
 <body>
- {% if user.is_authenticated %}
+{% if user.is_authenticated %}
+
     <div class="drop">
         <ul class="drop_menu">
             <li><a href='#'>Abrechnung</a>
@@ -52,23 +55,28 @@
             <li><a href="/heatingplants/">Heizwerk</a></li>
         </ul>
     </div>
+
     <div class="clear"></div>
+
     {% block body %}
 
         <!-- hier kommt Inhalt, falls der nutzer authenticated ist...-->
 
     {% endblock %}
 
-      <a style="position: absolute; right: 0px; top: 12px;" href="{% url 'logout' %}"><button style="background-color: red; color:#ffffff; border-color: red">Logout</button></a>
+    <!--  <a style="position: absolute; right: 0px; top: 12px;" href="{% url 'logout' %}"><button style="background-color: red; color:#ffffff; border-color: red">Logout</button></a> -->
 
 {% else %}
-    <form style="margin: 0 auto; position: absolute; top: 30%; right: 40%" id="login_form" method="post" action="/login/">
+    <form style="margin: 0 auto; position: absolute; top: 30%; right: 40%" id="login_form" method="post"
+          action="/login/">
         {% csrf_token %}
         Username: <input type="text" name="username" value="" size="50"/>
         <br/>
         Password: <input type="password" name="password" value="" size="50"/>
         <br/>
-        <a style="position: absolute; right: 35%" class="linkButton" type="submit"><button class="myButton">Login</button></a>
+        <a style="position: absolute; right: 35%" class="linkButton" type="submit">
+            <button class="myButton">Login</button>
+        </a>
     </form>
 {% endif %}
 

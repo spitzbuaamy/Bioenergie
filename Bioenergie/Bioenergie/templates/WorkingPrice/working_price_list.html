@@ -4,11 +4,11 @@
 {% for working_price in working_prices %}
 
     <ul class="list">
-        <li>Group {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }}) <a href="{% url 'working_price_detail' pk=working_price.pk %}">Details</a> <a href="{% url 'working_price_delete' pk=working_price.pk %}">Löschen</a><a href="{% url 'working_price_update' pk=working_price.pk %}">Bearbeiten</a></li>
+        <li>Gruppe {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }}) <a href="{% url 'working_price_detail' pk=working_price.pk %}">Details</a> <a href="{% url 'working_price_delete' pk=working_price.pk %}">Löschen</a><a href="{% url 'working_price_update' pk=working_price.pk %}">Bearbeiten</a></li>
     </ul>
 
 {% endfor %}
 
-<a class="linkButton" href="{% url 'working_price_create' %}"><button class="btn btn-primary">Neuen Arbeitspreis anlegen</button></a>
+<a style="padding-left: 5px" class="linkButton" href="{% url 'working_price_create' %}"><button class="btn btn-primary">Neuen Arbeitspreis anlegen</button></a>
 
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-
-<p>
-    Möchten Sie diese Anschlusspauschale wirklich löschen?
-    Group {{ connection_flat_rate.wage_group }}: ({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }})
+</br>
+<p style="padding-left: 10px">
+    Möchten Sie diese Anschlusspauschale wirklich löschen? </br>
+    Gruppe {{ connection_flat_rate.wage_group }}: ({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }})
 </p>
-<form method="post">
+<form method="post" style="padding-left: 10px">
     {% csrf_token %}
-    <input type="submit" value="Löschen" class="btn btn-primary"/>
+    <input type="submit" value="Löschen" class="btn btn-danger"/>
 </form>
 
 {% endblock %}

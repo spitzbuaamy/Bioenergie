@@ -1,14 +1,14 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-
-<p>
+</br>
+<p style="padding-left: 10px">
     Möchten Sie dieses Gebäude wirklich löschen?
-     <li>{{ building.street }} {{ building.house_number }} {{ building.customer }}
+     <li style="padding-left: 10px">{{ building.street }} {{ building.house_number }} {{ building.customer }}
 </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit" value="Löschen" class="btn btn-primary"/>
+    <input type="submit" value="Löschen" class="btn btn-danger"/>
 </form>
 
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-
-<p>
-    Möchten Sie diese Messung wirklich löschen?
-    {{ measurement.measured_date }}
+</br>
+<p style="padding-left: 10px">
+    Möchten Sie diese Messung wirklich löschen? </br>
+    Messung vom {{ measurement.measured_date }}
 </p>
-<form method="post">
+<form method="post" style="padding-left: 10px">
     {% csrf_token %}
-    <input type="submit" value="Löschen" class="btn btn-primary"/>
+    <input type="submit" value="Löschen" class="btn btn-danger"/>
 </form>
 
 {% endblock %}

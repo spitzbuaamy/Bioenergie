@@ -1,14 +1,14 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-
-<p>
+</br>
+<p style="padding-left: 10px">
     Möchten Sie diese Bank wirklich löschen?
-     <li>{{ bank.name }}</li>
+     <li style="padding-left: 10px">{{ bank.name }}</li>
 </p>
-<form method="post">
+<form method="post" style="padding-left: 10px">
     {% csrf_token %}
-    <input type="submit" value="Löschen" class="btn btn-primary"/>
+    <input type="submit" value="Löschen" class="btn btn-danger"/>
 </form>
 
 {% endblock %}

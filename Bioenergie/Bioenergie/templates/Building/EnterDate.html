@@ -1,6 +1,6 @@
 {% extends "site_base.html" %}
 {% block extra_head %}
-<script>
+    <script>
         $(function () {
             $('#anfangsdatum').datepicker({
                 dateFormat: 'yy-mm-dd',
@@ -38,11 +38,11 @@
         </table>
         </p>
 
-        <input class="btn btn-primary" style="margin-left: 20px; padding: 6px; width: 340px" type="submit" value="Die Rechnung mit angegebenem Datum erzeugen"> </p>
-        <a class="btn btn-primary" style="margin-left: 20px; float: left; width: 314px" href="{% url 'pdf_Zwischenabrechnung' building.pk %}">Die Rechnung ohne Datumsangaben
+        <input class="btn btn-primary" style="margin-left: 20px; padding: 6px; width: 340px" type="submit"
+               value="Die Rechnung mit angegebenem Datum erzeugen"> </p>
+
+        <a class="btn btn-primary" style="margin-left: 20px; float: left; width: 314px"
+           href="{% url 'pdf_Zwischenabrechnung' building.pk %}">Die Rechnung ohne Datumsangaben
             erzeugen</a>
     </form>
-
-
-
 {% endblock %}

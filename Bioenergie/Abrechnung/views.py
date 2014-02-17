@@ -332,11 +332,7 @@ def pdfZwischenabrechnung(request, id):
     # Rechnen...
     thisyear = date.today().year
 
-    datum1 = request.GET['anfangsdatum']
-    datum2 = request.GET['enddatum']
-
-
-    if datum1 and datum2 is None:
+    if request.GET['anfangsdatum'] and request.GET['enddatum'] is None: #TODO: Des stimmt nu ned --> Fehlermeldung: "Key 'anfangsdatum' not found in <QueryDict: {}>"
         #Anzahl vergangener Monate ausrechnen
         today = datetime.now()
         month = today.month
@@ -355,15 +351,15 @@ def pdfZwischenabrechnung(request, id):
         end_acounting = date.today() #Ende der Abrechnung (Datum)
     else:
         #Anzahl vergangener Monate ausrechnen
-        variabel1 = datum1.split("-")
+        variabel1 = request.GET['anfangsdatum'].split("-")
         firstmonth = variabel1[1]
-        variabel2 = datum2.split("-")
+        variabel2 = request.GET['enddatum'].split("-")
         secondmonth = variabel2[1]
 
         months = (12 - (int(secondmonth) - int(firstmonth)) *(-1))
         #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
-        abr_date1 = str(datum1)
-        abr_date2 = str(datum2)
+        abr_date1 = str(request.GET['anfangsdatum'])
+        abr_date2 = str(request.GET['enddatum'])
 
 
         # Fuer die Abrechnungsperiode bei der Rechnung
@@ -375,7 +371,7 @@ def pdfZwischenabrechnung(request, id):
         year2 = variabel2[0]
 
         if month1 == "01":
-            chosenmonth1 = "Jaenner"
+            chosenmonth1 = "Januar"
         elif month1 == "02":
             chosenmonth1 = "Februar"
         elif month1 == "03":
@@ -400,7 +396,7 @@ def pdfZwischenabrechnung(request, id):
             chosenmonth1 = "Dezember"
 
         if month2 == "01":
-            chosenmonth2 = "Jaenner"
+            chosenmonth2 = "Januar"
         elif month2 == "02":
             chosenmonth2 = "Februar"
         elif month2 == "03":

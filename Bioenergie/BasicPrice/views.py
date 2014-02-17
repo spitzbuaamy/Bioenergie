@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Abrechnung.models import BasicPrice
+from Abrechnung.models import BasicPrice, MeasurementPrice, WorkingPrice
 from BasicPrice.forms import BasicPriceForm
 from django.core.urlresolvers import reverse_lazy
 
@@ -37,3 +37,14 @@ class BasicPriceDeleteView(DeleteView):
     model = BasicPrice
     context_object_name = 'basic_price'
     success_url = reverse_lazy('basic_price_list')
+
+
+class GroupView(ListView):
+    template_name = "group_view.html"
+    model = BasicPrice
+    model = WorkingPrice
+    model = MeasurementPrice
+    context_object_name = 'group_views'
+
+
+

@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% block body %}
+    <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Arbeitspreis</h4>
 {% for working_price in working_prices %}
 
     <ul class="list">
@@ -10,5 +11,6 @@
 {% endfor %}
 
 <a style="padding-left: 5px" class="linkButton" href="{% url 'working_price_create' %}"><button class="btn btn-primary">Neuen Arbeitspreis anlegen</button></a>
+<a style="padding-left: 5px" class="linkButton" href="{% url 'GroupView' %}"><button class="btn btn-primary">Zur Gruppenansicht wechseln</button></a>
 
 {% endblock %}

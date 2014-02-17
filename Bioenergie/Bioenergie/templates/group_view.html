@@ -1,0 +1,44 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+    </br>
+    <div style="font-size: 18px; padding-left: 5px">Grundpreisgruppen:</div>
+    {% for basic_price in group_views %}
+        <ul class="list">
+            <li>Gruppe {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }}) <a
+                    href="{% url 'basic_price_detail' pk=basic_price.pk %}">Details</a> <a
+                    href="{% url 'basic_price_delete' pk=basic_price.pk %}">Löschen</a><a
+                    href="{% url 'basic_price_update' pk=basic_price.pk %}">Bearbeiten</a></li>
+        </ul>
+    {% endfor %}
+    </br>
+    <div style="font-size: 18px; padding-left: 5px">Messpreisgruppen:</div>
+    {% for measurement_price in group_views %}
+        <ul class="list">
+            <li>Gruppe {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }}) <a
+                    href="{% url 'measurement_price_detail' pk=measurement_price.pk %}">Details</a> <a
+                    href="{% url 'measurement_price_delete' pk=measurement_price.pk %}">Löschen</a><a
+                    href="{% url 'measurement_price_update' pk=measurement_price.pk %}">Bearbeiten</a></li>
+        </ul>
+    {% endfor %}
+    </br>
+    <div style="font-size: 18px; padding-left: 5px">Arbeitspreisgruppen:</div>
+    {% for working_price in group_views %}
+        <ul class="list">
+            <li>Gruppe {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }}) <a
+                    href="{% url 'working_price_detail' pk=working_price.pk %}">Details</a> <a
+                    href="{% url 'working_price_delete' pk=working_price.pk %}">Löschen</a><a
+                    href="{% url 'working_price_update' pk=working_price.pk %}">Bearbeiten</a></li>
+        </ul>
+    {% endfor %}
+
+    </br>
+
+    <a style="padding-left: 5px" class="linkButton" href="{% url 'basic_price_create' %}">
+        <button class="btn btn-primary">Neuen Grundpreis anlegen</button>
+    </a>
+    <a class="linkButton" href="{% url 'measurement_price_create' %}"><button class="btn btn-primary">Neuen Messpreis anlegen</button></a>
+    <a class="linkButton" href="{% url 'working_price_create' %}"><button class="btn btn-primary">Neuen Arbeitspreis anlegen</button></a>
+
+
+{% endblock %}

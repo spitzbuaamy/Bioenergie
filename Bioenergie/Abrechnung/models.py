@@ -37,7 +37,7 @@ class Customer(models.Model): #Kunde
     )
     salutation = models.CharField("Anrede", max_length=10, choices=SALUTATIONS, default=2, blank=True)
     title = models.CharField("Titel", max_length=32, blank=True)
-    first_name = models.CharField("Vorname", max_length=32)
+    first_name = models.CharField("Vorname", max_length=32, blank=True)
     last_name = models.CharField("Nachname", max_length=32)
     telephone_number = models.IntegerField("Telefonnummer", blank=True)
     street = models.CharField("Straße", max_length=32)

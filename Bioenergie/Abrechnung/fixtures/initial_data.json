@@ -475,13 +475,19 @@
             "name": "Bioenergie Lembach Ammerstorfer KG",
             "zip": 4132,
             "house_number": 4,
+            "mail": "franz.ammerstorfer1@utanet.at",
             "company_register_number": "3463434",
             "Ust_ID": 42424,
             "manager": "Franz Ammerstorfer",
             "street": "Obernort",
             "place": "Lembach",
             "bill_number": 324343,
-            "correction_factor": 1.5
+            "correction_factor": 1.5,
+            "bank": 1,
+            "account_number": 45632,
+            "code_number": 8965423,
+            "BIC": 5668952,
+            "IBAN": 58932289
         }
     }
 ]

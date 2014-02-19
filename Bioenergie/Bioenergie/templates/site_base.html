@@ -4,8 +4,6 @@
 <html>
 <head>
 
-    <!-- Todo: Jquery ueber Django Static Files einbinden -->
-
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui-1.10.4.custom.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
@@ -20,7 +18,6 @@
 </head>
 <body>
 {% if user.is_authenticated %}
-
     <div class="drop">
         <ul class="drop_menu">
             <li><a href='#'>Abrechnung</a>
@@ -28,7 +25,7 @@
                     <li><a href="/abrechnungen/pdfrechnung/1">Energieabrechnung</a></li>
                     <li><a href='#'>Anschlussrechnung</a></li>
                     <li><a href="{% url 'building_invoice' %}">Zwischenabrechnung</a></li>
-                    <li><a href='#'>Leere Rechnung</a></li>
+                    <li><a href='{% url 'pdf_Leere_Rechnung' %}'>Leere Rechnung</a></li>
                 </ul>
             </li>
             <li><a href='#'>Rechnungskomponenten</a>
@@ -58,6 +55,9 @@
     </div>
 
     <div class="clear"></div>
+    {% comment %}<a style="padding-top: -25px" class="linkButton" href="{% url 'logout' %}"><button class="btn btn-small">Logout</button></a>{% endcomment %}
+
+
 
     {% block body %}
 
@@ -68,15 +68,15 @@
     <!--  <a style="position: absolute; right: 0px; top: 12px;" href="{% url 'logout' %}"><button style="background-color: red; color:#ffffff; border-color: red">Logout</button></a> -->
 
 {% else %}
-    <form style="margin: 0 auto; position: absolute; top: 30%; right: 40%" id="login_form" method="post"
+    <form style="margin-left: 50px; position: absolute; top: 30%; right: 40%" id="login_form" method="post"
           action="/login/">
         {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50"/>
+        Benutzername: <input style="margin-left: 20px" type="text" name="username" value="" size="50"/>
         <br/>
-        Password: <input type="password" name="password" value="" size="50"/>
+        Passwort: <input style="margin-left: 53px" type="password" name="password" value="" size="50"/>
         <br/>
-        <a style="position: absolute; right: 35%" class="linkButton" type="submit">
-            <button class="btn btn-primary">Login</button>
+        <a style="position: absolute; right: 43.5%" class="linkButton" type="submit">
+            <button class="btn btn-success">Login</button>
         </a>
     </form>
 {% endif %}

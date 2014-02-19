@@ -38,14 +38,14 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/customers/')
+                return HttpResponseRedirect('/buildings/')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in.
             print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponse("Username oder Passwort falsch!")
+            return HttpResponse("Benutzername oder Passwort falsch!")
 
 
     # The request is not a HTTP POST, so display the login form.
@@ -99,12 +99,11 @@ def pdfRechnung(request, id):
     connection_power = building.connection_power #Anschlussleistung
     rate = get_object_or_404(Rate, pk = id) #TODO: Stimmt noch nicht: Rate auf Gebaeude beziehen
     company_register_number = heatingplant.company_register_number
-    bank = building.customer.bank
-    bankname = bank.name
-    account_number = bank.account_number
-    code_number = bank.code_number
-    IBAN = bank.IBAN
-    BIC = bank.BIC
+    bankname = heatingplant.bank
+    account_number = heatingplant.account_number
+    code_number = heatingplant.code_number
+    IBAN = heatingplant.IBAN
+    BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
 
@@ -219,7 +218,7 @@ def pdfRechnung(request, id):
 
     #indices = index_set.filter(date__range=[index_last_year, index_this_year])
     indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
-    new_rate_gross = ((sum / months) * indexdif) * correction_factor #Brutto
+    new_rate_gross = float(((sum / months) * indexdif)) * float(correction_factor) #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
 
@@ -248,7 +247,7 @@ def pdfRechnung(request, id):
         'pagesize': 'A4',
         'building': building,
         'customer': customer,
-        'bank': bank,
+        #'bank': bank,
         'measurement_diff': measurement_diff,
         'begin_acounting': begin_acounting,
         'end_acounting': end_acounting,
@@ -313,12 +312,11 @@ def pdfZwischenabrechnung(request, id):
     connection_power = building.connection_power #Anschlussleistung
     rate = get_object_or_404(Rate, pk = id) #TODO: Stimmt noch nicht: Rate auf Gebaeude beziehen
     company_register_number = heatingplant.company_register_number
-    bank = building.customer.bank
-    bankname = bank.name
-    account_number = bank.account_number
-    code_number = bank.code_number
-    IBAN = bank.IBAN
-    BIC = bank.BIC
+    bankname = heatingplant.bank
+    account_number = heatingplant.account_number
+    code_number = heatingplant.code_number
+    IBAN = heatingplant.IBAN
+    BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
 
@@ -515,7 +513,7 @@ def pdfZwischenabrechnung(request, id):
 
     #indices = index_set.filter(date__range=[index_last_year, index_this_year])
     indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
-    new_rate_gross = ((sum / months) * indexdif) * correction_factor #Brutto
+    new_rate_gross = ((sum / months) * indexdif) * float(correction_factor) #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
 
@@ -544,7 +542,7 @@ def pdfZwischenabrechnung(request, id):
         'pagesize': 'A4',
         'building': building,
         'customer': customer,
-        'bank': bank,
+        #'bank': bank,
         'measurement_diff': measurement_diff,
         'begin_acounting': begin_acounting,
         'end_acounting': end_acounting,
@@ -591,3 +589,67 @@ def pdfZwischenabrechnung(request, id):
         "index_for_this_year": index_for_this_year,
         "index_for_the_next_year": index_for_the_next_year,
     })
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!              Leere Rechnung                                                                      !!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
+
+def LeereRechnung(request):
+    #Rueckgabe der PDF bestimmen
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="LeereRechnung.pdf"'
+    #Canvas = Leinwand: Dient als Schnittstelle zur Operatiion Malen
+    p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
+    p.translate(cm,cm) #Angegebene Werte auf cm umrechnen
+#-----------------------------------------------------------------------------------------------------------------------
+    #Zeichnen
+#-----------------------------------------------------------------------------------------------------------------------
+    #Variablendeklaration fuer die Kopfzeile
+    heatingplant = get_object_or_404(HeatingPlant, pk=1)
+    adress = str(heatingplant.street + " " + str(heatingplant.house_number) + "   " + str(heatingplant.zip) + " " + heatingplant.place)
+    telephone = str("Tel: " + heatingplant.phone_number + "   " + " Fax: " + heatingplant.phone_number)
+    e_mail = str("E-Mail: " + heatingplant.mail)
+
+    #Variablendeklaration fuer die Fusszeile
+    fbn = str("Firmenbuchnummer: " + str(heatingplant.company_register_number))
+    bankname = str("Bankname: " + str(heatingplant.bank))
+    account_number = str("Kontonummer: " + str(heatingplant.account_number))
+    BLZ = str("BLZ: " + str(heatingplant.code_number))
+    BIC = str("BIC: " + str(heatingplant.BIC))
+    IBAN = str("IBAN: " + str(heatingplant.IBAN))
+
+    #Kopfzeile
+    p.setFillColorRGB(1, 1, 0.75)
+    p.rect(0, 23.7*cm, 19.5*cm, 3.5*cm, fill=1)
+    p.setFillColorRGB(0, 0.5, 0)
+    p.setFont("Times-Roman", 18)
+    p.drawString(1*cm, 26.2*cm, heatingplant.name)
+    p.setFont("Times-Roman", 10)
+    p.drawString(1*cm, 25.5*cm, adress)
+    p.drawString(1*cm, 25.0*cm, telephone)
+    p.drawString(1*cm, 24.5*cm, e_mail)
+    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15*cm, 24.2*cm, width=3.5*cm, height=2.5*cm)
+
+    #Fusszeile
+    p.line(0, 0, 19.5*cm, 0)
+    p.line(19.5*cm, 0, 19.5*cm, 1.5*cm)
+    p.line(19.5*cm, 1.5*cm, 0, 1.5*cm)
+    p.line(0, 1.5*cm, 0, 0)
+    p.setFillColor("Black")
+    p.setFont("Times-Roman", 8)
+    p.drawString(1*cm, 1*cm, fbn)
+    p.drawString(12*cm, 1*cm, bankname)
+    p.drawString(12*cm, 0.7*cm, account_number)
+    p.drawString(15*cm, 0.7*cm, IBAN)
+    p.drawString(12*cm, 0.4*cm, BLZ)
+    p.drawString(15*cm, 0.4*cm, BIC)
+#-----------------------------------------------------------------------------------------------------------------------
+    # PDF korrekt downloaden und oeffnen
+    p.showPage()
+    p.save()
+
+    #Seite zurueckgeben (response zurueckgeben)
+    return response

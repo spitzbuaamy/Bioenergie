@@ -2,24 +2,16 @@
 
 {% block body %}
 
-    <table style="margin-left: 30px; margin-bottom: 20px" >
+    <table style="margin-left: 30px; margin-bottom: 20px">
         <ul>
             <tr>
                 <td> Name:</td>
                 <td>{{ heating_plant.name }}</td>
             </tr>
             <tr>
-                <td> Standardrabatt:</td>
-                <td> {{ heating_plant.standard_discount }} </td>
-            </tr>
-            <tr>
-                <td> Rechnungsnummer:</td>
-                <td> {{ heating_plant.bill_number }} </td>
-            </tr>
-            <tr>
                 <td valign="top"> Adresse:</td>
                 <td> {{ heating_plant.street }} {{ heating_plant.house_number }} <br/>
-                     {{ heating_plant.zip}} {{ heating_plant.place }}
+                    {{ heating_plant.zip }} {{ heating_plant.place }}
                 </td>
             </tr>
             <tr>
@@ -27,26 +19,62 @@
                 <td> {{ heating_plant.phone_number }} </td>
             </tr>
             <tr>
-                <td> Korrekturfaktor:</td>
-                <td> {{ heating_plant.correction_factor }} </td>
+                <td> E-Mail Adresse:</td>
+                <td> {{ heating_plant.mail }} </td>
             </tr>
             <tr>
-                <td> Umsatzsteuer ID:</td>
-                <td> {{ heating_plant.Ust_ID }} </td>
+                <td> Bankname:</td>
+                <td>{{ heating_plant.bank }} </td>
+            </tr>
+            <tr>
+                <td> Kontonummer:</td>
+                <td>{{ heating_plant.account_number }} </td>
+            </tr>
+            <tr>
+                <td> Bankleitzahl:</td>
+                <td>{{ heating_plant.code_number }} </td>
+            </tr>
+            <tr>
+                <td> BIC:</td>
+                <td>{{ heating_plant.BIC }} </td>
+            </tr>
+            <tr>
+                <td>IBAN:</td>
+                <td>{{ heating_plant.IBAN }}</td>
             </tr>
             <tr>
                 <td> Geschäftsführer:</td>
                 <td> {{ heating_plant.manager }} </td>
             </tr>
             <tr>
+                <td> Umsatzsteuer ID:</td>
+                <td> {{ heating_plant.Ust_ID }} </td>
+            </tr>
+            <tr>
                 <td> Firmenbuchnummer:</td>
                 <td> {{ heating_plant.company_register_number }} </td>
+            </tr>
+            <tr>
+                <td> Standardrabatt:</td>
+                <td> {{ heating_plant.standard_discount }} </td>
+            </tr>
+            <tr>
+                <td> Korrekturfaktor:</td>
+                <td> {{ heating_plant.correction_factor }} </td>
+            </tr>
+            <tr>
+                <td> Rechnungsnummer:</td>
+                <td> {{ heating_plant.bill_number }} </td>
             </tr>
         </ul>
     </table>
 
 
-<a style="padding-left: 20px" class="linkButton" href="{% url 'heating_plant_update' pk=heating_plant.pk %}"><button class="btn btn-primary">Bearbeiten</button></a>
-<a class="linkButton" href="{% url 'heating_plant_delete' pk=heating_plant.pk %}"><button class="btn btn-primary">Löschen</button></a>
+    <a style="padding-left: 20px" class="linkButton" href="{% url 'heating_plant_update' pk=heating_plant.pk %}">
+        <button class="btn btn-primary">Bearbeiten</button>
+    </a>
+    <a class="linkButton" href="{% url 'heating_plant_delete' pk=heating_plant.pk %}">
+        <button class="btn btn-primary">Löschen</button>
+    </a>
 
 {% endblock %}

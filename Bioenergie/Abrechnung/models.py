@@ -245,17 +245,23 @@ class CounterBill(models.Model):
 #-----------------------------------------------------------------------------------------------------------------------
 class HeatingPlant(models.Model):
     name = models.CharField("Name", max_length="64")
-    standard_discount = models.IntegerField("Standardrabatt")
-    bill_number = models.IntegerField("Rechnungsnummer")
-    house_number = models.IntegerField("Hausnummer")
     street = models.CharField("Straße", max_length="32")
+    house_number = models.IntegerField("Hausnummer")
     zip = models.IntegerField("Postleitzahl")
     place = models.CharField("Ort", max_length="32")
     phone_number = models.CharField("Telefonnummer", max_length="32", blank=True)
-    correction_factor = models.DecimalField("Korrekturfaktor", max_digits=3, decimal_places=2)
-    Ust_ID = models.IntegerField("Ust ID")
+    mail = models.CharField("E-Mail", max_length="64", blank=True)
+    bank = models.ForeignKey(Bank, verbose_name= "Bank")
+    account_number = models.IntegerField("Kontonummer") #Kontonummer des Kunden
+    code_number = models.IntegerField("Bankleitzahl") #Bankleitzahl
+    BIC = models.CharField("BIC", max_length=32)
+    IBAN = models.CharField("IBAN", max_length=32)
     manager = models.CharField("Geschäftsführer", max_length="32")
+    Ust_ID = models.IntegerField("Ust ID")
     company_register_number = models.CharField("Firmenbuchnummer", max_length="32")
+    standard_discount = models.IntegerField("Standardrabatt")
+    correction_factor = models.DecimalField("Korrekturfaktor", max_digits=8, decimal_places=2)
+    bill_number = models.IntegerField("Rechnungsnummer")
 
     def __unicode__(self):
         return unicode(self.name) + '(' + str(self.manager) + ')'

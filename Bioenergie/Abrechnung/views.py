@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.generic import TemplateView
-from Abrechnung.models import Building, HeatingPlant, CounterChange, Rate, Index
+from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index
 from django import http
 from django.template.loader import get_template
 from django.template import Context
@@ -353,8 +353,10 @@ def pdfZwischenabrechnung(request, id):
 #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
     thisyear = date.today().year
+    anfangsdatum = request.GET['anfangsdatum']
+    enddatum = request.GET['enddatum']
 
-    if request.GET['anfangsdatum'] and request.GET['enddatum'] is None: #TODO: Des stimmt nu ned --> Fehlermeldung: "Key 'anfangsdatum' not found in <QueryDict: {}>"
+    if (anfangsdatum == "2000-01-01") and (enddatum == "3000-01-01"):
         #Anzahl vergangener Monate ausrechnen
         today = datetime.now()
         month = today.month
@@ -373,15 +375,15 @@ def pdfZwischenabrechnung(request, id):
         end_acounting = date.today() #Ende der Abrechnung (Datum)
     else:
         #Anzahl vergangener Monate ausrechnen
-        variabel1 = request.GET['anfangsdatum'].split("-")
+        variabel1 = anfangsdatum.split("-")
         firstmonth = variabel1[1]
-        variabel2 = request.GET['enddatum'].split("-")
+        variabel2 = enddatum.split("-")
         secondmonth = variabel2[1]
 
         months = (12 - (int(secondmonth) - int(firstmonth)) *(-1))
         #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
-        abr_date1 = str(request.GET['anfangsdatum'])
-        abr_date2 = str(request.GET['enddatum'])
+        abr_date1 = str(anfangsdatum)
+        abr_date2 = str(enddatum)
 
 
         # Fuer die Abrechnungsperiode bei der Rechnung
@@ -621,7 +623,7 @@ def pdfZwischenabrechnung(request, id):
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Anschlussrechnung                                                                   !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-def pdfAnschlussrechnung(request):
+def pdfAnschlussrechnung(request, id):
     #Rueckgabe der PDF bestimmen
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="Anschlussrechnung.pdf"'
@@ -741,14 +743,128 @@ def pdfAnschlussrechnung(request):
     p.setFillColorRGB(0, 0.5, 0) #Schriftfarbe auf Gruen einstellen
     p.setFont("Times-Bold", 20) #Times-Bold = Dick geschrieben
     p.drawString(4.5*cm, 23.28*cm, "Angebot für einen Fernwärmeanschluss")
-
+#-----------------------------------------------------------------------------------------------------------------------
     #Variablen fuer die Rechnung deklarieren
+    offer = get_object_or_404(Building, pk=id)
+    customer_last_name = offer.building.customer.last_name
+    customer_first_name = offer.building.customer.first_name
+    customer_salutation = offer.building.customer.salutation
+    customer_title = offer.building.customer.title
+    customer = str(customer_salutation +" " + customer_title + " " + customer_first_name + " " + customer_last_name) #Kundenanschrift
+    customer_street = offer.building.customer.street #Wohnort des Kunden
+    customer_zip = offer.building.customer.zip
+    customer_address = str(customer_street + str(customer_zip))
+    connection_power = str(str(offer.building.connection_power) + " kW") #Anschlussleistung
+    wohnhaus = ""
+    gewerbe = ""
+    public = ""
+    bauparzelle = ""
+    anschlusspauschale = offer.building.connection_flat_rate.amount
+    lengh = int(offer.building.cable_length)
 
+    #Rechnen und Entscheidungen treffen
+    #Abfrage, welche Art von Gebauede es ist
+    if offer.object_type == "Wohnhaus":
+        wohnhaus = connection_power
+    elif offer.object_type == "Gewerbe":
+        gewerbe = connection_power
+    elif offer.object_type == "Öff. Gebäude":
+        public = connection_power
+    else:
+        bauparzelle = connection_power
 
+    #Abfrage, ob Heizung und Warmwasser auch beheizt werden
+    if offer.heating is True:
+        heizung = "Ja"
+    else:
+        heizung = "Nein"
+
+    if offer.warm_water is True:
+        warmwasser = "Ja"
+    else:
+        warmwasser = "Nein"
+
+    #Nettopreis berechnen
+    connection_value_net_price = float(int(offer.building.connection_power) * 119.9) #TODO: Erfragen, ob es immer 119.9 sind
+
+    #Abfrage, ob mehr als 15m Kabellaenge benoetigt werden
+    if (lengh - 15) <= 0:
+        more_lengh = str("0 m")
+        real_lengh = 0
+    else:
+        more_lengh = str(str(lengh-15) + " m")
+        real_lengh = int(lengh-15)
+
+    #Aufschlag berechnen
+    upcharge = str(int(str(offer.building.cable_price)) * real_lengh)
+
+    #Nettopreis, Bruttopreis und Umsatzsteuer fuer Anschlusswert berechnen
+    net_price = (float(anschlusspauschale) + float(connection_value_net_price) + float(upcharge))
+    tax = float(net_price * 0.2)
+    gross_price = float(net_price * 1.2)
+
+    #Nettopreis, Bruttopreis und Umsatzsteuer fuer Grundpreis berechnen
+    basic_price_net_price = float(offer.building.basic_price.amount)
+    basic_price_tax = float(basic_price_net_price * 0.2)
+    basic_price_gross_price = float(basic_price_net_price * 1.2)
+    basic_price1 = str("€ " + str(basic_price_net_price))
+    basic_price2 = str("€ " + str(basic_price_tax) + "Ust. = ")
+    basic_price3 = str("€ " + str(basic_price_gross_price) + "je kW Anschlussleistung und Verrechnungsjahr")
+
+    #Nettopreis, Bruttopreis und Umsatzsteuer fuer Arbeitspreis berechnen
+    working_price_net_price = float(offer.building.working_price.amount)
+    working_price_tax = float(working_price_net_price * 0.2)
+    working_price_gross_price = float(working_price_net_price * 1.2)
+    working_price1 = str("€ " + str(working_price_net_price))
+    working_price2 = str("€ " + str(working_price_tax) + "Ust. = ")
+    working_price3 = str("€ " + str(working_price_gross_price) + "je MWh")
+
+    #Nettopreis, Bruttopreis und Umsatzsteuer fuer Messpreis berechnen
+    measurement_price_net_price = float(offer.building.measurement_price.amount)
+    measurement_price_tax = float(measurement_price_net_price * 0.2)
+    measurement_price_gross_price = float(measurement_price_net_price * 1.2)
+    measurement_price1 = str("€ " + str(measurement_price_net_price))
+    measurement_price2 = str("€ " + str(measurement_price_tax) + "Ust. = ")
+    measurement_price3 = str("€ " + str(measurement_price_gross_price) + "je Jahr")
+
+#-----------------------------------------------------------------------------------------------------------------------
     #Varbiablen in die Rechnung einfuegen
     p.setFont("Times-Roman", 12) #Times New Roman mit Schriftgroesse 12pt
     p.setFillColor("Black") #Schriftfarbe Schwarz einstellen
     p.drawString(12.3*cm, 4.55*cm, heatingplant.name)
+    p.drawString(3*cm, 22.6*cm, customer)
+    p.drawString(3*cm, 22.1*cm, customer_address)
+    p.drawString(14*cm, 22.6*cm, offer.owner)
+    p.drawString(14*cm, 21.1*cm, offer.phone_number)
+    p.drawString(6.5*cm, 21.6*cm, wohnhaus)
+    p.drawString(6.5*cm, 21.1*cm, gewerbe)
+    p.drawString(12.2*cm, 21.6*cm, public)
+    p.drawString(12.2*cm, 21.1*cm, bauparzelle)
+    p.drawString(17.5*cm, 21.6*cm, heizung)
+    p.drawString(17.5*cm, 21.1*cm, warmwasser)
+    p.drawString(6*cm, 18.5*cm, connection_power)
+    p.drawString(18*cm, 19.5*cm, str(anschlusspauschale))
+    p.drawString(17.5*cm, 19.0*cm, str(connection_value_net_price))
+    p.drawString(11.5*cm, 18.5*cm, "€119,90") #TODO: Erfragen, ob dies ein Fixwert oder Varbiabel ist
+    p.drawString(7*cm, 18.0*cm, more_lengh)
+    p.drawString(11.5*cm, 18.0*cm, str(offer.building.cable_price))
+    p.drawString(18*cm, 18.0*cm, upcharge)
+    p.drawString(17.5*cm, 17.2*cm, str(net_price))
+    p.drawString(17.5*cm, 16.65*cm, str(tax))
+    p.drawString(17.5*cm, 16.1*cm, str(gross_price))
+    p.drawString(4*cm, 13.5*cm, basic_price1)
+    p.drawString(6.5*cm, 13.5*cm, basic_price2)
+    p.drawString(10*cm, 13.5*cm, basic_price3)
+    p.drawString(4*cm, 13.0*cm, working_price1)
+    p.drawString(6.5*cm, 13.0*cm, working_price2)
+    p.drawString(10*cm, 13.0*cm, working_price3)
+    p.drawString(4*cm, 12.5*cm, measurement_price1)
+    p.drawString(6.5*cm, 12.5*cm, measurement_price2)
+    p.drawString(10*cm, 12.5*cm, measurement_price3)
+    p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
+    p.drawString(0.*cm, 17.5*cm, str(offer.comment))
+
+
 
     # PDF korrekt downloaden und oeffnen
     p.showPage()

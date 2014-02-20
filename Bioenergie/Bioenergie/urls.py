@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^rates/', include('Rate.urls')),
     url(r'^workingprices/', include('WorkingPrice.urls')),
     url(r'^heatingplants/', include('HeatingPlant.urls')),
+    url(r'^offers/', include('Offer.urls')),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$/', )
     url(r'^login/$', 'Abrechnung.views.user_login', name='login'),

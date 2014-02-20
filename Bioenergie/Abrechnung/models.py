@@ -268,3 +268,27 @@ class HeatingPlant(models.Model):
 
     def get_absolute_url(self):
         return "/heatingplants/detail/%i" % self.id
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+class Offer(models.Model):
+    WOHNHAUS = 'Wohnhaus'
+    GEWERBE = 'Gewerbe'
+    OEFFGEBAUDE = 'Öff. Gebäude'
+    BAUPARZELLE = 'Bauparzelle'
+    TYPES = (
+        (WOHNHAUS, 'Wohnhaus'),
+        (GEWERBE, 'Gewerbe'),
+        (OEFFGEBAUDE, 'Öff. Gebäude'),
+        (BAUPARZELLE, 'Bauparzelle'),
+    )
+    building = models.ForeignKey(Building, verbose_name="Objekt")
+    owner = models.CharField("Eigentümer: (Ansonsten Kunde)", max_length="32", blank=True)
+    phone_number = models.CharField("Telefonnummer", max_length="32", blank=True)
+    object_type = models.CharField("Objektart", max_length="32", choices=TYPES, default=2)
+    comment = models.CharField("Soll ein Kommentar auf der Rechnung vermerkt werden?", max_length="64", blank=True)
+    heating = models.BooleanField("Heizung")
+    warm_water = models.BooleanField("Warmwasser")
+
+    def get_absolute_url(self):
+        return "/offers/detail/%i" % self.id

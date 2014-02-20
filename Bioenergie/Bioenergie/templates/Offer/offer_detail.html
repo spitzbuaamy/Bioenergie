@@ -47,6 +47,6 @@
     </br>
     <h4 style="padding-left: 20px">Rechnung mit angegebenen Daten erzeugen?</h4>
     <a style="padding-left: 20px" class="linkButton" href="{% url 'offer_update' pk=offer.pk %}"><button class="btn btn-primary">Bearbeiten</button></a>
-   <a class="linkButton" href="{% url 'pdf_Anschlussrechnung' id=offer.building.pk %}"><button class="btn btn-primary">Rechnung erstellen</button></a>
+   <a class="linkButton" href="{% url 'pdf_Anschlussrechnung' id1=offer.building.pk id2=offer.pk %}"><button class="btn btn-primary">Rechnung erstellen</button></a>
 
 {% endblock %}

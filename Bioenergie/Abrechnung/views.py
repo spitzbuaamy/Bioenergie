@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import date, datetime
 from xhtml2pdf import pisa
 from Abrechnung.pdfmixin import PDFTemplateResponseMixin
@@ -13,7 +15,14 @@ from django.template.loader import get_template
 from django.template import Context
 import cStringIO as StringIO
 import cgi
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
 
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!              Login Abfrage                                                                       !!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def user_login(request):
     # Like before, obtain the context for the user's request.
     context = RequestContext(request)
@@ -55,6 +64,12 @@ def user_login(request):
         # blank dictionary object...
         return render_to_response('login.html', {}, context)
 
+
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!              Logout Abgrage                                                                      !!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @login_required
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
@@ -63,6 +78,11 @@ def user_logout(request):
     return HttpResponseRedirect('/login/')
 
 
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!              PDF erstellen fuer Jahres- und Zwischenabrechnung                                   !!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # toPDF Funktion
 def write_pdf(template_src, context_dict):
     template = get_template(template_src)
@@ -81,6 +101,9 @@ def write_pdf(template_src, context_dict):
         return http.HttpResponse(result.getvalue(),
              mimetype='application/pdf')
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
+
+
+
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Jahresabrechnung                                                                    !!!!!!!!!!!
@@ -132,7 +155,7 @@ def pdfRechnung(request, id):
     if len(measurements) > 1:
         summe = measurements.latest('measured_date').value - measurements[0].value
     else:
-        summe = 'Keine Zaehlerstaende vorhanden'
+        summe = 'Keine Zählerstaende vorhanden'
 
     measurement_end_date = measurements.latest('measured_date').measured_date
     date_old_measurement = measurements[0].measured_date
@@ -194,14 +217,14 @@ def pdfRechnung(request, id):
     if debiting is False:
         if (advanced_payment_on_account_gross - sum) > 0:
             credit_additionalpayment = "Guthaben"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto ueberwiesen"
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto überwiesen"
         else:
             credit_additionalpayment = "Nachzahlung"
-            debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto ueberweisen"
+            debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto überweisen"
     else:
         if (advanced_payment_on_account_gross - sum) > 0:
             credit_additionalpayment = "Guthaben"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto ueberwiesen."
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto überwiesen."
         else:
             credit_additionalpayment = "Nachzahlung"
             debit_transfer = "Der Betrag wird innerhalb von 14 Tagen von Ihrem Konto abgebucht."
@@ -294,6 +317,7 @@ def pdfRechnung(request, id):
         "index_for_this_year": index_for_this_year,
         "index_for_the_next_year": index_for_the_next_year,
     })
+
 
 
 
@@ -430,7 +454,7 @@ def pdfZwischenabrechnung(request, id):
     if len(measurements) > 1:
         summe = measurements.latest('measured_date').value - measurements[0].value
     else:
-        summe = 'Keine Zaehlerstaende vorhanden'
+        summe = 'Keine Zählerstaende vorhanden'
 
     measurement_end_date = measurements.latest('measured_date').measured_date
     date_old_measurement = measurements[0].measured_date
@@ -489,14 +513,14 @@ def pdfZwischenabrechnung(request, id):
     if debiting is False:
         if (advanced_payment_on_account_gross - sum) > 0:
             credit_additionalpayment = "Guthaben"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto ueberwiesen"
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto überwiesen"
         else:
             credit_additionalpayment = "Nachzahlung"
-            debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto ueberweisen"
+            debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto überweisen"
     else:
         if (advanced_payment_on_account_gross - sum) > 0:
             credit_additionalpayment = "Guthaben"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto ueberwiesen."
+            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto überwiesen."
         else:
             credit_additionalpayment = "Nachzahlung"
             debit_transfer = "Der Betrag wird innerhalb von 14 Tagen von Ihrem Konto abgebucht."
@@ -590,18 +614,160 @@ def pdfZwischenabrechnung(request, id):
         "index_for_the_next_year": index_for_the_next_year,
     })
 
+
+
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!              Anschlussrechnung                                                                   !!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def pdfAnschlussrechnung(request):
+    #Rueckgabe der PDF bestimmen
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="Anschlussrechnung.pdf"'
+    #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
+    p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
+    p.translate(cm,cm) #Angegebene Werte auf cm umrechnen
+#-----------------------------------------------------------------------------------------------------------------------
+    #Zeichnen
+#-----------------------------------------------------------------------------------------------------------------------
+    #Variablendeklaration fuer die Kopfzeile
+    heatingplant = get_object_or_404(HeatingPlant, pk=1)
+    adress = str(heatingplant.street + " " + str(heatingplant.house_number) + "   " + str(heatingplant.zip) + " " + heatingplant.place)
+    telephone = str("Tel: " + heatingplant.phone_number + "   " + " Fax: " + heatingplant.phone_number)
+    e_mail = str("E-Mail: " + heatingplant.mail)
+
+    #Kopfzeile
+    p.setFillColorRGB(1, 1, 0.75)
+    p.setLineWidth(2) #Dicke Linien Zeichnen
+    p.rect(0, 24.0*cm, 19.5*cm, 3*cm, fill=1)
+
+    #Grundgeruest der Rechnung
+    p.line(0, 24*cm, 0, 0)
+    p.line(0, 0, 19.5*cm, 0)
+    p.line(19.5*cm, 0, 19.5*cm, 24*cm)
+    p.setLineWidth(1) #Duenne Linien Zeichnen
+    p.line(0, 23*cm, 19.5*cm, 23*cm)
+    p.line(0, 22*cm, 19.5*cm, 22*cm)
+    p.line(0, 21*cm, 19.5*cm, 21*cm)
+    p.line(2.8*cm, 21.5*cm, 19.5*cm, 21.5*cm)
+    p.line(2.8*cm, 22*cm, 2.8*cm, 21*cm)
+    p.line(5.8*cm, 22*cm, 5.8*cm, 21*cm)
+    p.line(9*cm, 22*cm, 9*cm, 21*cm)
+    p.line(12*cm, 22*cm, 12*cm, 21*cm)
+    p.line(14*cm, 22*cm, 14*cm, 21*cm)
+    p.line(17*cm, 22*cm, 17*cm, 21*cm)
+    p.line(19.5*cm, 20.4*cm, 16.7*cm, 20.4*cm)
+    p.line(16.7*cm, 20.4*cm, 16.7*cm, 16.0*cm)
+    p.line(16.7*cm, 17.6*cm, 19.5*cm, 17.6*cm)
+    p.setFillColorRGB(0.75, 0.75, 0.75)
+    p.rect(16.7*cm, 16.0*cm, 2.75*cm, 0.5*cm, fill=1)
+    p.setLineWidth(0.3) #Ganz duenne Linien Zeichnen
+    p.line(0, 14.4*cm, 19.5*cm, 14.4*cm)
+    p.line(0, 10.8*cm, 19.5*cm, 10.8*cm)
+    p.line(0, 7.7*cm, 19.5*cm, 7.7*cm)
+    p.line(0, 5.0*cm, 5.5*cm, 5.0*cm)
+    p.line(12*cm, 5.0*cm, 19.5*cm, 5.0*cm)
+    p.line(0, 1.5*cm, 5.5*cm, 1.5*cm)
+    p.line(12*cm, 1.5*cm, 19.5*cm, 1.5*cm)
+    p.line(16.7*cm, 17.05*cm, 19.5*cm, 17.05*cm)
+
+    #Text in die Kopfzeile einfuegen
+    p.setFillColorRGB(0, 0.5, 0) #Schriftfarbe auf Gruen einstellen
+    p.setFont("Times-Bold", 18) #Times-Bold = Dick geschrieben
+    p.drawString(1*cm, 26.2*cm, heatingplant.name)
+    p.setFont("Times-Bold", 10)
+    p.drawString(1*cm, 25.5*cm, adress)
+    p.drawString(1*cm, 25.0*cm, telephone)
+    p.drawString(1*cm, 24.5*cm, e_mail)
+    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15*cm, 24.25*cm, width=3.5*cm, height=2.5*cm)
+
+    #Standardtext auf der Rechnung
+    p.setFont("Times-Roman", 12) #Times New Roman mit Schriftgroesse 12pt
+    p.setFillColor("Black") #Schriftfarbe Schwarz einstellen
+    p.drawString(1.7*cm, 1.1*cm, "Ort und Datum")
+    p.drawString(1.7*cm, 4.55*cm, "Ort und Datum")
+    p.drawString(0.2*cm, 3*cm, "Ich (Wir) erkläre(n) mich (uns) mit dem Vorstehenden einverstanden und erteile(n) Ihnen den Auftrag.")
+    p.drawString(13.8*cm, 1.1*cm, "Unterschrift des Kunden")
+    p.setFont("Times-Italic", 12) #Kursiv geschrieben mit Schriftgroesse 12pt
+    p.drawString(0.2*cm, 7*cm, "Bindefrist des Angebotes:  3 Monate")
+    p.setFont("Times-Bold", 9) #Dick geschrieben mit Schriftgroesse 9pt
+    p.drawString(1*cm, 8*cm, "Der Abnehmer hat die Förderungsansuchen an die zuständigen Förderstellen selbst zu stellen.")
+    p.drawString(1*cm, 8.35*cm, "Das Wärmeversorgungsunternehmen kann über Art und Höhe der Förderung keine Zusagen treffen.")
+    p.setFont("Times-Bold", 10) #Dick geschrieben mit Schriftgroesse 10pt
+    p.drawString(0.2*cm, 10.4*cm, "Die Anschlusskosten können entsprechend den aktuellen Förderrichtlinien durch verschiedene")
+    p.drawString(0.2*cm, 10.0*cm, "Förderstellen gefördert werden.")
+    p.setFont("Times-Roman", 10) #Times New Roman, Schriftgroesse 10pt
+    p.drawString(1*cm, 11*cm, 'für die Versorgung mit Fernwärme aus dem Fernwärmenetz."')
+    p.drawString(1*cm, 11.35*cm, 'bitte dem beiliegenden "Wämelieferübereinkommen" sowie den "Allgemeinen Bedingungen')
+    p.drawString(1*cm, 11.7*cm, "Wertsicherung, Abrechnungsjahr, Zahlungskonditionen, Eigentumsgrenzen etc. entnehmen Sie")
+    p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
+    p.drawString(0.2*cm, 14*cm, "Fernwärmepreis:")
+    p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
+    p.drawString(0.2*cm, 13.5*cm, "Grundpreis:")
+    p.drawString(0.2*cm, 13*cm, "Arbeitspreis:")
+    p.drawString(0.2*cm, 12.5*cm, "Messgebühr:")
+    p.setFont("Times-Bold", 10) #Dick geschrieben mit Schriftgroesse 10pt
+    p.drawString(2.5*cm, 15.5*cm, "Zahlungs-")
+    p.drawString(2.5*cm, 15.1*cm, "konditionen:")
+    p.setFont("Times-Roman", 10) #Times New Roman, Schriftgroesse 10pt
+    p.drawString(5.0*cm, 15.5*cm, "50% des Anschlusspreises bei Vertragsabschluss")
+    p.drawString(5.0*cm, 15.1*cm, "Rest bei Inbetriebnahme (Heizbeginn)")
+    p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
+    p.drawString(12.3*cm, 16.1*cm, "Anschlusspreis inkl. Ust.")
+    p.drawString(14.5*cm, 16.65*cm, "+ 20% Ust.")
+    p.drawString(14.7*cm, 17.2*cm, "Nettopreis")
+    p.drawString(17.7*cm, 20.0*cm, "EUR")
+    p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
+    p.drawString(0.2*cm, 20*cm, "Fernwärmeanschluss")
+    p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
+    p.drawString(0.2*cm, 19.5*cm, "Hausanschluss (bis 15m) - Anschlusspauschale")
+    p.drawString(10*cm, 19.0*cm, "Nettopreis / Einheit")
+    p.drawString(0.2*cm, 18.5*cm, "Anschlusswert / kW")
+    p.drawString(0.2*cm, 18.0*cm, "Leitungsmehrlängen [m]:")
+    p.drawString(0.2*cm, 21.6*cm, "Objektart:")
+    p.drawString(3*cm, 21.6*cm, "Wohnhaus")
+    p.drawString(3*cm, 21.1*cm, "Gewerbe")
+    p.drawString(9.2*cm, 21.6*cm, "Öff. Gebäude")
+    p.drawString(9.2*cm, 21.1*cm, "Bauparzelle")
+    p.drawString(14.2*cm, 21.6*cm, "Heizung")
+    p.drawString(14.2*cm, 21.1*cm, "Warmwasser")
+    p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
+    p.drawString(0.2*cm, 22.6*cm, "Kundenname:")
+    p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
+    p.drawString(0.2*cm, 22.1*cm, "Anschrift:")
+    p.drawString(11.5*cm, 22.6*cm, "Eigentümer:")
+    p.drawString(11.5*cm, 22.1*cm, "Telefon:")
+    p.setFillColorRGB(0, 0.5, 0) #Schriftfarbe auf Gruen einstellen
+    p.setFont("Times-Bold", 20) #Times-Bold = Dick geschrieben
+    p.drawString(4.5*cm, 23.28*cm, "Angebot für einen Fernwärmeanschluss")
+
+    #Variablen fuer die Rechnung deklarieren
+
+
+    #Varbiablen in die Rechnung einfuegen
+    p.setFont("Times-Roman", 12) #Times New Roman mit Schriftgroesse 12pt
+    p.setFillColor("Black") #Schriftfarbe Schwarz einstellen
+    p.drawString(12.3*cm, 4.55*cm, heatingplant.name)
+
+    # PDF korrekt downloaden und oeffnen
+    p.showPage()
+    p.save()
+
+    #Seite zurueckgeben (response zurueckgeben)
+    return response
+
+
+
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Leere Rechnung                                                                      !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import cm
-
-def LeereRechnung(request):
+def pdfLeereRechnung(request):
     #Rueckgabe der PDF bestimmen
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="LeereRechnung.pdf"'
-    #Canvas = Leinwand: Dient als Schnittstelle zur Operatiion Malen
+    #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
     p.translate(cm,cm) #Angegebene Werte auf cm umrechnen
 #-----------------------------------------------------------------------------------------------------------------------
@@ -625,9 +791,9 @@ def LeereRechnung(request):
     p.setFillColorRGB(1, 1, 0.75)
     p.rect(0, 23.7*cm, 19.5*cm, 3.5*cm, fill=1)
     p.setFillColorRGB(0, 0.5, 0)
-    p.setFont("Times-Roman", 18)
+    p.setFont("Times-Bold", 18)
     p.drawString(1*cm, 26.2*cm, heatingplant.name)
-    p.setFont("Times-Roman", 10)
+    p.setFont("Times-Bold", 10)
     p.drawString(1*cm, 25.5*cm, adress)
     p.drawString(1*cm, 25.0*cm, telephone)
     p.drawString(1*cm, 24.5*cm, e_mail)

@@ -39,17 +39,17 @@ class Customer(models.Model): #Kunde
     title = models.CharField("Titel", max_length=32, blank=True)
     first_name = models.CharField("Vorname", max_length=32, blank=True)
     last_name = models.CharField("Nachname", max_length=32)
-    telephone_number = models.IntegerField("Telefonnummer", blank=True)
+    telephone_number = models.CharField("Telefonnummer", max_length=32, blank=True, null=True)
     street = models.CharField("Straße", max_length=32)
     house_number = models.IntegerField("Hausnummer")
     zip = models.IntegerField("Postleitzahl") # PLZ
     place = models.CharField("Ort", max_length=32)
     customer_number = models.CharField("Kundennummer", max_length=32) #TODO: Format festlegen
     bank = models.ForeignKey(Bank, verbose_name= "Bank")
-    account_number = models.IntegerField("Kontonummer") #Kontonummer des Kunden
-    code_number = models.IntegerField("Bankleitzahl") #Bankleitzahl
-    BIC = models.CharField("BIC", max_length=32)
-    IBAN = models.CharField("IBAN", max_length=32)
+    account_number = models.CharField("Kontonummer", max_length=32, blank=True) #Kontonummer des Kunden
+    code_number = models.CharField("Bankleitzahl", max_length=32, blank=True) #Bankleitzahl
+    BIC = models.CharField("BIC", max_length=32, blank=True)
+    IBAN = models.CharField("IBAN", max_length=32, blank=True)
     debitor = models.BooleanField("Abbucher")
 
 
@@ -64,7 +64,7 @@ class Customer(models.Model): #Kunde
 class WorkingPrice(models.Model): #Arbeitspreis
     min = models.IntegerField("Minimum")
     max = models.IntegerField("Maximum")
-    amount = models.IntegerField("Preis") #Preis
+    amount = models.DecimalField("Preis", max_digits=8, decimal_places=2 ) #Preis
     wage_group = models.IntegerField("Gruppe")
 
     def __unicode__(self):
@@ -78,7 +78,7 @@ class WorkingPrice(models.Model): #Arbeitspreis
 class BasicPrice(models.Model): #Grundpreis
     min = models.IntegerField("Minimum")
     max = models.IntegerField("Maximum")
-    amount = models.IntegerField("Preis") #Preis
+    amount = models.DecimalField("Preis", max_digits=8, decimal_places=2) #Preis
     wage_group = models.IntegerField("Gruppe")
 
     def __unicode__(self):
@@ -92,7 +92,7 @@ class BasicPrice(models.Model): #Grundpreis
 class MeasurementPrice(models.Model): #Messpreis
     min = models.IntegerField("Minimum")
     max = models.IntegerField("Maximum")
-    amount = models.IntegerField("Preis") #Preis
+    amount = models.DecimalField("Preis", max_digits=8, decimal_places=2) #Preis
     wage_group = models.IntegerField("Gruppe")
 
     def __unicode__(self):
@@ -106,7 +106,7 @@ class MeasurementPrice(models.Model): #Messpreis
 class ConnectionFlatRate(models.Model):
     min = models.IntegerField("Minimum")
     max = models.IntegerField("Maximum")
-    amount = models.IntegerField("Preis") #Preis
+    amount = models.DecimalField("Preis", max_digits=8, decimal_places=2) #Preis
     wage_group = models.IntegerField("Gruppe")
 
     def __unicode__(self):
@@ -274,7 +274,7 @@ class HeatingPlant(models.Model):
 class Offer(models.Model):
     WOHNHAUS = 'Wohnhaus'
     GEWERBE = 'Gewerbe'
-    OEFFGEBAUDE = 'Öff. Gebäude'
+    OEFFGEBAUDE = 'Gemeindeobjekt'
     BAUPARZELLE = 'Bauparzelle'
     TYPES = (
         (WOHNHAUS, 'Wohnhaus'),

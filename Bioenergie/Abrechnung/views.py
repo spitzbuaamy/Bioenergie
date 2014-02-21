@@ -753,8 +753,8 @@ def pdfAnschlussrechnung(request, id1, id2):
     customer_title = building.customer.title
     customer = str(customer_salutation + " " + customer_title + " " + customer_first_name + " " + customer_last_name) #Kundenanschrift
     customer_street = building.customer.street #Wohnort des Kunden
-    customer_zip = building.customer.zip
-    customer_address = str(customer_street + str(customer_zip))
+    customer_house_number = building.customer.house_number
+    customer_address = str(customer_street + " " + str(customer_house_number))
     connection_power = str(str(building.connection_power) + " kW") #Anschlussleistung
     wohnhaus = ""
     gewerbe = ""
@@ -769,7 +769,7 @@ def pdfAnschlussrechnung(request, id1, id2):
         wohnhaus = connection_power
     elif offer.object_type == "Gewerbe":
         gewerbe = connection_power
-    elif offer.object_type == "Öff. Gebäude":
+    elif offer.object_type == "Gemeindeobjekt":
         public = connection_power
     else:
         bauparzelle = connection_power
@@ -797,7 +797,7 @@ def pdfAnschlussrechnung(request, id1, id2):
         real_lengh = int(lengh-15)
 
     #Aufschlag berechnen
-    upcharge = str(int(str(building.cable_price)) * real_lengh)
+    upcharge= str(int(str(building.cable_price)) * real_lengh)
 
     #Nettopreis, Bruttopreis und Umsatzsteuer fuer Anschlusswert berechnen
     net_price = (float(anschlusspauschale) + float(connection_value_net_price) + float(upcharge))
@@ -805,28 +805,20 @@ def pdfAnschlussrechnung(request, id1, id2):
     gross_price = float(net_price * 1.2)
 
     #Nettopreis, Bruttopreis und Umsatzsteuer fuer Grundpreis berechnen
-    basic_price_net_price = float(building.basic_price.amount)
-    basic_price_tax = float(basic_price_net_price * 0.2)
-    basic_price_gross_price = float(basic_price_net_price * 1.2)
-    basic_price1 = str("€ " + str(basic_price_net_price))
-    basic_price2 = str("€ " + str(basic_price_tax) + " Ust. ")
-    basic_price3 = str("€ " + str(basic_price_gross_price) + "  je kW Anschlussleistung und Verrechnungsjahr")
+    basic_price1 = float(building.basic_price.amount)
+    basic_price2 = float(basic_price1 * 0.2)
+    basic_price3 = float(basic_price1 * 1.2)
 
     #Nettopreis, Bruttopreis und Umsatzsteuer fuer Arbeitspreis berechnen
-    working_price_net_price = float(building.working_price.amount)
-    working_price_tax = float(working_price_net_price * 0.2)
-    working_price_gross_price = float(working_price_net_price * 1.2)
-    working_price1 = str("€ " + str(working_price_net_price))
-    working_price2 = str("€ " + str(working_price_tax) + " Ust. ")
-    working_price3 = str("€ " + str(working_price_gross_price) + "  je MWh")
+    working_price1 = float(building.working_price.amount)
+    working_price2 = float(working_price1 * 0.2)
+    working_price3 = float(working_price1 * 1.2)
 
     #Nettopreis, Bruttopreis und Umsatzsteuer fuer Messpreis berechnen
-    measurement_price_net_price = float(building.measurement_price.amount)
-    measurement_price_tax = float(measurement_price_net_price * 0.2)
-    measurement_price_gross_price = float(measurement_price_net_price * 1.2)
-    measurement_price1 = str("€ " + str(measurement_price_net_price))
-    measurement_price2 = str("€ " + str(measurement_price_tax) + " Ust. ")
-    measurement_price3 = str("€ " + str(measurement_price_gross_price) + "  je Jahr")
+    measurement_price1 = float(building.measurement_price.amount)
+    measurement_price2 = float(measurement_price1 * 0.2)
+    measurement_price3 = float(measurement_price1 * 1.2)
+
 
 #-----------------------------------------------------------------------------------------------------------------------
     #Varbiablen in die Rechnung einfuegen
@@ -846,27 +838,44 @@ def pdfAnschlussrechnung(request, id1, id2):
     p.drawString(17.8*cm, 21.6*cm, heizung)
     p.drawString(17.8*cm, 21.1*cm, warmwasser)
     p.drawString(6*cm, 18.5*cm, connection_power)
-    p.drawString(17.5*cm, 19.5*cm, str(anschlusspauschale))
-    p.drawString(17.5*cm, 18.5*cm, str(connection_value_net_price))
-    p.drawString(11.5*cm, 18.5*cm, "€ 119,90") #TODO: Erfragen, ob dies ein Fixwert oder Varbiabel ist
+    p.drawRightString(19*cm, 19.5*cm, str('%.2f' % anschlusspauschale))
+    p.drawRightString(19*cm, 18.5*cm, str('%.2f' % connection_value_net_price))
+    p.drawRightString(12.4*cm, 18.5*cm, "119.90") #TODO: Erfragen, ob dies ein Fixwert oder Varbiabel ist
+    p.drawString(10.9*cm, 18.5*cm, str("€ "))
     p.drawString(6*cm, 18.0*cm, more_lengh)
-    p.drawString(11.5*cm, 18.0*cm, str("€ " + str(building.cable_price)))
-    p.drawString(17.5*cm, 18.0*cm, upcharge)
-    p.drawString(17.5*cm, 17.4*cm, str(net_price))
-    p.drawString(17.5*cm, 16.85*cm, str(tax))
-    p.drawString(17.5*cm, 16.3*cm, str(gross_price))
-    p.drawString(4*cm, 13.5*cm, basic_price1)
-    p.drawString(6.5*cm, 13.5*cm, basic_price2)
-    p.drawString(10*cm, 13.5*cm, basic_price3)
-    p.drawString(4*cm, 13.0*cm, working_price1)
-    p.drawString(6.5*cm, 13.0*cm, working_price2)
-    p.drawString(10*cm, 13.0*cm, working_price3)
-    p.drawString(4*cm, 12.5*cm, measurement_price1)
-    p.drawString(6.5*cm, 12.5*cm, measurement_price2)
-    p.drawString(10*cm, 12.5*cm, measurement_price3)
-    p.drawString(5.5*cm, 13.5*cm, " + ")
-    p.drawString(5.5*cm, 13.0*cm, " + ")
-    p.drawString(5.5*cm, 12.5*cm, " + ")
+    p.drawRightString(12.4*cm, 18.0*cm, str('%.2f' % float(building.cable_price.price_per_meter)))
+    p.drawString(10.9*cm, 18.0*cm, str("€ "))
+    p.drawRightString(19*cm, 18.0*cm, str('%.2f' % float(upcharge)))
+    p.drawRightString(19.0*cm, 17.4*cm, str('%.2f' % net_price))
+    p.drawRightString(19.0*cm, 16.85*cm, str('%.2f' % tax))
+    p.drawRightString(19.0*cm, 16.3*cm, str('%.2f' % gross_price))
+    p.drawString(3.5*cm, 13.5*cm, str("€"))
+    p.drawRightString(5*cm, 13.5*cm, str('%.2f' % basic_price1))
+    p.drawString(6.2*cm, 13.5*cm, str("€"))
+    p.drawString(7.7*cm, 13.5*cm, str("Ust."))
+    p.drawRightString(7.5*cm, 13.5*cm, str('%.2f' % basic_price2))
+    p.drawString(9.5*cm, 13.5*cm, str("€"))
+    p.drawRightString(11*cm, 13.5*cm, str('%.2f' % basic_price3))
+    p.drawString(11.0*cm, 13.5*cm, str("  je kW Anschlussleistung und Verrechnungsjahr"))
+    p.drawString(3.5*cm, 13.0*cm, str("€"))
+    p.drawRightString(5*cm, 13.0*cm, str('%.2f' % working_price1))
+    p.drawString(6.2*cm, 13.0*cm, str("€"))
+    p.drawString(7.7*cm, 13.0*cm, str("Ust."))
+    p.drawRightString(7.5*cm, 13.0*cm, str('%.2f' % working_price2))
+    p.drawString(9.5*cm, 13.0*cm, str("€"))
+    p.drawRightString(11*cm, 13.0*cm, str('%.2f' % working_price3))
+    p.drawString(11.0*cm, 13.0*cm, str("  je MWh"))
+    p.drawString(3.5*cm, 12.5*cm, str("€"))
+    p.drawRightString(5*cm, 12.5*cm, str('%.2f' % measurement_price1))
+    p.drawString(6.2*cm, 12.5*cm, str("€"))
+    p.drawString(7.7*cm, 12.5*cm, str("Ust."))
+    p.drawRightString(7.5*cm, 12.5*cm, str('%.2f' % measurement_price2))
+    p.drawString(9.5*cm, 12.5*cm, str("€"))
+    p.drawRightString(11*cm, 12.5*cm, str('%.2f' % measurement_price3))
+    p.drawString(11.0*cm, 12.5*cm, str("  je Jahr"))
+    p.drawString(5.3*cm, 13.5*cm, " + ")
+    p.drawString(5.3*cm, 13.0*cm, " + ")
+    p.drawString(5.3*cm, 12.5*cm, " + ")
     p.drawString(8.7*cm, 13.5*cm, " = ")
     p.drawString(8.7*cm, 13*cm, " = ")
     p.drawString(8.7*cm, 12.5*cm, " = ")

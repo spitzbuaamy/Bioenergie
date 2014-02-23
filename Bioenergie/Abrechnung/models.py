@@ -173,7 +173,7 @@ class CounterChange(models.Model):    #Zaehlerwechsel
 class Measurement(models.Model): #Zaehlerstand
     building = models.ForeignKey(Building, verbose_name="Objekt")
     measured_date = models.DateField("Messdatum") #Messdatum
-    value = models.IntegerField("Wert")
+    value = models.DecimalField("Wert", max_digits=12, decimal_places=4)
 
     def __unicode__(self):
         return unicode(self.measured_date)
@@ -186,7 +186,7 @@ class Measurement(models.Model): #Zaehlerstand
 class Rate(models.Model):
     building = models.ForeignKey(Building, verbose_name="Objekt")
     year = models.IntegerField("Jahr")
-    monthly_rate = models.IntegerField("Monatsrate")
+    monthly_rate = models.DecimalField("Monatsrate", max_digits=8, decimal_places=2)
 
     def __unicode__(self):
         return unicode(self.monthly_rate)

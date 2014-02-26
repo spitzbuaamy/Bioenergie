@@ -25,21 +25,21 @@
         "pk": 1,
         "model": "Abrechnung.customer",
         "fields": {
-            "first_name": "Jakob",
-            "last_name": "Wundsam",
+            "first_name": "",
+            "last_name": "Amtsgeb\u00e4ude u. Musikschule",
             "debitor": true,
-            "zip": 4141,
-            "title": "",
-            "house_number": 1,
-            "BIC": "234325",
-            "telephone_number": 20,
-            "code_number": 3333,
-            "customer_number": "345434433",
-            "street": "Pfarrkirchen",
-            "place": "Pfarrkirchen",
-            "account_number": 3333,
-            "salutation": "Herr",
-            "IBAN": "2345523",
+            "zip": 4132,
+            "title": "Gemeinde Lembach",
+            "house_number": 2,
+            "BIC": "BND2315",
+            "telephone_number": "",
+            "code_number": 1554,
+            "customer_number": "K01",
+            "street": "Schulstra\u00dfe",
+            "place": "Lembach",
+            "account_number": 16513,
+            "salutation": "",
+            "IBAN": "15616133",
             "bank": 1
         }
     },
@@ -47,65 +47,1077 @@
         "pk": 2,
         "model": "Abrechnung.customer",
         "fields": {
-            "first_name": "Fabian",
-            "last_name": "Schauer",
-            "debitor": false,
+            "first_name": "SHV Rohrbach",
+            "last_name": "Bezirksaltenheim Lembach",
+            "debitor": true,
             "zip": 4132,
-            "title": "",
-            "house_number": 5,
-            "BIC": "234325",
-            "telephone_number": 10,
-            "code_number": 3333,
-            "customer_number": "324432432",
-            "street": "Steining",
+            "title": "An den",
+            "house_number": 14,
+            "BIC": "BND2315",
+            "telephone_number": "",
+            "code_number": 1563,
+            "customer_number": "K02",
+            "street": "Lederergasse",
             "place": "Lembach",
-            "account_number": 3333,
-            "salutation": "Herr",
-            "IBAN": "2345523",
-            "bank": 2
+            "account_number": 20334,
+            "salutation": "",
+            "IBAN": "15616132",
+            "bank": 1
         }
     },
     {
         "pk": 3,
         "model": "Abrechnung.customer",
         "fields": {
-            "first_name": "Klaus",
-            "last_name": "Ammerstorfer",
-            "debitor": false,
+            "first_name": "Atzgersdorfer",
+            "last_name": "Sabine",
+            "debitor": true,
             "zip": 4132,
             "title": "",
             "house_number": 6,
-            "BIC": "234325",
-            "telephone_number": 30,
-            "code_number": 3333,
-            "customer_number": "3244334",
-            "street": "Stra\u00dfe",
+            "BIC": "4123",
+            "telephone_number": "",
+            "code_number": 45,
+            "customer_number": "K03",
+            "street": "Marktplatz",
             "place": "Lembach",
-            "account_number": 3333,
-            "salutation": "Herr",
-            "IBAN": "2345523",
-            "bank": 2
+            "account_number": 1243,
+            "salutation": "Frau",
+            "IBAN": "4451236",
+            "bank": 1
         }
     },
     {
         "pk": 4,
         "model": "Abrechnung.customer",
         "fields": {
-            "first_name": "Daniel",
-            "last_name": "\u00d6ller",
+            "first_name": "",
+            "last_name": "Markthaus",
             "debitor": false,
-            "zip": 4157,
+            "zip": 4132,
+            "title": "Gemeinde Lembach",
+            "house_number": 3,
+            "BIC": "BND2315",
+            "telephone_number": "",
+            "code_number": 1563,
+            "customer_number": "K04",
+            "street": "Marktplatz",
+            "place": "Lembach",
+            "account_number": 1243,
+            "salutation": "",
+            "IBAN": "15616133",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Pfarramt Lembach",
+            "debitor": false,
+            "zip": 4132,
+            "title": "An das",
+            "house_number": 13,
+            "BIC": "BND2315",
+            "telephone_number": "",
+            "code_number": 1563,
+            "customer_number": "K05",
+            "street": "Marktplatz",
+            "place": "Lembach",
+            "account_number": 1243,
+            "salutation": "",
+            "IBAN": "15616133",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Hildegard u. Franz",
+            "last_name": "Brunner",
+            "debitor": false,
+            "zip": 4132,
+            "title": "",
+            "house_number": 13,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K06",
+            "street": "Linzerstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 7,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Streinesberger",
+            "last_name": "Kaufhaus Haderer",
+            "debitor": false,
+            "zip": 4132,
+            "title": "An",
+            "house_number": 7,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K08",
+            "street": "Marktplatz",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 8,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Raiffeisenbank Donau Ameisberg",
+            "debitor": false,
+            "zip": 4132,
+            "title": "An die",
+            "house_number": 1,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K09",
+            "street": "Marktplatz",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 9,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Feuerwehrdepot",
+            "debitor": false,
+            "zip": 4132,
+            "title": "Gemeinde Lembach",
+            "house_number": 3,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K10",
+            "street": "Hanriederstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 10,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Klaus",
+            "last_name": "F\u00fcrst",
+            "debitor": false,
+            "zip": 4132,
+            "title": "Dr.",
+            "house_number": 12,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K11",
+            "street": "Lederergasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 11,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Helene",
+            "last_name": "Rein",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 6,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K12",
+            "street": "Hanriederstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 12,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Hubert",
+            "last_name": "Schinkinger",
+            "debitor": false,
+            "zip": 4132,
+            "title": "",
+            "house_number": 10,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K13",
+            "street": "Hammer",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 13,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Barbara",
+            "last_name": "Schmidt",
+            "debitor": false,
+            "zip": 4132,
+            "title": "",
+            "house_number": 14,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K14",
+            "street": "Friedhofstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 14,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Schule",
+            "debitor": false,
+            "zip": 4132,
+            "title": "Gemeinde Lembach",
+            "house_number": 1,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K15",
+            "street": "Schulstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 15,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Judith",
+            "last_name": "Stadler",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 8,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K16",
+            "street": "Lederergasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 16,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Elke",
+            "last_name": "W\u00f6gerbauer",
+            "debitor": true,
+            "zip": 4132,
             "title": "",
             "house_number": 11,
-            "BIC": "234325",
-            "telephone_number": 90,
-            "code_number": 3333,
-            "customer_number": "0000000001",
-            "street": "Sonnenweg",
-            "place": "Peilstein",
-            "account_number": 3333,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K17",
+            "street": "Pfarrgasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 17,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Hanriederstra\u00dfe 5-7",
+            "debitor": true,
+            "zip": 4020,
+            "title": "WSG.",
+            "house_number": 9,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K18",
+            "street": "Ederstra\u00dfe ",
+            "place": "Linz",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 18,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Lederergasse",
+            "debitor": true,
+            "zip": 4020,
+            "title": "WSG.",
+            "house_number": 9,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K19",
+            "street": "Ederstra\u00dfe",
+            "place": "Linz",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 19,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "R. u. E.",
+            "last_name": "Edtbauer Privatstiftung",
+            "debitor": true,
+            "zip": 4132,
+            "title": "Lederergasse",
+            "house_number": 6,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K20",
+            "street": "Tanngergstra\u00dfe ",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 20,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "R. u. E.",
+            "last_name": "Edtbauer Privatstiftung",
+            "debitor": false,
+            "zip": 4132,
+            "title": "Tannbergstr. 6",
+            "house_number": 6,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K21",
+            "street": "Tannbergstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 21,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "R. u. E.",
+            "last_name": "Edtbauer Privatstiftung",
+            "debitor": true,
+            "zip": 4132,
+            "title": "Tannbergstr. 9",
+            "house_number": 6,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K22",
+            "street": "Tannbergstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 22,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Andrea und Bernd",
+            "last_name": "J\u00e4ger",
+            "debitor": false,
+            "zip": 4132,
+            "title": "",
+            "house_number": 22,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K23",
+            "street": "Johaniterstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
             "salutation": "Herr",
-            "IBAN": "2345523",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 23,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Herbert",
+            "last_name": "P\u00fcrchenfellner",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 15,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K24",
+            "street": "Marktplatz",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 24,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Andrea und Thomas",
+            "last_name": "Gierlinger",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 1,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K25",
+            "street": "M\u00fchlgasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 25,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "H. u. K.",
+            "last_name": "Kneidinger",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 28,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K26",
+            "street": "Hanriederstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Firma",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 26,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Leopoldine",
+            "last_name": "Sellner",
+            "debitor": false,
+            "zip": 4132,
+            "title": "",
+            "house_number": 12,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K27",
+            "street": "Johaniterstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 27,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Reinhold",
+            "last_name": "Sellner",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 2,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K28",
+            "street": "Tannbergstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 28,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Johann",
+            "last_name": "Ortner",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 16,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K29",
+            "street": "Johaniterstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 29,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Walter",
+            "last_name": "Jakschi",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 10,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K30",
+            "street": "Lederergasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 30,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Gabriela",
+            "last_name": "Kesztele",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 35,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K31",
+            "street": "Gartenstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 31,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "M. u. J.",
+            "last_name": "Lindorfer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 15,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K32",
+            "street": "Hanriederstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 32,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Christian",
+            "last_name": "S\u00f6ser",
+            "debitor": true,
+            "zip": 4132,
+            "title": "Dr.",
+            "house_number": 11,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K33",
+            "street": "Linzerstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 33,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Hans ",
+            "last_name": "S\u00f6ser",
+            "debitor": false,
+            "zip": 4132,
+            "title": "Dr.",
+            "house_number": 11,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K34",
+            "street": "Linzerstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 34,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Christa u. Hubert",
+            "last_name": "Leitenbauer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "An die",
+            "house_number": 3,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K35",
+            "street": "Bohmerwaldstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 35,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Markus",
+            "last_name": "Hintringer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 12,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K36",
+            "street": "Hanriederstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 36,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Kurt",
+            "last_name": "Vierlinger",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 7,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K37",
+            "street": "Hammer",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 37,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Max u. Grete",
+            "last_name": "H\u00f6llinger",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 25,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K38",
+            "street": "Rendlsiedlung",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 38,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "",
+            "last_name": "Sparkasse M\u00fchlviertel West",
+            "debitor": true,
+            "zip": 4132,
+            "title": "An die",
+            "house_number": 2,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K39",
+            "street": "Falkensteinstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 39,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Herbert",
+            "last_name": "Kumpfm\u00fcller",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 1,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K40",
+            "street": "Moritz-Scheiblsstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 40,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Rudolf Schmiedhofer",
+            "last_name": "Grundst\u00fccksgemeinschaft",
+            "debitor": true,
+            "zip": 4132,
+            "title": "An die",
+            "house_number": 21,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K41",
+            "street": "Falkensteinstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 41,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Gerbert",
+            "last_name": "Arnreiter",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 3,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K42",
+            "street": "Hammer",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Firma",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 42,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "G\u00fcnther",
+            "last_name": "Wakolbinger",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 6,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K43",
+            "street": "Schulstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 43,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Maria und Franz",
+            "last_name": "Auer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 2,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K44",
+            "street": "M\u00fchlgasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Frau",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 44,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Harald",
+            "last_name": "Stadler",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 17,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K45",
+            "street": "Falkensteinstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 45,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Max",
+            "last_name": "H\u00f6glinger",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 19,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K46",
+            "street": "Hanriederstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 46,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Bernhard",
+            "last_name": "H\u00f6tzendorfer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 5,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K47",
+            "street": "Lederergasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 47,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "G\u00fcnther",
+            "last_name": "Peherstorfer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 7,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K48",
+            "street": "Lederergasse",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Herr",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 48,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Walter",
+            "last_name": "Reinalt",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 7,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K49",
+            "street": "M\u00fchlholzweg ",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 2
+        }
+    },
+    {
+        "pk": 49,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Gerlinde und Norbert",
+            "last_name": "Hofer",
+            "debitor": true,
+            "zip": 4132,
+            "title": "",
+            "house_number": 8,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K50",
+            "street": "M\u00fchlholzweg",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "Familie",
+            "IBAN": "",
+            "bank": 1
+        }
+    },
+    {
+        "pk": 50,
+        "model": "Abrechnung.customer",
+        "fields": {
+            "first_name": "Stra\u00dfenmeisterei",
+            "last_name": "Lembach",
+            "debitor": true,
+            "zip": 4132,
+            "title": "An die",
+            "house_number": 3,
+            "BIC": "",
+            "telephone_number": "",
+            "code_number": "",
+            "customer_number": "K51",
+            "street": "Bohmerwaldstra\u00dfe",
+            "place": "Lembach",
+            "account_number": "",
+            "salutation": "",
+            "IBAN": "",
             "bank": 1
         }
     },
@@ -113,10 +1125,10 @@
         "pk": 1,
         "model": "Abrechnung.workingprice",
         "fields": {
-            "max": 20,
-            "amount": 23,
+            "max": 15,
+            "amount": 80.18,
             "wage_group": 1,
-            "min": 10
+            "min": 0
         }
     },
     {
@@ -124,59 +1136,119 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 30,
-            "amount": 45,
+            "amount": 78.06,
             "wage_group": 2,
-            "min": 20
+            "min": 16
         }
     },
     {
         "pk": 3,
         "model": "Abrechnung.workingprice",
         "fields": {
-            "max": 40,
-            "amount": 78,
-            "wage_group": 3,
-            "min": 30
-        }
-    },
-    {
-        "pk": 1,
-        "model": "Abrechnung.basicprice",
-        "fields": {
-            "max": 20,
-            "amount": 10,
-            "wage_group": 1,
-            "min": 13
-        }
-    },
-    {
-        "pk": 2,
-        "model": "Abrechnung.basicprice",
-        "fields": {
-            "max": 30,
-            "amount": 20,
-            "wage_group": 2,
-            "min": 21
-        }
-    },
-    {
-        "pk": 3,
-        "model": "Abrechnung.basicprice",
-        "fields": {
-            "max": 40,
-            "amount": 30,
+            "max": 50,
+            "amount": 76.77,
             "wage_group": 3,
             "min": 31
         }
     },
     {
+        "pk": 4,
+        "model": "Abrechnung.workingprice",
+        "fields": {
+            "max": 80,
+            "amount": 75.6,
+            "wage_group": 4,
+            "min": 51
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.workingprice",
+        "fields": {
+            "max": 200,
+            "amount": 74.43,
+            "wage_group": 5,
+            "min": 81
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.workingprice",
+        "fields": {
+            "max": 1000,
+            "amount": 73.15,
+            "wage_group": 6,
+            "min": 201
+        }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 15,
+            "amount": 29.6,
+            "wage_group": 1,
+            "min": 0
+        }
+    },
+    {
+        "pk": 2,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 30,
+            "amount": 29.15,
+            "wage_group": 2,
+            "min": 16
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 50,
+            "amount": 28.01,
+            "wage_group": 3,
+            "min": 31
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 80,
+            "amount": 26.84,
+            "wage_group": 4,
+            "min": 51
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 200,
+            "amount": 25.55,
+            "wage_group": 5,
+            "min": 81
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.basicprice",
+        "fields": {
+            "max": 1000,
+            "amount": 24.38,
+            "wage_group": 6,
+            "min": 201
+        }
+    },
+    {
         "pk": 1,
         "model": "Abrechnung.measurementprice",
         "fields": {
-            "max": 20,
-            "amount": 30,
+            "max": 15,
+            "amount": 87.85,
             "wage_group": 1,
-            "min": 10
+            "min": 0
         }
     },
     {
@@ -184,29 +1256,59 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 30,
-            "amount": 45,
+            "amount": 87.85,
             "wage_group": 2,
-            "min": 20
+            "min": 16
         }
     },
     {
         "pk": 3,
         "model": "Abrechnung.measurementprice",
         "fields": {
-            "max": 40,
-            "amount": 67,
+            "max": 50,
+            "amount": 87.85,
             "wage_group": 3,
-            "min": 30
+            "min": 31
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.measurementprice",
+        "fields": {
+            "max": 80,
+            "amount": 109.79,
+            "wage_group": 4,
+            "min": 51
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.measurementprice",
+        "fields": {
+            "max": 200,
+            "amount": 109.79,
+            "wage_group": 5,
+            "min": 81
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.measurementprice",
+        "fields": {
+            "max": 1000,
+            "amount": 219.47,
+            "wage_group": 6,
+            "min": 201
         }
     },
     {
         "pk": 1,
         "model": "Abrechnung.connectionflatrate",
         "fields": {
-            "max": 20,
-            "amount": 21,
+            "max": 15,
+            "amount": 3839,
             "wage_group": 1,
-            "min": 10
+            "min": 0
         }
     },
     {
@@ -214,19 +1316,49 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 30,
-            "amount": 45,
+            "amount": 4037,
             "wage_group": 2,
-            "min": 20
+            "min": 16
         }
     },
     {
         "pk": 3,
         "model": "Abrechnung.connectionflatrate",
         "fields": {
-            "max": 40,
-            "amount": 67,
+            "max": 50,
+            "amount": 4279,
             "wage_group": 3,
-            "min": 30
+            "min": 31
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.connectionflatrate",
+        "fields": {
+            "max": 80,
+            "amount": 4796,
+            "wage_group": 4,
+            "min": 51
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.connectionflatrate",
+        "fields": {
+            "max": 200,
+            "amount": 7590,
+            "wage_group": 5,
+            "min": 81
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.connectionflatrate",
+        "fields": {
+            "max": 1000,
+            "amount": 13590.5,
+            "wage_group": 6,
+            "min": 201
         }
     },
     {
@@ -237,26 +1369,96 @@
         }
     },
     {
+        "pk": 2,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 0
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 56
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 12
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 56
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 82
+        }
+    },
+    {
+        "pk": 7,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 5
+        }
+    },
+    {
+        "pk": 8,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 25
+        }
+    },
+    {
+        "pk": 9,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 17
+        }
+    },
+    {
+        "pk": 10,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 2
+        }
+    },
+    {
+        "pk": 11,
+        "model": "Abrechnung.cableprice",
+        "fields": {
+            "price_per_meter": 7
+        }
+    },
+    {
         "pk": 1,
         "model": "Abrechnung.building",
         "fields": {
             "customer": 1,
-            "connection_number": 43,
-            "measurement_price": 3,
-            "street": "Pfarrkirchen",
-            "zip": 4141,
-            "working_price": 1,
+            "connection_number": 1,
+            "measurement_price": 4,
+            "street": "Schulstra\u00dfe",
+            "zip": 4132,
+            "working_price": 4,
             "house_number": 2,
-            "contract_date": "2013-11-05",
-            "cable_price": 1,
-            "discount_fixed": 12,
-            "connection_power": 23,
-            "connection_flat_rate": 2,
-            "place": "Pfarrkirchen",
-            "last_bill": "2013-11-12",
-            "basic_price": 2,
-            "billing_begin": "2013-06-01",
-            "cable_length": 888
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 80,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 4,
+            "billing_begin": "2013-07-01"
+
         }
     },
     {
@@ -265,116 +1467,1372 @@
         "fields": {
             "customer": 2,
             "connection_number": 2,
-            "measurement_price": 3,
-            "street": "Steining",
+            "measurement_price": 6,
+            "street": "Lederergasse",
             "zip": 4132,
-            "working_price": 2,
-            "house_number": 5,
-            "contract_date": "2013-11-05",
-            "cable_price": 1,
-            "discount_fixed": 0,
-            "connection_power": 56,
-            "connection_flat_rate": 2,
+            "working_price": 6,
+            "house_number": 14,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 380,
+
             "place": "Lembach",
-            "last_bill": "2013-11-03",
-            "basic_price": 1,
-            "billing_begin": "2013-06-01",
-            "cable_length": 67
+            "last_bill": "2013-07-01",
+            "basic_price": 6,
+            "billing_begin": "2013-07-01"
+
         }
     },
     {
         "pk": 3,
         "model": "Abrechnung.building",
         "fields": {
-            "customer": 1,
-            "connection_number": 24,
-            "measurement_price": 3,
-            "street": "adsfas",
+            "customer": 3,
+            "connection_number": 3,
+            "measurement_price": 2,
+            "street": "Marktplatz",
             "zip": 4132,
-            "working_price": 1,
+            "working_price": 2,
             "house_number": 6,
-            "contract_date": "2013-12-03",
-            "cable_price": 1,
-            "discount_fixed": 25,
-            "connection_power": 36,
-            "connection_flat_rate": 1,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 28,
+
             "place": "Lembach",
-            "last_bill": "2013-12-17",
+            "last_bill": "2013-07-01",
             "basic_price": 2,
-            "billing_begin": "2013-06-01",
-            "cable_length": 124
+            "billing_begin": "2013-07-01"
+
         }
     },
     {
         "pk": 4,
         "model": "Abrechnung.building",
         "fields": {
-            "customer": 1,
-            "connection_number": 56,
+            "customer": 4,
+            "connection_number": 4,
+            "measurement_price": 2,
+            "street": "Marktplatz",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 3,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 25,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 5,
+            "connection_number": 5,
+            "measurement_price": 4,
+            "street": "Marktplatz",
+            "zip": 4132,
+            "working_price": 4,
+            "house_number": 13,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 51,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 4,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 6,
+            "connection_number": 6,
             "measurement_price": 1,
-            "street": "adfa",
-            "zip": 53,
-            "working_price": 3,
-            "house_number": 5,
-            "contract_date": "2013-12-09",
-            "cable_price": 1,
-            "discount_fixed": 25,
-            "connection_power": 89,
-            "connection_flat_rate": 1,
-            "place": "fhdscdscd",
-            "last_bill": "2013-12-22",
+            "street": "Linzerstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 13,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 14,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
             "basic_price": 1,
-            "billing_begin": "2013-06-01",
-            "cable_length": 15
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 7,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 7,
+            "connection_number": 8,
+            "measurement_price": 5,
+            "street": "Marktplatz",
+            "zip": 4132,
+            "working_price": 5,
+            "house_number": 7,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 85,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 5,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 8,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 8,
+            "connection_number": 9,
+            "measurement_price": 1,
+            "street": "Marktplatz",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 1,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 9,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 9,
+            "connection_number": 10,
+            "measurement_price": 1,
+            "street": "Hanriederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 3,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 10,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 10,
+            "connection_number": 11,
+            "measurement_price": 2,
+            "street": "Lederergasse",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 12,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 20,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 11,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 11,
+            "connection_number": 12,
+            "measurement_price": 1,
+            "street": "Hanriederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 6,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 10,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 12,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 12,
+            "connection_number": 13,
+            "measurement_price": 2,
+            "street": "Hammer",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 10,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 20,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 13,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 13,
+            "connection_number": 14,
+            "measurement_price": 1,
+            "street": "Friedhofstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 14,
+            "contract_date": "2004-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 14,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 14,
+            "connection_number": 15,
+            "measurement_price": 6,
+            "street": "Schulstra\u00dfe",
+            "zip": 4132,
+            "working_price": 6,
+            "house_number": 1,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 550,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 6,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 15,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 15,
+            "connection_number": 16,
+            "measurement_price": 1,
+            "street": "Lederergasse",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 8,
+            "contract_date": "2002-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 12,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 16,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 16,
+            "connection_number": 17,
+            "measurement_price": 1,
+            "street": "Pfarrgasse",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 11,
+            "contract_date": "2004-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 14,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 17,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 17,
+            "connection_number": 18,
+            "measurement_price": 5,
+            "street": "Ederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 5,
+            "house_number": 9,
+            "contract_date": "2001-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 92,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 5,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 18,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 18,
+            "connection_number": 19,
+            "measurement_price": 2,
+            "street": "Ederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 9,
+            "contract_date": "2002-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 20,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 19,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 19,
+            "connection_number": 20,
+            "measurement_price": 2,
+            "street": "Tannbergstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 6,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 20,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 20,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 20,
+            "connection_number": 21,
+            "measurement_price": 3,
+            "street": "Tannbergstra\u00dfe",
+            "zip": 4132,
+            "working_price": 3,
+            "house_number": 6,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 47,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 3,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 21,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 21,
+            "connection_number": 22,
+            "measurement_price": 4,
+            "street": "Tannbergstra\u00dfe",
+            "zip": 4132,
+            "working_price": 4,
+            "house_number": 6,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 60,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 4,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 22,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 22,
+            "connection_number": 23,
+            "measurement_price": 1,
+            "street": "Johaniterstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 22,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 12,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 23,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 23,
+            "connection_number": 24,
+            "measurement_price": 1,
+            "street": "Marktplatz",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 15,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 24,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 24,
+            "connection_number": 25,
+            "measurement_price": 1,
+            "street": "M\u00fchlgasse",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 1,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 12,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 25,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 25,
+            "connection_number": 26,
+            "measurement_price": 5,
+            "street": "Hanriederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 5,
+            "house_number": 28,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 100,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 5,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 26,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 26,
+            "connection_number": 27,
+            "measurement_price": 1,
+            "street": "Johaniterstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 12,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 14,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 27,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 27,
+            "connection_number": 28,
+            "measurement_price": 1,
+            "street": "Tannbergstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 12,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 12,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 28,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 28,
+            "connection_number": 29,
+            "measurement_price": 1,
+            "street": "Johaniterstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 16,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 14,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 29,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 29,
+            "connection_number": 30,
+            "measurement_price": 1,
+            "street": "Lederergasse",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 10,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 30,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 30,
+            "connection_number": 31,
+            "measurement_price": 1,
+            "street": "Gartenstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 35,
+            "contract_date": "2008-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 31,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 31,
+            "connection_number": 32,
+            "measurement_price": 2,
+            "street": "Hanriederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 15,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 20,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 32,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 32,
+            "connection_number": 33,
+            "measurement_price": 2,
+            "street": "Lederergasse",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 11,
+            "contract_date": "2008-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 25,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 33,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 33,
+            "connection_number": 34,
+            "measurement_price": 2,
+            "street": "Linzerstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 7,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 16,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 34,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 50,
+            "connection_number": 35,
+            "measurement_price": 1,
+            "street": "Bohmerwaldstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 3,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 14,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 35,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 35,
+            "connection_number": 26,
+            "measurement_price": 1,
+            "street": "Hanriederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 12,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 12,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 36,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 36,
+            "connection_number": 37,
+            "measurement_price": 2,
+            "street": "Hammer",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 7,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 16,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 37,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 37,
+            "connection_number": 38,
+            "measurement_price": 1,
+            "street": "Rendlsiedlung",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 25,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 14,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 38,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 38,
+            "connection_number": 39,
+            "measurement_price": 3,
+            "street": "Falkensteinstra\u00dfe",
+            "zip": 4132,
+            "working_price": 3,
+            "house_number": 2,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 32,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 3,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 39,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 39,
+            "connection_number": 40,
+            "measurement_price": 2,
+            "street": "Moritz-Scheiblsstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 1,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 16,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 40,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 40,
+            "connection_number": 41,
+            "measurement_price": 2,
+            "street": "Falkensteinstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 21,
+            "contract_date": "2006-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 28,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 41,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 44,
+            "connection_number": 45,
+            "measurement_price": 2,
+            "street": "Falkensteinstra\u00dfe",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 17,
+            "contract_date": "2007-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 20,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 42,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 45,
+            "connection_number": 46,
+            "measurement_price": 1,
+            "street": "Hanriederstra\u00dfe",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 19,
+            "contract_date": "2008-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 12,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 43,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 46,
+            "connection_number": 47,
+            "measurement_price": 2,
+            "street": "Lederergasse",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 5,
+            "contract_date": "2008-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 16,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 44,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 47,
+            "connection_number": 48,
+            "measurement_price": 2,
+            "street": "Lederergasse",
+            "zip": 4132,
+            "working_price": 2,
+            "house_number": 7,
+            "contract_date": "2008-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 16,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 2,
+            "billing_begin": "2013-07-01"
+
+        }
+    },
+    {
+        "pk": 45,
+        "model": "Abrechnung.building",
+        "fields": {
+            "customer": 48,
+            "connection_number": 49,
+            "measurement_price": 1,
+            "street": "M\u00fchlholzweg",
+            "zip": 4132,
+            "working_price": 1,
+            "house_number": 7,
+            "contract_date": "2008-07-01",
+
+            "discount_fixed": null,
+            "connection_power": 15,
+
+            "place": "Lembach",
+            "last_bill": "2013-07-01",
+            "basic_price": 1,
+            "billing_begin": "2013-07-01"
+
         }
     },
     {
         "pk": 1,
         "model": "Abrechnung.counterchange",
         "fields": {
-            "date": "2012-08-15",
+            "date": "2013-11-01",
             "building": 2,
-            "date_new_counter": "2013-11-26",
-            "counter_final_result": 34,
-            "new_counter_reading": 12
-        }
-    },
-    {
-        "pk": 2,
-        "model": "Abrechnung.counterchange",
-        "fields": {
-            "date": "2013-11-12",
-            "building": 1,
-            "date_new_counter": "2013-11-13",
-            "counter_final_result": 20,
-            "new_counter_reading": 15
+            "date_new_counter": "2013-11-01",
+            "counter_final_result": 2000,
+            "new_counter_reading": 1000
         }
     },
     {
         "pk": 1,
         "model": "Abrechnung.measurement",
         "fields": {
-            "building": 2,
-            "measured_date": "2013-11-08",
-            "value": 45
+            "building": 1,
+            "measured_date": "2013-06-30",
+            "value": 324
         }
     },
     {
         "pk": 2,
         "model": "Abrechnung.measurement",
         "fields": {
-            "building": 1,
-            "measured_date": "2013-12-02",
+            "building": 2,
+            "measured_date": "2013-06-30",
+            "value": 2781
+        }
+    },
+    {
+        "pk": 3,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 3,
+            "measured_date": "2013-06-30",
+            "value": 313.673
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 4,
+            "measured_date": "2013-06-30",
+            "value": 86.675
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 5,
+            "measured_date": "2013-06-30",
+            "value": 270.649
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 6,
+            "measured_date": "2013-06-30",
+            "value": 74596
+        }
+    },
+    {
+        "pk": 7,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 7,
+            "measured_date": "2013-06-30",
+            "value": 479
+        }
+    },
+    {
+        "pk": 8,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 8,
+            "measured_date": "2013-06-30",
+            "value": 119.631
+        }
+    },
+    {
+        "pk": 9,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 9,
+            "measured_date": "2013-06-30",
+            "value": 80
+        }
+    },
+    {
+        "pk": 10,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 10,
+            "measured_date": "2013-06-30",
+            "value": 20
+        }
+    },
+    {
+        "pk": 11,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 11,
+            "measured_date": "2013-06-30",
             "value": 23
         }
     },
     {
-        "pk": 3,
+        "pk": 12,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 12,
+            "measured_date": "2013-06-30",
+            "value": 113.901
+        }
+    },
+    {
+        "pk": 13,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 13,
+            "measured_date": "2013-06-30",
+            "value": 62
+        }
+    },
+    {
+        "pk": 14,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 14,
+            "measured_date": "2013-06-30",
+            "value": 2252.524
+        }
+    },
+    {
+        "pk": 15,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 15,
+            "measured_date": "2013-06-30",
+            "value": 31.087
+        }
+    },
+    {
+        "pk": 16,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 16,
+            "measured_date": "2013-06-30",
+            "value": 48.4
+        }
+    },
+    {
+        "pk": 17,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 17,
+            "measured_date": "2013-06-30",
+            "value": 783
+        }
+    },
+    {
+        "pk": 18,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 18,
+            "measured_date": "2013-06-30",
+            "value": 92.494
+        }
+    },
+    {
+        "pk": 19,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 19,
+            "measured_date": "2013-06-30",
+            "value": 17
+        }
+    },
+    {
+        "pk": 20,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 20,
+            "measured_date": "2013-06-30",
+            "value": 47
+        }
+    },
+    {
+        "pk": 21,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 21,
+            "measured_date": "2013-06-30",
+            "value": 74
+        }
+    },
+    {
+        "pk": 22,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 22,
+            "measured_date": "2013-06-30",
+            "value": 13
+        }
+    },
+    {
+        "pk": 23,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 23,
+            "measured_date": "2013-06-30",
+            "value": 34.71
+        }
+    },
+    {
+        "pk": 24,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 24,
+            "measured_date": "2013-06-30",
+            "value": 10
+        }
+    },
+    {
+        "pk": 25,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 25,
+            "measured_date": "2013-06-30",
+            "value": 138
+        }
+    },
+    {
+        "pk": 26,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 26,
+            "measured_date": "2013-06-30",
+            "value": 19
+        }
+    },
+    {
+        "pk": 27,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 27,
+            "measured_date": "2013-06-30",
+            "value": 0
+        }
+    },
+    {
+        "pk": 28,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 28,
+            "measured_date": "2013-06-30",
+            "value": 25
+        }
+    },
+    {
+        "pk": 29,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 31,
+            "measured_date": "2013-06-30",
+            "value": 27
+        }
+    },
+    {
+        "pk": 30,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 33,
+            "measured_date": "2013-06-30",
+            "value": 4
+        }
+    },
+    {
+        "pk": 31,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 36,
+            "measured_date": "2013-06-30",
+            "value": 21
+        }
+    },
+    {
+        "pk": 32,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 37,
+            "measured_date": "2013-06-30",
+            "value": 15
+        }
+    },
+    {
+        "pk": 33,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 40,
+            "measured_date": "2013-06-30",
+            "value": 27
+        }
+    },
+    {
+        "pk": 34,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 2,
+            "measured_date": "2014-02-11",
+            "value": 5000
+        }
+    },
+    {
+        "pk": 35,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 2,
+            "measured_date": "2013-11-02",
+            "value": 3600
+        }
+    },
+    {
+        "pk": 36,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 4,
+            "measured_date": "2013-09-04",
+            "value": 3600
+        }
+    },
+    {
+        "pk": 37,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 4,
+            "measured_date": "2014-02-05",
+            "value": 7000
+        }
+    },
+    {
+        "pk": 38,
         "model": "Abrechnung.measurement",
         "fields": {
             "building": 1,
-            "measured_date": "2014-01-02",
-            "value": 31
+            "measured_date": "2013-12-04",
+            "value": 2000
+        }
+    },
+    {
+        "pk": 39,
+        "model": "Abrechnung.measurement",
+        "fields": {
+            "building": 1,
+            "measured_date": "2013-09-04",
+            "value": 5000
         }
     },
     {
@@ -382,26 +2840,359 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 1,
-            "monthly_rate": 240,
-            "year": 2012
+            "monthly_rate": 51.22,
+            "year": 2013
         }
     },
     {
         "pk": 2,
         "model": "Abrechnung.rate",
         "fields": {
-            "building": 1,
-            "monthly_rate": 50,
-            "year": 2010
+            "building": 2,
+            "monthly_rate": 371.11,
+            "year": 2013
         }
     },
     {
         "pk": 3,
         "model": "Abrechnung.rate",
         "fields": {
-            "building": 2,
-            "monthly_rate": 345,
-            "year": 2000
+            "building": 3,
+            "monthly_rate": 41.72,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 4,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 4,
+            "monthly_rate": 14.66,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 5,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 5,
+            "monthly_rate": 46.36,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 6,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 6,
+            "monthly_rate": 8.47,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 7,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 7,
+            "monthly_rate": 72.4,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 8,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 8,
+            "monthly_rate": 16.27,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 9,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 9,
+            "monthly_rate": 10.75,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 10,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 10,
+            "monthly_rate": 18.55,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 11,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 11,
+            "monthly_rate": 12.21,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 12,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 12,
+            "monthly_rate": 20.25,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 13,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 13,
+            "monthly_rate": 23.29,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 14,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 14,
+            "monthly_rate": 348.44,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 15,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 15,
+            "monthly_rate": 7.02,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 16,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 16,
+            "monthly_rate": 11.75,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 17,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 17,
+            "monthly_rate": 91.7,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 18,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 18,
+            "monthly_rate": 19.69,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 19,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 19,
+            "monthly_rate": 20.52,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 20,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 20,
+            "monthly_rate": 42.04,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 21,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 21,
+            "monthly_rate": 60.7,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 22,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 22,
+            "monthly_rate": 12.7,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 23,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 23,
+            "monthly_rate": 29.9,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 24,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 25,
+            "monthly_rate": 100.85,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 25,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 26,
+            "monthly_rate": 16.32,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 26,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 27,
+            "monthly_rate": 18.36,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 27,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 28,
+            "monthly_rate": 18.18,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 28,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 29,
+            "monthly_rate": 14.17,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 29,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 30,
+            "monthly_rate": 14.39,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 30,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 31,
+            "monthly_rate": 24.42,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 31,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 32,
+            "monthly_rate": 19.17,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 32,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 33,
+            "monthly_rate": 21.97,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 33,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 34,
+            "monthly_rate": 18.41,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 34,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 35,
+            "monthly_rate": 20.67,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 35,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 36,
+            "monthly_rate": 15.09,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 36,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 37,
+            "monthly_rate": 16.24,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 37,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 38,
+            "monthly_rate": 28.92,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 38,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 39,
+            "monthly_rate": 19.68,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 39,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 40,
+            "monthly_rate": 30.24,
+            "year": 2013
+        }
+    },
+    {
+        "pk": 40,
+        "model": "Abrechnung.rate",
+        "fields": {
+            "building": 41,
+            "monthly_rate": 23.11,
+            "year": 2013
         }
     },
     {
@@ -427,67 +3218,33 @@
             "index": 155,
             "year": 2014
         }
-    },
-    {
-        "pk": 1,
-        "model": "Abrechnung.bill",
-        "fields": {
-            "building": 1,
-            "measurement_price": 20,
-            "working_price": 45,
-            "payment_net": 1000,
-            "additional_payment_net": 145,
-            "new_payment_net": 123,
-            "discount": 14,
-            "basic_price": 12,
-            "date": "2013-11-05",
-            "bill_number": "324343"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "Abrechnung.counterbill",
-        "fields": {
-            "old_measurement": 56666,
-            "date_new_measurement": "2013-06-14",
-            "bill": 1,
-            "new_measurement": 4666666,
-            "date_old_measurement": "2012-01-12"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "Abrechnung.counterbill",
-        "fields": {
-            "old_measurement": 256,
-            "date_new_measurement": "0123-12-12",
-            "bill": 1,
-            "new_measurement": 289,
-            "date_old_measurement": "2005-03-13"
-        }
-    },
+    }
+    ,
     {
         "pk": 1,
         "model": "Abrechnung.heatingplant",
         "fields": {
             "phone_number": "",
-            "standard_discount": 14,
+            "code_number": 8965423,
             "name": "Bioenergie Lembach Ammerstorfer KG",
             "zip": 4132,
             "house_number": 4,
-            "mail": "franz.ammerstorfer1@utanet.at",
             "company_register_number": "3463434",
+            "BIC": "5668952",
             "Ust_ID": 42424,
             "manager": "Franz Ammerstorfer",
             "street": "Obernort",
             "place": "Lembach",
-            "bill_number": 324343,
-            "correction_factor": 1.5,
-            "bank": 1,
             "account_number": 45632,
-            "code_number": 8965423,
-            "BIC": 5668952,
-            "IBAN": 58932289
+            "IBAN": "58932289",
+            "mail": "franz.ammerstorfer1@utanet.at",
+            "standard_discount": 14,
+            "correction_factor": "1.5",
+            "bill_number": 324343,
+            "bank": 1
         }
     }
 ]
+
+
+

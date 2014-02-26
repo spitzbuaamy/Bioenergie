@@ -1,7 +1,5 @@
 from django.contrib import admin
 from Abrechnung.models import Bank, BasicPrice, Bill, Building, CablePrice, ConnectionFlatRate, CounterBill, CounterChange, Customer, Index, Measurement, MeasurementPrice, Rate, WorkingPrice, Offer
-# Todo: use autoadmin
-
 
 admin.site.register(Bank)
 admin.site.register(BasicPrice)

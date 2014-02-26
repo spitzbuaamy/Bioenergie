@@ -120,7 +120,6 @@ def pdfRechnung(request, id):
     measurementprice = building.measurement_price
     basicprice = building.basic_price
     connection_power = building.connection_power #Anschlussleistung
-    rate = get_object_or_404(Rate, pk = id) #TODO: Stimmt noch nicht: Rate auf Gebaeude beziehen
     company_register_number = heatingplant.company_register_number
     bankname = heatingplant.bank
     account_number = heatingplant.account_number
@@ -129,6 +128,7 @@ def pdfRechnung(request, id):
     BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
+    rate = building.rate_set.get(year = (date.today().year - 1)) #TODO: Funktioniert nu ned so gonz
 
 
     #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
@@ -177,15 +177,15 @@ def pdfRechnung(request, id):
 
     #Arbeitspeis
     workingpriceamount = workingprice.amount
-    workingpricemulti = workingprice.amount * measurement_diff
+    workingpricemulti = float(workingprice.amount) * float(measurement_diff)
 
     #Messpreis:
     measurementpriceamount = measurementprice.amount
-    measurementpricemulti = measurementprice.amount * (float(months) / 12)
+    measurementpricemulti = float(measurementprice.amount) * (months / 12)
 
     #Grundpreis
     basicpriceamount = basicprice.amount
-    basicpricemulti = basicpriceamount * connection_power * (float(months) / 12)
+    basicpricemulti = float(basicpriceamount) * float(connection_power) * (months / 12)
 
     #Zusammenrechnen der Ergebnisse von Messpreis und Grundpreis
     restult_measurementprice_basicprice = round(measurementpricemulti, 2) + round(basicpricemulti, 2)
@@ -209,9 +209,10 @@ def pdfRechnung(request, id):
     sum = net_workingprice_measurementprice_basicprice - result_discount + vat_after_discount
 
     #Akontozahlung Brutto, Netto und MWSt
-    advanced_payment_on_account_net = rate.monthly_rate * months #Netto
+    advanced_payment_on_account_net = float(rate.monthly_rate) * months #Netto
     advanced_payment_on_account_vat = advanced_payment_on_account_net * float(0.2) #MWST
     advanced_payment_on_account_gross = advanced_payment_on_account_net * float(1.2) #Brutto
+
 
     #Unterscheidung ob Guthaben oder Nachzahlung; Ergebnis wird in die String-Variable credit_additionalpayment gespeichert
     if debiting is False:
@@ -239,11 +240,15 @@ def pdfRechnung(request, id):
     index_last_year = str(int(thisyear-1))
     index_this_year = str(int(thisyear))
 
-    #indices = index_set.filter(date__range=[index_last_year, index_this_year])
+
     indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
     new_rate_gross = float(((sum / months) * indexdif)) * float(correction_factor) #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
+
+    #Berechnete Nettorate in Datenbank speichern
+    rate_this_year = Rate(year=date.today().year, monthly_rate=(new_rate_net), building=building)
+    rate_this_year.save()
 
     #Wenn kein ganzes Jahr abgerechnet wird, soll in der Rechnung aufscheinen: Anteilig x Monate
     if months < 12:
@@ -343,12 +348,6 @@ def pdfZwischenabrechnung(request, id):
     BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
-
-
-    #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
-    #date_new_measurement = counterchange.date_new_counter #Datum neuer Zaehlerstand
-    #heat_quantity = counterchange.heat_quantity #Zu verrechnende Waermemenge
-    #new_reading = counterchange.counter_final_result #Neuer Zaehlerstand
 
 #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
@@ -475,15 +474,15 @@ def pdfZwischenabrechnung(request, id):
 
     #Arbeitspeis
     workingpriceamount = workingprice.amount
-    workingpricemulti = workingprice.amount * measurement_diff
+    workingpricemulti = float(workingprice.amount) * float(measurement_diff)
 
     #Messpreis:
     measurementpriceamount = measurementprice.amount
-    measurementpricemulti = measurementprice.amount * (float(months) / 12)
+    measurementpricemulti = measurementprice.amount * (months / 12)
 
     #Grundpreis
     basicpriceamount = basicprice.amount
-    basicpricemulti = basicpriceamount * connection_power * (float(months) / 12)
+    basicpricemulti = basicpriceamount * connection_power * (months / 12)
 
     #Zusammenrechnen der Ergebnisse von Messpreis und Grundpreis
     restult_measurementprice_basicprice = round(measurementpricemulti, 2) + round(basicpricemulti, 2)
@@ -508,8 +507,8 @@ def pdfZwischenabrechnung(request, id):
 
     #Akontozahlung Brutto, Netto und MWSt
     advanced_payment_on_account_net = rate.monthly_rate * months #Netto
-    advanced_payment_on_account_vat = advanced_payment_on_account_net * float(0.2) #MWST
-    advanced_payment_on_account_gross = advanced_payment_on_account_net * float(1.2) #Brutto
+    advanced_payment_on_account_vat = float(advanced_payment_on_account_net) * float(0.2) #MWST
+    advanced_payment_on_account_gross = float(advanced_payment_on_account_net) * float(1.2) #Brutto
 
     #Unterscheidung ob Guthaben oder Nachzahlung; Ergebnis wird in die String-Variable credit_additionalpayment gespeichert
     if debiting is False:
@@ -760,8 +759,8 @@ def pdfAnschlussrechnung(request, id1, id2):
     gewerbe = ""
     public = ""
     bauparzelle = ""
-    anschlusspauschale = building.connection_flat_rate.amount
-    lengh = int(building.cable_length)
+    anschlusspauschale = offer.connection_flat_rate.amount
+    lengh = int(offer.cable_length)
 
     #Rechnen und Entscheidungen treffen
     #Abfrage, welche Art von Gebauede es ist
@@ -786,7 +785,8 @@ def pdfAnschlussrechnung(request, id1, id2):
         warmwasser = "Nein"
 
     #Nettopreis berechnen
-    connection_value_net_price = float(int(building.connection_power) * 119.9) #TODO: Erfragen, ob es immer 119.9 sind
+    connection = float(offer.connection)
+    connection_value_net_price = float(int(building.connection_power) * connection)
 
     #Abfrage, ob mehr als 15m Kabellaenge benoetigt werden
     if (lengh - 15) <= 0:
@@ -797,7 +797,7 @@ def pdfAnschlussrechnung(request, id1, id2):
         real_lengh = int(lengh-15)
 
     #Aufschlag berechnen
-    upcharge= str(int(str(building.cable_price)) * real_lengh)
+    upcharge= str(int(str(offer.cable_price)) * real_lengh)
 
     #Nettopreis, Bruttopreis und Umsatzsteuer fuer Anschlusswert berechnen
     net_price = (float(anschlusspauschale) + float(connection_value_net_price) + float(upcharge))
@@ -840,10 +840,10 @@ def pdfAnschlussrechnung(request, id1, id2):
     p.drawString(6*cm, 18.5*cm, connection_power)
     p.drawRightString(19*cm, 19.5*cm, str('%.2f' % anschlusspauschale))
     p.drawRightString(19*cm, 18.5*cm, str('%.2f' % connection_value_net_price))
-    p.drawRightString(12.4*cm, 18.5*cm, "119.90") #TODO: Erfragen, ob dies ein Fixwert oder Varbiabel ist
+    p.drawRightString(12.4*cm, 18.5*cm, str(connection))
     p.drawString(10.9*cm, 18.5*cm, str("€ "))
     p.drawString(6*cm, 18.0*cm, more_lengh)
-    p.drawRightString(12.4*cm, 18.0*cm, str('%.2f' % float(building.cable_price.price_per_meter)))
+    p.drawRightString(12.4*cm, 18.0*cm, str('%.2f' % float(offer.cable_price.price_per_meter)))
     p.drawString(10.9*cm, 18.0*cm, str("€ "))
     p.drawRightString(19*cm, 18.0*cm, str('%.2f' % float(upcharge)))
     p.drawRightString(19.0*cm, 17.4*cm, str('%.2f' % net_price))

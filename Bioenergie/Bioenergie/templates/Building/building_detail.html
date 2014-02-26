@@ -9,6 +9,14 @@
                 <td>{{ building.customer }}</td>
             </tr>
             <tr>
+                <td> Adresse:</td>
+                <td> {{ building.zip }} {{ building.place }} </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> {{ building.street }} {{ building.house_number }} </td>
+            </tr>
+            <tr>
                 <td> Arbeitspreis:</td>
                 <td> {{ building.working_price }} </td>
             </tr>
@@ -19,26 +27,6 @@
             <tr>
                 <td> Messpreis:</td>
                 <td> {{ building.measurement_price }} </td>
-            </tr>
-            <tr>
-                <td> Anschlusspreis:</td>
-                <td> {{ building.connection_flat_rate }} </td>
-            </tr>
-            <tr>
-                <td> Kabelpreis:</td>
-                <td> {{ building.cable_price }}€ </td>
-            </tr>
-            <tr>
-                <td> Kabellänge:</td>
-                <td> {{ building.cable_length }}m </td>
-            </tr>
-            <tr>
-                <td> Adresse:</td>
-                <td> {{ building.zip }} {{ building.place }} </td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> {{ building.street }} {{ building.house_number }} </td>
             </tr>
             <tr>
                 <td> Fixer Rabatt:</td>

@@ -22,6 +22,22 @@
                 <td> {{ offer.object_type }} </td>
             </tr>
             <tr>
+                <td>Hausanschluss:</td>
+                <td>{{ offer.connection }} €/kW</td>
+            </tr>
+            <tr>
+                <td> Anschlusspauschale:</td>
+                <td> {{ offer.connection_flat_rate }} </td>
+            </tr>
+            <tr>
+                <td> Kabelpreis:</td>
+                <td> {{ offer.cable_price }} €/m</td>
+            </tr>
+            <tr>
+                <td> Kabellänge:</td>
+                <td> {{ offer.cable_length }} m</td>
+            </tr>
+            <tr>
                 <td> Heizung:</td>
                 {% if offer.heating == True %}
                 <td> Ja  </td>

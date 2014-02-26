@@ -44,7 +44,7 @@ class Customer(models.Model): #Kunde
     house_number = models.IntegerField("Hausnummer")
     zip = models.IntegerField("Postleitzahl") # PLZ
     place = models.CharField("Ort", max_length=32)
-    customer_number = models.CharField("Kundennummer", max_length=32) #TODO: Format festlegen
+    customer_number = models.CharField("Kundennummer", max_length=32)
     bank = models.ForeignKey(Bank, verbose_name= "Bank")
     account_number = models.CharField("Kontonummer", max_length=32, blank=True) #Kontonummer des Kunden
     code_number = models.CharField("Bankleitzahl", max_length=32, blank=True) #Bankleitzahl
@@ -130,16 +130,13 @@ class CablePrice(models.Model):
 #-----------------------------------------------------------------------------------------------------------------------
 class Building(models.Model):
     customer = models.ForeignKey(Customer, verbose_name="Kunde")
-    working_price = models.ForeignKey(WorkingPrice, verbose_name="Arbeitspreis")
-    basic_price = models.ForeignKey(BasicPrice, verbose_name="Grundpreis")
-    measurement_price = models.ForeignKey(MeasurementPrice, verbose_name="Messpreis")
-    connection_flat_rate = models.ForeignKey(ConnectionFlatRate, verbose_name="Anschlusspauschale") #Anschlusspauschale
-    cable_price = models.ForeignKey(CablePrice, verbose_name="Zuleitungspreis") #Zuleitungspreis
-    cable_length = models.IntegerField("Kabellänge") #Kabellaenge
     street = models.CharField("Straße", max_length=32)
     house_number = models.IntegerField("Hausnummer")
     zip = models.IntegerField("Postleitzahl")
     place = models.CharField("Ort", max_length=32)
+    working_price = models.ForeignKey(WorkingPrice, verbose_name="Arbeitspreis")
+    basic_price = models.ForeignKey(BasicPrice, verbose_name="Grundpreis")
+    measurement_price = models.ForeignKey(MeasurementPrice, verbose_name="Messpreis")
     discount_fixed = models.IntegerField("Fixer Rabatt", blank=True, null=True)
     contract_date = models.DateField("Anschlussdatum") #Anschlussdatum
     connection_number = models.IntegerField("AnschlussID") #AnschlussID
@@ -286,6 +283,10 @@ class Offer(models.Model):
     owner = models.CharField("Eigentümer: (Ansonsten Kunde)", max_length="32", blank=True)
     phone_number = models.CharField("Telefonnummer", max_length="32", blank=True)
     object_type = models.CharField("Objektart", max_length="32", choices=TYPES, default=2)
+    connection = models.DecimalField("Anschluss je KW", max_digits=8, decimal_places=2)
+    connection_flat_rate = models.ForeignKey(ConnectionFlatRate, verbose_name="Anschlusspauschale") #Anschlusspauschale
+    cable_price = models.ForeignKey(CablePrice, verbose_name="Zuleitungspreis") #Zuleitungspreis
+    cable_length = models.IntegerField("Kabellänge [in Meter]") #Kabellaenge
     comment = models.CharField("Soll ein Kommentar auf der Rechnung vermerkt werden?", max_length="64", blank=True)
     heating = models.BooleanField("Heizung")
     warm_water = models.BooleanField("Warmwasser")

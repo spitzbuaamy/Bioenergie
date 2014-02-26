@@ -30,7 +30,11 @@
             </tr>
             <tr>
                 <td> Fixer Rabatt:</td>
-                <td> {{ building.discount_fixed }}% </td>
+                {% if building.discount_fixed == None %}
+                <td> Nein </td>
+                {% else %}
+                <td> {{ building.discount_fixed }}%</td>
+                {% endif %}
             </tr>
             <tr>
                 <td> Anschlussdatum:</td>

@@ -128,7 +128,7 @@ def pdfRechnung(request, id):
     BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
-    rate = building.rate_set.get(year = (date.today().year - 1)) #TODO: Funktioniert nu ned so gonz
+    rate = building.rate_set.get(year = (date.today().year - 1))
 
 
     #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
@@ -339,7 +339,6 @@ def pdfZwischenabrechnung(request, id):
     measurementprice = building.measurement_price
     basicprice = building.basic_price
     connection_power = building.connection_power #Anschlussleistung
-    rate = get_object_or_404(Rate, pk = id) #TODO: Stimmt noch nicht: Rate auf Gebaeude beziehen
     company_register_number = heatingplant.company_register_number
     bankname = heatingplant.bank
     account_number = heatingplant.account_number
@@ -348,6 +347,7 @@ def pdfZwischenabrechnung(request, id):
     BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
+    rate = building.rate_set.get(year = (date.today().year - 1))
 
 #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
@@ -478,11 +478,11 @@ def pdfZwischenabrechnung(request, id):
 
     #Messpreis:
     measurementpriceamount = measurementprice.amount
-    measurementpricemulti = measurementprice.amount * (months / 12)
+    measurementpricemulti = float(measurementpriceamount) * (months / 12.0)
 
     #Grundpreis
     basicpriceamount = basicprice.amount
-    basicpricemulti = basicpriceamount * connection_power * (months / 12)
+    basicpricemulti = float(basicpriceamount) * float(connection_power) * (months / 12.0)
 
     #Zusammenrechnen der Ergebnisse von Messpreis und Grundpreis
     restult_measurementprice_basicprice = round(measurementpricemulti, 2) + round(basicpricemulti, 2)

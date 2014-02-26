@@ -275,7 +275,6 @@ def pdfRechnung(request, id):
         'pagesize': 'A4',
         'building': building,
         'customer': customer,
-        #'bank': bank,
         'measurement_diff': measurement_diff,
         'begin_acounting': begin_acounting,
         'end_acounting': end_acounting,

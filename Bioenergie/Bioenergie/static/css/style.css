@@ -1,3 +1,7 @@
+.navbar-form  {
+    display: inline-block;
+}
+
 input, select {
     display: block;
     margin: 10px;

@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'WorkingPrice',
     'werkzeug',
     'django_extensions',
+
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

@@ -2,13 +2,7 @@
 
 {% block body %}
 
-    <form action="search/" method="get" style="margin-top: -33.5px; position: absolute; right: 100px;">
-        <input type="text" name="q" style="display: inline; height: 14px">
-        <input type="submit" value="Suchen" style="display: inline; margin-top: -10px; background-color: gray; border-color: gray;">
-    </form>
-
-
-    {% for building in buildings %}
+      {% for building in buildings %}
 
         <ul class="list">
             <li>{{ building.customer }} {{ building.street }} {{ building.house_number }}  <a href="{% url 'enter_date' building.pk%}">Dieses Gebäude Abrechnen</a></li>

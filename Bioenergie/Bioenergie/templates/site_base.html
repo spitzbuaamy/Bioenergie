@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
 
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
@@ -11,6 +11,44 @@
     <script type="text/javascript" src="{% static "js/jquery-ui-1.10.4.custom.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
 
+    <script type="text/javascript">
+
+
+        $(function () {
+            //Graue hinterlegung in aktivem tab
+            function stripTrailingSlash(str) {
+                if (str.substr(-1) == '/') {
+                    return str.substr(0, str.length - 1);
+                }
+                return str;
+            }
+
+            var url = window.location.pathname;
+
+            var activePage = stripTrailingSlash(url);
+
+            $('.nav li a').each(function () {
+                var currentPage = stripTrailingSlash($(this).attr('href'));
+
+                if (activePage == currentPage) {
+                    $(this).parent().addClass('active');
+                }
+            });
+
+            if ((url.substring(0, 11) != "/customers/") && (url != "/buildings/invoice/")) {
+                $('input[type="submit"]').remove();
+                $('#searchtext').remove();
+            }
+            if (url.substring(0, 18) == "/customers/search/")
+                $('#search').removeAttr('action');
+            $('#logout').click(function(){
+                console.log(window.location);
+                window.location.pathname = "/logout/";
+            });
+        });
+    </script>
+
+
     <title>customer</title>
     {% block extra_head %}
         <!-- zusaetzliche head tags -->
@@ -18,43 +56,68 @@
 </head>
 <body>
 {% if user.is_authenticated %}
-    <div class="drop">
-        <ul class="drop_menu">
-            <li><a href='#'>Abrechnung</a>
-                <ul>
-                    <li><a href="/abrechnungen/pdfrechnung/1">Energieabrechnung</a></li>
-                    <li><a href='{% url 'offer_create' %}'>Anschlussrechnung</a></li>
-                    <li><a href="{% url 'building_invoice' %}">Zwischenabrechnung</a></li>
-                    <li><a href='{% url 'pdf_Leere_Rechnung' %}'>Leere Rechnung</a></li>
-                </ul>
-            </li>
-            <li><a href='#'>Rechnungskomponenten</a>
-                <ul>
-                    <li><a href="/banks/">Bank</a></li>
-                    <li><a href="/cableprices/">Kabelpreis</a></li>
-                    <li><a href="/connectionflatrates/">Anschlusspauschale</a></li>
-                    <li><a href="/rates/">Rate</a></li>
-                </ul>
-            </li>
-            <li><a href="/customers/">Kunde</a></li>
-            <li><a href="/buildings/">Objekt</a></li>
-            <li><a href="/counterchanges/">Zählerwechsel</a></li>
-            <li><a href=>Preisgruppen</a>
-                <ul>
-                    <li><a href="/basicprices/">Grundpreis</a></li>
-                    <li><a href="/measurementprices/">Messpreis</a></li>
-                    <li><a href="/workingprices/">Arbeitspreis</a></li>
-                </ul>
-            </li>
-            <li><a href="/indexes/">Index</a></li>
-            <li><a href="/measurements/">Messung</a></li>
-            <li><a href="/heatingplants/">Heizwerk</a></li>
-        </ul>
 
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Wärmeabrechnung</a>
+            <ul class="nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Abrechnung
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/abrechnungen/pdfrechnung/1">Energieabrechnung</a></li>
+                        <li><a href='{% url 'offer_create' %}'>Anschlussrechnung</a></li>
+                        <li><a href="{% url 'building_invoice' %}">Zwischenabrechnung</a></li>
+                        <li><a href='{% url 'pdf_Leere_Rechnung' %}'>Leere Rechnung</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Rechnungskomponenten
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/banks/">Bank</a></li>
+                        <li><a href="/cableprices/">Kabelpreis</a></li>
+                        <li><a href="/connectionflatrates/">Anschlusspauschale</a></li>
+                        <li><a href="/rates/">Rate</a></li>
+                    </ul>
+                </li>
+                <li><a href="/customers/">Kunde</a></li>
+                <li><a href="/buildings/">Objekt</a></li>
+                <li><a href="/counterchanges/">Zählerwechsel</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Preisgruppen
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/basicprices/">Grundpreis</a></li>
+                        <li><a href="/measurementprices/">Messpreis</a></li>
+                        <li><a href="/workingprices/">Arbeitspreis</a></li>
+                    </ul>
+                </li>
+                <li><a href="/indexes/">Index</a></li>
+                <li><a href="/measurements/">Messung</a></li>
+                <li><a href="/heatingplants/">Heizwerk</a></li>
+            </ul>
+            <form id="search" class="navbar-form navbar-left" role="search" action="search/" method="get">
+                <div class="form-group">
+                    <input id="searchtext" name="q" type="text" class="form-control" placeholder="Kunde">
+                    <input type="submit" class="btn" value="Suchen"/>
+                </div>
+            </form>
+            <form class="navbar-form pull-right" style="height: 28px; position: absolute; top: 2px; right: 25px" >
+                    <button id="logout" class="btn btn-danger">Logout</button>
+            </form>
+
+        </div>
     </div>
 
     <div class="clear"></div>
-   
+
 
     {% block body %}
 
@@ -62,7 +125,7 @@
 
     {% endblock %}
 
-    <a style="position: absolute; right: 0px; top: 3px;" href="{% url 'logout' %}"><button style="background-color: red; color:#ffffff; border-color: red">Logout</button></a>
+
 
 {% else %}
     <form style="margin-left: 50px; position: absolute; top: 30%; right: 40%" id="login_form" method="post"

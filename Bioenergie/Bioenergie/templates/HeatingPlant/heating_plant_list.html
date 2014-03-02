@@ -2,17 +2,20 @@
 
 {% block body %}
     <table>
-    {% for heating_plant in heating_plants %}
+        {% for heating_plant in heating_plants %}
 
-        <tr class="list">
-            <td>{{ heating_plant.name }} ({{ heating_plant.manager }}) </td>
-            <td><a href="{% url 'heating_plant_detail' pk=heating_plant.pk %}" class="btn btn-primary">Details</a> </td>
-            <td><a href="{% url 'heating_plant_update' pk=heating_plant.pk %}" class="btn btn-primary">Ändern</a></td>
-            <td><a href="{% url 'heating_plant_delete' pk=heating_plant.pk %}" class="btn btn-danger">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>{{ heating_plant.name }} ({{ heating_plant.manager }})</td>
+                <td><a href="{% url 'heating_plant_detail' pk=heating_plant.pk %}" class="btn btn-primary">Details</a>
+                </td>
+                <td><a href="{% url 'heating_plant_update' pk=heating_plant.pk %}" class="btn btn-primary">Ändern</a>
+                </td>
+                <td><a href="{% url 'heating_plant_delete' pk=heating_plant.pk %}" class="btn btn-danger">Löschen</a>
+                </td>
+            </tr>
 
-    {% endfor %}
-</table>
+        {% endfor %}
+    </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'heating_plant_create' %}">
         <button class="btn btn-primary">Neues Heizwerk anlegen</button>
     </a>

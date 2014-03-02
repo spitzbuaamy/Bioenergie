@@ -6,15 +6,18 @@ from django.template import loader, Context, RequestContext
 from django.views.generic.base import TemplateResponseMixin
 from django.http import HttpResponse
 
+
 def content_to_pdf(content, dest, encoding='utf-8', **kwargs):
     """
     Write into *dest* file object the given html *content*.
     Return True if the operation completed successfully.
     """
     from xhtml2pdf import pisa
+
     src = StringIO(content.encode(encoding))
     pdf = pisa.pisaDocument(src, dest, encoding=encoding, **kwargs)
     return not pdf.err
+
 
 def content_to_response(content, filename=None):
     """
@@ -25,8 +28,9 @@ def content_to_response(content, filename=None):
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response
 
-def render_to_pdf(request, template, context, filename=None, encoding='utf-8', 
-    **kwargs):
+
+def render_to_pdf(request, template, context, filename=None, encoding='utf-8',
+                  **kwargs):
     """
     Render a pdf response using given *request*, *template* and *context*.
     """
@@ -114,17 +118,18 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
 
     def get_pdf_response(self, context, **response_kwargs):
         return render_to_pdf(
-            request=self.request, 
+            request=self.request,
             template=self.get_pdf_template_names(),
-            context=context, 
-            encoding=self.pdf_encoding, 
-            filename=self.get_pdf_filename(), 
+            context=context,
+            encoding=self.pdf_encoding,
+            filename=self.get_pdf_filename(),
             **self.pdf_kwargs
         )
 
     def render_to_response(self, context, **response_kwargs):
         if self.is_pdf():
             from django.conf import settings
+
             context['STATIC_ROOT'] = settings.STATIC_ROOT
             return self.get_pdf_response(context, **response_kwargs)
         context[self.pdf_url_varname] = self.get_pdf_url()

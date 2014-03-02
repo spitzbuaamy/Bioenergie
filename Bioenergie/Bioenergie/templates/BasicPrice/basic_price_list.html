@@ -3,17 +3,17 @@
 {% block body %}
     <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Grundpreis</h4>
     <table>
-    {% for basic_price in basic_prices %}
+        {% for basic_price in basic_prices %}
 
-        <tr class="list">
-            <td>Gruppe {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }}) </td>
-            <td><a href="{% url 'basic_price_detail' pk=basic_price.pk %}" class="btn-primary btn">Details</a></td>
-             <td><a href="{% url 'basic_price_update' pk=basic_price.pk %}" class="btn btn-primary">Ändern</a></td>
-             <td><a href="{% url 'basic_price_delete' pk=basic_price.pk %}" class="btn-danger btn">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>Gruppe {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }})</td>
+                <td><a href="{% url 'basic_price_detail' pk=basic_price.pk %}" class="btn-primary btn">Details</a></td>
+                <td><a href="{% url 'basic_price_update' pk=basic_price.pk %}" class="btn btn-primary">Ändern</a></td>
+                <td><a href="{% url 'basic_price_delete' pk=basic_price.pk %}" class="btn-danger btn">Löschen</a></td>
+            </tr>
 
-    {% endfor %}
-</table>
+        {% endfor %}
+    </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'basic_price_create' %}">
         <button class="btn btn-primary">Neuen Grundpreis anlegen</button>
     </a>

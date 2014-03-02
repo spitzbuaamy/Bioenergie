@@ -2,16 +2,21 @@
 
 {% block body %}
     <table>
-    {% for connection_flat_rate in connection_flat_rates %}
+        {% for connection_flat_rate in connection_flat_rates %}
 
-        <tr class="list">
-            <td>Gruppe {{ connection_flat_rate.wage_group }}:({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }})</td>
-            <td><a href="{% url 'connection_flat_rate_detail' pk=connection_flat_rate.pk %}" class="btn btn-primary">Details</a></td>
-            <td><a href="{% url 'connection_flat_rate_update' pk=connection_flat_rate.pk %}" class="btn btn-primary">Ändern</a></td>
-            <td><a href="{% url 'connection_flat_rate_delete' pk=connection_flat_rate.pk %}" class="btn btn-danger">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>
+                    Gruppe {{ connection_flat_rate.wage_group }}:({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }})
+                </td>
+                <td><a href="{% url 'connection_flat_rate_detail' pk=connection_flat_rate.pk %}"
+                       class="btn btn-primary">Details</a></td>
+                <td><a href="{% url 'connection_flat_rate_update' pk=connection_flat_rate.pk %}"
+                       class="btn btn-primary">Ändern</a></td>
+                <td><a href="{% url 'connection_flat_rate_delete' pk=connection_flat_rate.pk %}" class="btn btn-danger">Löschen</a>
+                </td>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
     </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'connection_flat_rate_create' %}">
         <button class="btn btn-primary">Neue Anschlusspauschale anlegen</button>

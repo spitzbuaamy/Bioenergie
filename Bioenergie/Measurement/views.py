@@ -1,8 +1,8 @@
-from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 from Abrechnung.models import Measurement
 from Measurement.forms import MeasurementForm
-from django.core.urlresolvers import reverse_lazy
 
 
 class MeasurementListView(ListView):
@@ -25,7 +25,7 @@ class MeasurementCreateView(CreateView):
     #success_url = reverse_lazy('measurement_list')
 
     def get_form(self, form_class):
-        form = super(MeasurementCreateView,self).get_form(form_class)
+        form = super(MeasurementCreateView, self).get_form(form_class)
         form.fields['measured_date'].widget.attrs.update({"class": "datepicker"})
         return form
 
@@ -38,7 +38,7 @@ class MeasurementUpdateView(UpdateView):
     # success_url = reverse_lazy('measurement_list')
 
     def get_form(self, form_class):
-        form = super(MeasurementUpdateView,self).get_form(form_class)
+        form = super(MeasurementUpdateView, self).get_form(form_class)
         form.fields['measured_date'].widget.attrs.update({"class": "datepicker"})
         return form
 

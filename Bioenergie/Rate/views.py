@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 from Abrechnung.models import Rate
 from Rate.forms import RateForm
-from django.core.urlresolvers import reverse_lazy
 
 
 class RateListView(ListView):

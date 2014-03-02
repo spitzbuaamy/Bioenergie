@@ -3,17 +3,22 @@
 {% block body %}
     <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Messpreis</h4>
     <table>
-    {% for measurement_price in measurement_prices %}
+        {% for measurement_price in measurement_prices %}
 
-        <tr class="list">
-            <td>Gruppe {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }}) </td>
-            <td><a href="{% url 'measurement_price_detail' pk=measurement_price.pk %}" class="btn btn-primary">Details</a> </td>
-            <td><a href="{% url 'measurement_price_update' pk=measurement_price.pk %}" class="btn-primary btn">Ändern</a></td>
-            <td><a href="{% url 'measurement_price_delete' pk=measurement_price.pk %}" class="btn btn-danger">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>Gruppe {{ measurement_price.wage_group }}:
+                    ({{ measurement_price.min }}-{{ measurement_price.max }})
+                </td>
+                <td><a href="{% url 'measurement_price_detail' pk=measurement_price.pk %}" class="btn btn-primary">Details</a>
+                </td>
+                <td><a href="{% url 'measurement_price_update' pk=measurement_price.pk %}" class="btn-primary btn">Ändern</a>
+                </td>
+                <td><a href="{% url 'measurement_price_delete' pk=measurement_price.pk %}" class="btn btn-danger">Löschen</a>
+                </td>
+            </tr>
 
-    {% endfor %}
-</table>
+        {% endfor %}
+    </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'measurement_price_create' %}">
         <button class="btn btn-primary">Neuen Messpreis anlegen</button>
     </a>

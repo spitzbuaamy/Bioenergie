@@ -1,10 +1,12 @@
+from itertools import chain
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 from Abrechnung.models import Customer, Building
 from Customer.forms import CustomerForm
-from django.core.urlresolvers import reverse_lazy
-from itertools import chain
 
 
 class CustomerListView(ListView):
@@ -20,7 +22,7 @@ class CustomerDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CustomerDetailView, self).get_context_data(**kwargs)
-        context['buildings'] =  context['customer'].building_set.all()
+        context['buildings'] = context['customer'].building_set.all()
 
         return context
 
@@ -31,7 +33,6 @@ class CustomerCreateView(CreateView):
     context_object_name = 'customer'
     form_class = CustomerForm
     #success_url = reverse_lazy('customer_list')
-
 
 
 class CustomerUpdateView(UpdateView):
@@ -56,11 +57,13 @@ def search_form(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        splitedsearch = q.split( )
+        splitedsearch = q.split()
         customer = []
         for searchterm in splitedsearch:
-            customer = list(set(chain(customer, Customer.objects.filter(last_name__icontains = searchterm) | Customer.objects.filter(first_name__icontains = searchterm) | Customer.objects.filter(street__icontains = searchterm))))
+            customer = list(set(chain(customer, Customer.objects.filter(
+                last_name__icontains=searchterm) | Customer.objects.filter(
+                first_name__icontains=searchterm) | Customer.objects.filter(street__icontains=searchterm))))
         return render(request, 'customer/search_results.html',
-            {'Customers': customer, 'query': q})
+                      {'Customers': customer, 'query': q})
     else:
         return HttpResponse('Bitte einen Namen eingeben!')

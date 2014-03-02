@@ -3,16 +3,19 @@
 {% block body %}
     <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Arbeitspreis</h4>
     <table>
-    {% for working_price in working_prices %}
+        {% for working_price in working_prices %}
 
-        <tr class="list">
-            <td>Gruppe {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }})</td>
-            <td><a href="{% url 'working_price_detail' pk=working_price.pk %}" class="btn btn-primary">Details</a> </td>
-            <td><a href="{% url 'working_price_update' pk=working_price.pk %}" class="btn btn-primary">Ändern</a></td>
-            <td><a href="{% url 'working_price_delete' pk=working_price.pk %}" class="btn btn-danger">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>Gruppe {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }})</td>
+                <td><a href="{% url 'working_price_detail' pk=working_price.pk %}" class="btn btn-primary">Details</a>
+                </td>
+                <td><a href="{% url 'working_price_update' pk=working_price.pk %}" class="btn btn-primary">Ändern</a>
+                </td>
+                <td><a href="{% url 'working_price_delete' pk=working_price.pk %}" class="btn btn-danger">Löschen</a>
+                </td>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
     </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'working_price_create' %}">
         <button class="btn btn-primary">Neuen Arbeitspreis anlegen</button>

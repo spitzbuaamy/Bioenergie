@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 from Abrechnung.models import ConnectionFlatRate
 from ConnectionFlatRate.forms import ConnectionFlatRateForm
-from django.core.urlresolvers import reverse_lazy
 
 
 class ConnectionFlatRateListView(ListView):

@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from datetime import date, datetime
+import cStringIO as StringIO
+import cgi
+
 from xhtml2pdf import pisa
-from Abrechnung.pdfmixin import PDFTemplateResponseMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.generic import TemplateView
-from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index
 from django import http
 from django.template.loader import get_template
 from django.template import Context
-import cStringIO as StringIO
-import cgi
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
+
+from Abrechnung.pdfmixin import PDFTemplateResponseMixin
+from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index
+
 
 
 #todo: alle apps in der settings.py unter "installed apps" eintragen
@@ -66,8 +69,6 @@ def user_login(request):
         return render_to_response('login.html', {}, context)
 
 
-
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Logout Abgrage                                                                      !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -77,8 +78,6 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homepage.
     return HttpResponseRedirect('/login/')
-
-
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -100,10 +99,8 @@ def write_pdf(template_src, context_dict):
 
     if not pdf.err:
         return http.HttpResponse(result.getvalue(),
-             mimetype='application/pdf')
+                                 mimetype='application/pdf')
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
-
-
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -129,7 +126,7 @@ def pdfRechnung(request, id):
     BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
-    rate = building.rate_set.get(year = (date.today().year - 1))
+    rate = building.rate_set.get(year=(date.today().year - 1))
 
 
     #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
@@ -137,19 +134,18 @@ def pdfRechnung(request, id):
     #heat_quantity = counterchange.heat_quantity #Zu verrechnende Waermemenge
     #new_reading = counterchange.counter_final_result #Neuer Zaehlerstand
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
     thisyear = date.today().year
 
 
     #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
     abr_date1 = building.last_bill
-    abr_date2 = str(int(thisyear))+"-07-01"
+    abr_date2 = str(int(thisyear)) + "-07-01"
 
     #Zaehlerwechsel
 
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
-
 
     measurements = building.measurement_set.filter(measured_date__range=[abr_date1, abr_date2])
     #Fehlermeldung ausgeben, falls keine Messwerte vorhanden sind
@@ -170,7 +166,7 @@ def pdfRechnung(request, id):
     measurement_diff = summe
 
     # Fuer die Abrechnungsperiode bei der Rechnung
-    begin_acounting = "1. Juli " + str(int(thisyear-1)) #Beginn der Abrechnung (Datum)
+    begin_acounting = "1. Juli " + str(int(thisyear - 1)) #Beginn der Abrechnung (Datum)
     end_acounting = "30. Juni " + str(thisyear) #Ende der Abrechnung (Datum)
 
     #Alter Zaehlerstand - neuer Zaehlerstand
@@ -201,7 +197,7 @@ def pdfRechnung(request, id):
         discount = standard_discount
     else:
         discount = discount_fixed
-    result_discount = net_workingprice_measurementprice_basicprice * (float(discount)/100)
+    result_discount = net_workingprice_measurementprice_basicprice * (float(discount) / 100)
 
     #MWST nach Rabatt
     vat_after_discount = (net_workingprice_measurementprice_basicprice - round(result_discount, 2)) * 0.2
@@ -238,11 +234,11 @@ def pdfRechnung(request, id):
 
     #Neu berechnete Rate
     #(Heizkosten vom Vorjahr / Monate) * (neuer Index / vorriger Index)
-    index_last_year = str(int(thisyear-1))
+    index_last_year = str(int(thisyear - 1))
     index_this_year = str(int(thisyear))
 
-
-    indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
+    indexdif = float(Index.objects.get(year=index_last_year).index) / float(
+        Index.objects.get(year=index_this_year).index)
     new_rate_gross = float(((sum / months) * indexdif)) * float(correction_factor) #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
@@ -260,16 +256,17 @@ def pdfRechnung(request, id):
         partial2 = ""
 
     #Adresse des Heiwerkes
-    heatingplant_data = heatingplant.name + " " + heatingplant.street + " "+ str(heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
+    heatingplant_data = heatingplant.name + " " + heatingplant.street + " " + str(
+        heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
 
 
     #Erneutes auslesen des Index, um diesen auf der Rechnung anzuzeigen.
-    year_ago = str(int(thisyear-2))
-    index_for_the_last_year = Index.objects.get(year = year_ago).index
-    index_for_this_year = Index.objects.get(year = index_last_year).index
-    index_for_the_next_year = Index.objects.get(year = index_this_year).index
+    year_ago = str(int(thisyear - 2))
+    index_for_the_last_year = Index.objects.get(year=year_ago).index
+    index_for_this_year = Index.objects.get(year=index_last_year).index
+    index_for_the_next_year = Index.objects.get(year=index_this_year).index
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
 
     return write_pdf('Rechnung.html', {
         'counterchanges': counter_changes,
@@ -324,8 +321,6 @@ def pdfRechnung(request, id):
     })
 
 
-
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Zwischenabrechnung                                                                  !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -347,9 +342,9 @@ def pdfZwischenabrechnung(request, id):
     BIC = heatingplant.BIC
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
-    rate = building.rate_set.get(year = (date.today().year - 1))
+    rate = building.rate_set.get(year=(date.today().year - 1))
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
     thisyear = date.today().year
     anfangsdatum = request.GET['anfangsdatum']
@@ -367,7 +362,7 @@ def pdfZwischenabrechnung(request, id):
 
         #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
         abr_date1 = building.last_bill
-        abr_date2 = str(int(thisyear))+"-07-01"
+        abr_date2 = str(int(thisyear)) + "-07-01"
 
         # Fuer die Abrechnungsperiode bei der Rechnung
         begin_acounting = abr_date1 #Beginn der Abrechnung (Datum)
@@ -379,7 +374,7 @@ def pdfZwischenabrechnung(request, id):
         variabel2 = enddatum.split("-")
         secondmonth = variabel2[1]
 
-        months = (12 - (int(secondmonth) - int(firstmonth)) *(-1))
+        months = (12 - (int(secondmonth) - int(firstmonth)) * (-1))
         #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
         abr_date1 = str(anfangsdatum)
         abr_date2 = str(enddatum)
@@ -449,7 +444,6 @@ def pdfZwischenabrechnung(request, id):
     #Zaehlerwechsel
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
 
-
     measurements = building.measurement_set.filter(measured_date__range=[abr_date1, abr_date2])
     #Fehlermeldung ausgeben, falls keine Messwerte vorhanden sind
     if len(measurements) > 1:
@@ -497,7 +491,7 @@ def pdfZwischenabrechnung(request, id):
         discount = standard_discount
     else:
         discount = discount_fixed
-    result_discount = net_workingprice_measurementprice_basicprice * (float(discount)/100)
+    result_discount = net_workingprice_measurementprice_basicprice * (float(discount) / 100)
 
     #MWST nach Rabatt
     vat_after_discount = (net_workingprice_measurementprice_basicprice - round(result_discount, 2)) * 0.2
@@ -533,11 +527,12 @@ def pdfZwischenabrechnung(request, id):
 
     #Neu berechnete Rate
     #(Heizkosten vom Vorjahr / Monate) * (neuer Index / vorriger Index)
-    index_last_year = str(int(thisyear-1))
+    index_last_year = str(int(thisyear - 1))
     index_this_year = str(int(thisyear))
 
     #indices = index_set.filter(date__range=[index_last_year, index_this_year])
-    indexdif = float(Index.objects.get(year= index_last_year).index) / float(Index.objects.get(year=index_this_year).index)
+    indexdif = float(Index.objects.get(year=index_last_year).index) / float(
+        Index.objects.get(year=index_this_year).index)
     new_rate_gross = ((sum / months) * indexdif) * float(correction_factor) #Brutto
     new_rate_net = new_rate_gross / float(1.2) #Netto
     new_rate_vat = new_rate_gross - new_rate_net #MWST
@@ -551,16 +546,17 @@ def pdfZwischenabrechnung(request, id):
         partial2 = ""
 
     #Adresse des Heiwerkes
-    heatingplant_data = heatingplant.name + " " + heatingplant.street + " "+ str(heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
+    heatingplant_data = heatingplant.name + " " + heatingplant.street + " " + str(
+        heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
 
 
     #Erneutes auslesen des Index, um diesen auf der Rechnung anzuzeigen.
-    year_ago = str(int(thisyear-2))
-    index_for_the_last_year = Index.objects.get(year = year_ago).index
-    index_for_this_year = Index.objects.get(year = index_last_year).index
-    index_for_the_next_year = Index.objects.get(year = index_this_year).index
+    year_ago = str(int(thisyear - 2))
+    index_for_the_last_year = Index.objects.get(year=year_ago).index
+    index_for_this_year = Index.objects.get(year=index_last_year).index
+    index_for_the_next_year = Index.objects.get(year=index_this_year).index
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
 
     return write_pdf('Rechnung.html', {
         'counterchanges': counter_changes,
@@ -616,9 +612,6 @@ def pdfZwischenabrechnung(request, id):
     })
 
 
-
-
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Anschlussrechnung                                                                   !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -628,129 +621,138 @@ def pdfAnschlussrechnung(request, id1, id2):
     response['Content-Disposition'] = 'attachment; filename="Anschlussrechnung.pdf"'
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
-    p.translate(cm,cm) #Angegebene Werte auf cm umrechnen
-#-----------------------------------------------------------------------------------------------------------------------
+    p.translate(cm, cm) #Angegebene Werte auf cm umrechnen
+    #-----------------------------------------------------------------------------------------------------------------------
     #Zeichnen
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
     #Variablendeklaration fuer die Kopfzeile
     heatingplant = get_object_or_404(HeatingPlant, pk=1)
-    adress = str(heatingplant.street + " " + str(heatingplant.house_number) + "   " + str(heatingplant.zip) + " " + heatingplant.place)
+    adress = str(heatingplant.street + " " + str(heatingplant.house_number) + "   " + str(
+        heatingplant.zip) + " " + heatingplant.place)
     telephone = str("Tel: " + heatingplant.phone_number + "   " + " Fax: " + heatingplant.phone_number)
     e_mail = str("E-Mail: " + heatingplant.mail)
 
     #Kopfzeile
     p.setFillColorRGB(1, 1, 0.75)
     p.setLineWidth(2) #Dicke Linien Zeichnen
-    p.rect(0, 24.0*cm, 19.5*cm, 3*cm, fill=1)
+    p.rect(0, 24.0 * cm, 19.5 * cm, 3 * cm, fill=1)
 
     #Grundgeruest der Rechnung
-    p.line(0, 24*cm, 0, 0)
-    p.line(0, 0, 19.5*cm, 0)
-    p.line(19.5*cm, 0, 19.5*cm, 24*cm)
+    p.line(0, 24 * cm, 0, 0)
+    p.line(0, 0, 19.5 * cm, 0)
+    p.line(19.5 * cm, 0, 19.5 * cm, 24 * cm)
     p.setLineWidth(1) #Duenne Linien Zeichnen
-    p.line(0, 23*cm, 19.5*cm, 23*cm)
-    p.line(0, 22*cm, 19.5*cm, 22*cm)
-    p.line(0, 21*cm, 19.5*cm, 21*cm)
-    p.line(2.8*cm, 21.5*cm, 19.5*cm, 21.5*cm)
-    p.line(2.8*cm, 22*cm, 2.8*cm, 21*cm)
-    p.line(5.8*cm, 22*cm, 5.8*cm, 21*cm)
-    p.line(9*cm, 22*cm, 9*cm, 21*cm)
-    p.line(12*cm, 22*cm, 12*cm, 21*cm)
-    p.line(14*cm, 22*cm, 14*cm, 21*cm)
-    p.line(17*cm, 22*cm, 17*cm, 21*cm)
-    p.line(19.5*cm, 20.4*cm, 16.7*cm, 20.4*cm)
-    p.line(16.7*cm, 20.4*cm, 16.7*cm, 16.2*cm)
-    p.line(16.7*cm, 17.8*cm, 19.5*cm, 17.8*cm)
+    p.line(0, 23 * cm, 19.5 * cm, 23 * cm)
+    p.line(0, 22 * cm, 19.5 * cm, 22 * cm)
+    p.line(0, 21 * cm, 19.5 * cm, 21 * cm)
+    p.line(2.8 * cm, 21.5 * cm, 19.5 * cm, 21.5 * cm)
+    p.line(2.8 * cm, 22 * cm, 2.8 * cm, 21 * cm)
+    p.line(5.8 * cm, 22 * cm, 5.8 * cm, 21 * cm)
+    p.line(9 * cm, 22 * cm, 9 * cm, 21 * cm)
+    p.line(12 * cm, 22 * cm, 12 * cm, 21 * cm)
+    p.line(14 * cm, 22 * cm, 14 * cm, 21 * cm)
+    p.line(17 * cm, 22 * cm, 17 * cm, 21 * cm)
+    p.line(19.5 * cm, 20.4 * cm, 16.7 * cm, 20.4 * cm)
+    p.line(16.7 * cm, 20.4 * cm, 16.7 * cm, 16.2 * cm)
+    p.line(16.7 * cm, 17.8 * cm, 19.5 * cm, 17.8 * cm)
     p.setFillColorRGB(0.75, 0.75, 0.75)
-    p.rect(16.7*cm, 16.2*cm, 2.75*cm, 0.5*cm, fill=1)
+    p.rect(16.7 * cm, 16.2 * cm, 2.75 * cm, 0.5 * cm, fill=1)
     p.setLineWidth(0.3) #Ganz duenne Linien Zeichnen
-    p.line(0, 14.4*cm, 19.5*cm, 14.4*cm)
-    p.line(0, 10.8*cm, 19.5*cm, 10.8*cm)
-    p.line(0, 7.7*cm, 19.5*cm, 7.7*cm)
-    p.line(0, 5.0*cm, 5.5*cm, 5.0*cm)
-    p.line(12*cm, 5.0*cm, 19.5*cm, 5.0*cm)
-    p.line(0, 1.5*cm, 5.5*cm, 1.5*cm)
-    p.line(12*cm, 1.5*cm, 19.5*cm, 1.5*cm)
-    p.line(16.7*cm, 17.25*cm, 19.5*cm, 17.25*cm)
+    p.line(0, 14.4 * cm, 19.5 * cm, 14.4 * cm)
+    p.line(0, 10.8 * cm, 19.5 * cm, 10.8 * cm)
+    p.line(0, 7.7 * cm, 19.5 * cm, 7.7 * cm)
+    p.line(0, 5.0 * cm, 5.5 * cm, 5.0 * cm)
+    p.line(12 * cm, 5.0 * cm, 19.5 * cm, 5.0 * cm)
+    p.line(0, 1.5 * cm, 5.5 * cm, 1.5 * cm)
+    p.line(12 * cm, 1.5 * cm, 19.5 * cm, 1.5 * cm)
+    p.line(16.7 * cm, 17.25 * cm, 19.5 * cm, 17.25 * cm)
 
     #Text in die Kopfzeile einfuegen
     p.setFillColorRGB(0, 0.5, 0) #Schriftfarbe auf Gruen einstellen
     p.setFont("Times-Bold", 18) #Times-Bold = Dick geschrieben
-    p.drawString(1*cm, 26.2*cm, heatingplant.name)
+    p.drawString(1 * cm, 26.2 * cm, heatingplant.name)
     p.setFont("Times-Bold", 10)
-    p.drawString(1*cm, 25.5*cm, adress)
-    p.drawString(1*cm, 25.0*cm, telephone)
-    p.drawString(1*cm, 24.5*cm, e_mail)
-    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15*cm, 24.25*cm, width=3.5*cm, height=2.5*cm)
+    p.drawString(1 * cm, 25.5 * cm, adress)
+    p.drawString(1 * cm, 25.0 * cm, telephone)
+    p.drawString(1 * cm, 24.5 * cm, e_mail)
+    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15 * cm, 24.25 * cm,
+                width=3.5 * cm, height=2.5 * cm)
 
     #Standardtext auf der Rechnung
     p.setFont("Times-Roman", 12) #Times New Roman mit Schriftgroesse 12pt
     p.setFillColor("Black") #Schriftfarbe Schwarz einstellen
-    p.drawString(1.7*cm, 1.1*cm, "Ort und Datum")
-    p.drawString(1.7*cm, 4.55*cm, "Ort und Datum")
-    p.drawString(0.2*cm, 3*cm, "Ich (Wir) erkläre(n) mich (uns) mit dem Vorstehenden einverstanden und erteile(n) Ihnen den Auftrag.")
-    p.drawString(13.8*cm, 1.1*cm, "Unterschrift des Kunden")
+    p.drawString(1.7 * cm, 1.1 * cm, "Ort und Datum")
+    p.drawString(1.7 * cm, 4.55 * cm, "Ort und Datum")
+    p.drawString(0.2 * cm, 3 * cm,
+                 "Ich (Wir) erkläre(n) mich (uns) mit dem Vorstehenden einverstanden und erteile(n) Ihnen den Auftrag.")
+    p.drawString(13.8 * cm, 1.1 * cm, "Unterschrift des Kunden")
     p.setFont("Times-Italic", 12) #Kursiv geschrieben mit Schriftgroesse 12pt
-    p.drawString(0.2*cm, 7*cm, "Bindefrist des Angebotes:  3 Monate")
+    p.drawString(0.2 * cm, 7 * cm, "Bindefrist des Angebotes:  3 Monate")
     p.setFont("Times-Bold", 9) #Dick geschrieben mit Schriftgroesse 9pt
-    p.drawString(1*cm, 8*cm, "Der Abnehmer hat die Förderungsansuchen an die zuständigen Förderstellen selbst zu stellen.")
-    p.drawString(1*cm, 8.35*cm, "Das Wärmeversorgungsunternehmen kann über Art und Höhe der Förderung keine Zusagen treffen.")
+    p.drawString(1 * cm, 8 * cm,
+                 "Der Abnehmer hat die Förderungsansuchen an die zuständigen Förderstellen selbst zu stellen.")
+    p.drawString(1 * cm, 8.35 * cm,
+                 "Das Wärmeversorgungsunternehmen kann über Art und Höhe der Förderung keine Zusagen treffen.")
     p.setFont("Times-Bold", 10) #Dick geschrieben mit Schriftgroesse 10pt
-    p.drawString(0.2*cm, 10.4*cm, "Die Anschlusskosten können entsprechend den aktuellen Förderrichtlinien durch verschiedene")
-    p.drawString(0.2*cm, 10.0*cm, "Förderstellen gefördert werden.")
+    p.drawString(0.2 * cm, 10.4 * cm,
+                 "Die Anschlusskosten können entsprechend den aktuellen Förderrichtlinien durch verschiedene")
+    p.drawString(0.2 * cm, 10.0 * cm, "Förderstellen gefördert werden.")
     p.setFont("Times-Roman", 10) #Times New Roman, Schriftgroesse 10pt
-    p.drawString(1*cm, 11*cm, 'für die Versorgung mit Fernwärme aus dem Fernwärmenetz."')
-    p.drawString(1*cm, 11.35*cm, 'bitte dem beiliegenden "Wämelieferübereinkommen" sowie den "Allgemeinen Bedingungen')
-    p.drawString(1*cm, 11.7*cm, "Wertsicherung, Abrechnungsjahr, Zahlungskonditionen, Eigentumsgrenzen etc. entnehmen Sie")
+    p.drawString(1 * cm, 11 * cm, 'für die Versorgung mit Fernwärme aus dem Fernwärmenetz."')
+    p.drawString(1 * cm, 11.35 * cm,
+                 'bitte dem beiliegenden "Wämelieferübereinkommen" sowie den "Allgemeinen Bedingungen')
+    p.drawString(1 * cm, 11.7 * cm,
+                 "Wertsicherung, Abrechnungsjahr, Zahlungskonditionen, Eigentumsgrenzen etc. entnehmen Sie")
     p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
-    p.drawString(0.2*cm, 14*cm, "Fernwärmepreis:")
+    p.drawString(0.2 * cm, 14 * cm, "Fernwärmepreis:")
     p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
-    p.drawString(0.2*cm, 13.5*cm, "Grundpreis:")
-    p.drawString(0.2*cm, 13*cm, "Arbeitspreis:")
-    p.drawString(0.2*cm, 12.5*cm, "Messgebühr:")
+    p.drawString(0.2 * cm, 13.5 * cm, "Grundpreis:")
+    p.drawString(0.2 * cm, 13 * cm, "Arbeitspreis:")
+    p.drawString(0.2 * cm, 12.5 * cm, "Messgebühr:")
     p.setFont("Times-Bold", 10) #Dick geschrieben mit Schriftgroesse 10pt
-    p.drawString(2.5*cm, 15.5*cm, "Zahlungs-")
-    p.drawString(2.5*cm, 15.1*cm, "konditionen:")
+    p.drawString(2.5 * cm, 15.5 * cm, "Zahlungs-")
+    p.drawString(2.5 * cm, 15.1 * cm, "konditionen:")
     p.setFont("Times-Roman", 10) #Times New Roman, Schriftgroesse 10pt
-    p.drawString(5.0*cm, 15.5*cm, "50% des Anschlusspreises bei Vertragsabschluss")
-    p.drawString(5.0*cm, 15.1*cm, "Rest bei Inbetriebnahme (Heizbeginn)")
+    p.drawString(5.0 * cm, 15.5 * cm, "50% des Anschlusspreises bei Vertragsabschluss")
+    p.drawString(5.0 * cm, 15.1 * cm, "Rest bei Inbetriebnahme (Heizbeginn)")
     p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
-    p.drawString(12.3*cm, 16.3*cm, "Anschlusspreis inkl. Ust.")
-    p.drawString(14.5*cm, 16.85*cm, "+ 20% Ust.")
-    p.drawString(14.7*cm, 17.4*cm, "Nettopreis")
-    p.drawString(17.7*cm, 20.0*cm, "EUR")
+    p.drawString(12.3 * cm, 16.3 * cm, "Anschlusspreis inkl. Ust.")
+    p.drawString(14.5 * cm, 16.85 * cm, "+ 20% Ust.")
+    p.drawString(14.7 * cm, 17.4 * cm, "Nettopreis")
+    p.drawString(17.7 * cm, 20.0 * cm, "EUR")
     p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
-    p.drawString(0.2*cm, 20*cm, "Fernwärmeanschluss")
+    p.drawString(0.2 * cm, 20 * cm, "Fernwärmeanschluss")
     p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
-    p.drawString(0.2*cm, 19.5*cm, "Hausanschluss (bis 15m) - Anschlusspauschale")
-    p.drawString(10*cm, 19.0*cm, "Nettopreis / Einheit")
-    p.drawString(0.2*cm, 18.5*cm, "Anschlusswert / kW")
-    p.drawString(0.2*cm, 18.0*cm, "Leitungsmehrlängen [m]:")
-    p.drawString(0.2*cm, 21.6*cm, "Objektart:")
-    p.drawString(3*cm, 21.6*cm, "Wohnhaus")
-    p.drawString(3*cm, 21.1*cm, "Gewerbe")
-    p.drawString(9.2*cm, 21.6*cm, "Öff. Gebäude")
-    p.drawString(9.2*cm, 21.1*cm, "Bauparzelle")
-    p.drawString(14.2*cm, 21.6*cm, "Heizung")
-    p.drawString(14.2*cm, 21.1*cm, "Warmwasser")
+    p.drawString(0.2 * cm, 19.5 * cm, "Hausanschluss (bis 15m) - Anschlusspauschale")
+    p.drawString(10 * cm, 19.0 * cm, "Nettopreis / Einheit")
+    p.drawString(0.2 * cm, 18.5 * cm, "Anschlusswert / kW")
+    p.drawString(0.2 * cm, 18.0 * cm, "Leitungsmehrlängen [m]:")
+    p.drawString(0.2 * cm, 21.6 * cm, "Objektart:")
+    p.drawString(3 * cm, 21.6 * cm, "Wohnhaus")
+    p.drawString(3 * cm, 21.1 * cm, "Gewerbe")
+    p.drawString(9.2 * cm, 21.6 * cm, "Öff. Gebäude")
+    p.drawString(9.2 * cm, 21.1 * cm, "Bauparzelle")
+    p.drawString(14.2 * cm, 21.6 * cm, "Heizung")
+    p.drawString(14.2 * cm, 21.1 * cm, "Warmwasser")
     p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
-    p.drawString(0.2*cm, 22.6*cm, "Kundenname:")
+    p.drawString(0.2 * cm, 22.6 * cm, "Kundenname:")
     p.setFont("Times-Roman", 12) #Times New Roman, Schriftgroesse 12pt
-    p.drawString(0.2*cm, 22.1*cm, "Anschrift:")
-    p.drawString(11.5*cm, 22.6*cm, "Eigentümer:")
-    p.drawString(11.5*cm, 22.1*cm, "Telefon:")
+    p.drawString(0.2 * cm, 22.1 * cm, "Anschrift:")
+    p.drawString(11.5 * cm, 22.6 * cm, "Eigentümer:")
+    p.drawString(11.5 * cm, 22.1 * cm, "Telefon:")
     p.setFillColorRGB(0, 0.5, 0) #Schriftfarbe auf Gruen einstellen
     p.setFont("Times-Bold", 20) #Times-Bold = Dick geschrieben
-    p.drawString(4.5*cm, 23.28*cm, "Angebot für einen Fernwärmeanschluss")
-#-----------------------------------------------------------------------------------------------------------------------
+    p.drawString(4.5 * cm, 23.28 * cm, "Angebot für einen Fernwärmeanschluss")
+    #-----------------------------------------------------------------------------------------------------------------------
     #Variablen fuer die Rechnung deklarieren
     building = get_object_or_404(Building, pk=id1)
-    offer = get_object_or_404(Offer, pk = id2)
+    offer = get_object_or_404(Offer, pk=id2)
     customer_last_name = building.customer.last_name
     customer_first_name = building.customer.first_name
     customer_salutation = building.customer.salutation
     customer_title = building.customer.title
-    customer = str(customer_salutation + " " + customer_title + " " + customer_first_name + " " + customer_last_name) #Kundenanschrift
+    customer = str(
+        customer_salutation + " " + customer_title + " " + customer_first_name + " " + customer_last_name) #Kundenanschrift
     customer_street = building.customer.street #Wohnort des Kunden
     customer_house_number = building.customer.house_number
     customer_address = str(customer_street + " " + str(customer_house_number))
@@ -793,11 +795,11 @@ def pdfAnschlussrechnung(request, id1, id2):
         more_lengh = str("0 m")
         real_lengh = 0
     else:
-        more_lengh = str(str(lengh-15) + " m")
-        real_lengh = int(lengh-15)
+        more_lengh = str(str(lengh - 15) + " m")
+        real_lengh = int(lengh - 15)
 
     #Aufschlag berechnen
-    upcharge= str(int(str(offer.cable_price)) * real_lengh)
+    upcharge = str(int(str(offer.cable_price)) * real_lengh)
 
     #Nettopreis, Bruttopreis und Umsatzsteuer fuer Anschlusswert berechnen
     net_price = (float(anschlusspauschale) + float(connection_value_net_price) + float(upcharge))
@@ -820,67 +822,67 @@ def pdfAnschlussrechnung(request, id1, id2):
     measurement_price3 = float(measurement_price1 * 1.2)
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
     #Varbiablen in die Rechnung einfuegen
     p.setFont("Times-Roman", 12) #Times New Roman mit Schriftgroesse 12pt
     p.setFillColor("Black") #Schriftfarbe Schwarz einstellen
-    p.drawString(12.3*cm, 4.55*cm, heatingplant.name)
+    p.drawString(12.3 * cm, 4.55 * cm, heatingplant.name)
     p.setFont("Times-Bold", 12)
-    p.drawString(3*cm, 22.6*cm, customer)
+    p.drawString(3 * cm, 22.6 * cm, customer)
     p.setFont("Times-Roman", 12)
-    p.drawString(3*cm, 22.1*cm, customer_address)
-    p.drawString(14*cm, 22.6*cm, offer.owner)
-    p.drawString(14*cm, 22.1*cm, offer.phone_number)
-    p.drawString(6.5*cm, 21.6*cm, wohnhaus)
-    p.drawString(6.5*cm, 21.1*cm, gewerbe)
-    p.drawString(12.2*cm, 21.6*cm, public)
-    p.drawString(12.2*cm, 21.1*cm, bauparzelle)
-    p.drawString(17.8*cm, 21.6*cm, heizung)
-    p.drawString(17.8*cm, 21.1*cm, warmwasser)
-    p.drawString(6*cm, 18.5*cm, connection_power)
-    p.drawRightString(19*cm, 19.5*cm, str('%.2f' % anschlusspauschale))
-    p.drawRightString(19*cm, 18.5*cm, str('%.2f' % connection_value_net_price))
-    p.drawRightString(12.4*cm, 18.5*cm, str(connection))
-    p.drawString(10.9*cm, 18.5*cm, str("€ "))
-    p.drawString(6*cm, 18.0*cm, more_lengh)
-    p.drawRightString(12.4*cm, 18.0*cm, str('%.2f' % float(offer.cable_price.price_per_meter)))
-    p.drawString(10.9*cm, 18.0*cm, str("€ "))
-    p.drawRightString(19*cm, 18.0*cm, str('%.2f' % float(upcharge)))
-    p.drawRightString(19.0*cm, 17.4*cm, str('%.2f' % net_price))
-    p.drawRightString(19.0*cm, 16.85*cm, str('%.2f' % tax))
-    p.drawRightString(19.0*cm, 16.3*cm, str('%.2f' % gross_price))
-    p.drawString(3.5*cm, 13.5*cm, str("€"))
-    p.drawRightString(5*cm, 13.5*cm, str('%.2f' % basic_price1))
-    p.drawString(6.2*cm, 13.5*cm, str("€"))
-    p.drawString(7.7*cm, 13.5*cm, str("Ust."))
-    p.drawRightString(7.5*cm, 13.5*cm, str('%.2f' % basic_price2))
-    p.drawString(9.5*cm, 13.5*cm, str("€"))
-    p.drawRightString(11*cm, 13.5*cm, str('%.2f' % basic_price3))
-    p.drawString(11.0*cm, 13.5*cm, str("  je kW Anschlussleistung und Verrechnungsjahr"))
-    p.drawString(3.5*cm, 13.0*cm, str("€"))
-    p.drawRightString(5*cm, 13.0*cm, str('%.2f' % working_price1))
-    p.drawString(6.2*cm, 13.0*cm, str("€"))
-    p.drawString(7.7*cm, 13.0*cm, str("Ust."))
-    p.drawRightString(7.5*cm, 13.0*cm, str('%.2f' % working_price2))
-    p.drawString(9.5*cm, 13.0*cm, str("€"))
-    p.drawRightString(11*cm, 13.0*cm, str('%.2f' % working_price3))
-    p.drawString(11.0*cm, 13.0*cm, str("  je MWh"))
-    p.drawString(3.5*cm, 12.5*cm, str("€"))
-    p.drawRightString(5*cm, 12.5*cm, str('%.2f' % measurement_price1))
-    p.drawString(6.2*cm, 12.5*cm, str("€"))
-    p.drawString(7.7*cm, 12.5*cm, str("Ust."))
-    p.drawRightString(7.5*cm, 12.5*cm, str('%.2f' % measurement_price2))
-    p.drawString(9.5*cm, 12.5*cm, str("€"))
-    p.drawRightString(11*cm, 12.5*cm, str('%.2f' % measurement_price3))
-    p.drawString(11.0*cm, 12.5*cm, str("  je Jahr"))
-    p.drawString(5.3*cm, 13.5*cm, " + ")
-    p.drawString(5.3*cm, 13.0*cm, " + ")
-    p.drawString(5.3*cm, 12.5*cm, " + ")
-    p.drawString(8.7*cm, 13.5*cm, " = ")
-    p.drawString(8.7*cm, 13*cm, " = ")
-    p.drawString(8.7*cm, 12.5*cm, " = ")
+    p.drawString(3 * cm, 22.1 * cm, customer_address)
+    p.drawString(14 * cm, 22.6 * cm, offer.owner)
+    p.drawString(14 * cm, 22.1 * cm, offer.phone_number)
+    p.drawString(6.5 * cm, 21.6 * cm, wohnhaus)
+    p.drawString(6.5 * cm, 21.1 * cm, gewerbe)
+    p.drawString(12.2 * cm, 21.6 * cm, public)
+    p.drawString(12.2 * cm, 21.1 * cm, bauparzelle)
+    p.drawString(17.8 * cm, 21.6 * cm, heizung)
+    p.drawString(17.8 * cm, 21.1 * cm, warmwasser)
+    p.drawString(6 * cm, 18.5 * cm, connection_power)
+    p.drawRightString(19 * cm, 19.5 * cm, str('%.2f' % anschlusspauschale))
+    p.drawRightString(19 * cm, 18.5 * cm, str('%.2f' % connection_value_net_price))
+    p.drawRightString(12.4 * cm, 18.5 * cm, str(connection))
+    p.drawString(10.9 * cm, 18.5 * cm, str("€ "))
+    p.drawString(6 * cm, 18.0 * cm, more_lengh)
+    p.drawRightString(12.4 * cm, 18.0 * cm, str('%.2f' % float(offer.cable_price.price_per_meter)))
+    p.drawString(10.9 * cm, 18.0 * cm, str("€ "))
+    p.drawRightString(19 * cm, 18.0 * cm, str('%.2f' % float(upcharge)))
+    p.drawRightString(19.0 * cm, 17.4 * cm, str('%.2f' % net_price))
+    p.drawRightString(19.0 * cm, 16.85 * cm, str('%.2f' % tax))
+    p.drawRightString(19.0 * cm, 16.3 * cm, str('%.2f' % gross_price))
+    p.drawString(3.5 * cm, 13.5 * cm, str("€"))
+    p.drawRightString(5 * cm, 13.5 * cm, str('%.2f' % basic_price1))
+    p.drawString(6.2 * cm, 13.5 * cm, str("€"))
+    p.drawString(7.7 * cm, 13.5 * cm, str("Ust."))
+    p.drawRightString(7.5 * cm, 13.5 * cm, str('%.2f' % basic_price2))
+    p.drawString(9.5 * cm, 13.5 * cm, str("€"))
+    p.drawRightString(11 * cm, 13.5 * cm, str('%.2f' % basic_price3))
+    p.drawString(11.0 * cm, 13.5 * cm, str("  je kW Anschlussleistung und Verrechnungsjahr"))
+    p.drawString(3.5 * cm, 13.0 * cm, str("€"))
+    p.drawRightString(5 * cm, 13.0 * cm, str('%.2f' % working_price1))
+    p.drawString(6.2 * cm, 13.0 * cm, str("€"))
+    p.drawString(7.7 * cm, 13.0 * cm, str("Ust."))
+    p.drawRightString(7.5 * cm, 13.0 * cm, str('%.2f' % working_price2))
+    p.drawString(9.5 * cm, 13.0 * cm, str("€"))
+    p.drawRightString(11 * cm, 13.0 * cm, str('%.2f' % working_price3))
+    p.drawString(11.0 * cm, 13.0 * cm, str("  je MWh"))
+    p.drawString(3.5 * cm, 12.5 * cm, str("€"))
+    p.drawRightString(5 * cm, 12.5 * cm, str('%.2f' % measurement_price1))
+    p.drawString(6.2 * cm, 12.5 * cm, str("€"))
+    p.drawString(7.7 * cm, 12.5 * cm, str("Ust."))
+    p.drawRightString(7.5 * cm, 12.5 * cm, str('%.2f' % measurement_price2))
+    p.drawString(9.5 * cm, 12.5 * cm, str("€"))
+    p.drawRightString(11 * cm, 12.5 * cm, str('%.2f' % measurement_price3))
+    p.drawString(11.0 * cm, 12.5 * cm, str("  je Jahr"))
+    p.drawString(5.3 * cm, 13.5 * cm, " + ")
+    p.drawString(5.3 * cm, 13.0 * cm, " + ")
+    p.drawString(5.3 * cm, 12.5 * cm, " + ")
+    p.drawString(8.7 * cm, 13.5 * cm, " = ")
+    p.drawString(8.7 * cm, 13 * cm, " = ")
+    p.drawString(8.7 * cm, 12.5 * cm, " = ")
     p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
-    p.drawString(1*cm, 17.0*cm, str(offer.comment))
+    p.drawString(1 * cm, 17.0 * cm, str(offer.comment))
 
 
 
@@ -892,8 +894,6 @@ def pdfAnschlussrechnung(request, id1, id2):
     return response
 
 
-
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Leere Rechnung                                                                      !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -903,13 +903,14 @@ def pdfLeereRechnung(request):
     response['Content-Disposition'] = 'attachment; filename="LeereRechnung.pdf"'
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
-    p.translate(cm,cm) #Angegebene Werte auf cm umrechnen
-#-----------------------------------------------------------------------------------------------------------------------
+    p.translate(cm, cm) #Angegebene Werte auf cm umrechnen
+    #-----------------------------------------------------------------------------------------------------------------------
     #Zeichnen
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
     #Variablendeklaration fuer die Kopfzeile
     heatingplant = get_object_or_404(HeatingPlant, pk=1)
-    adress = str(heatingplant.street + " " + str(heatingplant.house_number) + "   " + str(heatingplant.zip) + " " + heatingplant.place)
+    adress = str(heatingplant.street + " " + str(heatingplant.house_number) + "   " + str(
+        heatingplant.zip) + " " + heatingplant.place)
     telephone = str("Tel: " + heatingplant.phone_number + "   " + " Fax: " + heatingplant.phone_number)
     e_mail = str("E-Mail: " + heatingplant.mail)
 
@@ -923,31 +924,32 @@ def pdfLeereRechnung(request):
 
     #Kopfzeile
     p.setFillColorRGB(1, 1, 0.75)
-    p.rect(0, 23.7*cm, 19.5*cm, 3.5*cm, fill=1)
+    p.rect(0, 23.7 * cm, 19.5 * cm, 3.5 * cm, fill=1)
     p.setFillColorRGB(0, 0.5, 0)
     p.setFont("Times-Bold", 18)
-    p.drawString(1*cm, 26.2*cm, heatingplant.name)
+    p.drawString(1 * cm, 26.2 * cm, heatingplant.name)
     p.setFont("Times-Bold", 10)
-    p.drawString(1*cm, 25.5*cm, adress)
-    p.drawString(1*cm, 25.0*cm, telephone)
-    p.drawString(1*cm, 24.5*cm, e_mail)
+    p.drawString(1 * cm, 25.5 * cm, adress)
+    p.drawString(1 * cm, 25.0 * cm, telephone)
+    p.drawString(1 * cm, 24.5 * cm, e_mail)
     #todo: bild zum projekt hinzufügen - keinen absoluten pfad verwenden
-    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15*cm, 24.2*cm, width=3.5*cm, height=2.5*cm)
+    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15 * cm, 24.2 * cm,
+                width=3.5 * cm, height=2.5 * cm)
 
     #Fusszeile
-    p.line(0, 0, 19.5*cm, 0)
-    p.line(19.5*cm, 0, 19.5*cm, 1.5*cm)
-    p.line(19.5*cm, 1.5*cm, 0, 1.5*cm)
-    p.line(0, 1.5*cm, 0, 0)
+    p.line(0, 0, 19.5 * cm, 0)
+    p.line(19.5 * cm, 0, 19.5 * cm, 1.5 * cm)
+    p.line(19.5 * cm, 1.5 * cm, 0, 1.5 * cm)
+    p.line(0, 1.5 * cm, 0, 0)
     p.setFillColor("Black")
     p.setFont("Times-Roman", 8)
-    p.drawString(1*cm, 1*cm, fbn)
-    p.drawString(12*cm, 1*cm, bankname)
-    p.drawString(12*cm, 0.7*cm, account_number)
-    p.drawString(15*cm, 0.7*cm, IBAN)
-    p.drawString(12*cm, 0.4*cm, BLZ)
-    p.drawString(15*cm, 0.4*cm, BIC)
-#-----------------------------------------------------------------------------------------------------------------------
+    p.drawString(1 * cm, 1 * cm, fbn)
+    p.drawString(12 * cm, 1 * cm, bankname)
+    p.drawString(12 * cm, 0.7 * cm, account_number)
+    p.drawString(15 * cm, 0.7 * cm, IBAN)
+    p.drawString(12 * cm, 0.4 * cm, BLZ)
+    p.drawString(15 * cm, 0.4 * cm, BIC)
+    #-----------------------------------------------------------------------------------------------------------------------
     # PDF korrekt downloaden und oeffnen
     p.showPage()
     p.save()

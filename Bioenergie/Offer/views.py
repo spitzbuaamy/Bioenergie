@@ -11,7 +11,7 @@ class OfferCreateView(CreateView):
     form_class = OfferForm
 
     def get_form(self, form_class):
-        form = super(OfferCreateView,self).get_form(form_class)
+        form = super(OfferCreateView, self).get_form(form_class)
         #todo: selectpicker funktioniert aus ungeklärten gründen nicht(optisches problem). Fragts in Jürgen vl hat weiß der warum.
         form.fields['building'].widget.attrs.update({'class': 'selectpicker'})
         form.fields['object_type'].widget.attrs.update({"class": "selectpicker"})

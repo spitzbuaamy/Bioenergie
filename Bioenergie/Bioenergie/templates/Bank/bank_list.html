@@ -2,16 +2,16 @@
 
 {% block body %}
     <table>
-    {% for bank in banks %}
+        {% for bank in banks %}
 
-        <tr class="list">
-            <td>{{ bank.name }}</td>
-            <td><a href="{% url 'bank_detail' pk=bank.pk %}" class="btn btn-primary">Details</a></td>
-            <td><a href="{% url 'bank_update' pk=bank.pk %}" class="btn btn-primary">Ändern</a></td>
-            <td><a href="{% url 'bank_delete' pk=bank.pk %}" class="btn btn-danger">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>{{ bank.name }}</td>
+                <td><a href="{% url 'bank_detail' pk=bank.pk %}" class="btn btn-primary">Details</a></td>
+                <td><a href="{% url 'bank_update' pk=bank.pk %}" class="btn btn-primary">Ändern</a></td>
+                <td><a href="{% url 'bank_delete' pk=bank.pk %}" class="btn btn-danger">Löschen</a></td>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
     </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'bank_create' %}">
         <button class="btn btn-primary">Neue Bank anlegen</button>

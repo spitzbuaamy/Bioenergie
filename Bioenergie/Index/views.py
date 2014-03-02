@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 from Abrechnung.models import Index, Customer, Building
 from Index.forms import IndexForm
-from django.core.urlresolvers import reverse_lazy
 
 
 class IndexListView(ListView):

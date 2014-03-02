@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 from Abrechnung.models import Bank
 from Bank.forms import BankForm
-from django.core.urlresolvers import reverse_lazy
 
 
 class BankListView(ListView):

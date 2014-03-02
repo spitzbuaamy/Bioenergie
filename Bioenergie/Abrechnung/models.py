@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from random import choice
 from django.db import models
-import csv
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Create your models here.
@@ -45,7 +43,7 @@ class Customer(models.Model): #Kunde
     zip = models.IntegerField("Postleitzahl") # PLZ
     place = models.CharField("Ort", max_length=32)
     customer_number = models.CharField("Kundennummer", max_length=32)
-    bank = models.ForeignKey(Bank, verbose_name= "Bank")
+    bank = models.ForeignKey(Bank, verbose_name="Bank")
     account_number = models.CharField("Kontonummer", max_length=32, blank=True) #Kontonummer des Kunden
     code_number = models.CharField("Bankleitzahl", max_length=32, blank=True) #Bankleitzahl
     BIC = models.CharField("BIC", max_length=32, blank=True)
@@ -64,7 +62,7 @@ class Customer(models.Model): #Kunde
 class WorkingPrice(models.Model): #Arbeitspreis
     min = models.IntegerField("Minimum")
     max = models.IntegerField("Maximum")
-    amount = models.DecimalField("Preis", max_digits=8, decimal_places=2 ) #Preis
+    amount = models.DecimalField("Preis", max_digits=8, decimal_places=2) #Preis
     wage_group = models.IntegerField("Gruppe")
 
     def __unicode__(self):
@@ -248,7 +246,7 @@ class HeatingPlant(models.Model):
     place = models.CharField("Ort", max_length="32")
     phone_number = models.CharField("Telefonnummer", max_length="32", blank=True)
     mail = models.CharField("E-Mail", max_length="64", blank=True)
-    bank = models.ForeignKey(Bank, verbose_name= "Bank")
+    bank = models.ForeignKey(Bank, verbose_name="Bank")
     account_number = models.IntegerField("Kontonummer") #Kontonummer des Kunden
     code_number = models.IntegerField("Bankleitzahl") #Bankleitzahl
     BIC = models.CharField("BIC", max_length=32)

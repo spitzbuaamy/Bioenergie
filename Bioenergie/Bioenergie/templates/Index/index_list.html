@@ -2,17 +2,17 @@
 
 {% block body %}
     <table>
-    {% for index in indexes %}
+        {% for index in indexes %}
 
-        <tr class="list">
-            <td>Jahr: {{ index.year }} - Index: {{ index.index }} </td>
-            <td><a href="{% url 'index_detail' pk=index.pk %}" class="btn btn-primary">Details</a> </td>
-            <td><a href="{% url 'index_update' pk=index.pk %}" class="btn btn-primary">Ändern</a></td>
-            <td><a href="{% url 'index_delete' pk=index.pk %}" class="btn btn-danger">Löschen</a></td>
-        </tr>
+            <tr class="list">
+                <td>Jahr: {{ index.year }} - Index: {{ index.index }} </td>
+                <td><a href="{% url 'index_detail' pk=index.pk %}" class="btn btn-primary">Details</a></td>
+                <td><a href="{% url 'index_update' pk=index.pk %}" class="btn btn-primary">Ändern</a></td>
+                <td><a href="{% url 'index_delete' pk=index.pk %}" class="btn btn-danger">Löschen</a></td>
+            </tr>
 
-    {% endfor %}
-</table>
+        {% endfor %}
+    </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'index_create' %}">
         <button class="btn btn-primary">Neuen Index anlegen</button>
     </a>

@@ -1,17 +1,18 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-
+    <table>
     {% for customer in customers %}
 
-        <ul class="list" xmlns="http://www.w3.org/1999/html">
-            <li>{{ customer.first_name }} {{ customer.last_name }} <a href="{% url 'customer_detail' pk=customer.pk %}">Details</a>
-                <a href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a
-                        href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
-        </ul>
+        <tr class="list" xmlns="http://www.w3.org/1999/html">
+            <td>{{ customer.first_name }} {{ customer.last_name }} </td>
+            <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary">Details</a></td>
+            <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn btn-primary">Ändner</a></td>
+            <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn btn-danger">Löschen</a></td>
+        </tr>
 
     {% endfor %}
-
+</table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'customer_create' %}">
         <button class="btn btn-primary">Neuen Kunden anlegen</button>
     </a>

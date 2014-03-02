@@ -6,14 +6,17 @@
     <p style="padding-left: 10px">Sie suchten nach: <strong>{{ query }}</strong></p>
 
     {% if Customers %}
-        <ul class="list">
+
+        <table class="list">
             {% for customer in Customers %}
-                <li>{{ customer.first_name }} {{ customer.last_name }} <a
-                        href="{% url 'customer_detail' pk=customer.pk %}">Details</a> <a
-                        href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a
-                        href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
+                <tr>
+                    <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                    <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary">Details</a></td>
+                    <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn-primary btn">Ändern</a></td>
+                    <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn-danger btn">Löschen</a></td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p style="padding-left: 10px; color: red">Leider kein Kunde gefunden.</p>
     {% endif %}

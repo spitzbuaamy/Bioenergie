@@ -1,18 +1,18 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-
+    <table>
     {% for building in buildings %}
 
-        <ul class="list">
-            <li>{{ building.customer }} {{ building.street }} {{ building.house_number }} <a
-                    href="{% url 'building_detail' pk=building.pk %}">Details</a> <a
-                    href="{% url 'building_delete' pk=building.pk %}">Löschen</a><a
-                    href="{% url 'building_update' pk=building.pk %}">Bearbeiten</a></li>
-        </ul>
+        <tr class="list">
+            <td>{{ building.customer }} {{ building.street }} {{ building.house_number }} </td>
+            <td><a href="{% url 'building_detail' pk=building.pk %}" class="btn btn-primary">Details</a> </td>
+            <td><a href="{% url 'building_update' pk=building.pk %}" class="btn-primary btn">Ändern</a></td>
+            <td><a href="{% url 'building_delete' pk=building.pk %}" class="btn btn-danger">Löschen</a></td>
+        </tr>
 
     {% endfor %}
-
+    </table>
     <a style="padding-left: 5px" class="linkButton" href="{% url 'building_create' %}">
         <button class="btn btn-primary">Neues Gebäude anlegen</button>
     </a>

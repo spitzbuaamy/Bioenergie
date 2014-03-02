@@ -1,117 +1,64 @@
-.navbar-form  {
-    display: inline-block;
-}
-
-input, select {
-    display: block;
-    margin: 10px;
-}
-/*______________________________________________________________________________________________________________________
-*/
-.mine-button {
-    outline: 0;
-    margin: 0 4px 0 0;
-    padding: 0 1em;
-    height: 2em;
-    text-decoration: none !important;
-    cursor: pointer;
-    position: relative;
-    text-align: center;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px
-}
-
-/*______________________________________________________________________________________________________________________
-*/
-.drop_menu {
-    background: black;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    height: 30px;
-}
-
-.drop_menu li {
-    float: left;
-}
-
-.drop_menu li a {
-    padding: 10px 20px;
-    display: inline-block;
-    color: #fff;
-    text-decoration: none;
-    font: 14px arial, verdana, sans-serif;
-}
-
-/* Submenu */
-.drop_menu ul {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-    list-style-type: none;
-}
-
-.drop_menu li:hover {
-    position: relative;
-    background: gray;
-}
-
-.drop_menu li:hover ul {
-    left: 0px;
-    top: 30px;
-    background: gray;
-    padding: 0px;
-}
-
-.drop_menu li:hover ul li a {
-    padding: 5px;
-    display: block;
-    width: 168px;
-    text-indent: 15px;
-    background-color: gray;
-}
-
-.drop_menu li:hover ul li a:hover {
-    background: lightgray;
-}
-
-/*______________________________________________________________________________________________________________________
-*/
-
-a {
-    color: black;
-    text-decoration: none;
-    margin-right: 10pt;
+.edit {
     float: right;
 }
-
-ul.list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+#left {
+    margin-left: 15px;
 }
 
-.linkButton {
-    float: left;
-}
-
-ul.list li {
-    background-color: #008041;
-    margin: 5px;
-    padding: 3px;
-}
-
-ul.list li > a {
-    color: yellow;
-
-}
-
-ul.list li:hover {
-    background-color: greenyellow;
-
+a {
+    margin-left: 5px;
 }
 
 
-.clear {
-    clear: both;
+form {
+    padding-left: 20px;
+}
+.errorlist {
+    color: red;
+    list-style: none;
+}
+
+h2 {
+  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  margin: 0;
+  margin-left: 15px;
+  padding: 0;
+}
+
+tr {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+tr:last-child {
+  border: none;
+}
+
+td {
+  text-decoration: none;
+  color: #000;
+
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+td:hover {
+  background: gainsboro;
+}
+
+.subform {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.del {
+    display: block;
 }

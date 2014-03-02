@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <table style="margin-left: 30px; margin-bottom: 20px" >
+    <table style="margin-left: 30px; margin-bottom: 20px">
         <ul>
             <tr>
                 <td> Preisgruppe:</td>
@@ -10,21 +10,26 @@
             </tr>
             <tr>
                 <td> Minimum:</td>
-                <td> {{ measurement_price.min }} kW </td>
+                <td> {{ measurement_price.min }} kW</td>
             </tr>
             <tr>
                 <td> Maximum:</td>
-                <td> {{ measurement_price.max }} kW </td>
+                <td> {{ measurement_price.max }} kW</td>
             </tr>
             <tr>
                 <td> Betrag:</td>
-                <td> {{ measurement_price.amount }} € </td>
+                <td> {{ measurement_price.amount }} €</td>
             </tr>
         </ul>
     </table>
 
 
-<a style="padding-left: 20px" class="linkButton" href="{% url 'measurement_price_update' pk=measurement_price.pk %}"><button class="btn btn-primary">Bearbeiten</button></a>
-<a class="linkButton" href="{% url 'measurement_price_delete' pk=measurement_price.pk %}"><button class="btn btn-primary">Löschen</button></a>
+    <a style="padding-left: 20px" class="linkButton"
+       href="{% url 'measurement_price_update' pk=measurement_price.pk %}">
+        <button class="btn btn-primary">Bearbeiten</button>
+    </a>
+    <a class="linkButton" href="{% url 'measurement_price_delete' pk=measurement_price.pk %}">
+        <button class="btn btn-primary">Löschen</button>
+    </a>
 
 {% endblock %}

@@ -2,13 +2,16 @@
 {% block body %}
 
 
-</br>
+    </br>
     <p style="padding-left: 10px">Sie suchten nach: <strong>{{ query }}</strong></p>
 
     {% if Customers %}
-        <ul class = "list">
+        <ul class="list">
             {% for customer in Customers %}
-            <li>{{ customer.first_name }} {{ customer.last_name }} <a href="{% url 'customer_detail' pk=customer.pk %}">Details</a> <a href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
+                <li>{{ customer.first_name }} {{ customer.last_name }} <a
+                        href="{% url 'customer_detail' pk=customer.pk %}">Details</a> <a
+                        href="{% url 'customer_delete' pk=customer.pk %}">Löschen</a><a
+                        href="{% url 'customer_update' pk=customer.pk %}">Bearbeiten</a></li>
             {% endfor %}
         </ul>
     {% else %}

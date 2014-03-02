@@ -1,14 +1,14 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-</br>
-<p style="padding-left: 10px">
-    Möchten Sie diesen Zählerwechsel wirklich löschen? </br>
-    {{ counter_change.building }} {{ counter_change.date }}
-</p>
-<form method="post" style="padding-left: 10px">
-    {% csrf_token %}
-    <input type="submit" value="Löschen" class="btn btn-danger"/>
-</form>
+    </br>
+    <p style="padding-left: 10px">
+        Möchten Sie diesen Zählerwechsel wirklich löschen? </br>
+        {{ counter_change.building }} {{ counter_change.date }}
+    </p>
+    <form method="post" style="padding-left: 10px">
+        {% csrf_token %}
+        <input type="submit" value="Löschen" class="btn btn-danger"/>
+    </form>
 
 {% endblock %}

@@ -24,6 +24,11 @@ class MeasurementCreateView(CreateView):
     form_class = MeasurementForm
     #success_url = reverse_lazy('measurement_list')
 
+    def get_form(self, form_class):
+        form = super(MeasurementCreateView,self).get_form(form_class)
+        form.fields['measured_date'].widget.attrs.update({"class": "datepicker"})
+        return form
+
 
 class MeasurementUpdateView(UpdateView):
     template_name = "Measurement/measurement_form.html"
@@ -31,6 +36,11 @@ class MeasurementUpdateView(UpdateView):
     context_object_name = 'measurement'
     form_class = MeasurementForm
     # success_url = reverse_lazy('measurement_list')
+
+    def get_form(self, form_class):
+        form = super(MeasurementUpdateView,self).get_form(form_class)
+        form.fields['measured_date'].widget.attrs.update({"class": "datepicker"})
+        return form
 
 
 class MeasurementDeleteView(DeleteView):

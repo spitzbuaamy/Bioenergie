@@ -6,6 +6,7 @@ from Customer.forms import CustomerForm
 from django.core.urlresolvers import reverse_lazy
 from itertools import chain
 
+
 class CustomerListView(ListView):
     template_name = "customer/customer_list.html"
     model = Customer
@@ -30,6 +31,7 @@ class CustomerCreateView(CreateView):
     context_object_name = 'customer'
     form_class = CustomerForm
     #success_url = reverse_lazy('customer_list')
+
 
 
 class CustomerUpdateView(UpdateView):

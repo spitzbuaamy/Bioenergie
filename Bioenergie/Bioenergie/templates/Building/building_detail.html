@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <table style="margin-left: 30px; margin-bottom: 20px" >
+    <table style="margin-left: 30px; margin-bottom: 20px">
         <ul>
             <tr>
                 <td> Kunde:</td>
@@ -13,7 +13,7 @@
                 <td> {{ building.zip }} {{ building.place }} </td>
             </tr>
             <tr>
-                <td> </td>
+                <td></td>
                 <td> {{ building.street }} {{ building.house_number }} </td>
             </tr>
             <tr>
@@ -31,9 +31,9 @@
             <tr>
                 <td> Fixer Rabatt:</td>
                 {% if building.discount_fixed == None %}
-                <td> Nein </td>
+                    <td> Nein</td>
                 {% else %}
-                <td> {{ building.discount_fixed }}%</td>
+                    <td> {{ building.discount_fixed }}%</td>
                 {% endif %}
             </tr>
             <tr>
@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <td> Anschlussleistung:</td>
-                <td> {{ building.connection_power }}kW </td>
+                <td> {{ building.connection_power }}kW</td>
             </tr>
             <tr>
                 <td> Letzte Rechnung:</td>

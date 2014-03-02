@@ -1,14 +1,18 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-{% for counter_bill in counter_bills %}
+    {% for counter_bill in counter_bills %}
 
-    <ul class="list">
-        <li>{{ counter_bill.bill }}<a href="{% url 'counter_bill_detail' pk=counter_bill.pk %}">Details</a> <a href="{% url 'counter_bill_delete' pk=counter_bill.pk %}">Löschen</a><a href="{% url 'counter_bill_update' pk=counter_bill.pk %}">Bearbeiten</a></li>
-    </ul>
+        <ul class="list">
+            <li>{{ counter_bill.bill }}<a href="{% url 'counter_bill_detail' pk=counter_bill.pk %}">Details</a> <a
+                    href="{% url 'counter_bill_delete' pk=counter_bill.pk %}">Löschen</a><a
+                    href="{% url 'counter_bill_update' pk=counter_bill.pk %}">Bearbeiten</a></li>
+        </ul>
 
-{% endfor %}
+    {% endfor %}
 
-<a style="padding-left: 5px" class="linkButton" href="{% url 'counter_bill_create' %}"><button class="btn btn-primary">Neue Zählerrechnung anlegen</button></a>
+    <a style="padding-left: 5px" class="linkButton" href="{% url 'counter_bill_create' %}">
+        <button class="btn btn-primary">Neue Zählerrechnung anlegen</button>
+    </a>
 
 {% endblock %}

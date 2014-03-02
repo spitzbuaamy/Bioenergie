@@ -2,7 +2,7 @@
 
 {% block extra_head %}
 
-     <style type="text/css">
+    <style type="text/css">
         input {
             display: block;
             margin-bottom: 15pt;
@@ -13,16 +13,16 @@
             margin: 0;
             padding: 0;
         }
-     </style>
+    </style>
 
 {% endblock %}
 
 {% block body %}
 
-<form method="post" style="padding-left: 10px">
-    {% csrf_token %}
-{{ form }}
-    </br><input type="submit" value="Änderungen speichern" class="btn btn-primary"/>
-</form>
+    <form method="post" style="padding-left: 10px">
+        {% csrf_token %}
+        {{ form }}
+        </br><input type="submit" value="Änderungen speichern" class="btn btn-primary"/>
+    </form>
 
-{%  endblock %}
+{% endblock %}

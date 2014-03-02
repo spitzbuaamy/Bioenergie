@@ -23,6 +23,12 @@ class CounterChangeCreateView(CreateView):
     form_class = CounterChangeForm
     #success_url = reverse_lazy('counter_change_list')
 
+    def get_form(self, form_class):
+        form = super(CounterChangeCreateView,self).get_form(form_class)
+        form.fields['date'].widget.attrs.update({'class': 'datepicker'})
+        form.fields['date_new_counter'].widget.attrs.update({"class": "datepicker"})
+        return form
+
 
 class CounterChangeUpdateView(UpdateView):
     template_name = "CounterChange/counter_change_form.html"
@@ -31,6 +37,11 @@ class CounterChangeUpdateView(UpdateView):
     form_class = CounterChangeForm
     # success_url = reverse_lazy('counter_change_list')
 
+    def get_form(self, form_class):
+        form = super(CounterChangeUpdateView,self).get_form(form_class)
+        form.fields['date'].widget.attrs.update({'class': 'datepicker'})
+        form.fields['date_new_counter'].widget.attrs.update({"class": "datepicker"})
+        return form
 
 class CounterChangeDeleteView(DeleteView):
     template_name = "CounterChange/counter_change_confirm_delete.html"

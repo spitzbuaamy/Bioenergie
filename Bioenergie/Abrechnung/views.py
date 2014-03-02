@@ -931,6 +931,7 @@ def pdfLeereRechnung(request):
     p.drawString(1*cm, 25.5*cm, adress)
     p.drawString(1*cm, 25.0*cm, telephone)
     p.drawString(1*cm, 24.5*cm, e_mail)
+    #todo: bild zum projekt hinzufügen - keinen absoluten pfad verwenden
     p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15*cm, 24.2*cm, width=3.5*cm, height=2.5*cm)
 
     #Fusszeile

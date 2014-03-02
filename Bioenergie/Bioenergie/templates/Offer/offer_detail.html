@@ -1,16 +1,16 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-</br>
-   <h4 style="padding-left: 30px">Ihre angegebenen Daten:</h4>
-    <table style="margin-left: 30px; margin-bottom: 20px" >
+    </br>
+    <h4 style="padding-left: 30px">Ihre angegebenen Daten:</h4>
+    <table style="margin-left: 30px; margin-bottom: 20px">
         <ul>
             <tr>
                 <td> Anzuschließendes Objekt:</td>
                 <td>{{ offer.building }}</td>
             </tr>
             <tr>
-                <td> Eigentümer: </td>
+                <td> Eigentümer:</td>
                 <td> {{ offer.owner }} </td>
             </tr>
             <tr>
@@ -40,17 +40,17 @@
             <tr>
                 <td> Heizung:</td>
                 {% if offer.heating == True %}
-                <td> Ja  </td>
+                    <td> Ja</td>
                 {% else %}
-                <td> Nein </td>
+                    <td> Nein</td>
                 {% endif %}
             </tr>
             <tr>
                 <td> Warmwasser:</td>
-                {% if offer.warm_water == True%}
-                <td> Ja </td>
+                {% if offer.warm_water == True %}
+                    <td> Ja</td>
                 {% else %}
-                <td> Nein </td>
+                    <td> Nein</td>
                 {% endif %}
             </tr>
             <tr>
@@ -62,7 +62,11 @@
 
     </br>
     <h4 style="padding-left: 20px">Rechnung mit angegebenen Daten erzeugen?</h4>
-    <a style="padding-left: 20px" class="linkButton" href="{% url 'offer_update' pk=offer.pk %}"><button class="btn btn-primary">Bearbeiten</button></a>
-   <a class="linkButton" href="{% url 'pdf_Anschlussrechnung' id1=offer.building.pk id2=offer.pk %}"><button class="btn btn-primary">Rechnung erstellen</button></a>
+    <a style="padding-left: 20px" class="linkButton" href="{% url 'offer_update' pk=offer.pk %}">
+        <button class="btn btn-primary">Bearbeiten</button>
+    </a>
+    <a class="linkButton" href="{% url 'pdf_Anschlussrechnung' id1=offer.building.pk id2=offer.pk %}">
+        <button class="btn btn-primary">Rechnung erstellen</button>
+    </a>
 
 {% endblock %}

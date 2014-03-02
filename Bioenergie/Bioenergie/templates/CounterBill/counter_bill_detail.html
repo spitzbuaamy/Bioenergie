@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <table style="margin-left: 30px; margin-bottom: 20px" >
+    <table style="margin-left: 30px; margin-bottom: 20px">
         <ul>
             <tr>
                 <td> Rechnung:</td>
@@ -28,7 +28,11 @@
     </table>
 
 
-<a style="padding-left: 20px"class="linkButton" href="{% url 'counter_bill_update' pk=counter_bill.pk %}"><button class="btn btn-primary">Bearbeiten</button></a>
-<a class="linkButton" href="{% url 'counter_bill_delete' pk=counter_bill.pk %}"><button class="btn btn-primary">Löschen</button></a>
+    <a style="padding-left: 20px" class="linkButton" href="{% url 'counter_bill_update' pk=counter_bill.pk %}">
+        <button class="btn btn-primary">Bearbeiten</button>
+    </a>
+    <a class="linkButton" href="{% url 'counter_bill_delete' pk=counter_bill.pk %}">
+        <button class="btn btn-primary">Löschen</button>
+    </a>
 
 {% endblock %}

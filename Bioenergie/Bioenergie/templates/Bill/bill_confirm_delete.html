@@ -2,13 +2,13 @@
 
 {% block body %}
 
-<p>
-    Möchten Sie diese Rechnung wirklich löschen?
-    {{ bill.bill_number }} {{ bill.date }}
-</p>
-<form method="post">
-    {% csrf_token %}
-    <input type="submit" value="Löschen" class="btn btn-primary"/>
-</form>
+    <p>
+        Möchten Sie diese Rechnung wirklich löschen?
+        {{ bill.bill_number }} {{ bill.date }}
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Löschen" class="btn btn-primary"/>
+    </form>
 
 {% endblock %}

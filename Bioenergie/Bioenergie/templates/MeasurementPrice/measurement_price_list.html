@@ -2,15 +2,22 @@
 
 {% block body %}
     <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Messpreis</h4>
-{% for measurement_price in measurement_prices %}
+    {% for measurement_price in measurement_prices %}
 
-    <ul class="list">
-        <li>Gruppe {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }}) <a href="{% url 'measurement_price_detail' pk=measurement_price.pk %}">Details</a> <a href="{% url 'measurement_price_delete' pk=measurement_price.pk %}">Löschen</a><a href="{% url 'measurement_price_update' pk=measurement_price.pk %}">Bearbeiten</a></li>
-    </ul>
+        <ul class="list">
+            <li>Gruppe {{ measurement_price.wage_group }}: ({{ measurement_price.min }}-{{ measurement_price.max }}) <a
+                    href="{% url 'measurement_price_detail' pk=measurement_price.pk %}">Details</a> <a
+                    href="{% url 'measurement_price_delete' pk=measurement_price.pk %}">Löschen</a><a
+                    href="{% url 'measurement_price_update' pk=measurement_price.pk %}">Bearbeiten</a></li>
+        </ul>
 
-{% endfor %}
+    {% endfor %}
 
-<a style="padding-left: 5px" class="linkButton" href="{% url 'measurement_price_create' %}"><button class="btn btn-primary">Neuen Messpreis anlegen</button></a>
-<a style="padding-left: 5px" class="linkButton" href="{% url 'GroupView' %}"><button class="btn btn-primary">Zur Gruppenansicht wechseln</button></a>
+    <a style="padding-left: 5px" class="linkButton" href="{% url 'measurement_price_create' %}">
+        <button class="btn btn-primary">Neuen Messpreis anlegen</button>
+    </a>
+    <a style="padding-left: 5px" class="linkButton" href="{% url 'GroupView' %}">
+        <button class="btn btn-primary">Zur Gruppenansicht wechseln</button>
+    </a>
 
 {% endblock %}

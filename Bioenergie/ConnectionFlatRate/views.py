@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from Abrechnung.models import ConnectionFlatRate
 from ConnectionFlatRate.forms import ConnectionFlatRateForm

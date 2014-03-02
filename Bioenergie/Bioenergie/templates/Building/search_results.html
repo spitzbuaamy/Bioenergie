@@ -3,15 +3,17 @@
 
     <form action="" method="get" style="margin-top: -33.5px; position: absolute; right: 100px">
         <input type="text" name="q" style="display: inline; height: 14px">
-        <input type="submit" value="Suchen" style="display: inline; margin-top: -10px; background-color: gray; border-color: gray;">
+        <input type="submit" value="Suchen"
+               style="display: inline; margin-top: -10px; background-color: gray; border-color: gray;">
     </form>
-</br>
+    </br>
     <p style="padding-left: 10px">Sie suchten nach: <strong>{{ query }}</strong></p>
 
     {% if Buildings %}
-        <ul class = "list">
+        <ul class="list">
             {% for building in Buildings %}
-            <li>{{ building.customer }} {{ building.street }} {{ building.house_number }}  <a href="{% url 'building_detail' pk=building.pk %}">Dieses Gebäude Abrechnen</a></li>
+                <li>{{ building.customer }} {{ building.street }} {{ building.house_number }} <a
+                        href="{% url 'building_detail' pk=building.pk %}">Dieses Gebäude Abrechnen</a></li>
             {% endfor %}
         </ul>
     {% else %}

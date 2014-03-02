@@ -12,7 +12,8 @@
 </head>
 
 <body style="width: 620px; margin-top: 50px">
-<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>{{ heatingplant_data }} TelNr: 07286/8242</u></p>
+<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>{{ heatingplant_data }} TelNr: 07286/8242</u>
+</p>
 
 <p style="margin-top: 60px; line-height: 100%; font-size: 12px"> {{ customer.salutation }} {{ customer.first_name }} {{ customer.last_name }}</p>
 
@@ -41,7 +42,8 @@
     Heizkosten {{ building.customer }} {{ building.street }} {{ building.house_number }}</p>
 
 <p style="font-size: 12px; margin-bottom: 0in; border-top: none; border-bottom: 1px solid #00000a; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; line-height: 150%">
-    <b>Rechnung für Wärmelieferung von {{ begin_acounting}} bis {{ end_acounting }} </b></p>
+    <b>Rechnung für Wärmelieferung von {{ begin_acounting }} bis {{ end_acounting }} </b></p>
+
 <p style="font-size: 12px; margin-bottom: 0in; line-height: 100%">
 <table width="619" cellpadding="4" cellspacing="0">
 
@@ -141,7 +143,8 @@
 
 <tr valign="top">
     <td width="409" style="border: none; padding: 0in">
-        <p style="font-size: 9pt">Grundpreis (EUR {{ basicpriceamount }} pro kW) {{ connection_power }} x {{ partial1 }} {{ months }} {{ partial2 }}
+        <p style="font-size: 9pt">Grundpreis (EUR {{ basicpriceamount }} pro kW) {{ connection_power }}
+            x {{ partial1 }} {{ months }} {{ partial2 }}
     </td>
     <td width="32" style="border: none; padding: 0in">
         <p>EUR</p>

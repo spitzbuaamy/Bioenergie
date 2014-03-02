@@ -2,28 +2,28 @@
 
 {% block body %}
 
-    <table style="margin-left: 30px; margin-bottom: 20px" >
+    <table style="margin-left: 30px; margin-bottom: 20px">
         <ul>
             <tr>
-                <td  valign="top"> Kunde:</td>
+                <td valign="top"> Kunde:</td>
                 <td>{{ customer.salutation }} <br/>
-                {{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} <br/>
-                {{ customer.street }} {{ customer.house_number }} <br/>
-                {{ customer.zip }} {{ customer.place }} </td>
+                    {{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} <br/>
+                    {{ customer.street }} {{ customer.house_number }} <br/>
+                    {{ customer.zip }} {{ customer.place }} </td>
             </tr>
             <tr>
-                <td> Telefonnummer: </td>
+                <td> Telefonnummer:</td>
                 <td>  {{ customer.telephone_number }} </td>
             </tr>
             <tr>
-                <td> Kundennummer: </td>
+                <td> Kundennummer:</td>
                 <td>  {{ customer.customer_number }} </td>
             </tr>
             <tr>
                 <td> Bank:</td>
                 <td> {{ customer.bank }} </td>
             </tr>
-          </ul>
+        </ul>
     </table>
 
 
@@ -41,58 +41,61 @@
         <table style=" margin: 50px; margin-top: -10px">
             <ul>
                 <tr><br/>
-                    <h2 style="margin-left: 40px">Objekt {{ forloop.counter }}</h2> <a style="position: relative; margin-top: 250px; margin-left: 0px; padding-left: 20px" class="linkButton" href="{% url 'building_update' pk=building.pk %}">
-            <button class="btn btn-primary">Bearbeiten</button>
-        </a>
-                    <tr>
-                <td> Kunde:</td>
-                <td>{{ building.customer }}</td>
-            </tr>
-            <tr>
-                <td> Adresse:</td>
-                <td> {{ building.zip }} {{ building.place }} </td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> {{ building.street }} {{ building.house_number }} </td>
-            </tr>
-            <tr>
-                <td> Arbeitspreis:</td>
-                <td> {{ building.working_price }} </td>
-            </tr>
-            <tr>
-                <td> Grundpreis:</td>
-                <td> {{ building.basic_price }} </td>
-            </tr>
-            <tr>
-                <td> Messpreis:</td>
-                <td> {{ building.measurement_price }} </td>
-            </tr>
-            <tr>
-                <td> Fixer Rabatt:</td>
-                {% if building.discount_fixed == None %}
-                <td> Nein </td>
-                {% else %}
-                <td> {{ building.discount_fixed }}%</td>
-                {% endif %}
-            </tr>
-            <tr>
-                <td> Anschlussdatum:</td>
-                <td> {{ building.contract_date }} </td>
-            </tr>
-            <tr>
-                <td> Anschlussnummer:</td>
-                <td> {{ building.connection_number }} </td>
-            </tr>
-            <tr>
-                <td> Anschlussleistung:</td>
-                <td> {{ building.connection_power }}kW </td>
-            </tr>
-            <tr>
-                <td> Letzte Rechnung:</td>
-                <td>{{ building.last_bill }}</td>
-            </tr>
-        </ul>
+
+                    <h2 style="margin-left: 40px">Objekt {{ forloop.counter }}</h2> <a
+                            style="position: relative; margin-top: 250px; margin-left: 0px; padding-left: 20px"
+                            class="linkButton" href="{% url 'building_update' pk=building.pk %}">
+                        <button class="btn btn-primary">Bearbeiten</button>
+                    </a>
+                <tr>
+                    <td> Kunde:</td>
+                    <td>{{ building.customer }}</td>
+                </tr>
+                <tr>
+                    <td> Adresse:</td>
+                    <td> {{ building.zip }} {{ building.place }} </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> {{ building.street }} {{ building.house_number }} </td>
+                </tr>
+                <tr>
+                    <td> Arbeitspreis:</td>
+                    <td> {{ building.working_price }} </td>
+                </tr>
+                <tr>
+                    <td> Grundpreis:</td>
+                    <td> {{ building.basic_price }} </td>
+                </tr>
+                <tr>
+                    <td> Messpreis:</td>
+                    <td> {{ building.measurement_price }} </td>
+                </tr>
+                <tr>
+                    <td> Fixer Rabatt:</td>
+                    {% if building.discount_fixed == None %}
+                        <td> Nein</td>
+                    {% else %}
+                        <td> {{ building.discount_fixed }}%</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td> Anschlussdatum:</td>
+                    <td> {{ building.contract_date }} </td>
+                </tr>
+                <tr>
+                    <td> Anschlussnummer:</td>
+                    <td> {{ building.connection_number }} </td>
+                </tr>
+                <tr>
+                    <td> Anschlussleistung:</td>
+                    <td> {{ building.connection_power }}kW</td>
+                </tr>
+                <tr>
+                    <td> Letzte Rechnung:</td>
+                    <td>{{ building.last_bill }}</td>
+                </tr>
+            </ul>
         </table>
     {% endfor %}
 

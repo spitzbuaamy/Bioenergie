@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from itertools import chain
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -26,6 +27,13 @@ class BuildingCreateView(CreateView):
     form_class = BuildingForm
     #success_url = reverse_lazy('building_list')
 
+    def get_form(self, form_class):
+        form = super(BuildingCreateView,self).get_form(form_class)
+        form.fields['contract_date'].widget.attrs.update({"class": "datepicker"})
+        form.fields['last_bill'].widget.attrs.update({"class": "datepicker"})
+        form.fields['billing_begin'].widget.attrs.update({"class": "datepicker"})
+        return form
+
 
 class BuildingUpdateView(UpdateView):
     template_name = "Building/building_form.html"
@@ -33,6 +41,13 @@ class BuildingUpdateView(UpdateView):
     context_object_name = 'building'
     form_class = BuildingForm
     # success_url = reverse_lazy('building_list')
+    #todo: Gehört der datpicker zu allen 3 feldern? Im Template waren nur 2 datpicker funktionen
+    def get_form(self, form_class):
+        form = super(BuildingUpdateView,self).get_form(form_class)
+        form.fields['contract_date'].widget.attrs.update({"class": "datepicker"})
+        form.fields['last_bill'].widget.attrs.update({"class": "datepicker"})
+        form.fields['billing_begin'].widget.attrs.update({"class": "datepicker"})
+        return form
 
 
 class BuildingDeleteView(DeleteView):

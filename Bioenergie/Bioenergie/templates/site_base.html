@@ -5,11 +5,14 @@
 <head>
     <link rel="icon" href="{% static "images/favicon.ico" %}" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui-1.10.4.custom.min.css" %}">
+    <!--    <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui-1.10.4.custom.min.css" %}"> -->
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
     <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery-ui-1.10.4.custom.min.js" %}"></script>
+    <!--    <script type="text/javascript" src="{% static "js/jquery-ui-1.10.4.custom.min.js" %}"></script> -->
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap-select.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap-datepicker.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.de.js" %}"></script>
 
     <script type="text/javascript">
 
@@ -18,7 +21,7 @@
             //Graue hinterlegung in aktivem tab
             function stripTrailingSlash(str) {
                 if (str.substr(-1) == '/') {
-                        return str.substr(0, str.length - 1);
+                    return str.substr(0, str.length - 1);
                 }
                 return str;
             }
@@ -35,15 +38,28 @@
                 }
             });
 
-            if ((url.substring(0, 11) != "/customers/") && (url != "/buildings/invoice/")) {
-                $('input[type="submit"]').remove();
-                $('#searchtext').remove();
-            }
-            if (url.substring(0, 18) == "/customers/search/")
-                $('#search').removeAttr('action');
-            $('#logout').click(function(){
-                console.log(window.location);
-                window.location.pathname = "/logout/";
+            $(document).ready(function () {
+                //Suchfeld ausblenden
+                if ((url.substring(0, 11) != "/customers/") && (url != "/buildings/invoice/")) {
+                    $('#searchbutton').remove();
+                    $('#searchtext').remove();
+                }
+                if (url.substring(0, 18) == "/customers/search/")
+                    $('#search').removeAttr('action');
+                //Suche zu allen Selectpicker mit mehr als 9 optionen
+                $.each($('.selectpicker'), function (index, value) {
+                    if (value.length >= 10)
+                        $(value).attr('data-live-search', "true");
+                });
+                //selectpicker
+                $('.selectpicker').selectpicker();
+
+                //datepicker
+                $(".datepicker").datepicker({
+                    format: 'dd.mm.yyyy',
+                    language: "de",
+                    weekStart: 1
+                });
             });
         });
     </script>
@@ -106,11 +122,11 @@
             <form id="search" class="navbar-form navbar-left" role="search" action="search/" method="get">
                 <div class="form-group">
                     <input id="searchtext" name="q" type="text" class="form-control" placeholder="Kunde">
-                    <input type="submit" class="btn" value="Suchen"/>
+                    <input id="searchbutton" type="submit" class="btn" value="Suchen"/>
                 </div>
             </form>
-            <form class="navbar-form pull-right" style="height: 28px; position: absolute; top: 2px; right: 25px" >
-                    <button id="logout" class="btn btn-danger">Logout</button>
+            <form class="navbar-form pull-right" style="height: 28px; position: absolute; top: 2px; right: 25px">
+                <button id="logout" class="btn btn-danger">Logout</button>
             </form>
 
         </div>

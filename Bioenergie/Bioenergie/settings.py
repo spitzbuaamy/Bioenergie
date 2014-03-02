@@ -143,7 +143,7 @@ INSTALLED_APPS = (
     'MeasurementPrice',
     'Rate',
     'WorkingPrice',
-    'werkzeug',
+    #'werkzeug',
     'django_extensions',
 
 )

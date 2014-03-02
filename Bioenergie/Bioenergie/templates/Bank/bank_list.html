@@ -5,11 +5,15 @@
     {% for bank in banks %}
 
         <ul class="list">
-            <li>{{ bank.name }}<a href="{% url 'bank_detail' pk=bank.pk %}">Details</a> <a href="{% url 'bank_delete' pk=bank.pk %}">Löschen</a><a href="{% url 'bank_update' pk=bank.pk %}">Bearbeiten</a></li>
+            <li>{{ bank.name }}<a href="{% url 'bank_detail' pk=bank.pk %}">Details</a> <a
+                    href="{% url 'bank_delete' pk=bank.pk %}">Löschen</a><a href="{% url 'bank_update' pk=bank.pk %}">Bearbeiten</a>
+            </li>
         </ul>
 
     {% endfor %}
 
-<a style="padding-left: 5px" class="linkButton" href="{% url 'bank_create' %}"><button class="btn btn-primary">Neue Bank anlegen</button></a>
+    <a style="padding-left: 5px" class="linkButton" href="{% url 'bank_create' %}">
+        <button class="btn btn-primary">Neue Bank anlegen</button>
+    </a>
 
 {% endblock %}

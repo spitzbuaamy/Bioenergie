@@ -4385,7 +4385,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 .pagination ul > li > a, .pagination ul > li > span {
     float: left;
     padding: 4px 12px;
-    line-height: 20px;
+    right: 0px;
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #ddd;

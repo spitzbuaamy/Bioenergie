@@ -283,8 +283,9 @@ class Offer(models.Model):
     owner = models.CharField("Eigentümer: (Ansonsten Kunde)", max_length="32", blank=True)
     phone_number = models.CharField("Telefonnummer", max_length="32", blank=True)
     object_type = models.CharField("Objektart", max_length="32", choices=TYPES, default=2)
-    connection = models.DecimalField("Anschluss je KW", max_digits=8, decimal_places=2)
+    connection = models.DecimalField("Änderungsfaktor für Anschluss je KW ", max_digits=8, decimal_places=2)
     connection_flat_rate = models.ForeignKey(ConnectionFlatRate, verbose_name="Anschlusspauschale") #Anschlusspauschale
+    connection_index = models.DecimalField("Änderungsfaktor für Anschlusspauschale ", max_digits=8, decimal_places=2)
     cable_price = models.ForeignKey(CablePrice, verbose_name="Zuleitungspreis") #Zuleitungspreis
     cable_length = models.IntegerField("Leitungsmehrlänge [in Meter]") #Kabellaenge
     comment = models.CharField("Soll ein Kommentar auf der Rechnung vermerkt werden?", max_length="64", blank=True)

@@ -33,11 +33,11 @@
             "house_number": 2,
             "BIC": "BND2315",
             "telephone_number": "",
-            "code_number": 1554,
+            "code_number": "1554",
             "customer_number": "K01",
             "street": "Schulstra\u00dfe",
             "place": "Lembach",
-            "account_number": 16513,
+            "account_number": "16513",
             "salutation": "",
             "IBAN": "15616133",
             "bank": 1
@@ -55,11 +55,11 @@
             "house_number": 14,
             "BIC": "BND2315",
             "telephone_number": "",
-            "code_number": 1563,
+            "code_number": "1563",
             "customer_number": "K02",
             "street": "Lederergasse",
             "place": "Lembach",
-            "account_number": 20334,
+            "account_number": "20334",
             "salutation": "",
             "IBAN": "15616132",
             "bank": 1
@@ -77,11 +77,11 @@
             "house_number": 6,
             "BIC": "4123",
             "telephone_number": "",
-            "code_number": 45,
+            "code_number": "45",
             "customer_number": "K03",
             "street": "Marktplatz",
             "place": "Lembach",
-            "account_number": 1243,
+            "account_number": "1243",
             "salutation": "Frau",
             "IBAN": "4451236",
             "bank": 1
@@ -99,11 +99,11 @@
             "house_number": 3,
             "BIC": "BND2315",
             "telephone_number": "",
-            "code_number": 1563,
+            "code_number": "1563",
             "customer_number": "K04",
             "street": "Marktplatz",
             "place": "Lembach",
-            "account_number": 1243,
+            "account_number": "1243",
             "salutation": "",
             "IBAN": "15616133",
             "bank": 1
@@ -121,11 +121,11 @@
             "house_number": 13,
             "BIC": "BND2315",
             "telephone_number": "",
-            "code_number": 1563,
+            "code_number": "1563",
             "customer_number": "K05",
             "street": "Marktplatz",
             "place": "Lembach",
-            "account_number": 1243,
+            "account_number": "1243",
             "salutation": "",
             "IBAN": "15616133",
             "bank": 1
@@ -1126,7 +1126,7 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 15,
-            "amount": 80.18,
+            "amount": "54.1",
             "wage_group": 1,
             "min": 0
         }
@@ -1136,7 +1136,7 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 30,
-            "amount": 78.06,
+            "amount": "52.67",
             "wage_group": 2,
             "min": 16
         }
@@ -1146,7 +1146,7 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 50,
-            "amount": 76.77,
+            "amount": "51.8",
             "wage_group": 3,
             "min": 31
         }
@@ -1156,7 +1156,7 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 80,
-            "amount": 75.6,
+            "amount": "51.01",
             "wage_group": 4,
             "min": 51
         }
@@ -1166,7 +1166,7 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 200,
-            "amount": 74.43,
+            "amount": "50.22",
             "wage_group": 5,
             "min": 81
         }
@@ -1176,7 +1176,7 @@
         "model": "Abrechnung.workingprice",
         "fields": {
             "max": 1000,
-            "amount": 73.15,
+            "amount": "49.36",
             "wage_group": 6,
             "min": 201
         }
@@ -1186,7 +1186,7 @@
         "model": "Abrechnung.basicprice",
         "fields": {
             "max": 15,
-            "amount": 29.6,
+            "amount": "19.97",
             "wage_group": 1,
             "min": 0
         }
@@ -1196,7 +1196,7 @@
         "model": "Abrechnung.basicprice",
         "fields": {
             "max": 30,
-            "amount": 29.15,
+            "amount": "19.67",
             "wage_group": 2,
             "min": 16
         }
@@ -1206,7 +1206,7 @@
         "model": "Abrechnung.basicprice",
         "fields": {
             "max": 50,
-            "amount": 28.01,
+            "amount": "18.9",
             "wage_group": 3,
             "min": 31
         }
@@ -1216,7 +1216,7 @@
         "model": "Abrechnung.basicprice",
         "fields": {
             "max": 80,
-            "amount": 26.84,
+            "amount": "18.11",
             "wage_group": 4,
             "min": 51
         }
@@ -1226,7 +1226,7 @@
         "model": "Abrechnung.basicprice",
         "fields": {
             "max": 200,
-            "amount": 25.55,
+            "amount": "17.24",
             "wage_group": 5,
             "min": 81
         }
@@ -1236,7 +1236,7 @@
         "model": "Abrechnung.basicprice",
         "fields": {
             "max": 1000,
-            "amount": 24.38,
+            "amount": "16.45",
             "wage_group": 6,
             "min": 201
         }
@@ -1246,7 +1246,7 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 15,
-            "amount": 87.85,
+            "amount": "59.28",
             "wage_group": 1,
             "min": 0
         }
@@ -1256,7 +1256,7 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 30,
-            "amount": 87.85,
+            "amount": "59.28",
             "wage_group": 2,
             "min": 16
         }
@@ -1266,7 +1266,7 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 50,
-            "amount": 87.85,
+            "amount": "59.28",
             "wage_group": 3,
             "min": 31
         }
@@ -1276,7 +1276,7 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 80,
-            "amount": 109.79,
+            "amount": "74.08",
             "wage_group": 4,
             "min": 51
         }
@@ -1286,7 +1286,7 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 200,
-            "amount": 109.79,
+            "amount": "74.08",
             "wage_group": 5,
             "min": 81
         }
@@ -1296,7 +1296,7 @@
         "model": "Abrechnung.measurementprice",
         "fields": {
             "max": 1000,
-            "amount": 219.47,
+            "amount": "148.09",
             "wage_group": 6,
             "min": 201
         }
@@ -1306,7 +1306,7 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 15,
-            "amount": 3839,
+            "amount": "3490",
             "wage_group": 1,
             "min": 0
         }
@@ -1316,7 +1316,7 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 30,
-            "amount": 4037,
+            "amount": "3670",
             "wage_group": 2,
             "min": 16
         }
@@ -1326,7 +1326,7 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 50,
-            "amount": 4279,
+            "amount": "3890",
             "wage_group": 3,
             "min": 31
         }
@@ -1336,7 +1336,7 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 80,
-            "amount": 4796,
+            "amount": "4360",
             "wage_group": 4,
             "min": 51
         }
@@ -1346,7 +1346,7 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 200,
-            "amount": 7590,
+            "amount": "6900",
             "wage_group": 5,
             "min": 81
         }
@@ -1356,7 +1356,7 @@
         "model": "Abrechnung.connectionflatrate",
         "fields": {
             "max": 1000,
-            "amount": 13590.5,
+            "amount": "12355",
             "wage_group": 6,
             "min": 201
         }
@@ -1445,20 +1445,17 @@
             "customer": 1,
             "connection_number": 1,
             "measurement_price": 4,
-            "street": "Schulstra\u00dfe",
             "zip": 4132,
             "working_price": 4,
             "house_number": 2,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 80,
-
+            "street": "Schulstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 4,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1468,20 +1465,17 @@
             "customer": 2,
             "connection_number": 2,
             "measurement_price": 6,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 6,
             "house_number": 14,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 380,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 6,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1491,20 +1485,17 @@
             "customer": 3,
             "connection_number": 3,
             "measurement_price": 2,
-            "street": "Marktplatz",
             "zip": 4132,
             "working_price": 2,
             "house_number": 6,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 28,
-
+            "street": "Marktplatz",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1514,20 +1505,17 @@
             "customer": 4,
             "connection_number": 4,
             "measurement_price": 2,
-            "street": "Marktplatz",
             "zip": 4132,
             "working_price": 2,
             "house_number": 3,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 25,
-
+            "street": "Marktplatz",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1537,20 +1525,17 @@
             "customer": 5,
             "connection_number": 5,
             "measurement_price": 4,
-            "street": "Marktplatz",
             "zip": 4132,
             "working_price": 4,
             "house_number": 13,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 51,
-
+            "street": "Marktplatz",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 4,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1560,20 +1545,17 @@
             "customer": 6,
             "connection_number": 6,
             "measurement_price": 1,
-            "street": "Linzerstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 13,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 14,
-
+            "street": "Linzerstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1583,20 +1565,17 @@
             "customer": 7,
             "connection_number": 8,
             "measurement_price": 5,
-            "street": "Marktplatz",
             "zip": 4132,
             "working_price": 5,
             "house_number": 7,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 85,
-
+            "street": "Marktplatz",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 5,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1606,20 +1585,17 @@
             "customer": 8,
             "connection_number": 9,
             "measurement_price": 1,
-            "street": "Marktplatz",
             "zip": 4132,
             "working_price": 1,
             "house_number": 1,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "Marktplatz",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1629,20 +1605,17 @@
             "customer": 9,
             "connection_number": 10,
             "measurement_price": 1,
-            "street": "Hanriederstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 3,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "Hanriederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1652,20 +1625,17 @@
             "customer": 10,
             "connection_number": 11,
             "measurement_price": 2,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 2,
             "house_number": 12,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 20,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1675,20 +1645,17 @@
             "customer": 11,
             "connection_number": 12,
             "measurement_price": 1,
-            "street": "Hanriederstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 6,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 10,
-
+            "street": "Hanriederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1698,20 +1665,17 @@
             "customer": 12,
             "connection_number": 13,
             "measurement_price": 2,
-            "street": "Hammer",
             "zip": 4132,
             "working_price": 2,
             "house_number": 10,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 20,
-
+            "street": "Hammer",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1721,20 +1685,17 @@
             "customer": 13,
             "connection_number": 14,
             "measurement_price": 1,
-            "street": "Friedhofstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 14,
             "contract_date": "2004-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "Friedhofstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1744,20 +1705,17 @@
             "customer": 14,
             "connection_number": 15,
             "measurement_price": 6,
-            "street": "Schulstra\u00dfe",
             "zip": 4132,
             "working_price": 6,
             "house_number": 1,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 550,
-
+            "street": "Schulstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 6,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1767,20 +1725,17 @@
             "customer": 15,
             "connection_number": 16,
             "measurement_price": 1,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 1,
             "house_number": 8,
             "contract_date": "2002-07-01",
-
             "discount_fixed": null,
             "connection_power": 12,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1790,20 +1745,17 @@
             "customer": 16,
             "connection_number": 17,
             "measurement_price": 1,
-            "street": "Pfarrgasse",
             "zip": 4132,
             "working_price": 1,
             "house_number": 11,
             "contract_date": "2004-07-01",
-
             "discount_fixed": null,
             "connection_power": 14,
-
+            "street": "Pfarrgasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1813,20 +1765,17 @@
             "customer": 17,
             "connection_number": 18,
             "measurement_price": 5,
-            "street": "Ederstra\u00dfe",
             "zip": 4132,
             "working_price": 5,
             "house_number": 9,
             "contract_date": "2001-07-01",
-
             "discount_fixed": null,
             "connection_power": 92,
-
+            "street": "Ederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 5,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1836,20 +1785,17 @@
             "customer": 18,
             "connection_number": 19,
             "measurement_price": 2,
-            "street": "Ederstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 9,
             "contract_date": "2002-07-01",
-
             "discount_fixed": null,
             "connection_power": 20,
-
+            "street": "Ederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1859,20 +1805,17 @@
             "customer": 19,
             "connection_number": 20,
             "measurement_price": 2,
-            "street": "Tannbergstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 6,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 20,
-
+            "street": "Tannbergstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1882,20 +1825,17 @@
             "customer": 20,
             "connection_number": 21,
             "measurement_price": 3,
-            "street": "Tannbergstra\u00dfe",
             "zip": 4132,
             "working_price": 3,
             "house_number": 6,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 47,
-
+            "street": "Tannbergstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 3,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1905,20 +1845,17 @@
             "customer": 21,
             "connection_number": 22,
             "measurement_price": 4,
-            "street": "Tannbergstra\u00dfe",
             "zip": 4132,
             "working_price": 4,
             "house_number": 6,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 60,
-
+            "street": "Tannbergstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 4,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1928,20 +1865,17 @@
             "customer": 22,
             "connection_number": 23,
             "measurement_price": 1,
-            "street": "Johaniterstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 22,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 12,
-
+            "street": "Johaniterstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1951,20 +1885,17 @@
             "customer": 23,
             "connection_number": 24,
             "measurement_price": 1,
-            "street": "Marktplatz",
             "zip": 4132,
             "working_price": 1,
             "house_number": 15,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "Marktplatz",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1974,20 +1905,17 @@
             "customer": 24,
             "connection_number": 25,
             "measurement_price": 1,
-            "street": "M\u00fchlgasse",
             "zip": 4132,
             "working_price": 1,
             "house_number": 1,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 12,
-
+            "street": "M\u00fchlgasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -1997,20 +1925,17 @@
             "customer": 25,
             "connection_number": 26,
             "measurement_price": 5,
-            "street": "Hanriederstra\u00dfe",
             "zip": 4132,
             "working_price": 5,
             "house_number": 28,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 100,
-
+            "street": "Hanriederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 5,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2020,20 +1945,17 @@
             "customer": 26,
             "connection_number": 27,
             "measurement_price": 1,
-            "street": "Johaniterstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 12,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 14,
-
+            "street": "Johaniterstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2043,20 +1965,17 @@
             "customer": 27,
             "connection_number": 28,
             "measurement_price": 1,
-            "street": "Tannbergstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 12,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 12,
-
+            "street": "Tannbergstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2066,20 +1985,17 @@
             "customer": 28,
             "connection_number": 29,
             "measurement_price": 1,
-            "street": "Johaniterstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 16,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 14,
-
+            "street": "Johaniterstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2089,20 +2005,17 @@
             "customer": 29,
             "connection_number": 30,
             "measurement_price": 1,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 1,
             "house_number": 10,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2112,20 +2025,17 @@
             "customer": 30,
             "connection_number": 31,
             "measurement_price": 1,
-            "street": "Gartenstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 35,
             "contract_date": "2008-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "Gartenstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2135,20 +2045,17 @@
             "customer": 31,
             "connection_number": 32,
             "measurement_price": 2,
-            "street": "Hanriederstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 15,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 20,
-
+            "street": "Hanriederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2158,20 +2065,17 @@
             "customer": 32,
             "connection_number": 33,
             "measurement_price": 2,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 2,
             "house_number": 11,
             "contract_date": "2008-07-01",
-
             "discount_fixed": null,
             "connection_power": 25,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2181,20 +2085,17 @@
             "customer": 33,
             "connection_number": 34,
             "measurement_price": 2,
-            "street": "Linzerstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 7,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 16,
-
+            "street": "Linzerstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2204,20 +2105,17 @@
             "customer": 50,
             "connection_number": 35,
             "measurement_price": 1,
-            "street": "Bohmerwaldstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 3,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 14,
-
+            "street": "Bohmerwaldstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2227,20 +2125,17 @@
             "customer": 35,
             "connection_number": 26,
             "measurement_price": 1,
-            "street": "Hanriederstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 12,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 12,
-
+            "street": "Hanriederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2250,20 +2145,17 @@
             "customer": 36,
             "connection_number": 37,
             "measurement_price": 2,
-            "street": "Hammer",
             "zip": 4132,
             "working_price": 2,
             "house_number": 7,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 16,
-
+            "street": "Hammer",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2273,20 +2165,17 @@
             "customer": 37,
             "connection_number": 38,
             "measurement_price": 1,
-            "street": "Rendlsiedlung",
             "zip": 4132,
             "working_price": 1,
             "house_number": 25,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 14,
-
+            "street": "Rendlsiedlung",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2296,20 +2185,17 @@
             "customer": 38,
             "connection_number": 39,
             "measurement_price": 3,
-            "street": "Falkensteinstra\u00dfe",
             "zip": 4132,
             "working_price": 3,
             "house_number": 2,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 32,
-
+            "street": "Falkensteinstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 3,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2319,20 +2205,17 @@
             "customer": 39,
             "connection_number": 40,
             "measurement_price": 2,
-            "street": "Moritz-Scheiblsstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 1,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 16,
-
+            "street": "Moritz-Scheiblsstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2342,20 +2225,17 @@
             "customer": 40,
             "connection_number": 41,
             "measurement_price": 2,
-            "street": "Falkensteinstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 21,
             "contract_date": "2006-07-01",
-
             "discount_fixed": null,
             "connection_power": 28,
-
+            "street": "Falkensteinstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2365,20 +2245,17 @@
             "customer": 44,
             "connection_number": 45,
             "measurement_price": 2,
-            "street": "Falkensteinstra\u00dfe",
             "zip": 4132,
             "working_price": 2,
             "house_number": 17,
             "contract_date": "2007-07-01",
-
             "discount_fixed": null,
             "connection_power": 20,
-
+            "street": "Falkensteinstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2388,20 +2265,17 @@
             "customer": 45,
             "connection_number": 46,
             "measurement_price": 1,
-            "street": "Hanriederstra\u00dfe",
             "zip": 4132,
             "working_price": 1,
             "house_number": 19,
             "contract_date": "2008-07-01",
-
             "discount_fixed": null,
             "connection_power": 12,
-
+            "street": "Hanriederstra\u00dfe",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2411,20 +2285,17 @@
             "customer": 46,
             "connection_number": 47,
             "measurement_price": 2,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 2,
             "house_number": 5,
             "contract_date": "2008-07-01",
-
             "discount_fixed": null,
             "connection_power": 16,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2434,20 +2305,17 @@
             "customer": 47,
             "connection_number": 48,
             "measurement_price": 2,
-            "street": "Lederergasse",
             "zip": 4132,
             "working_price": 2,
             "house_number": 7,
             "contract_date": "2008-07-01",
-
             "discount_fixed": null,
             "connection_power": 16,
-
+            "street": "Lederergasse",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 2,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2457,20 +2325,17 @@
             "customer": 48,
             "connection_number": 49,
             "measurement_price": 1,
-            "street": "M\u00fchlholzweg",
             "zip": 4132,
             "working_price": 1,
             "house_number": 7,
             "contract_date": "2008-07-01",
-
             "discount_fixed": null,
             "connection_power": 15,
-
+            "street": "M\u00fchlholzweg",
             "place": "Lembach",
             "last_bill": "2013-07-01",
             "basic_price": 1,
             "billing_begin": "2013-07-01"
-
         }
     },
     {
@@ -2490,7 +2355,7 @@
         "fields": {
             "building": 1,
             "measured_date": "2013-06-30",
-            "value": 324
+            "value": "324"
         }
     },
     {
@@ -2499,7 +2364,7 @@
         "fields": {
             "building": 2,
             "measured_date": "2013-06-30",
-            "value": 2781
+            "value": "2781"
         }
     },
     {
@@ -2508,7 +2373,7 @@
         "fields": {
             "building": 3,
             "measured_date": "2013-06-30",
-            "value": 313.673
+            "value": "313.673"
         }
     },
     {
@@ -2517,7 +2382,7 @@
         "fields": {
             "building": 4,
             "measured_date": "2013-06-30",
-            "value": 86.675
+            "value": "86.675"
         }
     },
     {
@@ -2526,7 +2391,7 @@
         "fields": {
             "building": 5,
             "measured_date": "2013-06-30",
-            "value": 270.649
+            "value": "270.649"
         }
     },
     {
@@ -2535,7 +2400,7 @@
         "fields": {
             "building": 6,
             "measured_date": "2013-06-30",
-            "value": 74596
+            "value": "74596"
         }
     },
     {
@@ -2544,7 +2409,7 @@
         "fields": {
             "building": 7,
             "measured_date": "2013-06-30",
-            "value": 479
+            "value": "479"
         }
     },
     {
@@ -2553,7 +2418,7 @@
         "fields": {
             "building": 8,
             "measured_date": "2013-06-30",
-            "value": 119.631
+            "value": "119.631"
         }
     },
     {
@@ -2562,7 +2427,7 @@
         "fields": {
             "building": 9,
             "measured_date": "2013-06-30",
-            "value": 80
+            "value": "80"
         }
     },
     {
@@ -2571,7 +2436,7 @@
         "fields": {
             "building": 10,
             "measured_date": "2013-06-30",
-            "value": 20
+            "value": "20"
         }
     },
     {
@@ -2580,7 +2445,7 @@
         "fields": {
             "building": 11,
             "measured_date": "2013-06-30",
-            "value": 23
+            "value": "23"
         }
     },
     {
@@ -2589,7 +2454,7 @@
         "fields": {
             "building": 12,
             "measured_date": "2013-06-30",
-            "value": 113.901
+            "value": "113.901"
         }
     },
     {
@@ -2598,7 +2463,7 @@
         "fields": {
             "building": 13,
             "measured_date": "2013-06-30",
-            "value": 62
+            "value": "62"
         }
     },
     {
@@ -2607,7 +2472,7 @@
         "fields": {
             "building": 14,
             "measured_date": "2013-06-30",
-            "value": 2252.524
+            "value": "2252.524"
         }
     },
     {
@@ -2616,7 +2481,7 @@
         "fields": {
             "building": 15,
             "measured_date": "2013-06-30",
-            "value": 31.087
+            "value": "31.087"
         }
     },
     {
@@ -2625,7 +2490,7 @@
         "fields": {
             "building": 16,
             "measured_date": "2013-06-30",
-            "value": 48.4
+            "value": "48.4"
         }
     },
     {
@@ -2634,7 +2499,7 @@
         "fields": {
             "building": 17,
             "measured_date": "2013-06-30",
-            "value": 783
+            "value": "783"
         }
     },
     {
@@ -2643,7 +2508,7 @@
         "fields": {
             "building": 18,
             "measured_date": "2013-06-30",
-            "value": 92.494
+            "value": "92.494"
         }
     },
     {
@@ -2652,7 +2517,7 @@
         "fields": {
             "building": 19,
             "measured_date": "2013-06-30",
-            "value": 17
+            "value": "17"
         }
     },
     {
@@ -2661,7 +2526,7 @@
         "fields": {
             "building": 20,
             "measured_date": "2013-06-30",
-            "value": 47
+            "value": "47"
         }
     },
     {
@@ -2670,7 +2535,7 @@
         "fields": {
             "building": 21,
             "measured_date": "2013-06-30",
-            "value": 74
+            "value": "74"
         }
     },
     {
@@ -2679,7 +2544,7 @@
         "fields": {
             "building": 22,
             "measured_date": "2013-06-30",
-            "value": 13
+            "value": "13"
         }
     },
     {
@@ -2688,7 +2553,7 @@
         "fields": {
             "building": 23,
             "measured_date": "2013-06-30",
-            "value": 34.71
+            "value": "34.71"
         }
     },
     {
@@ -2697,7 +2562,7 @@
         "fields": {
             "building": 24,
             "measured_date": "2013-06-30",
-            "value": 10
+            "value": "10"
         }
     },
     {
@@ -2706,7 +2571,7 @@
         "fields": {
             "building": 25,
             "measured_date": "2013-06-30",
-            "value": 138
+            "value": "138"
         }
     },
     {
@@ -2715,7 +2580,7 @@
         "fields": {
             "building": 26,
             "measured_date": "2013-06-30",
-            "value": 19
+            "value": "19"
         }
     },
     {
@@ -2724,7 +2589,7 @@
         "fields": {
             "building": 27,
             "measured_date": "2013-06-30",
-            "value": 0
+            "value": "0"
         }
     },
     {
@@ -2733,7 +2598,7 @@
         "fields": {
             "building": 28,
             "measured_date": "2013-06-30",
-            "value": 25
+            "value": "25"
         }
     },
     {
@@ -2742,7 +2607,7 @@
         "fields": {
             "building": 31,
             "measured_date": "2013-06-30",
-            "value": 27
+            "value": "27"
         }
     },
     {
@@ -2751,7 +2616,7 @@
         "fields": {
             "building": 33,
             "measured_date": "2013-06-30",
-            "value": 4
+            "value": "4"
         }
     },
     {
@@ -2760,7 +2625,7 @@
         "fields": {
             "building": 36,
             "measured_date": "2013-06-30",
-            "value": 21
+            "value": "21"
         }
     },
     {
@@ -2769,7 +2634,7 @@
         "fields": {
             "building": 37,
             "measured_date": "2013-06-30",
-            "value": 15
+            "value": "15"
         }
     },
     {
@@ -2778,7 +2643,7 @@
         "fields": {
             "building": 40,
             "measured_date": "2013-06-30",
-            "value": 27
+            "value": "27"
         }
     },
     {
@@ -2787,7 +2652,7 @@
         "fields": {
             "building": 2,
             "measured_date": "2014-02-11",
-            "value": 5000
+            "value": "5000"
         }
     },
     {
@@ -2796,7 +2661,7 @@
         "fields": {
             "building": 2,
             "measured_date": "2013-11-02",
-            "value": 3600
+            "value": "3600"
         }
     },
     {
@@ -2805,7 +2670,7 @@
         "fields": {
             "building": 4,
             "measured_date": "2013-09-04",
-            "value": 3600
+            "value": "3600"
         }
     },
     {
@@ -2814,7 +2679,7 @@
         "fields": {
             "building": 4,
             "measured_date": "2014-02-05",
-            "value": 7000
+            "value": "7000"
         }
     },
     {
@@ -2823,7 +2688,7 @@
         "fields": {
             "building": 1,
             "measured_date": "2013-12-04",
-            "value": 2000
+            "value": "2000"
         }
     },
     {
@@ -2832,7 +2697,7 @@
         "fields": {
             "building": 1,
             "measured_date": "2013-09-04",
-            "value": 5000
+            "value": "5000"
         }
     },
     {
@@ -2840,7 +2705,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 1,
-            "monthly_rate": 51.22,
+            "monthly_rate": "51.22",
             "year": 2013
         }
     },
@@ -2849,7 +2714,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 2,
-            "monthly_rate": 371.11,
+            "monthly_rate": "371.11",
             "year": 2013
         }
     },
@@ -2858,7 +2723,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 3,
-            "monthly_rate": 41.72,
+            "monthly_rate": "41.72",
             "year": 2013
         }
     },
@@ -2867,7 +2732,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 4,
-            "monthly_rate": 14.66,
+            "monthly_rate": "14.66",
             "year": 2013
         }
     },
@@ -2876,7 +2741,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 5,
-            "monthly_rate": 46.36,
+            "monthly_rate": "46.36",
             "year": 2013
         }
     },
@@ -2885,7 +2750,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 6,
-            "monthly_rate": 8.47,
+            "monthly_rate": "8.47",
             "year": 2013
         }
     },
@@ -2894,7 +2759,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 7,
-            "monthly_rate": 72.4,
+            "monthly_rate": "72.4",
             "year": 2013
         }
     },
@@ -2903,7 +2768,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 8,
-            "monthly_rate": 16.27,
+            "monthly_rate": "16.27",
             "year": 2013
         }
     },
@@ -2912,7 +2777,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 9,
-            "monthly_rate": 10.75,
+            "monthly_rate": "10.75",
             "year": 2013
         }
     },
@@ -2921,7 +2786,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 10,
-            "monthly_rate": 18.55,
+            "monthly_rate": "18.55",
             "year": 2013
         }
     },
@@ -2930,7 +2795,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 11,
-            "monthly_rate": 12.21,
+            "monthly_rate": "12.21",
             "year": 2013
         }
     },
@@ -2939,7 +2804,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 12,
-            "monthly_rate": 20.25,
+            "monthly_rate": "20.25",
             "year": 2013
         }
     },
@@ -2948,7 +2813,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 13,
-            "monthly_rate": 23.29,
+            "monthly_rate": "23.29",
             "year": 2013
         }
     },
@@ -2957,7 +2822,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 14,
-            "monthly_rate": 348.44,
+            "monthly_rate": "348.44",
             "year": 2013
         }
     },
@@ -2966,7 +2831,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 15,
-            "monthly_rate": 7.02,
+            "monthly_rate": "7.02",
             "year": 2013
         }
     },
@@ -2975,7 +2840,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 16,
-            "monthly_rate": 11.75,
+            "monthly_rate": "11.75",
             "year": 2013
         }
     },
@@ -2984,7 +2849,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 17,
-            "monthly_rate": 91.7,
+            "monthly_rate": "91.7",
             "year": 2013
         }
     },
@@ -2993,7 +2858,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 18,
-            "monthly_rate": 19.69,
+            "monthly_rate": "19.69",
             "year": 2013
         }
     },
@@ -3002,7 +2867,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 19,
-            "monthly_rate": 20.52,
+            "monthly_rate": "20.52",
             "year": 2013
         }
     },
@@ -3011,7 +2876,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 20,
-            "monthly_rate": 42.04,
+            "monthly_rate": "42.04",
             "year": 2013
         }
     },
@@ -3020,7 +2885,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 21,
-            "monthly_rate": 60.7,
+            "monthly_rate": "60.7",
             "year": 2013
         }
     },
@@ -3029,7 +2894,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 22,
-            "monthly_rate": 12.7,
+            "monthly_rate": "12.7",
             "year": 2013
         }
     },
@@ -3038,7 +2903,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 23,
-            "monthly_rate": 29.9,
+            "monthly_rate": "29.9",
             "year": 2013
         }
     },
@@ -3047,7 +2912,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 25,
-            "monthly_rate": 100.85,
+            "monthly_rate": "100.85",
             "year": 2013
         }
     },
@@ -3056,7 +2921,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 26,
-            "monthly_rate": 16.32,
+            "monthly_rate": "16.32",
             "year": 2013
         }
     },
@@ -3065,7 +2930,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 27,
-            "monthly_rate": 18.36,
+            "monthly_rate": "18.36",
             "year": 2013
         }
     },
@@ -3074,7 +2939,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 28,
-            "monthly_rate": 18.18,
+            "monthly_rate": "18.18",
             "year": 2013
         }
     },
@@ -3083,7 +2948,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 29,
-            "monthly_rate": 14.17,
+            "monthly_rate": "14.17",
             "year": 2013
         }
     },
@@ -3092,7 +2957,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 30,
-            "monthly_rate": 14.39,
+            "monthly_rate": "14.39",
             "year": 2013
         }
     },
@@ -3101,7 +2966,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 31,
-            "monthly_rate": 24.42,
+            "monthly_rate": "24.42",
             "year": 2013
         }
     },
@@ -3110,7 +2975,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 32,
-            "monthly_rate": 19.17,
+            "monthly_rate": "19.17",
             "year": 2013
         }
     },
@@ -3119,7 +2984,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 33,
-            "monthly_rate": 21.97,
+            "monthly_rate": "21.97",
             "year": 2013
         }
     },
@@ -3128,7 +2993,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 34,
-            "monthly_rate": 18.41,
+            "monthly_rate": "18.41",
             "year": 2013
         }
     },
@@ -3137,7 +3002,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 35,
-            "monthly_rate": 20.67,
+            "monthly_rate": "20.67",
             "year": 2013
         }
     },
@@ -3146,7 +3011,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 36,
-            "monthly_rate": 15.09,
+            "monthly_rate": "15.09",
             "year": 2013
         }
     },
@@ -3155,7 +3020,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 37,
-            "monthly_rate": 16.24,
+            "monthly_rate": "16.24",
             "year": 2013
         }
     },
@@ -3164,7 +3029,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 38,
-            "monthly_rate": 28.92,
+            "monthly_rate": "28.92",
             "year": 2013
         }
     },
@@ -3173,7 +3038,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 39,
-            "monthly_rate": 19.68,
+            "monthly_rate": "19.68",
             "year": 2013
         }
     },
@@ -3182,7 +3047,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 40,
-            "monthly_rate": 30.24,
+            "monthly_rate": "30.24",
             "year": 2013
         }
     },
@@ -3191,7 +3056,7 @@
         "model": "Abrechnung.rate",
         "fields": {
             "building": 41,
-            "monthly_rate": 23.11,
+            "monthly_rate": "23.11",
             "year": 2013
         }
     },
@@ -3218,13 +3083,12 @@
             "index": 155,
             "year": 2014
         }
-    }
-    ,
+    },
     {
         "pk": 1,
         "model": "Abrechnung.heatingplant",
         "fields": {
-            "phone_number": "",
+            "phone_number": "07286/8242",
             "code_number": 8965423,
             "name": "Bioenergie Lembach Ammerstorfer KG",
             "zip": 4132,
@@ -3239,12 +3103,27 @@
             "IBAN": "58932289",
             "mail": "franz.ammerstorfer1@utanet.at",
             "standard_discount": 14,
-            "correction_factor": "1.5",
+            "correction_factor": "1",
             "bill_number": 324343,
             "bank": 1
         }
+    },
+    {
+        "pk": 1,
+        "model": "Abrechnung.offer",
+        "fields": {
+            "building": 3,
+            "phone_number": "",
+            "connection_index": "1.2",
+            "cable_price": 1,
+            "object_type": "Wohnhaus",
+            "heating": true,
+            "comment": "",
+            "connection": "1.2",
+            "connection_flat_rate": 2,
+            "warm_water": true,
+            "owner": "",
+            "cable_length": 0
+        }
     }
 ]
-
-
-

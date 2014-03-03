@@ -13,10 +13,10 @@ settings.configure(
 reading = csv.reader(open("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Datei.csv"), delimiter=";")
 
 for line in reading:
-    building = line[0]
+    building = line[1]
     measured_date = line[3]
     value = line[4]
 
-    dataset = Measurement(building=building, measured_date=measured_date, value=value)
-    dataset.save()
-
+    print(building, measured_date, value)
+    #dataset = Measurement(building=building.connection_number, measured_date=measured_date, value=value)
+    #dataset.save()

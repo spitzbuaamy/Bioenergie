@@ -294,3 +294,4 @@ class Offer(models.Model):
 
     def get_absolute_url(self):
         return "/offers/detail/%i" % self.id
+

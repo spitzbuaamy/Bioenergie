@@ -71,6 +71,10 @@ class EnterDate(DetailView):
     context_object_name = 'building'
 
 
+def EmptyInvoice(request):
+    return render(request, 'Empty_Invoice.html')
+
+
 def search_form(request):
     return render(request, 'building/search_form.html')
 

@@ -8,4 +8,5 @@ urlpatterns = patterns('',
                        url(r'^pdfanschluss/(?P<id1>\d+)/(?P<id2>\d+)$', 'Abrechnung.views.pdfAnschlussrechnung',
                            name="pdf_Anschlussrechnung"),
 
+
 )

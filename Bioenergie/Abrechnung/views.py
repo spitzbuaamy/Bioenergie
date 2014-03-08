@@ -3,27 +3,20 @@
 from datetime import date, datetime
 import cStringIO as StringIO
 import cgi
-
 from xhtml2pdf import pisa
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.views.generic import TemplateView
 from django import http
 from django.template.loader import get_template
 from django.template import Context
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
-
-from Abrechnung.pdfmixin import PDFTemplateResponseMixin
 from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index
 
-
-
-#todo: alle apps in der settings.py unter "installed apps" eintragen
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Login Abfrage                                                                       !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -93,6 +86,25 @@ def write_pdf(template_src, context_dict):
         html.encode("UTF-8")), result, encoding='UTF-8')
 
     # Speichern
+    #file = open('Rechnungen/' + str(context_dict['customer']) + '.pdf', 'w')
+    #file.write(result.getvalue())
+    #file.close()
+
+    if not pdf.err:
+        return http.HttpResponse(result.getvalue(),
+                                 mimetype='application/pdf')
+    return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
+
+
+def write_zwischen_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    context = Context(context_dict)
+    html = template.render(context)
+    result = StringIO.StringIO()
+    pdf = pisa.pisaDocument(StringIO.StringIO(
+        html.encode("UTF-8")), result, encoding='UTF-8')
+
+    # Speichern
     file = open('Rechnungen/' + str(context_dict['customer']) + '.pdf', 'w')
     file.write(result.getvalue())
     file.close()
@@ -101,7 +113,6 @@ def write_pdf(template_src, context_dict):
         return http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
-
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Jahresabrechnung                                                                    !!!!!!!!!!!
@@ -127,24 +138,17 @@ def pdfRechnung(request, id):
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
     rate = building.rate_set.get(year=(date.today().year - 1))
-
-
-    #date_old_measurement = counterchange.date #Datum alter Zaehlerstand
-    #date_new_measurement = counterchange.date_new_counter #Datum neuer Zaehlerstand
-    #heat_quantity = counterchange.heat_quantity #Zu verrechnende Waermemenge
-    #new_reading = counterchange.counter_final_result #Neuer Zaehlerstand
+    actual_bill_number = heatingplant.bill_number
 
     #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
     thisyear = date.today().year
-
 
     #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
     abr_date1 = building.last_bill
     abr_date2 = str(int(thisyear)) + "-07-01"
 
     #Zaehlerwechsel
-
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
 
     measurements = building.measurement_set.filter(measured_date__range=[abr_date1, abr_date2])
@@ -168,9 +172,6 @@ def pdfRechnung(request, id):
     # Fuer die Abrechnungsperiode bei der Rechnung
     begin_acounting = "1. Juli " + str(int(thisyear - 1)) #Beginn der Abrechnung (Datum)
     end_acounting = "30. Juni " + str(thisyear) #Ende der Abrechnung (Datum)
-
-    #Alter Zaehlerstand - neuer Zaehlerstand
-    #old_reading = new_reading - heat_quantity #Alter Zaehlerstand
 
     #Arbeitspeis
     workingpriceamount = workingprice.amount
@@ -209,7 +210,6 @@ def pdfRechnung(request, id):
     advanced_payment_on_account_net = float(rate.monthly_rate) * months #Netto
     advanced_payment_on_account_vat = advanced_payment_on_account_net * float(0.2) #MWST
     advanced_payment_on_account_gross = advanced_payment_on_account_net * float(1.2) #Brutto
-
 
     #Unterscheidung ob Guthaben oder Nachzahlung; Ergebnis wird in die String-Variable credit_additionalpayment gespeichert
     if debiting is False:
@@ -266,6 +266,18 @@ def pdfRechnung(request, id):
     index_for_this_year = Index.objects.get(year=index_last_year).index
     index_for_the_next_year = Index.objects.get(year=index_this_year).index
 
+    #Rechnungsnummer um 1 erhoehen und in Datenbank speichern
+    number = actual_bill_number + 1
+    saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street, house_number=heatingplant.house_number,
+                          zip=heatingplant.zip, place=heatingplant.place, phone_number=heatingplant.phone_number,
+                          mail=heatingplant.mail, bank=heatingplant.bank, account_number=heatingplant.account_number,
+                          code_number=heatingplant.code_number, BIC=heatingplant.BIC, IBAN=heatingplant.IBAN,
+                          manager=heatingplant.manager, Ust_ID=heatingplant.Ust_ID,
+                          company_register_number=heatingplant.company_register_number,
+                          standard_discount=heatingplant.standard_discount,
+                          correction_factor=heatingplant.correction_factor, bill_number=number)
+    saving.save()
+
     #-----------------------------------------------------------------------------------------------------------------------
 
     return write_pdf('Rechnung.html', {
@@ -318,6 +330,7 @@ def pdfRechnung(request, id):
         "index_for_the_last_year": index_for_the_last_year,
         "index_for_this_year": index_for_this_year,
         "index_for_the_next_year": index_for_the_next_year,
+        "actual_bill_number": actual_bill_number,
     })
 
 
@@ -343,12 +356,14 @@ def pdfZwischenabrechnung(request, id):
     correction_factor = heatingplant.correction_factor
     debiting = building.customer.debitor
     rate = building.rate_set.get(year=(date.today().year - 1))
+    actual_bill_number = heatingplant.bill_number
 
     #-----------------------------------------------------------------------------------------------------------------------
     # Rechnen...
     thisyear = date.today().year
     anfangsdatum = request.GET['anfangsdatum']
-    enddatum = request.GET['enddatum']
+    enddatum = request.GET['enddatum'] #TODO: Datumsformat anpassen (wsl beim Datepicker)
+
 
     if (anfangsdatum == "2000-01-01") and (enddatum == "3000-01-01"):
         #Anzahl vergangener Monate ausrechnen
@@ -462,10 +477,6 @@ def pdfZwischenabrechnung(request, id):
 
     measurement_diff = summe
 
-
-    #Alter Zaehlerstand - neuer Zaehlerstand
-    #old_reading = new_reading - heat_quantity #Alter Zaehlerstand
-
     #Arbeitspeis
     workingpriceamount = workingprice.amount
     workingpricemulti = float(workingprice.amount) * float(measurement_diff)
@@ -556,14 +567,26 @@ def pdfZwischenabrechnung(request, id):
     index_for_this_year = Index.objects.get(year=index_last_year).index
     index_for_the_next_year = Index.objects.get(year=index_this_year).index
 
+    #Rechnungsnummer um 1 erhoehen und in Datenbank speichern
+    number = actual_bill_number + 1
+    saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street, house_number=heatingplant.house_number,
+                          zip=heatingplant.zip, place=heatingplant.place, phone_number=heatingplant.phone_number,
+                          mail=heatingplant.mail, bank=heatingplant.bank, account_number=heatingplant.account_number,
+                          code_number=heatingplant.code_number, BIC=heatingplant.BIC, IBAN=heatingplant.IBAN,
+                          manager=heatingplant.manager, Ust_ID=heatingplant.Ust_ID,
+                          company_register_number=heatingplant.company_register_number,
+                          standard_discount=heatingplant.standard_discount,
+                          correction_factor=heatingplant.correction_factor, bill_number=number)
+    saving.save()
+
     #-----------------------------------------------------------------------------------------------------------------------
 
-    return write_pdf('Rechnung.html', {
+    return write_zwischen_pdf('Rechnung.html', {
         'counterchanges': counter_changes,
         'pagesize': 'A4',
         'building': building,
         'customer': customer,
-        #'bank': bank,
+        'actual_bill_number': actual_bill_number,
         'measurement_diff': measurement_diff,
         'begin_acounting': begin_acounting,
         'end_acounting': end_acounting,
@@ -894,13 +917,18 @@ def pdfAnschlussrechnung(request, id1, id2):
     return response
 
 
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Leere Rechnung                                                                      !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def pdfLeereRechnung(request):
     #Rueckgabe der PDF bestimmen
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="LeereRechnung.pdf"'
+    name = request.GET['name']
+    customername = name.split(" ")
+
+    filename = str("LR_" + str(request.GET['artikel']) + "_" + str(customername[0]) + "_" + str(customername[1] + "_" + str(date.today().year)))
+    response['Content-Disposition'] = 'attachment; filename=' + filename
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
     p.translate(cm, cm) #Angegebene Werte auf cm umrechnen
@@ -949,6 +977,79 @@ def pdfLeereRechnung(request):
     p.drawString(15 * cm, 0.7 * cm, IBAN)
     p.drawString(12 * cm, 0.4 * cm, BLZ)
     p.drawString(15 * cm, 0.4 * cm, BIC)
+
+    #Variablen fuer Rechnung erzeugen
+    thisyear = date.today().year
+    actual_bill_number = heatingplant.bill_number
+    bill_number = str("LR-" + str(thisyear) + "-" + str(actual_bill_number))
+    actualdate = datetime.today().strftime("%d.%m.%Y")
+    customer_name = request.GET['name']
+    customer_adress = request.GET['adresse']
+    customer_place = request.GET['ort']
+    article = request.GET['artikel']
+    enteredprice = request.GET['preis']
+    price = float(enteredprice)
+    heatingplant_data = heatingplant.name + " " + heatingplant.street + " " + str(
+        heatingplant.house_number) + " " + str(
+        heatingplant.zip) + " " + heatingplant.place + " " + heatingplant.phone_number
+    vat = float(price) * 0.2
+    net_price = float(price) - vat
+
+    #Fixwerte auf der Rechnung
+    p.setFillColor("Black")
+    p.setFont("Times-Roman", 14)
+    p.drawRightString(17*cm, 22*cm, str("Rechnung"))
+    p.line(14.9*cm, 21.8*cm, 17.1*cm, 21.8*cm)
+    p.setFont("Times-Roman", 12)
+    p.drawString(11*cm, 21*cm, "Kundenrechnung:")
+    p.drawRightString(17*cm, 21*cm, str(bill_number))
+    p.drawString(11*cm, 20.5*cm, "Datum:")
+    p.drawRightString(17*cm, 20.5*cm, str(actualdate))
+    p.drawString(11*cm, 20.0*cm, "Ust-IDNr:")
+    p.drawRightString(17*cm, 20.0*cm, str(heatingplant.Ust_ID))
+
+
+    #Heizwerk auf Rechnung und Kunde auf der Rechnung anzeigen
+    p.setFont("Times-Roman", 8)
+    p.drawString(0.5*cm, 22*cm, str(heatingplant_data))
+    p.setFont("Times-Roman", 12)
+    p.drawString(1*cm, 21*cm, str(customer_name))
+    p.drawString(1*cm, 20.3*cm, str(customer_adress))
+    p.drawString(1*cm, 19.6*cm, str(customer_place))
+
+    #Artikel und Preis auf Rechnung
+    p.setFont("Times-Bold", 14)
+    p.drawString(1*cm, 16*cm, str("Artikelbezeichnung:"))
+    p.drawString(12.5*cm, 16*cm, str(article))
+    p.drawString(1*cm, 13.1*cm, str("Zu zahlender Betrag:"))
+    p.drawRightString(15*cm, 13.1*cm, str('%.2f' % price))
+    p.setFont("Times-Roman", 14)
+    p.drawString(1*cm, 15.2*cm, str("Nettopreis:"))
+    p.drawString(1*cm, 14.5*cm, str("MwSt:"))
+    p.drawString(1*cm, 13.8*cm, str("Bruttopreis:"))
+    p.drawRightString(15*cm, 15.2*cm, str('%.2f' % net_price))
+    p.drawRightString(15*cm, 14.5*cm, str('%.2f' % vat))
+    p.drawRightString(15*cm, 13.8*cm, str('%.2f' % price))
+    p.line(0.8*cm, 15.8*cm, 15.2*cm, 15.8*cm)
+    p.line(0.8*cm, 13.6*cm, 15.2*cm, 13.6*cm)
+    p.line(0.8*cm, 12.9*cm, 15.2*cm, 12.9*cm)
+    p.line(0.8*cm, 12.8*cm, 15.2*cm, 12.8*cm)
+    p.drawString(12.5*cm, 15.2*cm, str("€"))
+    p.drawString(12.5*cm, 14.5*cm, str("€"))
+    p.drawString(12.5*cm, 13.8*cm, str("€"))
+    p.drawString(12.5*cm, 13.1*cm, str("€"))
+
+    #Rechnungsnummer um 1 erhoehen und in Datenbank speichern
+    number = actual_bill_number + 1
+    saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street, house_number=heatingplant.house_number,
+                          zip=heatingplant.zip, place=heatingplant.place, phone_number=heatingplant.phone_number,
+                          mail=heatingplant.mail, bank=heatingplant.bank, account_number=heatingplant.account_number,
+                          code_number=heatingplant.code_number, BIC=heatingplant.BIC, IBAN=heatingplant.IBAN,
+                          manager=heatingplant.manager, Ust_ID=heatingplant.Ust_ID,
+                          company_register_number=heatingplant.company_register_number,
+                          standard_discount=heatingplant.standard_discount,
+                          correction_factor=heatingplant.correction_factor, bill_number=number)
+    saving.save()
     #-----------------------------------------------------------------------------------------------------------------------
     # PDF korrekt downloaden und oeffnen
     p.showPage()
@@ -956,3 +1057,7 @@ def pdfLeereRechnung(request):
 
     #Seite zurueckgeben (response zurueckgeben)
     return response
+
+
+
+

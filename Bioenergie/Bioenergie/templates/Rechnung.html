@@ -12,7 +12,7 @@
 </head>
 
 <body style="width: 620px; margin-top: 50px">
-<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>{{ heatingplant_data }} TelNr: 07286/8242</u>
+<p style="margin-bottom: 0.14in; line-height: 100%; font-size: 8pt;"><u>{{ heatingplant_data }} {{ heatingplant.phone_number }}</u>
 </p>
 
 <p style="margin-top: 60px; line-height: 100%; font-size: 12px"> {{ customer.salutation }} {{ customer.first_name }} {{ customer.last_name }}</p>
@@ -30,7 +30,7 @@
 <p align="right" style="margin-top: 0px; line-height: 100%; font-size: 4"><u>RECHNUNG</u></p>
 
 <p align="right" style="margin-bottom: 0in; line-height: 100%; font-size: 12px">Kundenrechnung:
-    HK {% now "Y" %}-{{ customer.pk }}-{{ building.pk }}</p>
+    HK-{% now "Y" %}-{{ actual_bill_number }}</p>
 
 <p align="right" style="margin-bottom: 0in; line-height: 100%; font-size: 12px">Datum:
     {% now "j. F Y" %}</p>

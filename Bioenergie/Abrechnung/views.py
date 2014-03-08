@@ -85,14 +85,14 @@ def write_pdf(template_src, context_dict):
     pdf = pisa.pisaDocument(StringIO.StringIO(
         html.encode("UTF-8")), result, encoding='UTF-8')
 
-    # Speichern
+    #Speichern
     #file = open('Rechnungen/' + str(context_dict['customer']) + '.pdf', 'w')
     #file.write(result.getvalue())
     #file.close()
 
     if not pdf.err:
         return http.HttpResponse(result.getvalue(),
-                                 mimetype='application/pdf')
+                                 mimetype='application/pdf', )
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
 
 
@@ -928,7 +928,7 @@ def pdfLeereRechnung(request):
     customername = name.split(" ")
 
     filename = str("LR_" + str(request.GET['artikel']) + "_" + str(customername[0]) + "_" + str(customername[1] + "_" + str(date.today().year)))
-    response['Content-Disposition'] = 'attachment; filename=' + filename
+    response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
     p.translate(cm, cm) #Angegebene Werte auf cm umrechnen

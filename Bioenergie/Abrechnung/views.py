@@ -91,8 +91,12 @@ def write_pdf(template_src, context_dict):
     #file.close()
 
     if not pdf.err:
-        return http.HttpResponse(result.getvalue(),
-                                 mimetype='application/pdf', )
+        response = http.HttpResponse(result.getvalue(),
+                                 mimetype='application/pdf')
+
+        response['Content-Disposition'] = 'attachment; filename=whatever.pdf'
+
+        return response
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
 
 
@@ -992,8 +996,8 @@ def pdfLeereRechnung(request):
     heatingplant_data = heatingplant.name + " " + heatingplant.street + " " + str(
         heatingplant.house_number) + " " + str(
         heatingplant.zip) + " " + heatingplant.place + " " + heatingplant.phone_number
-    vat = float(price) * 0.2
-    net_price = float(price) - vat
+    net_price = float(price) / 1.2
+    vat = float(price) - float(net_price)
 
     #Fixwerte auf der Rechnung
     p.setFillColor("Black")

@@ -6,9 +6,9 @@
 
             <tr class="list" xmlns="http://www.w3.org/1999/html">
                 <td>{{ customer.first_name }} {{ customer.last_name }} </td>
-                <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary">Details</a></td>
-                <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn btn-primary">Ändern</a></td>
-                <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn btn-danger">Löschen</a></td>
+                <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
             </tr>
 
         {% endfor %}

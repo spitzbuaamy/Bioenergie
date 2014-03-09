@@ -332,7 +332,7 @@ def pdfRechnung(request, id):
         "index_for_the_next_year": index_for_the_next_year,
         "actual_bill_number": actual_bill_number,
     })
-
+import pdb
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Zwischenabrechnung                                                                  !!!!!!!!!!!
@@ -365,7 +365,7 @@ def pdfZwischenabrechnung(request, id):
     enddatum = request.GET['enddatum'] #TODO: Datumsformat anpassen (wsl beim Datepicker)
 
 
-    if (anfangsdatum == "2000-01-01") and (enddatum == "3000-01-01"):
+    if (anfangsdatum == "01.01.2000") and (enddatum == "01.01.3000"):
         #Anzahl vergangener Monate ausrechnen
         today = datetime.now()
         month = today.month
@@ -384,77 +384,41 @@ def pdfZwischenabrechnung(request, id):
         end_acounting = date.today() #Ende der Abrechnung (Datum)
     else:
         #Anzahl vergangener Monate ausrechnen
-        variabel1 = anfangsdatum.split("-")
+        variabel1 = anfangsdatum.split(".")
         firstmonth = variabel1[1]
-        variabel2 = enddatum.split("-")
+        variabel2 = enddatum.split(".")
         secondmonth = variabel2[1]
 
         months = (12 - (int(secondmonth) - int(firstmonth)) * (-1))
         #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
-        abr_date1 = str(anfangsdatum)
-        abr_date2 = str(enddatum)
 
+
+        day_begin = anfangsdatum[0:2]
+        day_end = enddatum[0:2]
+        month_begin = anfangsdatum[3:5]
+        month_end = enddatum[3:5]
+        year_begin = anfangsdatum[6:10]
+        year_end = enddatum[6:10]
+        date_begin = year_begin + "-" + month_begin + "-" + day_begin
+        date_end = year_end + "-" + month_end + "-" + day_end
+        abr_date1 = str(date_begin)
+        abr_date2 = date_end
 
         # Fuer die Abrechnungsperiode bei der Rechnung
-        day1 = variabel1[2]
+        day1 = variabel1[0]
         month1 = variabel1[1]
-        year1 = variabel1[0]
-        day2 = variabel2[2]
+        year1 = variabel1[2]
+        day2 = variabel2[0]
         month2 = variabel2[1]
-        year2 = variabel2[0]
+        year2 = variabel2[2]
 
-        if month1 == "01":
-            chosenmonth1 = "Januar"
-        elif month1 == "02":
-            chosenmonth1 = "Februar"
-        elif month1 == "03":
-            chosenmonth1 = "Maerz"
-        elif month1 == "04":
-            chosenmonth1 = "April"
-        elif month1 == "05":
-            chosenmonth1 = "Mai"
-        elif month1 == "06":
-            chosenmonth1 = "Juni"
-        elif month1 == "07":
-            chosenmonth1 = "Juli"
-        elif month1 == "08":
-            chosenmonth1 = "August"
-        elif month1 == "09":
-            chosenmonth1 = "September"
-        elif month1 == "10":
-            chosenmonth1 = "Oktober"
-        elif month1 == "11":
-            chosenmonth1 = "November"
-        elif month1 == "12":
-            chosenmonth1 = "Dezember"
+        months = ['Januar', 'Februar', u'März', 'April', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
 
-        if month2 == "01":
-            chosenmonth2 = "Januar"
-        elif month2 == "02":
-            chosenmonth2 = "Februar"
-        elif month2 == "03":
-            chosenmonth2 = "Maerz"
-        elif month2 == "04":
-            chosenmonth2 = "April"
-        elif month2 == "05":
-            chosenmonth2 = "Mai"
-        elif month2 == "06":
-            chosenmonth2 = "Juni"
-        elif month2 == "07":
-            chosenmonth2 = "Juli"
-        elif month2 == "08":
-            chosenmonth2 = "August"
-        elif month2 == "09":
-            chosenmonth2 = "September"
-        elif month2 == "10":
-            chosenmonth2 = "Oktober"
-        elif month2 == "11":
-            chosenmonth2 = "November"
-        elif month2 == "12":
-            chosenmonth2 = "Dezember"
+        chosenmonth1 = months[int(month1)-1]
+        chosenmonth2 = months[int(month2)-1]
 
-        begin_acounting = str(day1 + ". " + chosenmonth1 + " " + year1)  #Beginn der Abrechnung (Datum)
-        end_acounting = str(day2 + ". " + chosenmonth2 + " " + year2) #Ende der Abrechnung (Datum)
+        begin_acounting = unicode(day1 + "." + chosenmonth1 + " " + year1)  #Beginn der Abrechnung (Datum)
+        end_acounting = unicode(day2 + "." + chosenmonth2 + " " + year2) #Ende der Abrechnung (Datum)
 
     #Zaehlerwechsel
     counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])

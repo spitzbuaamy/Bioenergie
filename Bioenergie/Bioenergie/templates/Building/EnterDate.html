@@ -5,7 +5,17 @@
     <script type="text/javascript">
     $(document).ready(function(){
         var end = false;
-        var anfang = flase;
+        var anfang = false;
+        $('#enddatum').datepicker({
+                    format: 'dd.mm.yyyy',
+                    language: "de",
+                    weekStart: 1
+                });
+        $('#anfangsdatum').datepicker({
+                    format: 'dd.mm.yyyy',
+                    language: "de",
+                    weekStart: 1
+                });
         $('#need_date').disable();
         $('#anfangsdatum').change(function(){
             if(this.val() == "")
@@ -53,8 +63,8 @@
 
     </form>
     <form action="{% url "pdf_Zwischenabrechnung" building.pk %}" method="get">
-        <input id="anfangsdatum" name="anfangsdatum" type="hidden" value="2000-01-01" style="margin-left: 10px">
-        <input id="enddatum" name="enddatum" type="hidden" value="3000-01-01" style="margin-left: 10px">
+        <input id="anfangsdatum" name="anfangsdatum" type="hidden" value="01.01.2000" style="margin-left: 10px">
+        <input id="enddatum" name="enddatum" type="hidden" value="01.01.3000" style="margin-left: 10px">
         </p>
 
         <input class="btn btn-primary" style="margin-left: 20px; padding: 6px; width: 340px" type="submit"

@@ -7,9 +7,9 @@
 
             <tr class="list">
                 <td>Gruppe {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }})</td>
-                <td><a href="{% url 'basic_price_detail' pk=basic_price.pk %}" class="btn-primary btn">Details</a></td>
-                <td><a href="{% url 'basic_price_update' pk=basic_price.pk %}" class="btn btn-primary">Ändern</a></td>
-                <td><a href="{% url 'basic_price_delete' pk=basic_price.pk %}" class="btn-danger btn">Löschen</a></td>
+                <td><a href="{% url 'basic_price_detail' pk=basic_price.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                <td><a href="{% url 'basic_price_update' pk=basic_price.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                <td><a href="{% url 'basic_price_delete' pk=basic_price.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
             </tr>
 
         {% endfor %}

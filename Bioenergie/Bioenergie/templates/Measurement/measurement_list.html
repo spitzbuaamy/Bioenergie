@@ -6,9 +6,9 @@
 
             <tr class="list">
                 <td>{{ measurement.measured_date }} {{ measurement.building }}</td>
-                <td><a href="{% url 'measurement_detail' pk=measurement.pk %}" class="btn btn-primary">Details</a></td>
-                <td><a href="{% url 'measurement_update' pk=measurement.pk %}" class="btn btn-primary">Ändern</a></td>
-                <td><a href="{% url 'measurement_delete' pk=measurement.pk %}" class="btn btn-danger">Löschen</a></td>
+                <td><a href="{% url 'measurement_detail' pk=measurement.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                <td><a href="{% url 'measurement_update' pk=measurement.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                <td><a href="{% url 'measurement_delete' pk=measurement.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
             </tr>
 
         {% endfor %}

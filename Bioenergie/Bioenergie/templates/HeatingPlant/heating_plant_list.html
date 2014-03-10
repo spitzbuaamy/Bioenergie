@@ -6,11 +6,11 @@
 
             <tr class="list">
                 <td>{{ heating_plant.name }} ({{ heating_plant.manager }})</td>
-                <td><a href="{% url 'heating_plant_detail' pk=heating_plant.pk %}" class="btn btn-primary">Details</a>
+                <td><a href="{% url 'heating_plant_detail' pk=heating_plant.pk %}" class="btn btn-primary btn-small">Details</a>
                 </td>
-                <td><a href="{% url 'heating_plant_update' pk=heating_plant.pk %}" class="btn btn-primary">Ändern</a>
+                <td><a href="{% url 'heating_plant_update' pk=heating_plant.pk %}" class="btn btn-primary btn-small">Ändern</a>
                 </td>
-                <td><a href="{% url 'heating_plant_delete' pk=heating_plant.pk %}" class="btn btn-danger">Löschen</a>
+                <td><a href="{% url 'heating_plant_delete' pk=heating_plant.pk %}" class="btn btn-danger btn-small">Löschen</a>
                 </td>
             </tr>
 

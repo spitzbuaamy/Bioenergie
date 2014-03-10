@@ -6,9 +6,9 @@
 
             <tr class="list">
                 <td>{{ bank.name }}</td>
-                <td><a href="{% url 'bank_detail' pk=bank.pk %}" class="btn btn-primary">Details</a></td>
-                <td><a href="{% url 'bank_update' pk=bank.pk %}" class="btn btn-primary">Ändern</a></td>
-                <td><a href="{% url 'bank_delete' pk=bank.pk %}" class="btn btn-danger">Löschen</a></td>
+                <td><a href="{% url 'bank_detail' pk=bank.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                <td><a href="{% url 'bank_update' pk=bank.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                <td><a href="{% url 'bank_delete' pk=bank.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
             </tr>
 
         {% endfor %}

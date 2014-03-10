@@ -336,7 +336,7 @@ def pdfRechnung(request, id):
         "index_for_the_next_year": index_for_the_next_year,
         "actual_bill_number": actual_bill_number,
     })
-import pdb
+
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Zwischenabrechnung                                                                  !!!!!!!!!!!

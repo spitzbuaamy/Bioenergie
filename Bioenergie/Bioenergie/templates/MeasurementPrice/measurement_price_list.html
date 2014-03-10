@@ -9,11 +9,11 @@
                 <td>Gruppe {{ measurement_price.wage_group }}:
                     ({{ measurement_price.min }}-{{ measurement_price.max }})
                 </td>
-                <td><a href="{% url 'measurement_price_detail' pk=measurement_price.pk %}" class="btn btn-primary">Details</a>
+                <td><a href="{% url 'measurement_price_detail' pk=measurement_price.pk %}" class="btn btn-primary btn-small">Details</a>
                 </td>
-                <td><a href="{% url 'measurement_price_update' pk=measurement_price.pk %}" class="btn-primary btn">Ändern</a>
+                <td><a href="{% url 'measurement_price_update' pk=measurement_price.pk %}" class="btn btn-primary btn-small">Ändern</a>
                 </td>
-                <td><a href="{% url 'measurement_price_delete' pk=measurement_price.pk %}" class="btn btn-danger">Löschen</a>
+                <td><a href="{% url 'measurement_price_delete' pk=measurement_price.pk %}" class="btn btn-danger btn-small">Löschen</a>
                 </td>
             </tr>
 

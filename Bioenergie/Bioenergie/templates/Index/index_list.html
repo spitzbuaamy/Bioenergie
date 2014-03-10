@@ -6,9 +6,9 @@
 
             <tr class="list">
                 <td>Jahr: {{ index.year }} - Index: {{ index.index }} </td>
-                <td><a href="{% url 'index_detail' pk=index.pk %}" class="btn btn-primary">Details</a></td>
-                <td><a href="{% url 'index_update' pk=index.pk %}" class="btn btn-primary">Ändern</a></td>
-                <td><a href="{% url 'index_delete' pk=index.pk %}" class="btn btn-danger">Löschen</a></td>
+                <td><a href="{% url 'index_detail' pk=index.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                <td><a href="{% url 'index_update' pk=index.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                <td><a href="{% url 'index_delete' pk=index.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
             </tr>
 
         {% endfor %}

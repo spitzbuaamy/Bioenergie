@@ -1,20 +1,30 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%">
+
         {% for building in buildings %}
 
             <tr class="list">
-                <td>{{ building.customer }} {{ building.street }} {{ building.house_number }} </td>
-                <td><a href="{% url 'building_detail' pk=building.pk %}" class="btn btn-primary">Details</a></td>
-                <td><a href="{% url 'building_update' pk=building.pk %}" class="btn-primary btn">Ändern</a></td>
-                <td><a href="{% url 'building_delete' pk=building.pk %}" class="btn btn-danger">Löschen</a></td>
+                <td style="width: 85%">{{ building.customer }} {{ building.street }} {{ building.house_number }} </td>
+                <td><a href="{% url 'building_detail' pk=building.pk %}" class="btn btn-primary btn-small">Details</a>
+                </td>
+                <td><a href="{% url 'building_update' pk=building.pk %}" class="btn btn-primary btn-small">Ändern</a>
+                </td>
+                <td><a href="{% url 'building_delete' pk=building.pk %}" class="btn btn-danger btn-small">Löschen</a>
+                </td>
+
             </tr>
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'building_create' %}">
-        <button class="btn btn-primary">Neues Gebäude anlegen</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px">
+        <tr>
+            <td class="linkButton" href="{% url 'building_create' %}">
+                <button class="btn btn-primary">Neues Gebäude anlegen</button>
+            </td>
+        </tr>
+    </table>
+
 
 {% endblock %}

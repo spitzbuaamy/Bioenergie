@@ -6,9 +6,9 @@
 
             <tr class="list">
                 <td>{{ rate.building }} {{ rate.year }}
-                <td><a href="{% url 'rate_detail' pk=rate.pk %}" class="btn btn-primary">Details</a></td>
-                <td><a href="{% url 'rate_update' pk=rate.pk %}" class="btn-primary btn">Ändern</a></td>
-                <td><a href="{% url 'rate_delete' pk=rate.pk %}" class="btn-danger btn">Löschen</a></td>
+                <td><a href="{% url 'rate_detail' pk=rate.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                <td><a href="{% url 'rate_update' pk=rate.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                <td><a href="{% url 'rate_delete' pk=rate.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
             </tr>
 
         {% endfor %}

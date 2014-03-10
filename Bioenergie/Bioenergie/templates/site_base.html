@@ -5,10 +5,9 @@
 <head>
     <link rel="icon" href="{% static "images/favicon.ico" %}" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-    <!--    <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui-1.10.4.custom.min.css" %}"> -->
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-select.min.css" %}">
     <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}"></script>
-    <!--    <script type="text/javascript" src="{% static "js/jquery-ui-1.10.4.custom.min.js" %}"></script> -->
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap-select.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap-datepicker.min.js" %}"></script>
@@ -51,6 +50,7 @@
                     if (value.length >= 10)
                         $(value).attr('data-live-search', "true");
                 });
+                $('select > option:nth-child(1)').remove();
                 //selectpicker
                 $('.selectpicker').selectpicker();
 

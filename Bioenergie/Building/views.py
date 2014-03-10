@@ -34,6 +34,10 @@ class BuildingCreateView(CreateView):
         form.fields['contract_date'].widget.attrs.update({"class": "datepicker"})
         form.fields['last_bill'].widget.attrs.update({"class": "datepicker"})
         form.fields['billing_begin'].widget.attrs.update({"class": "datepicker"})
+        form.fields['customer'].widget.attrs.update({"class": "selectpicker"})
+        form.fields['working_price'].widget.attrs.update({"class": "selectpicker"})
+        form.fields['basic_price'].widget.attrs.update({"class": "selectpicker"})
+        form.fields['measurement_price'].widget.attrs.update({"class": "selectpicker"})
         return form
 
 
@@ -43,12 +47,16 @@ class BuildingUpdateView(UpdateView):
     context_object_name = 'building'
     form_class = BuildingForm
     # success_url = reverse_lazy('building_list')
-    #todo: Gehört der datpicker zu allen 3 feldern? Im Template waren nur 2 datpicker funktionen
+
     def get_form(self, form_class):
         form = super(BuildingUpdateView, self).get_form(form_class)
         form.fields['contract_date'].widget.attrs.update({"class": "datepicker"})
         form.fields['last_bill'].widget.attrs.update({"class": "datepicker"})
         form.fields['billing_begin'].widget.attrs.update({"class": "datepicker"})
+        form.fields['customer'].widget.attrs.update({"class": "selectpicker"})
+        form.fields['working_price'].widget.attrs.update({"class": "selectpicker"})
+        form.fields['basic_price'].widget.attrs.update({"class": "selectpicker"})
+        form.fields['measurement_price'].widget.attrs.update({"class": "selectpicker"})
         return form
 
 

@@ -27,6 +27,7 @@ class MeasurementCreateView(CreateView):
     def get_form(self, form_class):
         form = super(MeasurementCreateView, self).get_form(form_class)
         form.fields['measured_date'].widget.attrs.update({"class": "datepicker"})
+        form.fields['building'].widget.attrs.update({"class": "selectpicker"})
         return form
 
 
@@ -40,6 +41,7 @@ class MeasurementUpdateView(UpdateView):
     def get_form(self, form_class):
         form = super(MeasurementUpdateView, self).get_form(form_class)
         form.fields['measured_date'].widget.attrs.update({"class": "datepicker"})
+        form.fields['building'].widget.attrs.update({"class": "selectpicker"})
         return form
 
 

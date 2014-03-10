@@ -24,6 +24,10 @@ class RateCreateView(CreateView):
     form_class = RateForm
     #success_url = reverse_lazy('rate_list')
 
+    def get_form(self, form_class):
+        form = super(RateUpdateView, self).get_form(form_class)
+        form.fields['building'].widget.attrs.update({'class': 'selectpicker'})
+        return form
 
 class RateUpdateView(UpdateView):
     template_name = "Rate/rate_form.html"
@@ -31,6 +35,11 @@ class RateUpdateView(UpdateView):
     context_object_name = 'rate'
     form_class = RateForm
     # success_url = reverse_lazy('rate_list')
+
+    def get_form(self, form_class):
+        form = super(RateUpdateView, self).get_form(form_class)
+        form.fields['building'].widget.attrs.update({'class': 'selectpicker'})
+        return form
 
 
 class RateDeleteView(DeleteView):

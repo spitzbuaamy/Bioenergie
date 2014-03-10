@@ -28,6 +28,7 @@ class CounterChangeCreateView(CreateView):
         form = super(CounterChangeCreateView, self).get_form(form_class)
         form.fields['date'].widget.attrs.update({'class': 'datepicker'})
         form.fields['date_new_counter'].widget.attrs.update({"class": "datepicker"})
+        form.fields['building'].widget.attrs.update({"class": "selectpicker"})
         return form
 
 
@@ -42,6 +43,7 @@ class CounterChangeUpdateView(UpdateView):
         form = super(CounterChangeUpdateView, self).get_form(form_class)
         form.fields['date'].widget.attrs.update({'class': 'datepicker'})
         form.fields['date_new_counter'].widget.attrs.update({"class": "datepicker"})
+        form.fields['building'].widget.attrs.update({"class": "selectpicker"})
         return form
 
 

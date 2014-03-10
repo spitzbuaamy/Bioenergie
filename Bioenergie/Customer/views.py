@@ -33,6 +33,12 @@ class CustomerCreateView(CreateView):
     form_class = CustomerForm
     #success_url = reverse_lazy('customer_list')
 
+    def get_form(self, form_class):
+        form = super(CustomerCreateView, self).get_form(form_class)
+        form.fields['salutation'].widget.attrs.update({'class': 'selectpicker'})
+        form.fields['bank'].widget.attrs.update({'class': 'selectpicker'})
+        return form
+
 
 class CustomerUpdateView(UpdateView):
     template_name = "customer/customer_form.html"
@@ -41,6 +47,11 @@ class CustomerUpdateView(UpdateView):
     form_class = CustomerForm
     # success_url = reverse_lazy('customer_list')
 
+    def get_form(self, form_class):
+        form = super(CustomerUpdateView, self).get_form(form_class)
+        form.fields['salutation'].widget.attrs.update({'class': 'selectpicker'})
+        form.fields['bank'].widget.attrs.update({'class': 'selectpicker'})
+        return form
 
 class CustomerDeleteView(DeleteView):
     template_name = "customer/customer_confirm_delete.html"

@@ -24,6 +24,11 @@ class HeatingPlantCreateView(CreateView):
     form_class = HeatingPlantForm
     #success_url = reverse_lazy('heating_plant_list')
 
+    def get_form(self, form_class):
+        form = super(HeatingPlantCreateView, self).get_form(form_class)
+        form.fields['bank'].widget.attrs.update({"class": "selectpicker"})
+        return form
+
 
 class HeatingPlantUpdateView(UpdateView):
     template_name = "HeatingPlant/heating_plant_form.html"
@@ -31,6 +36,11 @@ class HeatingPlantUpdateView(UpdateView):
     context_object_name = 'heating_plant'
     form_class = HeatingPlantForm
     # success_url = reverse_lazy('heating_plant_list')
+
+    def get_form(self, form_class):
+        form = super(HeatingPlantUpdateView, self).get_form(form_class)
+        form.fields['bank'].widget.attrs.update({"class": "selectpicker"})
+        return form
 
 
 class HeatingPlantDeleteView(DeleteView):

@@ -15,6 +15,28 @@
 
     </style>
 
+    <script>
+        $(function () {
+            $('#id_contract_date').datepicker({
+                format: 'dd.mm.yyyy',
+                language: "de",
+                weekStart: 1
+            });
+            $('#id_last_bill').datepicker({
+                format: 'dd.mm.yyyy',
+                language: "de",
+                weekStart: 1
+            });
+            $('#id_billing_begin').datepicker({
+                format: 'dd.mm.yyyy',
+                language: "de",
+                weekStart: 1
+            });
+        });
+    </script>
+
+
+
 
 {% endblock %}
 

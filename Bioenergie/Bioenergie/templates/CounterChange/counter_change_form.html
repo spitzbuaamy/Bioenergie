@@ -16,6 +16,20 @@
 
     </style>
 
+    <script>
+        $(function () {
+            $('#id_date').datepicker({
+                format: 'dd.mm.yyyy',
+                language: "de",
+                weekStart: 1
+            });
+            $('#id_date_new_counter').datepicker({
+                format: 'dd.mm.yyyy',
+                language: "de",
+                weekStart: 1
+            });
+        });
+    </script>
 
 {% endblock %}
 

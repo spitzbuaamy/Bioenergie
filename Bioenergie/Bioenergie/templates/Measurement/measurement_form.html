@@ -16,6 +16,15 @@
 
     </style>
 
+    <script>
+        $(function () {
+            $('#id_measured_date').datepicker({
+                format: 'dd.mm.yyyy',
+                language: "de",
+                weekStart: 1
+            });
+        });
+    </script>
 
 {% endblock %}
 

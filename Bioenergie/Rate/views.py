@@ -25,7 +25,7 @@ class RateCreateView(CreateView):
     #success_url = reverse_lazy('rate_list')
 
     def get_form(self, form_class):
-        form = super(RateUpdateView, self).get_form(form_class)
+        form = super(RateCreateView, self).get_form(form_class)
         form.fields['building'].widget.attrs.update({'class': 'selectpicker'})
         return form
 

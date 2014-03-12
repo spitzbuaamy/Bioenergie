@@ -1,11 +1,11 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%">
         {% for connection_flat_rate in connection_flat_rates %}
 
             <tr class="list">
-                <td>
+                <td style="width: 85%">
                     Gruppe {{ connection_flat_rate.wage_group }}:({{ connection_flat_rate.min }}-{{ connection_flat_rate.max }})
                 </td>
                 <td><a href="{% url 'connection_flat_rate_detail' pk=connection_flat_rate.pk %}"
@@ -18,8 +18,13 @@
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'connection_flat_rate_create' %}">
-        <button class="btn btn-primary">Neue Anschlusspauschale anlegen</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px" >
+        <tr>
+            <td>
+                <a class="linkButton" href="{% url 'connection_flat_rate_create' %}">
+        <button class="btn btn-primary">Neue Anschlusspauschale anlegen</button></a>
+            </td>
+        </tr>
+    </table>
 
 {% endblock %}

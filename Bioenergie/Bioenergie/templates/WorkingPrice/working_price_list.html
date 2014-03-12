@@ -1,12 +1,12 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Arbeitspreis</h4>
-    <table>
+    <h4 style="padding-left: 5%; margin-top: 20px">Sie befinden sich im Arbeitspreis</h4>
+    <table class="table-hover" style="margin-left: 5%">
         {% for working_price in working_prices %}
 
             <tr class="list">
-                <td>Gruppe {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }})</td>
+                <td style="width: 85%">Gruppe {{ working_price.wage_group }}: ({{ working_price.min }}-{{ working_price.max }})</td>
                 <td><a href="{% url 'working_price_detail' pk=working_price.pk %}" class="btn btn-primary btn-small">Details</a>
                 </td>
                 <td><a href="{% url 'working_price_update' pk=working_price.pk %}" class="btn btn-primary btn-small">Ändern</a>
@@ -17,11 +17,16 @@
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'working_price_create' %}">
-        <button class="btn btn-primary">Neuen Arbeitspreis anlegen</button>
-    </a>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'GroupView' %}">
-        <button class="btn btn-primary">Zur Gruppenansicht wechseln</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px" >
+        <tr>
+            <td>
+                <a class="linkButton" class="linkButton" href="{% url 'working_price_create' %}">
+        <button class="btn btn-primary">Neuen Arbeitspreis anlegen</button></a>
+            </td>
+            <td>
+                <a class="linkButton" href="{% url 'GroupView' %}"><button style="margin-left: 10%" class="btn btn-success">Zur Gruppenansicht wechseln</button></a>
+            </td>
+        </tr>
+    </table>
 
 {% endblock %}

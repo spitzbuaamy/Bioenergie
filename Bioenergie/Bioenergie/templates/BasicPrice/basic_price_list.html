@@ -1,12 +1,12 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <h4 style="padding-left: 10px; margin-top: 20px">Sie befinden sich im Grundpreis</h4>
-    <table>
+    <h4 style="padding-left: 5%; margin-top: 20px">Sie befinden sich im Grundpreis</h4>
+    <table class="table-hover" style="margin-left: 5%">
         {% for basic_price in basic_prices %}
 
             <tr class="list">
-                <td>Gruppe {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }})</td>
+                <td style="width: 85%">Gruppe {{ basic_price.wage_group }}: ({{ basic_price.min }}-{{ basic_price.max }})</td>
                 <td><a href="{% url 'basic_price_detail' pk=basic_price.pk %}" class="btn btn-primary btn-small">Details</a></td>
                 <td><a href="{% url 'basic_price_update' pk=basic_price.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
                 <td><a href="{% url 'basic_price_delete' pk=basic_price.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
@@ -14,11 +14,15 @@
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'basic_price_create' %}">
-        <button class="btn btn-primary">Neuen Grundpreis anlegen</button>
-    </a>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'GroupView' %}">
-        <button class="btn btn-primary">Zur Gruppenansicht wechseln</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px" >
+        <tr>
+            <td>
+                <a class="linkButton" class="linkButton" href="{% url 'basic_price_create' %}"><button class="btn btn-primary">Neuen Grundpreis anlegen</button></a>
+            </td>
+            <td>
+                <a class="linkButton" href="{% url 'GroupView' %}"><button style="margin-left: 10%" class="btn btn-success">Zur Gruppenansicht wechseln</button></a>
+            </td>
+        </tr>
+    </table>
 
 {% endblock %}

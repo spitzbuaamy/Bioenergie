@@ -286,7 +286,7 @@ class Offer(models.Model):
     connection = models.DecimalField("Änderungsfaktor für Anschluss je KW ", max_digits=8, decimal_places=2)
     connection_flat_rate = models.ForeignKey(ConnectionFlatRate, verbose_name="Anschlusspauschale") #Anschlusspauschale
     connection_index = models.DecimalField("Änderungsfaktor für Anschlusspauschale ", max_digits=8, decimal_places=2)
-    cable_price = models.ForeignKey(CablePrice, verbose_name="Zuleitungspreis") #Zuleitungspreis
+    cable_price = models.DecimalField("Zuleitungspreis", max_digits=8, decimal_places=2)
     cable_length = models.IntegerField("Leitungsmehrlänge [in Meter]") #Kabellaenge
     comment = models.CharField("Soll ein Kommentar auf der Rechnung vermerkt werden?", max_length="64", blank=True)
     heating = models.BooleanField("Heizung")

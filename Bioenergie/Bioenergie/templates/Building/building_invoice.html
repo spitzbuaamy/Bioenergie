@@ -1,12 +1,12 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%">
         {% for building in buildings %}
 
             <tr class="list">
-                <td>{{ building.customer }} {{ building.street }} {{ building.house_number }} </td>
-                <td><a href="{% url 'enter_date' building.pk %}" class="btn-primary btn">Dieses Gebäude Abrechnen</a>
+                <td style="width: 85%">{{ building.customer }} {{ building.street }} {{ building.house_number }} </td>
+                <td><a href="{% url 'enter_date' building.pk %}" class="btn btn-primary btn-small">Dieses Gebäude Abrechnen</a>
                 </td>
             </tr>
         {% endfor %}

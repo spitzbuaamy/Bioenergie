@@ -1,11 +1,11 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%">
         {% for cable_price in cable_prices %}
 
             <tr class="list">
-                <td>{{ cable_price.price_per_meter }}</td>
+                <td style="width: 85%">{{ cable_price.price_per_meter }}</td>
                 <td><a href="{% url 'cable_price_detail' pk=cable_price.pk %}" class="btn btn-primary btn-small">Details</a></td>
                 <td><a href="{% url 'cable_price_update' pk=cable_price.pk %}" class="btn-primary btn btn-small">Ändern</a></td>
                 <td><a href="{% url 'cable_price_delete' pk=cable_price.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
@@ -13,8 +13,14 @@
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'cable_price_create' %}">
-        <button class="btn btn-primary">Neuen Kabelpreis anlegen</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px" >
+        <tr>
+            <td>
+                <a class="linkButton" href="{% url 'cable_price_create' %}">
+        <button class="btn btn-primary">Neuen Kabelpreis anlegen</button></a>
+            </td>
+        </tr>
+    </table>
+
 
 {% endblock %}

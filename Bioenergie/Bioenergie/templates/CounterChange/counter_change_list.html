@@ -1,11 +1,11 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%">
         {% for counter_change in counter_changes %}
 
             <tr class="list">
-                <td>{{ counter_change.building }} {{ counter_change.date }}</td>
+                <td style="width: 85%">{{ counter_change.building }} {{ counter_change.date }}</td>
                 <td><a href="{% url 'counter_change_detail' pk=counter_change.pk %}" class="btn btn-primary btn-small">Details</a>
                 </td>
                 <td><a href="{% url 'counter_change_update' pk=counter_change.pk %}" class="btn btn-primary btn-small">Ändern</a>
@@ -16,9 +16,14 @@
 
         {% endfor %}
     </table>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px" >
+        <tr>
+            <td>
+                <a class="linkButton" href="{% url 'counter_change_create' %}">
+        <button class="btn btn-primary">Neuen Zählerwechsel anlegen</button></a>
+            </td>
+        </tr>
+    </table>
 
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'counter_change_create' %}">
-        <button class="btn btn-primary">Neuen Zählerwechsel anlegen</button>
-    </a>
 
 {% endblock %}

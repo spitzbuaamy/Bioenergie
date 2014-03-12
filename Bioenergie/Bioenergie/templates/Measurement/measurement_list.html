@@ -1,11 +1,20 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px; margin-bottom: 10px" >
+        <tr>
+            <td>
+                <a class="linkButton" href="{% url 'measurement_create' %}">
+        <button class="btn btn-primary">Neue Messung anlegen</button></a>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table-hover" style="margin-left: 5%">
         {% for measurement in measurements %}
 
             <tr class="list">
-                <td>{{ measurement.measured_date }} {{ measurement.building }}</td>
+                <td style="width: 85%">{{ measurement.measured_date }} {{ measurement.building }}</td>
                 <td><a href="{% url 'measurement_detail' pk=measurement.pk %}" class="btn btn-primary btn-small">Details</a></td>
                 <td><a href="{% url 'measurement_update' pk=measurement.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
                 <td><a href="{% url 'measurement_delete' pk=measurement.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
@@ -13,8 +22,6 @@
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'measurement_create' %}">
-        <button class="btn btn-primary">Neue Messung anlegen</button>
-    </a>
+
 
 {% endblock %}

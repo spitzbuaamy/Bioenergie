@@ -5,7 +5,7 @@
         {% for customer in customers %}
 
             <tr class="list" xmlns="http://www.w3.org/1999/html">
-                <td>{{ customer.first_name }} {{ customer.last_name }} </td>
+                <td style="width: 85%">{{ customer.first_name }} {{ customer.last_name }} </td>
                 <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary btn-small">Details</a></td>
                 <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
                 <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
@@ -15,8 +15,14 @@
             </tr>
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'customer_create' %}">
-        <button class="btn btn-primary">Neuen Kunden anlegen</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px; margin-bottom: 10px" >
+        <tr>
+            <td>
+                <a class="linkButton" href="{% url 'customer_create' %}">
+        <button class="btn btn-primary">Neuen Kunden anlegen</button></a>
+            </td>
+        </tr>
+    </table>
+
 
 {% endblock %}

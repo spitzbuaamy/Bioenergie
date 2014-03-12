@@ -1,11 +1,11 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-    <table>
+    <table class="table-hover" style="margin-left: 5%">
         {% for rate in rates %}
 
             <tr class="list">
-                <td>{{ rate.building }} {{ rate.year }}
+                <td style="width: 85%">{{ rate.building }} {{ rate.year }}
                 <td><a href="{% url 'rate_detail' pk=rate.pk %}" class="btn btn-primary btn-small">Details</a></td>
                 <td><a href="{% url 'rate_update' pk=rate.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
                 <td><a href="{% url 'rate_delete' pk=rate.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
@@ -13,8 +13,13 @@
 
         {% endfor %}
     </table>
-    <a style="padding-left: 5px" class="linkButton" href="{% url 'rate_create' %}">
-        <button class="btn btn-primary">Neue Rate anlegen</button>
-    </a>
+    <table class="table-hover" style="margin-left: 5%; margin-top: 5px; margin-bottom: 10px" >
+        <tr>
+            <td>
+                <a class="linkButton" href="{% url 'rate_create' %}">
+        <button class="btn btn-primary">Neue Rate anlegen</button></a>
+            </td>
+        </tr>
+    </table>
 
 {% endblock %}

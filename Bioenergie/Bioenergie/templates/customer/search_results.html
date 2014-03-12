@@ -3,17 +3,17 @@
 
 
     </br>
-    <p style="padding-left: 10px">Sie suchten nach: <strong>{{ query }}</strong></p>
+    <p style="padding-left: 5%">Sie suchten nach: <strong>{{ query }}</strong></p>
 
     {% if Customers %}
 
-        <table class="list">
+        <table class="table-hover" style="margin-left: 5%">
             {% for customer in Customers %}
                 <tr>
-                    <td>{{ customer.first_name }} {{ customer.last_name }}</td>
-                    <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary">Details</a></td>
-                    <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn-primary btn">Ändern</a></td>
-                    <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn-danger btn">Löschen</a></td>
+                    <td style="width: 85%">{{ customer.first_name }} {{ customer.last_name }}</td>
+                    <td><a href="{% url 'customer_detail' pk=customer.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                    <td><a href="{% url 'customer_update' pk=customer.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                    <td><a href="{% url 'customer_delete' pk=customer.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
                 </tr>
             {% endfor %}
         </table>

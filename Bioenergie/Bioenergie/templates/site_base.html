@@ -96,29 +96,29 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/banks/">Bank</a></li>
-                        <li><a href="/connectionflatrates/">Anschlusspauschale</a></li>
-                        <li><a href="/rates/">Rate</a></li>
+                        <li><a href='{% url 'bank_list' %}'>Bank</a></li>
+                        <li><a href='{% url 'connection_flat_rate_list' %}'>Anschlusspauschale</a></li>
+                        <li><a href='{% url 'rate_list' %}'>Rate</a></li>
                     </ul>
                 </li>
-                <li><a href="/customers/">Kunde</a></li>
-                <li><a href="/buildings/">Objekt</a></li>
-                <li><a href="/counterchanges/">Zählerwechsel</a></li>
+                <li><a href='{% url 'customer_list' %}'>Kunde</a></li>
+                <li><a href='{% url 'building_list' %}'>Objekt</a></li>
+                <li><a href='{% url 'counter_change_list' %}'>Zählerwechsel</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Preisgruppen
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/basicprices/">Grundpreis</a></li>
-                        <li><a href="/measurementprices/">Messpreis</a></li>
-                        <li><a href="/workingprices/">Arbeitspreis</a></li>
+                        <li><a href='{% url 'basic_price_list' %}'>Grundpreis</a></li>
+                        <li><a href='{% url 'measurement_price_list' %}'>Messpreis</a></li>
+                        <li><a href='{% url 'working_price_list' %}'>Arbeitspreis</a></li>
                         <li><a href = '{% url 'GroupView' %}'>Gruppenansicht</a></li>
                     </ul>
                 </li>
-                <li><a href="/indexes/">Index</a></li>
-                <li><a href="/measurements/">Messung</a></li>
-                <li><a href="/heatingplants/">Heizwerk</a></li>
+                <li><a href='{% url 'index_list' %}'>Index</a></li>
+                <li><a href='{% url 'measurement_list' %}'>Messung</a></li>
+                <li><a href='{% url 'heating_plant_list' %}'>Heizwerk</a></li>
             </ul>
             <form id="search" class="navbar-form navbar-left" role="search" action="search/" method="get">
                 <div class="form-group">

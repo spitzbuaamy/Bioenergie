@@ -17,6 +17,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index
 
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Login Abfrage                                                                       !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -84,17 +85,19 @@ def write_pdf(template_src, context_dict):
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(
         html.encode("UTF-8")), result, encoding='UTF-8')
+    building = context["building"]
+    customer = building.customer
 
-    #Speichern
-    #file = open('Rechnungen/' + str(context_dict['customer']) + '.pdf', 'w')
-    #file.write(result.getvalue())
-    #file.close()
+    firstname = unicode(customer.first_name).replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+    lastname = customer.last_name.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+
+    filename = str("HK_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
 
     if not pdf.err:
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        response['Content-Disposition'] = 'attachment; filename=whatever.pdf'
+        response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
 
         return response
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
@@ -107,16 +110,23 @@ def write_zwischen_pdf(template_src, context_dict):
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(
         html.encode("UTF-8")), result, encoding='UTF-8')
+    building = context["building"]
+    customer = building.customer
 
-    # Speichern
-    file = open('Rechnungen/' + str(context_dict['customer']) + '.pdf', 'w')
-    file.write(result.getvalue())
-    file.close()
+    firstname = unicode(customer.first_name).replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+    lastname = customer.last_name.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+
+    filename = str("ZA_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
 
     if not pdf.err:
-        return http.HttpResponse(result.getvalue(),
+        response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
+
+        response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
+
+        return response
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
+
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Jahresabrechnung                                                                    !!!!!!!!!!!
@@ -336,7 +346,7 @@ def pdfRechnung(request, id):
         "index_for_the_next_year": index_for_the_next_year,
         "actual_bill_number": actual_bill_number,
     })
-import pdb
+
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Zwischenabrechnung                                                                  !!!!!!!!!!!
@@ -609,7 +619,15 @@ def pdfZwischenabrechnung(request, id):
 def pdfAnschlussrechnung(request, id1, id2):
     #Rueckgabe der PDF bestimmen
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="Anschlussrechnung.pdf"'
+    mybuilding = get_object_or_404(Building, pk=id1)
+    firstname = mybuilding.customer.first_name
+    lastname = mybuilding.customer.last_name
+    firstname = firstname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+    lastname = lastname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+
+    filename = str("AR_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
+
+    response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
     p.translate(cm, cm) #Angegebene Werte auf cm umrechnen
@@ -742,11 +760,11 @@ def pdfAnschlussrechnung(request, id1, id2):
     customer_first_name = building.customer.first_name
     customer_salutation = building.customer.salutation
     customer_title = building.customer.title
-    customer = str(
+    customer = unicode(
         customer_salutation + " " + customer_title + " " + customer_first_name + " " + customer_last_name) #Kundenanschrift
     customer_street = building.customer.street #Wohnort des Kunden
     customer_house_number = building.customer.house_number
-    customer_address = str(customer_street + " " + str(customer_house_number))
+    customer_address = unicode(customer_street + " " + str(customer_house_number))
     connection_power = str(str(building.connection_power) + " kW") #Anschlussleistung
     wohnhaus = ""
     gewerbe = ""
@@ -778,7 +796,7 @@ def pdfAnschlussrechnung(request, id1, id2):
         warmwasser = "Nein"
 
     #Nettopreis berechnen
-    connection = float(offer.connection)
+    connection = float(float(offer.connection) * 109.00)
     connection_value_net_price = float(int(building.connection_power) * connection)
 
     #Abfrage, ob mehr als 15m Kabellaenge benoetigt werden
@@ -817,12 +835,12 @@ def pdfAnschlussrechnung(request, id1, id2):
     #Varbiablen in die Rechnung einfuegen
     p.setFont("Times-Roman", 12) #Times New Roman mit Schriftgroesse 12pt
     p.setFillColor("Black") #Schriftfarbe Schwarz einstellen
-    p.drawString(12.3 * cm, 4.55 * cm, heatingplant.name)
+    p.drawString(12.3 * cm, 4.55 * cm, unicode(heatingplant.name))
     p.setFont("Times-Bold", 12)
-    p.drawString(3 * cm, 22.6 * cm, customer)
+    p.drawString(3 * cm, 22.6 * cm, unicode(customer))
     p.setFont("Times-Roman", 12)
-    p.drawString(3 * cm, 22.1 * cm, customer_address)
-    p.drawString(14 * cm, 22.6 * cm, offer.owner)
+    p.drawString(3 * cm, 22.1 * cm, unicode(customer_address))
+    p.drawString(14 * cm, 22.6 * cm, unicode(offer.owner))
     p.drawString(14 * cm, 22.1 * cm, offer.phone_number)
     p.drawString(6.5 * cm, 21.6 * cm, wohnhaus)
     p.drawString(6.5 * cm, 21.1 * cm, gewerbe)
@@ -833,10 +851,10 @@ def pdfAnschlussrechnung(request, id1, id2):
     p.drawString(6 * cm, 18.5 * cm, connection_power)
     p.drawRightString(19 * cm, 19.5 * cm, str('%.2f' % anschlusspauschale))
     p.drawRightString(19 * cm, 18.5 * cm, str('%.2f' % connection_value_net_price))
-    p.drawRightString(12.4 * cm, 18.5 * cm, str(connection))
+    p.drawRightString(12.4 * cm, 18.5 * cm, str('%.2f' % connection))
     p.drawString(10.9 * cm, 18.5 * cm, str("€ "))
     p.drawString(6 * cm, 18.0 * cm, more_lengh)
-    p.drawRightString(12.4 * cm, 18.0 * cm, str('%.2f' % float(offer.cable_price.price_per_meter)))
+    p.drawRightString(12.4 * cm, 18.0 * cm, str('%.2f' % float(offer.cable_price)))
     p.drawString(10.9 * cm, 18.0 * cm, str("€ "))
     p.drawRightString(19 * cm, 18.0 * cm, str('%.2f' % float(upcharge)))
     p.drawRightString(19.0 * cm, 17.4 * cm, str('%.2f' % net_price))
@@ -873,7 +891,7 @@ def pdfAnschlussrechnung(request, id1, id2):
     p.drawString(8.7 * cm, 13 * cm, " = ")
     p.drawString(8.7 * cm, 12.5 * cm, " = ")
     p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
-    p.drawString(1 * cm, 17.0 * cm, str(offer.comment))
+    p.drawString(1 * cm, 17.0 * cm, unicode(offer.comment))
 
 
 
@@ -885,7 +903,6 @@ def pdfAnschlussrechnung(request, id1, id2):
     return response
 
 
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Leere Rechnung                                                                      !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -895,7 +912,15 @@ def pdfLeereRechnung(request):
     name = request.GET['name']
     customername = name.split(" ")
 
-    filename = str("LR_" + str(request.GET['artikel']) + "_" + str(customername[0]) + "_" + str(customername[1] + "_" + str(date.today().year)))
+    artikel = unicode(request.GET['artikel'])
+    artikel = artikel.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+    firstname = customername[0]
+    firstname = firstname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+    lastname = customername[1]
+    lastname = lastname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
+
+
+    filename = str("LR_" + str(artikel) + "_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
     response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
@@ -981,14 +1006,14 @@ def pdfLeereRechnung(request):
     p.setFont("Times-Roman", 8)
     p.drawString(0.5*cm, 22*cm, str(heatingplant_data))
     p.setFont("Times-Roman", 12)
-    p.drawString(1*cm, 21*cm, str(customer_name))
-    p.drawString(1*cm, 20.3*cm, str(customer_adress))
-    p.drawString(1*cm, 19.6*cm, str(customer_place))
+    p.drawString(1*cm, 21*cm, unicode(customer_name))
+    p.drawString(1*cm, 20.3*cm, unicode(customer_adress))
+    p.drawString(1*cm, 19.6*cm, unicode(customer_place))
 
     #Artikel und Preis auf Rechnung
     p.setFont("Times-Bold", 14)
     p.drawString(1*cm, 16*cm, str("Artikelbezeichnung:"))
-    p.drawString(12.5*cm, 16*cm, str(article))
+    p.drawString(5.5*cm, 16*cm, unicode(article))
     p.drawString(1*cm, 13.1*cm, str("Zu zahlender Betrag:"))
     p.drawRightString(15*cm, 13.1*cm, str('%.2f' % price))
     p.setFont("Times-Roman", 14)

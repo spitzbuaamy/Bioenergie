@@ -144,8 +144,10 @@ INSTALLED_APPS = (
     'Offer',
     'Rate',
     'WorkingPrice',
-    #'werkzeug',
+    'werkzeug',
     'django_extensions',
+
+    'debug_toolbar',
 
 
 )

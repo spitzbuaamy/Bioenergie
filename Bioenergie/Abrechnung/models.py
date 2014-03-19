@@ -206,19 +206,11 @@ class Index(models.Model):
 
 #-----------------------------------------------------------------------------------------------------------------------
 class Bill(models.Model):
-    building = models.ForeignKey(Building, verbose_name="Objekt")
-    bill_number = models.CharField("Rechnungsnummer", max_length=32)
-    date = models.DateField("Datum")
-    working_price = models.IntegerField("Arbeitspreis")
-    measurement_price = models.IntegerField("Messpreis")
-    basic_price = models.IntegerField("Grundpreis")
-    discount = models.IntegerField("Rabatt")
-    payment_net = models.IntegerField("Geleistete Akkontozahlung Netto") #geleistete Akkontozahlung Netto
-    additional_payment_net = models.IntegerField("Nachzahlung Netto") #Nachzahlungen Netto
-    new_payment_net = models.IntegerField("Neue Akkontozahlung Netto") #neue Akkontozahlung Netto
+    customer = models.ForeignKey(Customer, verbose_name="Kunde")
+    filepath = models.CharField("Dateipfad", max_length=512)
 
     def __unicode__(self):
-        return unicode(self.bill_number)
+        return unicode(self.filepath)
 
     def get_absolute_url(self):
         return "/bills/detail/%i" % self.id

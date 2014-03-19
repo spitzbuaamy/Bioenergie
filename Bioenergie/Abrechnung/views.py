@@ -3,6 +3,7 @@
 from datetime import date, datetime
 import cStringIO as StringIO
 import cgi
+import os
 from xhtml2pdf import pisa
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,12 +16,15 @@ from django.template import Context
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
-from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index
+from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index, Bill, Customer
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Login Abfrage                                                                       !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+from Bioenergie.settings import PROJECT_ROOT
+
+
 def user_login(request):
     # Like before, obtain the context for the user's request.
     context = RequestContext(request)
@@ -91,13 +95,21 @@ def write_pdf(template_src, context_dict):
     firstname = unicode(customer.first_name).replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
     lastname = customer.last_name.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
 
-    filename = str("HK_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
+    filename = str("HK_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
 
     if not pdf.err:
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
+        directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+        outfilepath = os.path.join(directory, filename)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        with open(outfilepath, "wb") as myFile:
+            myFile.write(str(result.getvalue()))
+
+        response['Content-Disposition'] = 'attachment; filename=' + filename
 
         return response
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
@@ -116,13 +128,21 @@ def write_zwischen_pdf(template_src, context_dict):
     firstname = unicode(customer.first_name).replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
     lastname = customer.last_name.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
 
-    filename = str("ZA_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
+    filename = str("ZA_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
 
     if not pdf.err:
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
+        directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+        outfilepath = os.path.join(directory, filename)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        with open(outfilepath, "wb") as myFile:
+            myFile.write(str(result.getvalue()))
+
+        response['Content-Disposition'] = 'attachment; filename=' + filename
 
         return response
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
@@ -376,7 +396,7 @@ def pdfZwischenabrechnung(request, id):
     # Rechnen...
     thisyear = date.today().year
     anfangsdatum = request.GET['anfangsdatum']
-    enddatum = request.GET['enddatum'] #TODO: Datumsformat anpassen (wsl beim Datepicker)
+    enddatum = request.GET['enddatum']
 
 
     if (anfangsdatum == "01.01.2000") and (enddatum == "01.01.3000"):
@@ -625,9 +645,14 @@ def pdfAnschlussrechnung(request, id1, id2):
     firstname = firstname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
     lastname = lastname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
 
-    filename = str("AR_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
+    filename = str("AR_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
 
-    response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
+    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+    outfilepath = os.path.join(directory, filename)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    response['Content-Disposition'] = 'attachment; filename=' + filename
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
     p.translate(cm, cm) #Angegebene Werte auf cm umrechnen
@@ -684,7 +709,7 @@ def pdfAnschlussrechnung(request, id1, id2):
     p.drawString(1 * cm, 25.5 * cm, adress)
     p.drawString(1 * cm, 25.0 * cm, telephone)
     p.drawString(1 * cm, 24.5 * cm, e_mail)
-    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15 * cm, 24.25 * cm,
+    p.drawImage(PROJECT_ROOT + '\Bioenergie\static\images\Biomasse.jpg', 15 * cm, 24.25 * cm,
                 width=3.5 * cm, height=2.5 * cm)
 
     #Standardtext auf der Rechnung
@@ -893,12 +918,11 @@ def pdfAnschlussrechnung(request, id1, id2):
     p.setFont("Times-Bold", 12) #Dick geschrieben mit Schriftgroesse 12pt
     p.drawString(1 * cm, 17.0 * cm, unicode(offer.comment))
 
-
-
     # PDF korrekt downloaden und oeffnen
     p.showPage()
     p.save()
-
+    p._filename = outfilepath
+    p.save()
     #Seite zurueckgeben (response zurueckgeben)
     return response
 
@@ -911,7 +935,6 @@ def pdfLeereRechnung(request):
     response = HttpResponse(content_type='application/pdf')
     name = request.GET['name']
     customername = name.split(" ")
-
     artikel = unicode(request.GET['artikel'])
     artikel = artikel.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
     firstname = customername[0]
@@ -920,8 +943,13 @@ def pdfLeereRechnung(request):
     lastname = lastname.replace(u'Ä', 'Ae').replace(u'Ö', 'Oe').replace(u'Ü', 'Ue').replace(u'ä', 'ae').replace(u'ö', 'oe').replace(u'ü', 'ue').replace(u'ß', 'ss').replace(" ", "_").replace(".", "")
 
 
-    filename = str("LR_" + str(artikel) + "_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year))
-    response['Content-Disposition'] = 'attachment; filename=' + filename + ".pdf"
+    filename = str("LR_" + str(artikel) + "_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
+    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+    outfilepath = os.path.join(directory, filename)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    response['Content-Disposition'] = 'attachment; filename=' + filename
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
     p.translate(cm, cm) #Angegebene Werte auf cm umrechnen
@@ -953,10 +981,9 @@ def pdfLeereRechnung(request):
     p.drawString(1 * cm, 25.5 * cm, adress)
     p.drawString(1 * cm, 25.0 * cm, telephone)
     p.drawString(1 * cm, 24.5 * cm, e_mail)
-    #todo: bild zum projekt hinzufügen - keinen absoluten pfad verwenden
-    p.drawImage("C:\Users\Fabian\Desktop\HTL Neufelden\Diplomarbeit\Bioenergie\Biomasse.jpg", 15 * cm, 24.2 * cm,
-                width=3.5 * cm, height=2.5 * cm)
 
+    p.drawImage(PROJECT_ROOT + '\Bioenergie\static\images\Biomasse.jpg', 15 * cm, 24.2 * cm,
+                width=3.5 * cm, height=2.5 * cm)
     #Fusszeile
     p.line(0, 0, 19.5 * cm, 0)
     p.line(19.5 * cm, 0, 19.5 * cm, 1.5 * cm)
@@ -1048,9 +1075,10 @@ def pdfLeereRechnung(request):
     p.showPage()
     p.save()
 
-    #Seite zurueckgeben (response zurueckgeben)
+    p._filename = outfilepath
+    p.save()
+
+    #b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customername), filepath=outfilepath)
+
     return response
-
-
-
 

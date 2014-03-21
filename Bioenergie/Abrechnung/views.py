@@ -101,13 +101,14 @@ def write_pdf(template_src, context_dict):
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+        directory = os.path.join(PROJECT_ROOT, 'Rechnungen', str(date.today().year))
         outfilepath = os.path.join(directory, filename)
         if not os.path.exists(directory):
             os.makedirs(directory)
 
         with open(outfilepath, "wb") as myFile:
             myFile.write(str(result.getvalue()))
+        b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=outfilepath.replace("C:\\", "C:\\\\"))
 
         response['Content-Disposition'] = 'attachment; filename=' + filename
 
@@ -134,7 +135,7 @@ def write_zwischen_pdf(template_src, context_dict):
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+        directory = os.path.join(PROJECT_ROOT, 'Rechnungen', str(date.today().year))
         outfilepath = os.path.join(directory, filename)
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -142,6 +143,7 @@ def write_zwischen_pdf(template_src, context_dict):
         with open(outfilepath, "wb") as myFile:
             myFile.write(str(result.getvalue()))
 
+        b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=outfilepath.replace("C:\\", "C:\\\\"))
         response['Content-Disposition'] = 'attachment; filename=' + filename
 
         return response
@@ -1077,8 +1079,6 @@ def pdfLeereRechnung(request):
 
     p._filename = outfilepath
     p.save()
-
-    #b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customername), filepath=outfilepath)
 
     return response
 

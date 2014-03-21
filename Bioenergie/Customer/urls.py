@@ -8,5 +8,6 @@ urlpatterns = patterns('',
                        url(r'^update/(?P<pk>\d+)$', CustomerUpdateView.as_view(), name='customer_update'),
                        url(r'^delete/(?P<pk>\d+)$', CustomerDeleteView.as_view(), name='customer_delete'),
                        url(r'^search/$', search),
+                       url(r'^bills/(?P<pk>\d+)', 'Customer.views.Bills', name='customer_bills'),
 
 )

@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+
+    <h3 style="padding-left: 10px">Rechnungen zu {{ customer.first_name }} {{ customer.last_name }}</h3>
+
+    {% if not bills %}
+        <h4 style="padding-left: 20px; color: red">Zu diesem Kunden liegen leider keine Rechnungen vor</h4>
+    {% else %}
+        {% for bill in bills %}
+            <table>
+                <td>
+                    <a href="{{ bill.filepath }}" target="_blank">asfd</a></td>
+
+
+
+                </br>
+            </table>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

@@ -208,9 +208,11 @@ class Index(models.Model):
 class Bill(models.Model):
     customer = models.ForeignKey(Customer, verbose_name="Kunde")
     filepath = models.CharField("Dateipfad", max_length=512)
+    file_name = models.CharField("Dateiname", max_length=64)
 
     def __unicode__(self):
         return unicode(self.filepath)
+
 
     def get_absolute_url(self):
         return "/bills/detail/%i" % self.id
@@ -248,6 +250,7 @@ class HeatingPlant(models.Model):
     manager = models.CharField("Geschäftsführer", max_length="32")
     Ust_ID = models.IntegerField("Ust ID")
     company_register_number = models.CharField("Firmenbuchnummer", max_length="32")
+    last_reading = models.DateField("Datum letzte CSV-Auslese", blank=True, null=True)
     standard_discount = models.IntegerField("Standardrabatt")
     correction_factor = models.DecimalField("Korrekturfaktor", max_digits=8, decimal_places=2)
     bill_number = models.IntegerField("Rechnungsnummer")

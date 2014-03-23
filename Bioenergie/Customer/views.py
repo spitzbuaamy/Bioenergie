@@ -82,6 +82,6 @@ def search(request):
 def Bills(request, pk):
     c = Customer.objects.get(id=pk)
     b = Bill.objects.filter(customer=c)
-    #assert False, b
+    #assert False, n
     return render(request, 'customer/bills.html',
                       {'bills': b, 'customer': c})

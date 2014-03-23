@@ -22,7 +22,7 @@ from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index, Bill, 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!              Login Abfrage                                                                       !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-from Bioenergie.settings import PROJECT_ROOT
+from Bioenergie.settings import PROJECT_ROOT, MEDIA_ROOT, MEDIA_URL
 
 
 def user_login(request):
@@ -101,15 +101,16 @@ def write_pdf(template_src, context_dict):
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        directory = os.path.join(PROJECT_ROOT, 'Rechnungen', str(date.today().year))
+        directory = os.path.join(MEDIA_ROOT, 'Rechnungen', str(date.today().year))
         outfilepath = os.path.join(directory, filename)
         if not os.path.exists(directory):
             os.makedirs(directory)
 
         with open(outfilepath, "wb") as myFile:
             myFile.write(str(result.getvalue()))
-        b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=outfilepath.replace("C:\\", "C:\\\\"))
 
+        webpath = MEDIA_URL + 'Rechnungen/' + str(date.today().year) + "/" + filename
+        b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=webpath, file_name=filename)
         response['Content-Disposition'] = 'attachment; filename=' + filename
 
         return response
@@ -135,7 +136,7 @@ def write_zwischen_pdf(template_src, context_dict):
         response = http.HttpResponse(result.getvalue(),
                                  mimetype='application/pdf')
 
-        directory = os.path.join(PROJECT_ROOT, 'Rechnungen', str(date.today().year))
+        directory = os.path.join(MEDIA_ROOT, 'Rechnungen', str(date.today().year))
         outfilepath = os.path.join(directory, filename)
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -143,7 +144,9 @@ def write_zwischen_pdf(template_src, context_dict):
         with open(outfilepath, "wb") as myFile:
             myFile.write(str(result.getvalue()))
 
-        b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=outfilepath.replace("C:\\", "C:\\\\"))
+        webpath = MEDIA_URL + 'Rechnungen/' + str(date.today().year) + "/" + filename
+
+        b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=webpath, file_name=filename)
         response['Content-Disposition'] = 'attachment; filename=' + filename
 
         return response
@@ -649,7 +652,7 @@ def pdfAnschlussrechnung(request, id1, id2):
 
     filename = str("AR_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
 
-    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year) + "/Anschlussrechnungen"
     outfilepath = os.path.join(directory, filename)
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -946,7 +949,7 @@ def pdfLeereRechnung(request):
 
 
     filename = str("LR_" + str(artikel) + "_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
-    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year)
+    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year) + "/Leere Rechnungen"
     outfilepath = os.path.join(directory, filename)
     if not os.path.exists(directory):
         os.makedirs(directory)

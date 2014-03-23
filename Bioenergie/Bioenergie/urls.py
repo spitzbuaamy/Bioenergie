@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 import Abrechnung
+from Bioenergie import settings
 
 admin.autodiscover()
 
@@ -34,4 +35,6 @@ urlpatterns = patterns('',
                        #url(r'^$/', )
                        url(r'^login/$', 'Abrechnung.views.user_login', name='login'),
                        url(r'^logout/$', 'Abrechnung.views.user_logout', name='logout'),
+        url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT, 'show_indexes': True }),
 )

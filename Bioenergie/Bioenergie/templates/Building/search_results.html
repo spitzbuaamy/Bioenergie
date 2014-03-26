@@ -1,25 +1,23 @@
 {% extends "site_base.html" %}
 {% block body %}
 
-    <form action="" method="get" style="margin-top: -33.5px; position: absolute; right: 100px">
-        <input type="text" name="q" style="display: inline; height: 14px">
-        <input type="submit" value="Suchen"
-               style="display: inline; margin-top: -10px; background-color: gray; border-color: gray;">
-    </form>
+
     </br>
-    <p style="padding-left: 10px">Sie suchten nach: <strong>{{ query }}</strong></p>
+    <p style="padding-left: 5%">Sie suchten nach: <strong>{{ query }}</strong></p>
 
     {% if Buildings %}
-        <ul class="list">
+
+        <table class="table-hover" style="margin-left: 5%">
             {% for building in Buildings %}
-                <li>{{ building.customer }} {{ building.street }} {{ building.house_number }} <a
-                        href="{% url 'building_detail' pk=building.pk %}">Dieses Gebäude Abrechnen</a></li>
+                <tr>
+                    <td style="width: 85%">{{ building.customer }} {{ building.street }} {{ building.house_number }}</td>
+                    <td><a href="{% url 'building_detail' pk=building.pk %}" class="btn btn-primary btn-small">Details</a></td>
+                    <td><a href="{% url 'building_update' pk=building.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
+                    <td><a href="{% url 'building_delete' pk=building.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p style="padding-left: 10px; color: red">Leider kein Gebäude gefunden.</p>
     {% endif %}
 {% endblock %}
-
-
-

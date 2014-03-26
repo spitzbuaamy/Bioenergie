@@ -147,8 +147,6 @@ INSTALLED_APPS = (
     'werkzeug',
     'django_extensions',
 
-    'debug_toolbar',
-
 
 )
 

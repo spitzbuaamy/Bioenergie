@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url
-
 from Building.views import BuildingListView, BuildingDetailView, BuildingCreateView, BuildingUpdateView, BuildingDeleteView, BuildingListViewInvoice, searchinvoice, EnterDate, EmptyInvoice
 
 urlpatterns = patterns('',

@@ -113,11 +113,19 @@
                         <li><a href='{% url 'basic_price_list' %}'>Grundpreis</a></li>
                         <li><a href='{% url 'measurement_price_list' %}'>Messpreis</a></li>
                         <li><a href='{% url 'working_price_list' %}'>Arbeitspreis</a></li>
-                        <li><a href = '{% url 'GroupView' %}'>Gruppenansicht</a></li>
+                        <li><a href='{% url 'GroupView' %}'>Gruppenansicht</a></li>
                     </ul>
                 </li>
-                <li><a href='{% url 'index_list' %}'>Index</a></li>
-                <li><a href='{% url 'measurement_list' %}'>Messung</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Messungen
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href='{% url 'measurement_list' %}'>Messung</a></li>
+                        <li><a href='{% url 'reading' %}'>CSV-Einlesen</a></li> {% comment %} {% url 'reading' %} {% endcomment %}
+                    </ul>
+                </li>
                 <li><a href='{% url 'heating_plant_list' %}'>Heizwerk</a></li>
             </ul>
             <form id="search" class="navbar-form navbar-left" role="search" action="search/" method="get">
@@ -126,7 +134,8 @@
                     <input id="searchbutton" type="submit" class="btn" value="Suchen"/>
                 </div>
             </form>
-            <form class="navbar-form pull-right" style="height: 28px; position: absolute; top: 2px; right: 25px" action="/logout/">
+            <form class="navbar-form pull-right" style="height: 28px; position: absolute; top: 2px; right: 25px"
+                  action="/logout/">
                 <button id="logout" class="btn btn-danger">Logout</button>
             </form>
 

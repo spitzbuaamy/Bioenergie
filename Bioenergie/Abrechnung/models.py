@@ -213,9 +213,20 @@ class Bill(models.Model):
     def __unicode__(self):
         return unicode(self.filepath)
 
-
     def get_absolute_url(self):
         return "/bills/detail/%i" % self.id
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+class OtherBills(models.Model):
+    filepath = models.CharField("Dateipfad", max_length=512)
+    file_name = models.CharField("Dateiname", max_length=64)
+
+    def __unicode__(self):
+        return unicode(self.file_name)
+
+    def get_absolute_url(self):
+        return "/otherbills/detail/%i" % self.id
 
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -264,11 +275,13 @@ class HeatingPlant(models.Model):
 
 #-----------------------------------------------------------------------------------------------------------------------
 class Offer(models.Model):
-    WOHNHAUS = 'Wohnhaus'
+    BLANK = 'Blank'
     GEWERBE = 'Gewerbe'
     OEFFGEBAUDE = 'Gemeindeobjekt'
     BAUPARZELLE = 'Bauparzelle'
+    WOHNHAUS = 'Wohnhaus'
     TYPES = (
+        (BLANK, 'Blank'),
         (WOHNHAUS, 'Wohnhaus'),
         (GEWERBE, 'Gewerbe'),
         (OEFFGEBAUDE, 'Öff. Gebäude'),

@@ -16,7 +16,7 @@ from django.template import Context
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
-from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index, Bill, Customer
+from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index, Bill, Customer, OtherBills
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -652,11 +652,16 @@ def pdfAnschlussrechnung(request, id1, id2):
 
     filename = str("AR_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
 
-    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year) + "/Anschlussrechnungen"
+    directory = os.path.join(MEDIA_ROOT, 'Rechnungen', str(date.today().year))
     outfilepath = os.path.join(directory, filename)
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+    with open(outfilepath, "wb") as myFile:
+        myFile.write(str(response))
+
+    webpath = MEDIA_URL + 'Rechnungen/' + str(date.today().year) + "/" + filename
+    b, created = OtherBills.objects.get_or_create(filepath=webpath, file_name=filename)
     response['Content-Disposition'] = 'attachment; filename=' + filename
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen
     p = canvas.Canvas(response, pagesize=A4) #Seitengroesse auf A4 festlegen
@@ -949,10 +954,17 @@ def pdfLeereRechnung(request):
 
 
     filename = str("LR_" + str(artikel) + "_" + str(firstname) + "_" + str(lastname) + "_" + str(date.today().year) + ".pdf")
-    directory = PROJECT_ROOT + '/Rechnungen/' + str(date.today().year) + "/Leere Rechnungen"
+
+    directory = os.path.join(MEDIA_ROOT, 'Rechnungen', str(date.today().year))
     outfilepath = os.path.join(directory, filename)
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+    with open(outfilepath, "wb") as myFile:
+        myFile.write(str(response))
+
+    webpath = MEDIA_URL + 'Rechnungen/' + str(date.today().year) + "/" + filename
+    b, created = OtherBills.objects.get_or_create(filepath=webpath, file_name=filename)
 
     response['Content-Disposition'] = 'attachment; filename=' + filename
     #Canvas = Leinwand: Dient als Schnittstelle zur Operation Malen

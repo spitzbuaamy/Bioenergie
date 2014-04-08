@@ -1,7 +1,8 @@
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
-from Abrechnung.models import HeatingPlant
+from Abrechnung.models import HeatingPlant, OtherBills
 from HeatingPlant.forms import HeatingPlantForm
 
 
@@ -48,3 +49,10 @@ class HeatingPlantDeleteView(DeleteView):
     model = HeatingPlant
     context_object_name = 'heating_plant'
     success_url = reverse_lazy('heating_plant_list')
+
+
+def OtherBill(request):
+    b = OtherBills.objects.all()
+    #assert False, b
+    return render(request, 'HeatingPlant/OtherBills.html',
+                      {'bills': b})

@@ -7,5 +7,6 @@ urlpatterns = patterns('',
                        url(r'^create/$', HeatingPlantCreateView.as_view(), name='heating_plant_create'),
                        url(r'^update/(?P<pk>\d+)$', HeatingPlantUpdateView.as_view(), name='heating_plant_update'),
                        url(r'^delete/(?P<pk>\d+)$', HeatingPlantDeleteView.as_view(), name='heating_plant_delete'),
+                       url(r'^otherbills/$', 'HeatingPlant.views.OtherBill', name='other_bills'),
 
 )

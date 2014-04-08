@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+    <h3 style="margin-left: 20px">Sonstige Rechnungen:</h3>
+    <h5 style="margin-left: 20px; margin-top: -15px">AR = Anschlussrechnung</h5>
+    <h5 style="margin-left: 20px; margin-top: -10px">LR = Leere Rechnung</h5>
+    {% if not bills %}
+        <h4 style="padding-left: 20px; color: red">Es liegen keine Rechnungen vor!</h4>
+    {% else %}
+        {% for bill in bills %}
+            <table style="margin-top: -10px">
+                <td>
+                    <a href="{{ bill.filepath }}" target="_blank">{{ bill.file_name }}</a></td>
+                </br>
+            </table>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

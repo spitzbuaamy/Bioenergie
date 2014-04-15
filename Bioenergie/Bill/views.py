@@ -4,8 +4,12 @@ from datetime import datetime
 import time
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView
 from Bioenergie.settings import PROJECT_ROOT
 #
+
+class AJAXLoadAuslese(TemplateView):
+    template_name = 'Auslese/loadAuslese.html'
 
 def Auslese(request):
     from Abrechnung.models import HeatingPlant, Measurement, Building
@@ -15,9 +19,8 @@ def Auslese(request):
 
     #CSV-Dateien importieren
     search_dir = os.path.join(PROJECT_ROOT, 'CSV-Dateien')
-    os.chdir(search_dir)
-    files = filter(os.path.isfile, os.listdir(search_dir))
-    files = [os.path.join(search_dir, f) for f in files]  # add path to each file
+    files = [os.path.join(search_dir, f) for f in os.listdir(search_dir)] # list files in dir & add path to files
+    files = filter(os.path.isfile, files) # remove directories from list
     files.sort(key=lambda x: os.path.getmtime(x))
 
     for file in files:
@@ -35,7 +38,6 @@ def Auslese(request):
                 month = measured_date[3:5]
                 year = measured_date[6:10]
                 mydate = str(year + "-" + month + "-" + day)
-
                 dataset = Measurement(building=mybuilding, measured_date=mydate, value=value)
                 saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street,
                                       house_number=heatingplant.house_number,

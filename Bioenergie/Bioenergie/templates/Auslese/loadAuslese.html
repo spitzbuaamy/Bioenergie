@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+{% block body %}
+    <h1>Auslese gestartet</h1>
+    <div id="loading"><img src="{% static "images/load.gif" %}" alt="loading...."/></div>
+
+    <div id="auslese" style="display: none;" class="alert alert-success"></div>
+    <script>$(function(){
+        $('#auslese').load('http://127.0.0.1:8000/bills/reading/', function(){
+                        $('#auslese').show();
+                        $("#loading").hide();
+        });
+    });</script>
+
+{% endblock %}

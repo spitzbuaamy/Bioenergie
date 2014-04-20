@@ -19,8 +19,8 @@ def Auslese(request):
 
     #CSV-Dateien importieren
     search_dir = os.path.join(PROJECT_ROOT, 'CSV-Dateien')
-    files = [os.path.join(search_dir, f) for f in os.listdir(search_dir)] # list files in dir & add path to files
-    files = filter(os.path.isfile, files) # remove directories from list
+    files = [os.path.join(search_dir, f) for f in os.listdir(search_dir)] #list files in dir & add path to files
+    files = filter(os.path.isfile, files) #remove directories from list
     files.sort(key=lambda x: os.path.getmtime(x))
 
     for file in files:
@@ -38,6 +38,7 @@ def Auslese(request):
                 month = measured_date[3:5]
                 year = measured_date[6:10]
                 mydate = str(year + "-" + month + "-" + day)
+                
                 dataset = Measurement(building=mybuilding, measured_date=mydate, value=value)
                 saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street,
                                       house_number=heatingplant.house_number,

@@ -11,9 +11,7 @@
             {% for building in Buildings %}
                 <tr>
                     <td style="width: 85%">{{ building.customer }} {{ building.street }} {{ building.house_number }}</td>
-                    <td><a href="{% url 'building_detail' pk=building.pk %}" class="btn btn-primary btn-small">Details</a></td>
-                    <td><a href="{% url 'building_update' pk=building.pk %}" class="btn btn-primary btn-small">Ändern</a></td>
-                    <td><a href="{% url 'building_delete' pk=building.pk %}" class="btn btn-danger btn-small">Löschen</a></td>
+                    <td><a href="{% url 'enter_date' building.pk %}" class="btn btn-primary btn-small">Dieses Gebäude Abrechnen</a>
                 </tr>
             {% endfor %}
         </table>

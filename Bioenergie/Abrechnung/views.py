@@ -4,6 +4,7 @@ from datetime import date, datetime
 import cStringIO as StringIO
 import cgi
 import os
+from django.views.generic import TemplateView
 from xhtml2pdf import pisa
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -17,6 +18,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from Abrechnung.models import Building, HeatingPlant, Offer, Rate, Index, Bill, Customer, OtherBills
+
+class AJAXGeneratePDF(TemplateView):
+    template_name = 'Bill/loadRechnung.html'
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -113,7 +117,8 @@ def write_pdf(template_src, context_dict):
         b, created = Bill.objects.get_or_create(customer=Customer.objects.get(first_name=customer.first_name, last_name=customer.last_name), filepath=webpath, file_name=filename)
         response['Content-Disposition'] = 'attachment; filename=' + filename
 
-        return response
+        #return response
+        return webpath
     return http.HttpResponse('Gremlins ate your pdf! %s' % cgi.escape(html))
 
 
@@ -157,220 +162,226 @@ def write_zwischen_pdf(template_src, context_dict):
 #!!!!!!!!!!              Jahresabrechnung                                                                    !!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # View
-def pdfRechnung(request, id):
+def pdfRechnung(request):
+    pdflinks = ""
+    for building in Building.objects.all():
 #-----------------------------------------------------------------------------------------------------------------------
-    months = 12
-    building = get_object_or_404(Building, pk=id)
-    heatingplant = get_object_or_404(HeatingPlant, pk=1)
-    customer = building.customer
-    Ust_ID = heatingplant.Ust_ID
-    workingprice = building.working_price
-    measurementprice = building.measurement_price
-    basicprice = building.basic_price
-    connection_power = building.connection_power #Anschlussleistung
-    company_register_number = heatingplant.company_register_number
-    bankname = heatingplant.bank
-    account_number = heatingplant.account_number
-    code_number = heatingplant.code_number
-    IBAN = heatingplant.IBAN
-    BIC = heatingplant.BIC
-    correction_factor = heatingplant.correction_factor
-    debiting = building.customer.debitor
-    rate = building.rate_set.get(year=(date.today().year - 1))
-    actual_bill_number = heatingplant.bill_number
+        months = 12
+        building = get_object_or_404(Building, pk=building.id)
+        heatingplant = get_object_or_404(HeatingPlant, pk=1)
+        customer = building.customer
+        Ust_ID = heatingplant.Ust_ID
+        workingprice = building.working_price
+        measurementprice = building.measurement_price
+        basicprice = building.basic_price
+        connection_power = building.connection_power #Anschlussleistung
+        company_register_number = heatingplant.company_register_number
+        bankname = heatingplant.bank
+        account_number = heatingplant.account_number
+        code_number = heatingplant.code_number
+        IBAN = heatingplant.IBAN
+        BIC = heatingplant.BIC
+        correction_factor = heatingplant.correction_factor
+        debiting = building.customer.debitor
+        rate = building.rate_set.get(year=(date.today().year - 1))
+        actual_bill_number = heatingplant.bill_number
 
-    #-----------------------------------------------------------------------------------------------------------------------
-    # Rechnen...
-    thisyear = date.today().year
+        #-----------------------------------------------------------------------------------------------------------------------
+        # Rechnen...
+        thisyear = date.today().year
 
-    #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
-    abr_date1 = building.last_bill
-    abr_date2 = str(int(thisyear)) + "-07-01"
+        #Zum Filtern der Messungen nach dem Abrechnungsjahr (damit keine Werte von frueheren Jahren genommen werden)
+        abr_date1 = building.last_bill
+        abr_date2 = str(int(thisyear)) + "-07-01"
 
-    #Zaehlerwechsel
-    counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
+        #Zaehlerwechsel
+        counter_changes = building.counterchange_set.filter(date__range=[abr_date1, abr_date2])
 
-    measurements = building.measurement_set.filter(measured_date__range=[abr_date1, abr_date2])
-    #Fehlermeldung ausgeben, falls keine Messwerte vorhanden sind
-    if len(measurements) > 1:
-        summe = measurements.latest('measured_date').value - measurements[0].value
-    else:
-        summe = 'Keine Zählerstaende vorhanden'
-
-    measurement_end_date = measurements.latest('measured_date').measured_date
-    date_old_measurement = measurements[0].measured_date
-    old_reading = measurements[0].value
-    new_reading = measurements.latest('measured_date').value
-
-    for counter_change in counter_changes:
-        summe = summe - counter_change.new_counter_reading
-        summe = summe + counter_change.counter_final_result
-
-    measurement_diff = summe
-
-    # Fuer die Abrechnungsperiode bei der Rechnung
-    begin_acounting = "1. Juli " + str(int(thisyear - 1)) #Beginn der Abrechnung (Datum)
-    end_acounting = "30. Juni " + str(thisyear) #Ende der Abrechnung (Datum)
-
-    #Arbeitspeis
-    workingpriceamount = workingprice.amount
-    workingpricemulti = float(workingprice.amount) * float(measurement_diff)
-
-    #Messpreis:
-    measurementpriceamount = measurementprice.amount
-    measurementpricemulti = float(measurementprice.amount) * (months / 12)
-
-    #Grundpreis
-    basicpriceamount = basicprice.amount
-    basicpricemulti = float(basicpriceamount) * float(connection_power) * (months / 12)
-
-    #Zusammenrechnen der Ergebnisse von Messpreis und Grundpreis
-    restult_measurementprice_basicprice = round(measurementpricemulti, 2) + round(basicpricemulti, 2)
-
-    #Nettosumme von Arbeitspreis + Summe aus Messpreis und Grundpreis
-    net_workingprice_measurementprice_basicprice = workingpricemulti + restult_measurementprice_basicprice
-
-    #Rabatt
-    discount_fixed = building.discount_fixed
-    standard_discount = heatingplant.standard_discount
-    if discount_fixed is None:
-        discount = standard_discount
-    else:
-        discount = discount_fixed
-    result_discount = net_workingprice_measurementprice_basicprice * (float(discount) / 100)
-
-    #MWST nach Rabatt
-    vat_after_discount = (net_workingprice_measurementprice_basicprice - round(result_discount, 2)) * 0.2
-
-    #Summe Netto - Rabatt + MwSt
-    sum = net_workingprice_measurementprice_basicprice - result_discount + vat_after_discount
-
-    #Akontozahlung Brutto, Netto und MWSt
-    advanced_payment_on_account_net = float(rate.monthly_rate) * months #Netto
-    advanced_payment_on_account_vat = advanced_payment_on_account_net * float(0.2) #MWST
-    advanced_payment_on_account_gross = advanced_payment_on_account_net * float(1.2) #Brutto
-
-    #Unterscheidung ob Guthaben oder Nachzahlung; Ergebnis wird in die String-Variable credit_additionalpayment gespeichert
-    if debiting is False:
-        if (advanced_payment_on_account_gross - sum) > 0:
-            credit_additionalpayment = "Guthaben"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto überwiesen"
+        measurements = building.measurement_set.filter(measured_date__range=[abr_date1, abr_date2])
+        #Fehlermeldung ausgeben, falls keine Messwerte vorhanden sind
+        if len(measurements) > 1:
+            summe = measurements.latest('measured_date').value - measurements[0].value
         else:
-            credit_additionalpayment = "Nachzahlung"
-            debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto überweisen"
-    else:
-        if (advanced_payment_on_account_gross - sum) > 0:
-            credit_additionalpayment = "Guthaben"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto überwiesen."
+            summe = 'Keine Zählerstaende vorhanden'
+
+        measurement_end_date = measurements.latest('measured_date').measured_date
+        date_old_measurement = measurements[0].measured_date
+        old_reading = measurements[0].value
+        new_reading = measurements.latest('measured_date').value
+
+        for counter_change in counter_changes:
+            summe = summe - counter_change.new_counter_reading
+            summe = summe + counter_change.counter_final_result
+
+        measurement_diff = summe
+
+        # Fuer die Abrechnungsperiode bei der Rechnung
+        begin_acounting = "1. Juli " + str(int(thisyear - 1)) #Beginn der Abrechnung (Datum)
+        end_acounting = "30. Juni " + str(thisyear) #Ende der Abrechnung (Datum)
+
+        #Arbeitspeis
+        workingpriceamount = workingprice.amount
+        workingpricemulti = float(workingprice.amount) * float(measurement_diff)
+
+        #Messpreis:
+        measurementpriceamount = measurementprice.amount
+        measurementpricemulti = float(measurementprice.amount) * (months / 12)
+
+        #Grundpreis
+        basicpriceamount = basicprice.amount
+        basicpricemulti = float(basicpriceamount) * float(connection_power) * (months / 12)
+
+        #Zusammenrechnen der Ergebnisse von Messpreis und Grundpreis
+        restult_measurementprice_basicprice = round(measurementpricemulti, 2) + round(basicpricemulti, 2)
+
+        #Nettosumme von Arbeitspreis + Summe aus Messpreis und Grundpreis
+        net_workingprice_measurementprice_basicprice = workingpricemulti + restult_measurementprice_basicprice
+
+        #Rabatt
+        discount_fixed = building.discount_fixed
+        standard_discount = heatingplant.standard_discount
+        if discount_fixed is None:
+            discount = standard_discount
         else:
-            credit_additionalpayment = "Nachzahlung"
-            debit_transfer = "Der Betrag wird innerhalb von 14 Tagen von Ihrem Konto abgebucht."
+            discount = discount_fixed
+        result_discount = net_workingprice_measurementprice_basicprice * (float(discount) / 100)
 
-    #Guthaben Brutto, Netto und MWSt
-    credit_additionalpayment_gross = advanced_payment_on_account_gross - sum #Brutto
-    credit_additionalpayment_net = credit_additionalpayment_gross / float(1.2) #Netto
-    credit_additionalpayment_vat = credit_additionalpayment_gross - credit_additionalpayment_net #MWST
+        #MWST nach Rabatt
+        vat_after_discount = (net_workingprice_measurementprice_basicprice - round(result_discount, 2)) * 0.2
 
-    #Neu berechnete Rate
-    #(Heizkosten vom Vorjahr / Monate) * (neuer Index / vorriger Index)
-    index_last_year = str(int(thisyear - 1))
-    index_this_year = str(int(thisyear))
+        #Summe Netto - Rabatt + MwSt
+        sum = net_workingprice_measurementprice_basicprice - result_discount + vat_after_discount
 
-    indexdif = float(Index.objects.get(year=index_last_year).index) / float(
-        Index.objects.get(year=index_this_year).index)
-    new_rate_gross = float(((sum / months) * indexdif)) * float(correction_factor) #Brutto
-    new_rate_net = new_rate_gross / float(1.2) #Netto
-    new_rate_vat = new_rate_gross - new_rate_net #MWST
+        #Akontozahlung Brutto, Netto und MWSt
+        advanced_payment_on_account_net = float(rate.monthly_rate) * months #Netto
+        advanced_payment_on_account_vat = advanced_payment_on_account_net * float(0.2) #MWST
+        advanced_payment_on_account_gross = advanced_payment_on_account_net * float(1.2) #Brutto
 
-    #Berechnete Nettorate in Datenbank speichern
-    rate_this_year = Rate(year=date.today().year, monthly_rate=(new_rate_net), building=building)
-    rate_this_year.save()
+        #Unterscheidung ob Guthaben oder Nachzahlung; Ergebnis wird in die String-Variable credit_additionalpayment gespeichert
+        if debiting is False:
+            if (advanced_payment_on_account_gross - sum) > 0:
+                credit_additionalpayment = "Guthaben"
+                debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf ihr Konto überwiesen"
+            else:
+                credit_additionalpayment = "Nachzahlung"
+                debit_transfer = "Bitte den Betrag innerhalb von 14 Tagen auf unser Konto überweisen"
+        else:
+            if (advanced_payment_on_account_gross - sum) > 0:
+                credit_additionalpayment = "Guthaben"
+                debit_transfer = "Der Betrag wird innerhalb von 14 Tagen auf Ihr Konto überwiesen."
+            else:
+                credit_additionalpayment = "Nachzahlung"
+                debit_transfer = "Der Betrag wird innerhalb von 14 Tagen von Ihrem Konto abgebucht."
 
-    #Wenn kein ganzes Jahr abgerechnet wird, soll in der Rechnung aufscheinen: Anteilig x Monate
-    if months < 12:
-        partial1 = "Anteilig"
-        partial2 = "Monate"
-    else:
-        partial1 = ""
-        partial2 = ""
+        #Guthaben Brutto, Netto und MWSt
+        credit_additionalpayment_gross = advanced_payment_on_account_gross - sum #Brutto
+        credit_additionalpayment_net = credit_additionalpayment_gross / float(1.2) #Netto
+        credit_additionalpayment_vat = credit_additionalpayment_gross - credit_additionalpayment_net #MWST
 
-    #Adresse des Heiwerkes
-    heatingplant_data = heatingplant.name + " " + heatingplant.street + " " + str(
-        heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
+        #Neu berechnete Rate
+        #(Heizkosten vom Vorjahr / Monate) * (neuer Index / vorriger Index)
+        index_last_year = str(int(thisyear - 1))
+        index_this_year = str(int(thisyear))
+
+        indexdif = float(Index.objects.get(year=index_last_year).index) / float(
+            Index.objects.get(year=index_this_year).index)
+        new_rate_gross = float(((sum / months) * indexdif)) * float(correction_factor) #Brutto
+        new_rate_net = new_rate_gross / float(1.2) #Netto
+        new_rate_vat = new_rate_gross - new_rate_net #MWST
+
+        #Berechnete Nettorate in Datenbank speichern
+        rate_this_year = Rate(year=date.today().year, monthly_rate=(new_rate_net), building=building)
+        rate_this_year.save()
+
+        #Wenn kein ganzes Jahr abgerechnet wird, soll in der Rechnung aufscheinen: Anteilig x Monate
+        if months < 12:
+            partial1 = "Anteilig"
+            partial2 = "Monate"
+        else:
+            partial1 = ""
+            partial2 = ""
+
+        #Adresse des Heiwerkes
+        heatingplant_data = heatingplant.name + " " + heatingplant.street + " " + str(
+            heatingplant.house_number) + " " + str(heatingplant.zip) + " " + heatingplant.place
 
 
-    #Erneutes auslesen des Index, um diesen auf der Rechnung anzuzeigen.
-    year_ago = str(int(thisyear - 2))
-    index_for_the_last_year = Index.objects.get(year=year_ago).index
-    index_for_this_year = Index.objects.get(year=index_last_year).index
-    index_for_the_next_year = Index.objects.get(year=index_this_year).index
+        #Erneutes auslesen des Index, um diesen auf der Rechnung anzuzeigen.
+        year_ago = str(int(thisyear - 2))
+        index_for_the_last_year = Index.objects.get(year=year_ago).index
+        index_for_this_year = Index.objects.get(year=index_last_year).index
+        index_for_the_next_year = Index.objects.get(year=index_this_year).index
 
-    #Rechnungsnummer um 1 erhoehen und in Datenbank speichern
-    number = actual_bill_number + 1
-    saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street, house_number=heatingplant.house_number,
-                          zip=heatingplant.zip, place=heatingplant.place, phone_number=heatingplant.phone_number,
-                          mail=heatingplant.mail, bank=heatingplant.bank, account_number=heatingplant.account_number,
-                          code_number=heatingplant.code_number, BIC=heatingplant.BIC, IBAN=heatingplant.IBAN,
-                          manager=heatingplant.manager, Ust_ID=heatingplant.Ust_ID,
-                          company_register_number=heatingplant.company_register_number,
-                          standard_discount=heatingplant.standard_discount,
-                          correction_factor=heatingplant.correction_factor, bill_number=number)
-    saving.save()
+        #Rechnungsnummer um 1 erhoehen und in Datenbank speichern
+        number = actual_bill_number + 1
+        saving = HeatingPlant(id=1, name=heatingplant.name, street=heatingplant.street, house_number=heatingplant.house_number,
+                              zip=heatingplant.zip, place=heatingplant.place, phone_number=heatingplant.phone_number,
+                              mail=heatingplant.mail, bank=heatingplant.bank, account_number=heatingplant.account_number,
+                              code_number=heatingplant.code_number, BIC=heatingplant.BIC, IBAN=heatingplant.IBAN,
+                              manager=heatingplant.manager, Ust_ID=heatingplant.Ust_ID,
+                              company_register_number=heatingplant.company_register_number,
+                              standard_discount=heatingplant.standard_discount,
+                              correction_factor=heatingplant.correction_factor, bill_number=number)
+        saving.save()
 
-    #-----------------------------------------------------------------------------------------------------------------------
+        #-----------------------------------------------------------------------------------------------------------------------
 
-    return write_pdf('Rechnung.html', {
-        'counterchanges': counter_changes,
-        'pagesize': 'A4',
-        'building': building,
-        'customer': customer,
-        'measurement_diff': measurement_diff,
-        'begin_acounting': begin_acounting,
-        'end_acounting': end_acounting,
-        'Ust_ID': Ust_ID,
-        'date_old_measurement': date_old_measurement,
-        'old_reading': old_reading,
-        'new_reading': new_reading,
-        'workingpriceamount': workingpriceamount,
-        'workingpricemulti': workingpricemulti,
-        'measurementpriceamount': measurementpriceamount,
-        'months': months,
-        'measurementpricemulti': measurementpricemulti,
-        'basicpriceamount': basicpriceamount,
-        'connection_power': connection_power,
-        'basicpricemulti': basicpricemulti,
-        'restult_measurementprice_basicprice': restult_measurementprice_basicprice,
-        'net_workingprice_measurementprice_basicprice': net_workingprice_measurementprice_basicprice,
-        'discount': discount,
-        'result_discount': result_discount,
-        'vat_after_discount': vat_after_discount,
-        'sum': sum,
-        'advanced_payment_on_account_net': advanced_payment_on_account_net,
-        'advanced_payment_on_account_vat': advanced_payment_on_account_vat,
-        'advanced_payment_on_account_gross': advanced_payment_on_account_gross,
-        'credit_additionalpayment': credit_additionalpayment,
-        'credit_additionalpayment_gross': credit_additionalpayment_gross,
-        'credit_additionalpayment_net': credit_additionalpayment_net,
-        'credit_additionalpayment_vat': credit_additionalpayment_vat,
-        'debit_transfer': debit_transfer,
-        'new_rate_gross': new_rate_gross,
-        'new_rate_net': new_rate_net,
-        'new_rate_vat': new_rate_vat,
-        'company_register_number': company_register_number,
-        'bankname': bankname,
-        'account_number': account_number,
-        'code_number': code_number,
-        'IBAN': IBAN,
-        'BIC': BIC,
-        'measurement_end_date': measurement_end_date,
-        "partial1": partial1,
-        "partial2": partial2,
-        "heatingplant_data": heatingplant_data,
-        "index_for_the_last_year": index_for_the_last_year,
-        "index_for_this_year": index_for_this_year,
-        "index_for_the_next_year": index_for_the_next_year,
-        "actual_bill_number": actual_bill_number,
-    })
+        link = write_pdf('Rechnung.html', {
+            'counterchanges': counter_changes,
+            'pagesize': 'A4',
+            'building': building,
+            'customer': customer,
+            'measurement_diff': measurement_diff,
+            'begin_acounting': begin_acounting,
+            'end_acounting': end_acounting,
+            'Ust_ID': Ust_ID,
+            'date_old_measurement': date_old_measurement,
+            'old_reading': old_reading,
+            'new_reading': new_reading,
+            'workingpriceamount': workingpriceamount,
+            'workingpricemulti': workingpricemulti,
+            'measurementpriceamount': measurementpriceamount,
+            'months': months,
+            'measurementpricemulti': measurementpricemulti,
+            'basicpriceamount': basicpriceamount,
+            'connection_power': connection_power,
+            'basicpricemulti': basicpricemulti,
+            'restult_measurementprice_basicprice': restult_measurementprice_basicprice,
+            'net_workingprice_measurementprice_basicprice': net_workingprice_measurementprice_basicprice,
+            'discount': discount,
+            'result_discount': result_discount,
+            'vat_after_discount': vat_after_discount,
+            'sum': sum,
+            'advanced_payment_on_account_net': advanced_payment_on_account_net,
+            'advanced_payment_on_account_vat': advanced_payment_on_account_vat,
+            'advanced_payment_on_account_gross': advanced_payment_on_account_gross,
+            'credit_additionalpayment': credit_additionalpayment,
+            'credit_additionalpayment_gross': credit_additionalpayment_gross,
+            'credit_additionalpayment_net': credit_additionalpayment_net,
+            'credit_additionalpayment_vat': credit_additionalpayment_vat,
+            'debit_transfer': debit_transfer,
+            'new_rate_gross': new_rate_gross,
+            'new_rate_net': new_rate_net,
+            'new_rate_vat': new_rate_vat,
+            'company_register_number': company_register_number,
+            'bankname': bankname,
+            'account_number': account_number,
+            'code_number': code_number,
+            'IBAN': IBAN,
+            'BIC': BIC,
+            'measurement_end_date': measurement_end_date,
+            "partial1": partial1,
+            "partial2": partial2,
+            "heatingplant_data": heatingplant_data,
+            "index_for_the_last_year": index_for_the_last_year,
+            "index_for_this_year": index_for_this_year,
+            "index_for_the_next_year": index_for_the_next_year,
+            "actual_bill_number": actual_bill_number,
+        })
+
+        pdflinks += "<a href='" + link + "'>" + link + "</a><br>"
+
+    return http.HttpResponse(pdflinks)
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

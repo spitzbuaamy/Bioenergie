@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+{% block body %}
+    <h1 id="heading" style="padding-left: 20px">Rechnungen werden generiert</h1>
+    <div id="loading" style="padding-left: 20px"><img src="{% static "images/load.gif" %}" alt="loading...."/></div>
+
+    <div id="finished" style="display: none" class="alert alert-success"></div>
+    <script>$(function(){
+        $('#finished').load('{% url "pdf_Rechnung" %}', function( response, status, xhr ){
+                        $('#finished').show();
+                        $("#loading").hide();
+                        $("#heading").text("PDFs wurden erfolgreich generiert:");
+        });
+    });</script>
+
+{% endblock %}
